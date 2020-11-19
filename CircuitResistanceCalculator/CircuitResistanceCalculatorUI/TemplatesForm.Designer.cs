@@ -46,9 +46,9 @@ namespace CircuitResistanceCalculatorUI
 			this.TemplatesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.TemplatesLabel.Location = new System.Drawing.Point(12, 9);
 			this.TemplatesLabel.Name = "TemplatesLabel";
-			this.TemplatesLabel.Size = new System.Drawing.Size(397, 18);
+			this.TemplatesLabel.Size = new System.Drawing.Size(270, 18);
 			this.TemplatesLabel.TabIndex = 0;
-			this.TemplatesLabel.Text = "Выберите шаблон для создания электрической схемы:";
+			this.TemplatesLabel.Text = "Select a template for creating the circuit:";
 			// 
 			// Template1Button
 			// 
