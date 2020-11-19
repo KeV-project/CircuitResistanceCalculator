@@ -16,5 +16,15 @@ namespace CircuitResistanceCalculatorUI
 		{
 			InitializeComponent();
 		}
+
+		private void toolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void newToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
