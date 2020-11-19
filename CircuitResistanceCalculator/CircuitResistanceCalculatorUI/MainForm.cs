@@ -12,15 +12,17 @@ namespace CircuitResistanceCalculatorUI
 {
 	public partial class MainForm : Form
 	{
+		private int _selectedTemplate;
 		public MainForm()
 		{
 			InitializeComponent();
 		}
 
-		private void ElectricalCircuitTemplateToolStripMenuItem_Click(object sender, 
-			EventArgs e)
+		private void ElectricalCircuitTemplateToolStripMenuItem_Click(
+			object sender, EventArgs e)
 		{
-
+			TemplatesForm templatesForm = new TemplatesForm();
+			templatesForm.ShowDialog();
 		}
 	}
 }

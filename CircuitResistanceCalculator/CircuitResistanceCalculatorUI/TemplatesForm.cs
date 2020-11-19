@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace CircuitResistanceCalculatorUI
 {
-	public partial class Templates : Form
+	public partial class TemplatesForm : Form
 	{
-		public Templates()
+		public TemplatesForm()
 		{
 			InitializeComponent();
+		}
+
+		private void CancelButton_Click(object sender, EventArgs e)
+		{
+			this.Close();
 		}
 	}
 }
