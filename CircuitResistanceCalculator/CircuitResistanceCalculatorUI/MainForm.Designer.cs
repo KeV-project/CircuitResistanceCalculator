@@ -29,10 +29,19 @@ namespace CircuitResistanceCalculatorUI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
+			this.SuspendLayout();
+			// 
+			// MainForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Text = "Form1";
+			this.ClientSize = new System.Drawing.Size(1056, 655);
+			this.MinimumSize = new System.Drawing.Size(1072, 693);
+			this.Name = "MainForm";
+			this.Text = "Circuit resistance calculator";
+			this.UseWaitCursor = true;
+			this.ResumeLayout(false);
+
 		}
 
 		#endregion
