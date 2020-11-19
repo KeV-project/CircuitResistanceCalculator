@@ -29,6 +29,25 @@ namespace CircuitResistanceCalculatorUI
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("C2");
+			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("R3", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("R2");
+			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("L1", new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3});
+			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("R4");
+			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("C3");
+			System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("R5", new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+			System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("L2");
+			System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("R1", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode7,
+            treeNode8});
+			System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("R6");
+			System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("C1", new System.Windows.Forms.TreeNode[] {
+            treeNode10});
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,8 +149,35 @@ namespace CircuitResistanceCalculatorUI
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.CircuitTreeView.Location = new System.Drawing.Point(12, 28);
 			this.CircuitTreeView.Name = "CircuitTreeView";
+			treeNode1.Name = "Узел6";
+			treeNode1.Text = "C2";
+			treeNode2.Name = "Узел5";
+			treeNode2.Text = "R3";
+			treeNode3.Name = "Узел4";
+			treeNode3.Text = "R2";
+			treeNode4.Name = "Узел1";
+			treeNode4.Text = "L1";
+			treeNode5.Name = "Узел7";
+			treeNode5.Text = "R4";
+			treeNode6.Name = "Узел28";
+			treeNode6.Text = "C3";
+			treeNode7.Name = "Узел8";
+			treeNode7.Text = "R5";
+			treeNode8.Name = "Узел9";
+			treeNode8.Text = "L2";
+			treeNode9.Name = "Узел2";
+			treeNode9.Text = "R1";
+			treeNode10.Name = "Узел10";
+			treeNode10.Text = "R6";
+			treeNode11.Name = "Узел3";
+			treeNode11.Text = "C1";
+			this.CircuitTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode9,
+            treeNode11});
 			this.CircuitTreeView.Size = new System.Drawing.Size(938, 551);
 			this.CircuitTreeView.TabIndex = 1;
+			this.CircuitTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CircuitTreeView_AfterSelect);
 			// 
 			// MainForm
 			// 

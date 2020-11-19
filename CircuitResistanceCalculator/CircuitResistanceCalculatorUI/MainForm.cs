@@ -26,5 +26,10 @@ namespace CircuitResistanceCalculatorUI
 		{
 
 		}
+
+		private void CircuitTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+
+		}
 	}
 }
