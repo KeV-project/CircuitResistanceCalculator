@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace CircuitResistanceCalculatorUI
 {
-	public partial class MainForm : Form
+	public partial class Templates : Form
 	{
-		public MainForm()
+		public Templates()
 		{
 			InitializeComponent();
-		}
-
-		private void ElectricalCircuitTemplateToolStripMenuItem_Click(object sender, 
-			EventArgs e)
-		{
-
 		}
 	}
 }

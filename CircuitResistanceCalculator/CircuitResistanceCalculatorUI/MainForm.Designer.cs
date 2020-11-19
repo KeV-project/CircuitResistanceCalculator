@@ -29,30 +29,13 @@ namespace CircuitResistanceCalculatorUI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("C2");
-			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("R3", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("R2");
-			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("L1", new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode3});
-			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("R4");
-			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("C3");
-			System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("R5", new System.Windows.Forms.TreeNode[] {
-            treeNode6});
-			System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("L2");
-			System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("R1", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode7,
-            treeNode8});
-			System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("R6");
-			System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("C1", new System.Windows.Forms.TreeNode[] {
-            treeNode10});
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.ElectricalDiagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.NewElectricalCircuitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ElectricalCircuitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ElectricalCircuitTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +56,7 @@ namespace CircuitResistanceCalculatorUI
 			this.menuStrip.Size = new System.Drawing.Size(962, 25);
 			this.menuStrip.TabIndex = 0;
 			this.menuStrip.Text = "menuStrip1";
+			this.menuStrip.UseWaitCursor = true;
 			// 
 			// FileToolStripMenuItem
 			// 
@@ -86,28 +70,42 @@ namespace CircuitResistanceCalculatorUI
 			this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
 			this.FileToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
 			this.FileToolStripMenuItem.Text = "File";
-			this.FileToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
 			// 
 			// CreateToolStripMenuItem
 			// 
 			this.CreateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ElectricalDiagramToolStripMenuItem});
+            this.NewElectricalCircuitToolStripMenuItem});
 			this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
 			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.CreateToolStripMenuItem.Text = "Create";
-			this.CreateToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
 			// 
-			// ElectricalDiagramToolStripMenuItem
+			// NewElectricalCircuitToolStripMenuItem
 			// 
-			this.ElectricalDiagramToolStripMenuItem.Name = "ElectricalDiagramToolStripMenuItem";
-			this.ElectricalDiagramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.ElectricalDiagramToolStripMenuItem.Text = "Electrical diagram";
+			this.NewElectricalCircuitToolStripMenuItem.Name = "NewElectricalCircuitToolStripMenuItem";
+			this.NewElectricalCircuitToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.NewElectricalCircuitToolStripMenuItem.Text = "New electrical circuit";
 			// 
 			// OpenToolStripMenuItem
 			// 
+			this.OpenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ElectricalCircuitToolStripMenuItem,
+            this.ElectricalCircuitTemplateToolStripMenuItem});
 			this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
 			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.OpenToolStripMenuItem.Text = "Open...";
+			// 
+			// ElectricalCircuitToolStripMenuItem
+			// 
+			this.ElectricalCircuitToolStripMenuItem.Name = "ElectricalCircuitToolStripMenuItem";
+			this.ElectricalCircuitToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+			this.ElectricalCircuitToolStripMenuItem.Text = "Electrical circuit";
+			// 
+			// ElectricalCircuitTemplateToolStripMenuItem
+			// 
+			this.ElectricalCircuitTemplateToolStripMenuItem.Name = "ElectricalCircuitTemplateToolStripMenuItem";
+			this.ElectricalCircuitTemplateToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+			this.ElectricalCircuitTemplateToolStripMenuItem.Text = "Electrical circuit template";
+			this.ElectricalCircuitTemplateToolStripMenuItem.Click += new System.EventHandler(this.ElectricalCircuitTemplateToolStripMenuItem_Click);
 			// 
 			// SaveToolStripMenuItem
 			// 
@@ -149,35 +147,9 @@ namespace CircuitResistanceCalculatorUI
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.CircuitTreeView.Location = new System.Drawing.Point(12, 28);
 			this.CircuitTreeView.Name = "CircuitTreeView";
-			treeNode1.Name = "Узел6";
-			treeNode1.Text = "C2";
-			treeNode2.Name = "Узел5";
-			treeNode2.Text = "R3";
-			treeNode3.Name = "Узел4";
-			treeNode3.Text = "R2";
-			treeNode4.Name = "Узел1";
-			treeNode4.Text = "L1";
-			treeNode5.Name = "Узел7";
-			treeNode5.Text = "R4";
-			treeNode6.Name = "Узел28";
-			treeNode6.Text = "C3";
-			treeNode7.Name = "Узел8";
-			treeNode7.Text = "R5";
-			treeNode8.Name = "Узел9";
-			treeNode8.Text = "L2";
-			treeNode9.Name = "Узел2";
-			treeNode9.Text = "R1";
-			treeNode10.Name = "Узел10";
-			treeNode10.Text = "R6";
-			treeNode11.Name = "Узел3";
-			treeNode11.Text = "C1";
-			this.CircuitTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode9,
-            treeNode11});
 			this.CircuitTreeView.Size = new System.Drawing.Size(938, 551);
 			this.CircuitTreeView.TabIndex = 1;
-			this.CircuitTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CircuitTreeView_AfterSelect);
+			this.CircuitTreeView.UseWaitCursor = true;
 			// 
 			// MainForm
 			// 
@@ -205,7 +177,7 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.MenuStrip menuStrip;
 		private System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem CreateToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem ElectricalDiagramToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem NewElectricalCircuitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem SaveAsToolStripMenuItem;
@@ -213,6 +185,8 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
 		private System.Windows.Forms.TreeView CircuitTreeView;
+		private System.Windows.Forms.ToolStripMenuItem ElectricalCircuitToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem ElectricalCircuitTemplateToolStripMenuItem;
 	}
 }
 
