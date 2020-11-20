@@ -43,18 +43,27 @@ namespace CircuitResistanceCalculatorUI
 
 			GroupBox buttonGroupBox = new GroupBox();
 			buttonGroupBox.Height = 40;
-			buttonGroupBox.Width = 250;
-			buttonGroupBox.Location = new Point(100, 
+			buttonGroupBox.Width = 200;
+			buttonGroupBox.Location = new Point(150, 
 				CalculateCircuitResistanceGroupBox.Height - 50);
 			buttonGroupBox.Anchor = (AnchorStyles.Right |  AnchorStyles.Bottom);
 			CalculateCircuitResistanceGroupBox.Controls.Add(buttonGroupBox);
 
-			//Button calculateButton = new Button();
-			//calculateButton.Text = "Calculate";
-			//calculateButton.Width = 96;
-			//calculateButton.Height = 28;
-			//calculateButton.Anchor = (AnchorStyles.Right | AnchorStyles.Bottom);
-			//groupBox.Controls.Add(calculateButton);
+			Button calculateButton = new Button();
+			calculateButton.Text = "Calculate";
+			calculateButton.Width = 96;
+			calculateButton.Height = 28;
+			calculateButton.Location = new Point(0, 5);
+			calculateButton.Anchor = (AnchorStyles.Left | AnchorStyles.Bottom);
+			buttonGroupBox.Controls.Add(calculateButton);
+
+			Button okButton = new Button();
+			okButton.Text = "Cancel";
+			okButton.Width = 96;
+			okButton.Height = 28;
+			okButton.Location = new Point(100, 5);
+			okButton.Anchor = (AnchorStyles.Right | AnchorStyles.Bottom);
+			buttonGroupBox.Controls.Add(okButton);
 
 			this.Controls.Add(CalculateCircuitResistanceGroupBox);
 		}
