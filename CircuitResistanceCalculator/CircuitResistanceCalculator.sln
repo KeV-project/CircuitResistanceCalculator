@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitResistanceCalculatorUI", "CircuitResistanceCalculatorUI\CircuitResistanceCalculatorUI.csproj", "{783D23BD-4BB1-48B9-8102-3A0B726C39FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9} = {8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitResistanceCalculator", "CircuitResistanceCalculator\CircuitResistanceCalculator.csproj", "{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{783D23BD-4BB1-48B9-8102-3A0B726C39FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{783D23BD-4BB1-48B9-8102-3A0B726C39FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{783D23BD-4BB1-48B9-8102-3A0B726C39FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

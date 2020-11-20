@@ -80,5 +80,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CircuitResistanceCalculator\CircuitResistanceCalculator.csproj">
+      <Project>{8d1268eb-5e51-4fbd-ac3e-137e8e35abf9}</Project>
+      <Name>CircuitResistanceCalculator</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
