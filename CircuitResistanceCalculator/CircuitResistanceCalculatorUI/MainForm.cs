@@ -32,12 +32,31 @@ namespace CircuitResistanceCalculatorUI
 		private void CalculateCircuitResistanceButton_Click(object sender, EventArgs e)
 		{
 			CircuitTreeView.Width = this.Width - 400;
-			GroupBox groupBox = new GroupBox();
-			groupBox.Height = CircuitTreeView.Height + 8;
-			groupBox.Width = 360;
-			groupBox.Location = new Point(CircuitTreeView.Width + 17, CircuitTreeView.Location.Y - 8);
-			groupBox.Anchor = (AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom);
-			this.Controls.Add(groupBox);
+
+			GroupBox CalculateCircuitResistanceGroupBox = new GroupBox();
+			CalculateCircuitResistanceGroupBox.Height = CircuitTreeView.Height + 8;
+			CalculateCircuitResistanceGroupBox.Width = 360;
+			CalculateCircuitResistanceGroupBox.Location = new Point(
+				CircuitTreeView.Width + 17, CircuitTreeView.Location.Y - 8);
+			CalculateCircuitResistanceGroupBox.Anchor = (AnchorStyles.Right
+				| AnchorStyles.Top | AnchorStyles.Bottom);
+
+			GroupBox buttonGroupBox = new GroupBox();
+			buttonGroupBox.Height = 40;
+			buttonGroupBox.Width = 250;
+			buttonGroupBox.Location = new Point(100, 
+				CalculateCircuitResistanceGroupBox.Height - 50);
+			buttonGroupBox.Anchor = (AnchorStyles.Right |  AnchorStyles.Bottom);
+			CalculateCircuitResistanceGroupBox.Controls.Add(buttonGroupBox);
+
+			//Button calculateButton = new Button();
+			//calculateButton.Text = "Calculate";
+			//calculateButton.Width = 96;
+			//calculateButton.Height = 28;
+			//calculateButton.Anchor = (AnchorStyles.Right | AnchorStyles.Bottom);
+			//groupBox.Controls.Add(calculateButton);
+
+			this.Controls.Add(CalculateCircuitResistanceGroupBox);
 		}
 	}
 }
