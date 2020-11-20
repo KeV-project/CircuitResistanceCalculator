@@ -29,6 +29,7 @@ namespace CircuitResistanceCalculatorUI
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,11 +40,12 @@ namespace CircuitResistanceCalculatorUI
 			this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.сalculatingCircuitResistanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CircuitTreeView = new System.Windows.Forms.TreeView();
-			this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.сalculatingCircuitResistanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.CalculateCircuitResistanceButton = new System.Windows.Forms.Button();
 			this.menuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -79,7 +81,7 @@ namespace CircuitResistanceCalculatorUI
 			this.CreateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewElectricalCircuitToolStripMenuItem});
 			this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.CreateToolStripMenuItem.Text = "Create";
 			// 
 			// NewElectricalCircuitToolStripMenuItem
@@ -94,7 +96,7 @@ namespace CircuitResistanceCalculatorUI
             this.ElectricalCircuitToolStripMenuItem,
             this.ElectricalCircuitTemplateToolStripMenuItem});
 			this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.OpenToolStripMenuItem.Text = "Open...";
 			// 
 			// ElectricalCircuitToolStripMenuItem
@@ -113,46 +115,20 @@ namespace CircuitResistanceCalculatorUI
 			// SaveToolStripMenuItem
 			// 
 			this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.SaveToolStripMenuItem.Text = "Save";
 			// 
 			// SaveAsToolStripMenuItem
 			// 
 			this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
-			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.SaveAsToolStripMenuItem.Text = "Save As";
 			// 
 			// ExitToolStripMenuItem
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.ExitToolStripMenuItem.Text = "Exit (Alt + F4)";
-			// 
-			// HelpToolStripMenuItem
-			// 
-			this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AboutToolStripMenuItem});
-			this.HelpToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
-			this.HelpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
-			this.HelpToolStripMenuItem.Text = "Help";
-			// 
-			// AboutToolStripMenuItem
-			// 
-			this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.AboutToolStripMenuItem.Text = "About (F1)";
-			// 
-			// CircuitTreeView
-			// 
-			this.CircuitTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.CircuitTreeView.Location = new System.Drawing.Point(12, 28);
-			this.CircuitTreeView.Name = "CircuitTreeView";
-			this.CircuitTreeView.Size = new System.Drawing.Size(938, 551);
-			this.CircuitTreeView.TabIndex = 1;
-			this.CircuitTreeView.UseWaitCursor = true;
 			// 
 			// actionsToolStripMenuItem
 			// 
@@ -168,11 +144,48 @@ namespace CircuitResistanceCalculatorUI
 			this.сalculatingCircuitResistanceToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
 			this.сalculatingCircuitResistanceToolStripMenuItem.Text = "Сalculating circuit resistance";
 			// 
+			// HelpToolStripMenuItem
+			// 
+			this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutToolStripMenuItem});
+			this.HelpToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
+			this.HelpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
+			this.HelpToolStripMenuItem.Text = "Help";
+			// 
+			// AboutToolStripMenuItem
+			// 
+			this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
+			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+			this.AboutToolStripMenuItem.Text = "About (F1)";
+			// 
+			// CircuitTreeView
+			// 
+			this.CircuitTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.CircuitTreeView.Location = new System.Drawing.Point(12, 64);
+			this.CircuitTreeView.Name = "CircuitTreeView";
+			this.CircuitTreeView.Size = new System.Drawing.Size(938, 515);
+			this.CircuitTreeView.TabIndex = 1;
+			this.CircuitTreeView.UseWaitCursor = true;
+			// 
+			// CalculateCircuitResistanceButton
+			// 
+			this.CalculateCircuitResistanceButton.Image = ((System.Drawing.Image)(resources.GetObject("CalculateCircuitResistanceButton.Image")));
+			this.CalculateCircuitResistanceButton.Location = new System.Drawing.Point(12, 28);
+			this.CalculateCircuitResistanceButton.Name = "CalculateCircuitResistanceButton";
+			this.CalculateCircuitResistanceButton.Size = new System.Drawing.Size(31, 30);
+			this.CalculateCircuitResistanceButton.TabIndex = 2;
+			this.CalculateCircuitResistanceButton.UseVisualStyleBackColor = true;
+			this.CalculateCircuitResistanceButton.UseWaitCursor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(962, 591);
+			this.Controls.Add(this.CalculateCircuitResistanceButton);
 			this.Controls.Add(this.CircuitTreeView);
 			this.Controls.Add(this.menuStrip);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -206,6 +219,7 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.ToolStripMenuItem ElectricalCircuitTemplateToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem сalculatingCircuitResistanceToolStripMenuItem;
+		private System.Windows.Forms.Button CalculateCircuitResistanceButton;
 	}
 }
 
