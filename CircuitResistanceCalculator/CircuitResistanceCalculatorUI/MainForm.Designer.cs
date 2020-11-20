@@ -58,7 +58,7 @@ namespace CircuitResistanceCalculatorUI
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-			this.menuStrip.Size = new System.Drawing.Size(962, 25);
+			this.menuStrip.Size = new System.Drawing.Size(1275, 25);
 			this.menuStrip.TabIndex = 0;
 			this.menuStrip.Text = "menuStrip1";
 			this.menuStrip.UseWaitCursor = true;
@@ -166,7 +166,7 @@ namespace CircuitResistanceCalculatorUI
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.CircuitTreeView.Location = new System.Drawing.Point(12, 64);
 			this.CircuitTreeView.Name = "CircuitTreeView";
-			this.CircuitTreeView.Size = new System.Drawing.Size(938, 515);
+			this.CircuitTreeView.Size = new System.Drawing.Size(1251, 608);
 			this.CircuitTreeView.TabIndex = 1;
 			this.CircuitTreeView.UseWaitCursor = true;
 			// 
@@ -179,22 +179,25 @@ namespace CircuitResistanceCalculatorUI
 			this.CalculateCircuitResistanceButton.TabIndex = 2;
 			this.CalculateCircuitResistanceButton.UseVisualStyleBackColor = true;
 			this.CalculateCircuitResistanceButton.UseWaitCursor = true;
+			this.CalculateCircuitResistanceButton.Click += new System.EventHandler(this.CalculateCircuitResistanceButton_Click);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(962, 591);
+			this.ClientSize = new System.Drawing.Size(1275, 684);
 			this.Controls.Add(this.CalculateCircuitResistanceButton);
 			this.Controls.Add(this.CircuitTreeView);
 			this.Controls.Add(this.menuStrip);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.MainMenuStrip = this.menuStrip;
-			this.MinimumSize = new System.Drawing.Size(978, 629);
+			this.MinimumSize = new System.Drawing.Size(1042, 665);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Circuit resistance calculator";
 			this.UseWaitCursor = true;
+			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
 			this.ResumeLayout(false);

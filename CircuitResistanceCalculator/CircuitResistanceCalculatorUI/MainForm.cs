@@ -23,5 +23,21 @@ namespace CircuitResistanceCalculatorUI
 			TemplatesForm templatesForm = new TemplatesForm();
 			templatesForm.ShowDialog();
 		}
+
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		private void CalculateCircuitResistanceButton_Click(object sender, EventArgs e)
+		{
+			CircuitTreeView.Width = this.Width - 400;
+			GroupBox groupBox = new GroupBox();
+			groupBox.Height = CircuitTreeView.Height + 8;
+			groupBox.Width = 360;
+			groupBox.Location = new Point(CircuitTreeView.Width + 17, CircuitTreeView.Location.Y - 8);
+			groupBox.Anchor = (AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom);
+			this.Controls.Add(groupBox);
+		}
 	}
 }
