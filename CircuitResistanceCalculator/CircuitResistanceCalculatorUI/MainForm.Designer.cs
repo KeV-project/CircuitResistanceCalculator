@@ -32,6 +32,9 @@ namespace CircuitResistanceCalculatorUI
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,12 +52,12 @@ namespace CircuitResistanceCalculatorUI
 			this.ResultTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.CircuitPictureBox = new System.Windows.Forms.PictureBox();
 			this.CalculateCircuitResistanceGroupBox = new System.Windows.Forms.GroupBox();
+			this.CircuitResistanceGridView = new System.Windows.Forms.DataGridView();
 			this.ClearButton = new System.Windows.Forms.Button();
 			this.EditFrequencyButton = new System.Windows.Forms.Button();
 			this.DeleteFrequencyButton = new System.Windows.Forms.Button();
 			this.EnterFrequencyTextBox = new System.Windows.Forms.TextBox();
 			this.EnterFreguencyLabel = new System.Windows.Forms.Label();
-			this.CircuitResistanceGridView = new System.Windows.Forms.DataGridView();
 			this.menuStrip.SuspendLayout();
 			this.MainTableLayoutPanel.SuspendLayout();
 			this.ResultTableLayoutPanel.SuspendLayout();
@@ -233,6 +236,51 @@ namespace CircuitResistanceCalculatorUI
 			this.CalculateCircuitResistanceGroupBox.TabIndex = 1;
 			this.CalculateCircuitResistanceGroupBox.TabStop = false;
 			// 
+			// CircuitResistanceGridView
+			// 
+			dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.CircuitResistanceGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			this.CircuitResistanceGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.CircuitResistanceGridView.BackgroundColor = System.Drawing.SystemColors.ScrollBar;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.CircuitResistanceGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+			this.CircuitResistanceGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.CircuitResistanceGridView.DefaultCellStyle = dataGridViewCellStyle3;
+			this.CircuitResistanceGridView.EnableHeadersVisualStyles = false;
+			this.CircuitResistanceGridView.Location = new System.Drawing.Point(6, 48);
+			this.CircuitResistanceGridView.Name = "CircuitResistanceGridView";
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.CircuitResistanceGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle5.BackColor = System.Drawing.Color.DarkGray;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+			this.CircuitResistanceGridView.RowsDefaultCellStyle = dataGridViewCellStyle5;
+			this.CircuitResistanceGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.CircuitResistanceGridView.Size = new System.Drawing.Size(535, 161);
+			this.CircuitResistanceGridView.TabIndex = 6;
+			// 
 			// ClearButton
 			// 
 			this.ClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -285,24 +333,6 @@ namespace CircuitResistanceCalculatorUI
 			this.EnterFreguencyLabel.TabIndex = 1;
 			this.EnterFreguencyLabel.Text = "Enter frequency:";
 			this.EnterFreguencyLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-			// 
-			// CircuitResistanceGridView
-			// 
-			dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-			this.CircuitResistanceGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-			this.CircuitResistanceGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.CircuitResistanceGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.CircuitResistanceGridView.Location = new System.Drawing.Point(6, 48);
-			this.CircuitResistanceGridView.Name = "CircuitResistanceGridView";
-			dataGridViewCellStyle2.BackColor = System.Drawing.Color.DarkGray;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSlateGray;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-			this.CircuitResistanceGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
-			this.CircuitResistanceGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.CircuitResistanceGridView.Size = new System.Drawing.Size(535, 161);
-			this.CircuitResistanceGridView.TabIndex = 6;
 			// 
 			// MainForm
 			// 
