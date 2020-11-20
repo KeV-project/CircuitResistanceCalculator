@@ -36,8 +36,8 @@ namespace CircuitResistanceCalculatorUI
 			this.Template4Button = new System.Windows.Forms.Button();
 			this.Template5Button = new System.Windows.Forms.Button();
 			this.Template6Button = new System.Windows.Forms.Button();
-			this.CancelButton = new System.Windows.Forms.Button();
 			this.Template3Button = new System.Windows.Forms.Button();
+			this.CancelButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// TemplatesLabel
@@ -105,17 +105,6 @@ namespace CircuitResistanceCalculatorUI
 			this.Template6Button.TabIndex = 6;
 			this.Template6Button.UseVisualStyleBackColor = true;
 			// 
-			// CancelButton
-			// 
-			this.CancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.CancelButton.Location = new System.Drawing.Point(692, 401);
-			this.CancelButton.Name = "CancelButton";
-			this.CancelButton.Size = new System.Drawing.Size(96, 28);
-			this.CancelButton.TabIndex = 7;
-			this.CancelButton.Text = "Cancel";
-			this.CancelButton.UseVisualStyleBackColor = true;
-			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
-			// 
 			// Template3Button
 			// 
 			this.Template3Button.Image = ((System.Drawing.Image)(resources.GetObject("Template3Button.Image")));
@@ -126,6 +115,17 @@ namespace CircuitResistanceCalculatorUI
 			this.Template3Button.Size = new System.Drawing.Size(259, 158);
 			this.Template3Button.TabIndex = 3;
 			this.Template3Button.UseVisualStyleBackColor = true;
+			// 
+			// CancelButton
+			// 
+			this.CancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.CancelButton.Location = new System.Drawing.Point(692, 401);
+			this.CancelButton.Name = "CancelButton";
+			this.CancelButton.Size = new System.Drawing.Size(96, 28);
+			this.CancelButton.TabIndex = 7;
+			this.CancelButton.Text = "Cancel";
+			this.CancelButton.UseVisualStyleBackColor = true;
+			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
 			// 
 			// TemplatesForm
 			// 
@@ -158,7 +158,7 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.Button Template4Button;
 		private System.Windows.Forms.Button Template5Button;
 		private System.Windows.Forms.Button Template6Button;
-		private System.Windows.Forms.Button CancelButton;
 		private System.Windows.Forms.Button Template3Button;
+		private System.Windows.Forms.Button CancelButton;
 	}
 }

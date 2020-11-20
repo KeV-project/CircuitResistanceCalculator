@@ -42,6 +42,8 @@ namespace CircuitResistanceCalculatorUI
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CircuitTreeView = new System.Windows.Forms.TreeView();
+			this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.сalculatingCircuitResistanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -49,6 +51,7 @@ namespace CircuitResistanceCalculatorUI
 			// 
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileToolStripMenuItem,
+            this.actionsToolStripMenuItem,
             this.HelpToolStripMenuItem});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
@@ -151,6 +154,20 @@ namespace CircuitResistanceCalculatorUI
 			this.CircuitTreeView.TabIndex = 1;
 			this.CircuitTreeView.UseWaitCursor = true;
 			// 
+			// actionsToolStripMenuItem
+			// 
+			this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сalculatingCircuitResistanceToolStripMenuItem});
+			this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
+			this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
+			this.actionsToolStripMenuItem.Text = "Actions";
+			// 
+			// сalculatingCircuitResistanceToolStripMenuItem
+			// 
+			this.сalculatingCircuitResistanceToolStripMenuItem.Name = "сalculatingCircuitResistanceToolStripMenuItem";
+			this.сalculatingCircuitResistanceToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.сalculatingCircuitResistanceToolStripMenuItem.Text = "Сalculating circuit resistance";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -187,6 +204,8 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.TreeView CircuitTreeView;
 		private System.Windows.Forms.ToolStripMenuItem ElectricalCircuitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem ElectricalCircuitTemplateToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem сalculatingCircuitResistanceToolStripMenuItem;
 	}
 }
 
