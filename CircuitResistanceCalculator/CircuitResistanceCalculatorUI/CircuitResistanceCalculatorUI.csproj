@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddNode.cs">
+    <Compile Include="AddNodeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddNode.Designer.cs">
-      <DependentUpon>AddNode.cs</DependentUpon>
+    <Compile Include="AddNodeForm.Designer.cs">
+      <DependentUpon>AddNodeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -65,8 +65,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddNode.resx">
-      <DependentUpon>AddNode.cs</DependentUpon>
+    <EmbeddedResource Include="AddNodeForm.resx">
+      <DependentUpon>AddNodeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

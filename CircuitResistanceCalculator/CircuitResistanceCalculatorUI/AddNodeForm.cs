@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CircuitResistanceCalculatorUI
 {
-	public partial class AddNode : Form
+	public partial class AddNodeForm : Form
 	{
-		public AddNode()
+		public AddNodeForm()
 		{
 			InitializeComponent();
 		}

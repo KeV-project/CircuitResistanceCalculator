@@ -1,7 +1,7 @@
 ﻿
 namespace CircuitResistanceCalculatorUI
 {
-	partial class AddNode
+	partial class AddNodeForm
 	{
 		/// <summary>
 		/// Required designer variable.
