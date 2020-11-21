@@ -364,6 +364,9 @@ namespace CircuitResistanceCalculatorUI
 			dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
 			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.CircuitResistanceGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			this.CircuitResistanceGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.CircuitResistanceGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.CircuitResistanceGridView.BackgroundColor = System.Drawing.SystemColors.ScrollBar;
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
