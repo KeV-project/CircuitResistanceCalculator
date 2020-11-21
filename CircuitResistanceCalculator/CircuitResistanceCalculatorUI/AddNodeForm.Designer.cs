@@ -1,7 +1,7 @@
 ﻿
 namespace CircuitResistanceCalculatorUI
 {
-	partial class AddNode
+	partial class AddNodeForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -68,7 +68,6 @@ namespace CircuitResistanceCalculatorUI
 			this.ConnectionTypeLabel.Size = new System.Drawing.Size(113, 17);
 			this.ConnectionTypeLabel.TabIndex = 0;
 			this.ConnectionTypeLabel.Text = "Connection type:";
-			this.ConnectionTypeLabel.Click += new System.EventHandler(this.ConnectionTypeLabel_Click);
 			// 
 			// ElementTypeLabel
 			// 
@@ -79,7 +78,6 @@ namespace CircuitResistanceCalculatorUI
 			this.ElementTypeLabel.Size = new System.Drawing.Size(91, 17);
 			this.ElementTypeLabel.TabIndex = 1;
 			this.ElementTypeLabel.Text = "Element type:";
-			this.ElementTypeLabel.Click += new System.EventHandler(this.ElementTypeLabel_Click);
 			// 
 			// button1
 			// 
@@ -112,7 +110,6 @@ namespace CircuitResistanceCalculatorUI
 			this.SerialRadioButton.TabStop = true;
 			this.SerialRadioButton.Text = "Serial";
 			this.SerialRadioButton.UseVisualStyleBackColor = true;
-			this.SerialRadioButton.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
 			// 
 			// ParallelRadioButton
 			// 
@@ -168,7 +165,6 @@ namespace CircuitResistanceCalculatorUI
 			this.RValuemaskedTextBox.Name = "RValuemaskedTextBox";
 			this.RValuemaskedTextBox.Size = new System.Drawing.Size(100, 20);
 			this.RValuemaskedTextBox.TabIndex = 9;
-			this.RValuemaskedTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
 			// 
 			// LValueMaskedTextBox
 			// 
@@ -234,7 +230,6 @@ namespace CircuitResistanceCalculatorUI
 			this.ConnectionGroupBox.Size = new System.Drawing.Size(482, 46);
 			this.ConnectionGroupBox.TabIndex = 17;
 			this.ConnectionGroupBox.TabStop = false;
-			this.ConnectionGroupBox.Enter += new System.EventHandler(this.groupBox1_Enter);
 			// 
 			// ElementsGroupBox
 			// 

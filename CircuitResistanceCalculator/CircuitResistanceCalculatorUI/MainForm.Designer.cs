@@ -494,7 +494,6 @@ namespace CircuitResistanceCalculatorUI
 			this.CreateNewTreeButton.Size = new System.Drawing.Size(32, 28);
 			this.CreateNewTreeButton.TabIndex = 6;
 			this.CreateNewTreeButton.UseVisualStyleBackColor = true;
-			this.CreateNewTreeButton.Click += new System.EventHandler(this.CreateNewTreeButton_Click);
 			// 
 			// EditButton
 			// 
