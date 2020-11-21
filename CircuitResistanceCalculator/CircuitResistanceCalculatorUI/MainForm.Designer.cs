@@ -55,6 +55,17 @@ namespace CircuitResistanceCalculatorUI
 			this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.rootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.branchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.templatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.circuit1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.circuit2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.circuit3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.circuit4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.circuit5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -68,20 +79,9 @@ namespace CircuitResistanceCalculatorUI
 			this.DeleteFrequencyButton = new System.Windows.Forms.Button();
 			this.EnterFrequencyTextBox = new System.Windows.Forms.TextBox();
 			this.EnterFreguencyLabel = new System.Windows.Forms.Label();
-			this.templatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.circuit1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.circuit2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.circuit3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.circuit4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.circuit5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.rootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.branchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AddRootButton = new System.Windows.Forms.Button();
 			this.AddBranchButton = new System.Windows.Forms.Button();
 			this.DeleteNodeButton = new System.Windows.Forms.Button();
-			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ClearTreeButton = new System.Windows.Forms.Button();
 			this.CreateNewTreeButton = new System.Windows.Forms.Button();
 			this.EditButton = new System.Windows.Forms.Button();
@@ -125,7 +125,7 @@ namespace CircuitResistanceCalculatorUI
 			this.CreateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewElectricalCircuitToolStripMenuItem});
 			this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.CreateToolStripMenuItem.Text = "Create";
 			// 
 			// NewElectricalCircuitToolStripMenuItem
@@ -140,7 +140,7 @@ namespace CircuitResistanceCalculatorUI
             this.ElectricalCircuitToolStripMenuItem,
             this.ElectricalCircuitTemplateToolStripMenuItem});
 			this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.OpenToolStripMenuItem.Text = "Open...";
 			// 
 			// ElectricalCircuitToolStripMenuItem
@@ -158,20 +158,97 @@ namespace CircuitResistanceCalculatorUI
 			// SaveToolStripMenuItem
 			// 
 			this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.SaveToolStripMenuItem.Text = "Save";
 			// 
 			// SaveAsToolStripMenuItem
 			// 
 			this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
-			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.SaveAsToolStripMenuItem.Text = "Save As";
 			// 
 			// ExitToolStripMenuItem
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.ExitToolStripMenuItem.Text = "Exit (Alt + F4)";
+			// 
+			// addToolStripMenuItem
+			// 
+			this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rootToolStripMenuItem,
+            this.branchToolStripMenuItem,
+            this.deleteToolStripMenuItem,
+            this.clearToolStripMenuItem});
+			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+			this.addToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
+			this.addToolStripMenuItem.Text = "Actions";
+			// 
+			// rootToolStripMenuItem
+			// 
+			this.rootToolStripMenuItem.Name = "rootToolStripMenuItem";
+			this.rootToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+			this.rootToolStripMenuItem.Text = "Add root";
+			// 
+			// branchToolStripMenuItem
+			// 
+			this.branchToolStripMenuItem.Name = "branchToolStripMenuItem";
+			this.branchToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+			this.branchToolStripMenuItem.Text = "Add branch";
+			// 
+			// deleteToolStripMenuItem
+			// 
+			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+			this.deleteToolStripMenuItem.Text = "Delete node";
+			// 
+			// clearToolStripMenuItem
+			// 
+			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+			this.clearToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+			this.clearToolStripMenuItem.Text = "Clear tree";
+			// 
+			// templatesToolStripMenuItem
+			// 
+			this.templatesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.circuit1ToolStripMenuItem,
+            this.circuit2ToolStripMenuItem,
+            this.circuit3ToolStripMenuItem,
+            this.circuit4ToolStripMenuItem,
+            this.circuit5ToolStripMenuItem});
+			this.templatesToolStripMenuItem.Name = "templatesToolStripMenuItem";
+			this.templatesToolStripMenuItem.Size = new System.Drawing.Size(74, 21);
+			this.templatesToolStripMenuItem.Text = "Templates";
+			// 
+			// circuit1ToolStripMenuItem
+			// 
+			this.circuit1ToolStripMenuItem.Name = "circuit1ToolStripMenuItem";
+			this.circuit1ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit1ToolStripMenuItem.Text = "Circuit №1";
+			// 
+			// circuit2ToolStripMenuItem
+			// 
+			this.circuit2ToolStripMenuItem.Name = "circuit2ToolStripMenuItem";
+			this.circuit2ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit2ToolStripMenuItem.Text = "Circuit №2";
+			// 
+			// circuit3ToolStripMenuItem
+			// 
+			this.circuit3ToolStripMenuItem.Name = "circuit3ToolStripMenuItem";
+			this.circuit3ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit3ToolStripMenuItem.Text = "Circuit №3";
+			// 
+			// circuit4ToolStripMenuItem
+			// 
+			this.circuit4ToolStripMenuItem.Name = "circuit4ToolStripMenuItem";
+			this.circuit4ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit4ToolStripMenuItem.Text = "Circuit №4";
+			// 
+			// circuit5ToolStripMenuItem
+			// 
+			this.circuit5ToolStripMenuItem.Name = "circuit5ToolStripMenuItem";
+			this.circuit5ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit5ToolStripMenuItem.Text = "Circuit №5";
 			// 
 			// HelpToolStripMenuItem
 			// 
@@ -185,7 +262,7 @@ namespace CircuitResistanceCalculatorUI
 			// AboutToolStripMenuItem
 			// 
 			this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
 			this.AboutToolStripMenuItem.Text = "About (F1)";
 			// 
 			// MainTableLayoutPanel
@@ -291,7 +368,7 @@ namespace CircuitResistanceCalculatorUI
 			this.CircuitResistanceGridView.BackgroundColor = System.Drawing.SystemColors.ScrollBar;
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
 			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
 			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
@@ -373,71 +450,6 @@ namespace CircuitResistanceCalculatorUI
 			this.EnterFreguencyLabel.Text = "Enter frequency:";
 			this.EnterFreguencyLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
 			// 
-			// templatesToolStripMenuItem
-			// 
-			this.templatesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.circuit1ToolStripMenuItem,
-            this.circuit2ToolStripMenuItem,
-            this.circuit3ToolStripMenuItem,
-            this.circuit4ToolStripMenuItem,
-            this.circuit5ToolStripMenuItem});
-			this.templatesToolStripMenuItem.Name = "templatesToolStripMenuItem";
-			this.templatesToolStripMenuItem.Size = new System.Drawing.Size(74, 21);
-			this.templatesToolStripMenuItem.Text = "Templates";
-			// 
-			// circuit1ToolStripMenuItem
-			// 
-			this.circuit1ToolStripMenuItem.Name = "circuit1ToolStripMenuItem";
-			this.circuit1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.circuit1ToolStripMenuItem.Text = "Circuit №1";
-			// 
-			// circuit2ToolStripMenuItem
-			// 
-			this.circuit2ToolStripMenuItem.Name = "circuit2ToolStripMenuItem";
-			this.circuit2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.circuit2ToolStripMenuItem.Text = "Circuit №2";
-			// 
-			// circuit3ToolStripMenuItem
-			// 
-			this.circuit3ToolStripMenuItem.Name = "circuit3ToolStripMenuItem";
-			this.circuit3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.circuit3ToolStripMenuItem.Text = "Circuit №3";
-			// 
-			// circuit4ToolStripMenuItem
-			// 
-			this.circuit4ToolStripMenuItem.Name = "circuit4ToolStripMenuItem";
-			this.circuit4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.circuit4ToolStripMenuItem.Text = "Circuit №4";
-			// 
-			// circuit5ToolStripMenuItem
-			// 
-			this.circuit5ToolStripMenuItem.Name = "circuit5ToolStripMenuItem";
-			this.circuit5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.circuit5ToolStripMenuItem.Text = "Circuit №5";
-			// 
-			// addToolStripMenuItem
-			// 
-			this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rootToolStripMenuItem,
-            this.branchToolStripMenuItem,
-            this.deleteToolStripMenuItem,
-            this.clearToolStripMenuItem});
-			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-			this.addToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
-			this.addToolStripMenuItem.Text = "Actions";
-			// 
-			// rootToolStripMenuItem
-			// 
-			this.rootToolStripMenuItem.Name = "rootToolStripMenuItem";
-			this.rootToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.rootToolStripMenuItem.Text = "Add root";
-			// 
-			// branchToolStripMenuItem
-			// 
-			this.branchToolStripMenuItem.Name = "branchToolStripMenuItem";
-			this.branchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.branchToolStripMenuItem.Text = "Add branch";
-			// 
 			// AddRootButton
 			// 
 			this.AddRootButton.Image = ((System.Drawing.Image)(resources.GetObject("AddRootButton.Image")));
@@ -465,18 +477,6 @@ namespace CircuitResistanceCalculatorUI
 			this.DeleteNodeButton.TabIndex = 4;
 			this.DeleteNodeButton.UseVisualStyleBackColor = true;
 			// 
-			// deleteToolStripMenuItem
-			// 
-			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.deleteToolStripMenuItem.Text = "Delete node";
-			// 
-			// clearToolStripMenuItem
-			// 
-			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-			this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.clearToolStripMenuItem.Text = "Clear tree";
-			// 
 			// ClearTreeButton
 			// 
 			this.ClearTreeButton.Image = ((System.Drawing.Image)(resources.GetObject("ClearTreeButton.Image")));
@@ -494,7 +494,6 @@ namespace CircuitResistanceCalculatorUI
 			this.CreateNewTreeButton.Size = new System.Drawing.Size(32, 28);
 			this.CreateNewTreeButton.TabIndex = 6;
 			this.CreateNewTreeButton.UseVisualStyleBackColor = true;
-			this.CreateNewTreeButton.Click += new System.EventHandler(this.CreateNewTreeButton_Click);
 			// 
 			// EditButton
 			// 
@@ -504,6 +503,7 @@ namespace CircuitResistanceCalculatorUI
 			this.EditButton.Size = new System.Drawing.Size(32, 28);
 			this.EditButton.TabIndex = 7;
 			this.EditButton.UseVisualStyleBackColor = true;
+			this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
 			// 
 			// MainForm
 			// 

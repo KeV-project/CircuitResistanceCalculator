@@ -17,29 +17,9 @@ namespace CircuitResistanceCalculatorUI
 			InitializeComponent();
 		}
 
-		private void radioButton1_CheckedChanged(object sender, EventArgs e)
+		private void CancelButton_Click(object sender, EventArgs e)
 		{
-
-		}
-
-		private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-		{
-
-		}
-
-		private void groupBox1_Enter(object sender, EventArgs e)
-		{
-
-		}
-
-		private void ConnectionTypeLabel_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void ElementTypeLabel_Click(object sender, EventArgs e)
-		{
-
+			this.Close();
 		}
 	}
 }

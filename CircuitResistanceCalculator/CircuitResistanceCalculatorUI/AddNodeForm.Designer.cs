@@ -47,14 +47,14 @@ namespace CircuitResistanceCalculatorUI
 			this.LUnitLable = new System.Windows.Forms.Label();
 			this.ConnectionGroupBox = new System.Windows.Forms.GroupBox();
 			this.ElementsGroupBox = new System.Windows.Forms.GroupBox();
-			this.IndexLabel = new System.Windows.Forms.Label();
-			this.RIndexMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
-			this.LIndexMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
-			this.CIndexMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
-			this.REquallyLabel = new System.Windows.Forms.Label();
-			this.LEquallyLabel = new System.Windows.Forms.Label();
 			this.CEquallyLabel = new System.Windows.Forms.Label();
+			this.CIndexMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
 			this.CUnitLabel = new System.Windows.Forms.Label();
+			this.LEquallyLabel = new System.Windows.Forms.Label();
+			this.IndexLabel = new System.Windows.Forms.Label();
+			this.REquallyLabel = new System.Windows.Forms.Label();
+			this.LIndexMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
+			this.RIndexMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
 			this.ConnectionGroupBox.SuspendLayout();
 			this.ElementsGroupBox.SuspendLayout();
 			this.SuspendLayout();
@@ -68,7 +68,6 @@ namespace CircuitResistanceCalculatorUI
 			this.ConnectionTypeLabel.Size = new System.Drawing.Size(113, 17);
 			this.ConnectionTypeLabel.TabIndex = 0;
 			this.ConnectionTypeLabel.Text = "Connection type:";
-			this.ConnectionTypeLabel.Click += new System.EventHandler(this.ConnectionTypeLabel_Click);
 			// 
 			// ElementTypeLabel
 			// 
@@ -79,7 +78,6 @@ namespace CircuitResistanceCalculatorUI
 			this.ElementTypeLabel.Size = new System.Drawing.Size(91, 17);
 			this.ElementTypeLabel.TabIndex = 1;
 			this.ElementTypeLabel.Text = "Element type:";
-			this.ElementTypeLabel.Click += new System.EventHandler(this.ElementTypeLabel_Click);
 			// 
 			// button1
 			// 
@@ -100,6 +98,7 @@ namespace CircuitResistanceCalculatorUI
 			this.CancelButton.TabIndex = 3;
 			this.CancelButton.Text = "Cancel";
 			this.CancelButton.UseVisualStyleBackColor = true;
+			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
 			// 
 			// SerialRadioButton
 			// 
@@ -112,7 +111,6 @@ namespace CircuitResistanceCalculatorUI
 			this.SerialRadioButton.TabStop = true;
 			this.SerialRadioButton.Text = "Serial";
 			this.SerialRadioButton.UseVisualStyleBackColor = true;
-			this.SerialRadioButton.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
 			// 
 			// ParallelRadioButton
 			// 
@@ -168,7 +166,6 @@ namespace CircuitResistanceCalculatorUI
 			this.RValuemaskedTextBox.Name = "RValuemaskedTextBox";
 			this.RValuemaskedTextBox.Size = new System.Drawing.Size(100, 20);
 			this.RValuemaskedTextBox.TabIndex = 9;
-			this.RValuemaskedTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
 			// 
 			// LValueMaskedTextBox
 			// 
@@ -234,7 +231,6 @@ namespace CircuitResistanceCalculatorUI
 			this.ConnectionGroupBox.Size = new System.Drawing.Size(482, 46);
 			this.ConnectionGroupBox.TabIndex = 17;
 			this.ConnectionGroupBox.TabStop = false;
-			this.ConnectionGroupBox.Enter += new System.EventHandler(this.groupBox1_Enter);
 			// 
 			// ElementsGroupBox
 			// 
@@ -263,57 +259,6 @@ namespace CircuitResistanceCalculatorUI
 			this.ElementsGroupBox.TabIndex = 18;
 			this.ElementsGroupBox.TabStop = false;
 			// 
-			// IndexLabel
-			// 
-			this.IndexLabel.AutoSize = true;
-			this.IndexLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.IndexLabel.Location = new System.Drawing.Point(138, 20);
-			this.IndexLabel.Name = "IndexLabel";
-			this.IndexLabel.Size = new System.Drawing.Size(45, 17);
-			this.IndexLabel.TabIndex = 9;
-			this.IndexLabel.Text = "Index:";
-			// 
-			// RIndexMaskedTextBox
-			// 
-			this.RIndexMaskedTextBox.Location = new System.Drawing.Point(112, 46);
-			this.RIndexMaskedTextBox.Name = "RIndexMaskedTextBox";
-			this.RIndexMaskedTextBox.Size = new System.Drawing.Size(100, 20);
-			this.RIndexMaskedTextBox.TabIndex = 19;
-			// 
-			// LIndexMaskedTextBox
-			// 
-			this.LIndexMaskedTextBox.Location = new System.Drawing.Point(112, 73);
-			this.LIndexMaskedTextBox.Name = "LIndexMaskedTextBox";
-			this.LIndexMaskedTextBox.Size = new System.Drawing.Size(100, 20);
-			this.LIndexMaskedTextBox.TabIndex = 20;
-			// 
-			// CIndexMaskedTextBox
-			// 
-			this.CIndexMaskedTextBox.Location = new System.Drawing.Point(112, 100);
-			this.CIndexMaskedTextBox.Name = "CIndexMaskedTextBox";
-			this.CIndexMaskedTextBox.Size = new System.Drawing.Size(100, 20);
-			this.CIndexMaskedTextBox.TabIndex = 21;
-			// 
-			// REquallyLabel
-			// 
-			this.REquallyLabel.AutoSize = true;
-			this.REquallyLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.REquallyLabel.Location = new System.Drawing.Point(246, 47);
-			this.REquallyLabel.Name = "REquallyLabel";
-			this.REquallyLabel.Size = new System.Drawing.Size(18, 17);
-			this.REquallyLabel.TabIndex = 19;
-			this.REquallyLabel.Text = "=";
-			// 
-			// LEquallyLabel
-			// 
-			this.LEquallyLabel.AutoSize = true;
-			this.LEquallyLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.LEquallyLabel.Location = new System.Drawing.Point(246, 74);
-			this.LEquallyLabel.Name = "LEquallyLabel";
-			this.LEquallyLabel.Size = new System.Drawing.Size(18, 17);
-			this.LEquallyLabel.TabIndex = 20;
-			this.LEquallyLabel.Text = "=";
-			// 
 			// CEquallyLabel
 			// 
 			this.CEquallyLabel.AutoSize = true;
@@ -323,6 +268,13 @@ namespace CircuitResistanceCalculatorUI
 			this.CEquallyLabel.Size = new System.Drawing.Size(18, 17);
 			this.CEquallyLabel.TabIndex = 21;
 			this.CEquallyLabel.Text = "=";
+			// 
+			// CIndexMaskedTextBox
+			// 
+			this.CIndexMaskedTextBox.Location = new System.Drawing.Point(112, 100);
+			this.CIndexMaskedTextBox.Name = "CIndexMaskedTextBox";
+			this.CIndexMaskedTextBox.Size = new System.Drawing.Size(100, 20);
+			this.CIndexMaskedTextBox.TabIndex = 21;
 			// 
 			// CUnitLabel
 			// 
@@ -334,7 +286,51 @@ namespace CircuitResistanceCalculatorUI
 			this.CUnitLabel.TabIndex = 16;
 			this.CUnitLabel.Text = "F";
 			// 
-			// AddNode
+			// LEquallyLabel
+			// 
+			this.LEquallyLabel.AutoSize = true;
+			this.LEquallyLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.LEquallyLabel.Location = new System.Drawing.Point(246, 74);
+			this.LEquallyLabel.Name = "LEquallyLabel";
+			this.LEquallyLabel.Size = new System.Drawing.Size(18, 17);
+			this.LEquallyLabel.TabIndex = 20;
+			this.LEquallyLabel.Text = "=";
+			// 
+			// IndexLabel
+			// 
+			this.IndexLabel.AutoSize = true;
+			this.IndexLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.IndexLabel.Location = new System.Drawing.Point(138, 20);
+			this.IndexLabel.Name = "IndexLabel";
+			this.IndexLabel.Size = new System.Drawing.Size(45, 17);
+			this.IndexLabel.TabIndex = 9;
+			this.IndexLabel.Text = "Index:";
+			// 
+			// REquallyLabel
+			// 
+			this.REquallyLabel.AutoSize = true;
+			this.REquallyLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.REquallyLabel.Location = new System.Drawing.Point(246, 47);
+			this.REquallyLabel.Name = "REquallyLabel";
+			this.REquallyLabel.Size = new System.Drawing.Size(18, 17);
+			this.REquallyLabel.TabIndex = 19;
+			this.REquallyLabel.Text = "=";
+			// 
+			// LIndexMaskedTextBox
+			// 
+			this.LIndexMaskedTextBox.Location = new System.Drawing.Point(112, 73);
+			this.LIndexMaskedTextBox.Name = "LIndexMaskedTextBox";
+			this.LIndexMaskedTextBox.Size = new System.Drawing.Size(100, 20);
+			this.LIndexMaskedTextBox.TabIndex = 20;
+			// 
+			// RIndexMaskedTextBox
+			// 
+			this.RIndexMaskedTextBox.Location = new System.Drawing.Point(112, 46);
+			this.RIndexMaskedTextBox.Name = "RIndexMaskedTextBox";
+			this.RIndexMaskedTextBox.Size = new System.Drawing.Size(100, 20);
+			this.RIndexMaskedTextBox.TabIndex = 19;
+			// 
+			// AddNodeForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -345,7 +341,8 @@ namespace CircuitResistanceCalculatorUI
 			this.Controls.Add(this.button1);
 			this.MaximumSize = new System.Drawing.Size(525, 319);
 			this.MinimumSize = new System.Drawing.Size(525, 319);
-			this.Name = "AddNode";
+			this.Name = "AddNodeForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Add node";
 			this.ConnectionGroupBox.ResumeLayout(false);
 			this.ConnectionGroupBox.PerformLayout();
