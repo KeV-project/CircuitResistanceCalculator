@@ -41,5 +41,10 @@ namespace CircuitResistanceCalculatorUI
 
 			CircuitResistanceGridView.DataSource = _data;
 		}
+
+		private void CreateNewTreeButton_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
