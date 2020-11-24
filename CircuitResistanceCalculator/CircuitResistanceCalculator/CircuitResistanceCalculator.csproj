@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data.cs" />
+    <Compile Include="Inductor.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="ParallelConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
