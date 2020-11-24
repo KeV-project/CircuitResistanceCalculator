@@ -47,5 +47,10 @@ namespace CircuitResistanceCalculatorUI
 			AddNodeForm addNodeForm = new AddNodeForm();
 			addNodeForm.ShowDialog();
 		}
+
+		private void CreateNewTreeButton_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
