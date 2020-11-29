@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Capacitor.cs" />
+    <Compile Include="Circuit.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Inductor.cs" />
     <Compile Include="Node.cs" />

@@ -14,5 +14,7 @@ namespace CircuitResistanceCalculator
 		{
 			return new Complex(0, 0);
 		}
+
+
 	}
 }
