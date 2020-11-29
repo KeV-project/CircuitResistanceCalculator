@@ -52,6 +52,12 @@
     <Compile Include="AddConnectionsForm.Designer.cs">
       <DependentUpon>AddConnectionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddElementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddElementForm.Designer.cs">
+      <DependentUpon>AddElementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditElementForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     </Compile>
     <EmbeddedResource Include="AddConnectionsForm.resx">
       <DependentUpon>AddConnectionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddElementForm.resx">
+      <DependentUpon>AddElementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditElementForm.resx">
       <DependentUpon>EditElementForm.cs</DependentUpon>
