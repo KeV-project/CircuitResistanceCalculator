@@ -68,6 +68,7 @@ namespace CircuitResistanceCalculatorUI
 			this.OkButton.TabIndex = 2;
 			this.OkButton.Text = "Ok";
 			this.OkButton.UseVisualStyleBackColor = true;
+			this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
 			// 
 			// CancelButton
 			// 

@@ -32,7 +32,7 @@ namespace CircuitResistanceCalculatorUI
 			this.ElementLabel = new System.Windows.Forms.Label();
 			this.ValueLabel = new System.Windows.Forms.Label();
 			this.UnitsLabel = new System.Windows.Forms.Label();
-			this.EllementsUnitsLabel = new System.Windows.Forms.Label();
+			this.ElementsUnitsLabel = new System.Windows.Forms.Label();
 			this.ValueTextBox = new System.Windows.Forms.TextBox();
 			this.ElementsDomainUpDown = new System.Windows.Forms.DomainUpDown();
 			this.CancelButton = new System.Windows.Forms.Button();
@@ -69,15 +69,15 @@ namespace CircuitResistanceCalculatorUI
 			this.UnitsLabel.TabIndex = 2;
 			this.UnitsLabel.Text = "Units";
 			// 
-			// EllementsUnitsLabel
+			// ElementsUnitsLabel
 			// 
-			this.EllementsUnitsLabel.AutoSize = true;
-			this.EllementsUnitsLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.EllementsUnitsLabel.Location = new System.Drawing.Point(219, 50);
-			this.EllementsUnitsLabel.Name = "EllementsUnitsLabel";
-			this.EllementsUnitsLabel.Size = new System.Drawing.Size(40, 17);
-			this.EllementsUnitsLabel.TabIndex = 3;
-			this.EllementsUnitsLabel.Text = "Units";
+			this.ElementsUnitsLabel.AutoSize = true;
+			this.ElementsUnitsLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ElementsUnitsLabel.Location = new System.Drawing.Point(219, 50);
+			this.ElementsUnitsLabel.Name = "ElementsUnitsLabel";
+			this.ElementsUnitsLabel.Size = new System.Drawing.Size(40, 17);
+			this.ElementsUnitsLabel.TabIndex = 3;
+			this.ElementsUnitsLabel.Text = "Units";
 			// 
 			// ValueTextBox
 			// 
@@ -89,12 +89,17 @@ namespace CircuitResistanceCalculatorUI
 			// 
 			// ElementsDomainUpDown
 			// 
+			this.ElementsDomainUpDown.Items.Add("L");
+			this.ElementsDomainUpDown.Items.Add("C");
+			this.ElementsDomainUpDown.Items.Add("R");
 			this.ElementsDomainUpDown.Location = new System.Drawing.Point(26, 50);
 			this.ElementsDomainUpDown.Name = "ElementsDomainUpDown";
+			this.ElementsDomainUpDown.ReadOnly = true;
 			this.ElementsDomainUpDown.Size = new System.Drawing.Size(54, 20);
 			this.ElementsDomainUpDown.TabIndex = 5;
 			this.ElementsDomainUpDown.Text = "R";
 			this.ElementsDomainUpDown.Wrap = true;
+			this.ElementsDomainUpDown.SelectedItemChanged += new System.EventHandler(this.ElementsDomainUpDown_SelectedItemChanged);
 			// 
 			// CancelButton
 			// 
@@ -115,6 +120,7 @@ namespace CircuitResistanceCalculatorUI
 			this.OkButton.TabIndex = 7;
 			this.OkButton.Text = "Ok";
 			this.OkButton.UseVisualStyleBackColor = true;
+			this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
 			// 
 			// AddElementForm
 			// 
@@ -125,7 +131,7 @@ namespace CircuitResistanceCalculatorUI
 			this.Controls.Add(this.CancelButton);
 			this.Controls.Add(this.ElementsDomainUpDown);
 			this.Controls.Add(this.ValueTextBox);
-			this.Controls.Add(this.EllementsUnitsLabel);
+			this.Controls.Add(this.ElementsUnitsLabel);
 			this.Controls.Add(this.UnitsLabel);
 			this.Controls.Add(this.ValueLabel);
 			this.Controls.Add(this.ElementLabel);
@@ -134,7 +140,7 @@ namespace CircuitResistanceCalculatorUI
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(294, 191);
 			this.Name = "AddElementForm";
-			this.Text = "AddElementForm";
+			this.Load += new System.EventHandler(this.AddElementForm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -145,7 +151,7 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.Label ElementLabel;
 		private System.Windows.Forms.Label ValueLabel;
 		private System.Windows.Forms.Label UnitsLabel;
-		private System.Windows.Forms.Label EllementsUnitsLabel;
+		private System.Windows.Forms.Label ElementsUnitsLabel;
 		private System.Windows.Forms.TextBox ValueTextBox;
 		private System.Windows.Forms.DomainUpDown ElementsDomainUpDown;
 		private System.Windows.Forms.Button CancelButton;

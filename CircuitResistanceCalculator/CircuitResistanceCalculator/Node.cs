@@ -7,13 +7,17 @@ using System.Numerics;
 
 namespace CircuitResistanceCalculator
 {
-	abstract class Node
+	public abstract class Node
 	{
 		public int Id { get; set; }
-		public abstract Complex CalculateZ(double frequency);
 		public Node()
 		{
 			Id = 0;
 		}
+
+		public abstract Complex CalculateZ(double frequency);
+
+		public delegate void ValueChanged();
+		public virtual event ValueChanged ValueChangedEvent;
 	}
 }

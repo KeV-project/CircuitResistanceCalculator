@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace CircuitResistanceCalculator
 {
-	class Resistor : Node
+	public class Resistor : Node
 	{
 		public byte Index { get; set; }
 		public double Value { get; set; }
@@ -22,12 +22,14 @@ namespace CircuitResistanceCalculator
 
 		public void ChangeValue(double value)
 		{
-			if(value != Value && ValueChanged != null)
+			if (Value != value)
 			{
-				//ValueChanged.Invoke();
+				Value = value;
 			}
+
+			ValueChangedEvent?.Invoke();
 		}
 
-		event EventHandler ValueChanged;
+		public override event ValueChanged ValueChangedEvent;
 	}
 }

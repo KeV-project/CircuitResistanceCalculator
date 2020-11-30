@@ -7,14 +7,30 @@ using System.Numerics;
 
 namespace CircuitResistanceCalculator
 {
-	class SerialConnection : Node
+	public class SerialConnection : Node
 	{
 		private List<Node> _nodes;
+		public void AddNode(Node node)
+		{
+			node.ValueChangedEvent += ValueChanged;
+			_nodes.Add(node);
+		}
 		public override Complex CalculateZ(double frequency)
 		{
-			return new Complex(0, 0);
+			Complex circuitResistance = new Complex(0, 0);
+
+			foreach (Node node in _nodes)
+			{
+				circuitResistance += node.CalculateZ(frequency);
+			}
+			return circuitResistance;
 		}
 
+		public void ValueChanged()
+		{
+			ValueChangedEvent?.Invoke();
+		}
 
+		public override event ValueChanged ValueChangedEvent;
 	}
 }

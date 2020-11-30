@@ -29,17 +29,6 @@ namespace CircuitResistanceCalculatorUI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("R1");
-			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("L1");
-			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Serial", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
-			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("C1");
-			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Parallel", new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4});
-			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Root", new System.Windows.Forms.TreeNode[] {
-            treeNode5});
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -125,7 +114,7 @@ namespace CircuitResistanceCalculatorUI
 			this.CreateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewElectricalCircuitToolStripMenuItem});
 			this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.CreateToolStripMenuItem.Text = "Create";
 			// 
 			// NewElectricalCircuitToolStripMenuItem
@@ -140,7 +129,7 @@ namespace CircuitResistanceCalculatorUI
             this.ElectricalCircuitToolStripMenuItem,
             this.ElectricalCircuitTemplateToolStripMenuItem});
 			this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.OpenToolStripMenuItem.Text = "Open...";
 			// 
 			// ElectricalCircuitToolStripMenuItem
@@ -158,19 +147,19 @@ namespace CircuitResistanceCalculatorUI
 			// SaveToolStripMenuItem
 			// 
 			this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.SaveToolStripMenuItem.Text = "Save";
 			// 
 			// SaveAsToolStripMenuItem
 			// 
 			this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
-			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.SaveAsToolStripMenuItem.Text = "Save As";
 			// 
 			// ExitToolStripMenuItem
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.ExitToolStripMenuItem.Text = "Exit (Alt + F4)";
 			// 
 			// addToolStripMenuItem
@@ -298,21 +287,6 @@ namespace CircuitResistanceCalculatorUI
 			this.CircuitTreeView.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.CircuitTreeView.Location = new System.Drawing.Point(3, 3);
 			this.CircuitTreeView.Name = "CircuitTreeView";
-			treeNode1.Name = "Узел5";
-			treeNode1.Text = "R1";
-			treeNode2.Name = "Узел6";
-			treeNode2.Text = "L1";
-			treeNode3.Name = "Узел2";
-			treeNode3.Text = "Serial";
-			treeNode4.Name = "Узел4";
-			treeNode4.Text = "C1";
-			treeNode5.Name = "Узел1";
-			treeNode5.Text = "Parallel";
-			treeNode6.ForeColor = System.Drawing.Color.Black;
-			treeNode6.Name = "Узел0";
-			treeNode6.Text = "Root";
-			this.CircuitTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
 			this.CircuitTreeView.Size = new System.Drawing.Size(401, 579);
 			this.CircuitTreeView.TabIndex = 0;
 			// 
@@ -477,6 +451,7 @@ namespace CircuitResistanceCalculatorUI
 			this.CreateNewCircuitButton.Size = new System.Drawing.Size(32, 28);
 			this.CreateNewCircuitButton.TabIndex = 6;
 			this.CreateNewCircuitButton.UseVisualStyleBackColor = true;
+			this.CreateNewCircuitButton.Click += new System.EventHandler(this.CreateNewCircuitButton_Click);
 			// 
 			// AddConnectionButton
 			// 
@@ -487,6 +462,7 @@ namespace CircuitResistanceCalculatorUI
 			this.AddConnectionButton.TabIndex = 7;
 			this.AddConnectionButton.Text = "C";
 			this.AddConnectionButton.UseVisualStyleBackColor = true;
+			this.AddConnectionButton.Click += new System.EventHandler(this.AddConnectionButton_Click);
 			// 
 			// AddElementButton
 			// 
@@ -497,6 +473,7 @@ namespace CircuitResistanceCalculatorUI
 			this.AddElementButton.TabIndex = 8;
 			this.AddElementButton.Text = "E";
 			this.AddElementButton.UseVisualStyleBackColor = true;
+			this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
 			// 
 			// EditNodeButton
 			// 
