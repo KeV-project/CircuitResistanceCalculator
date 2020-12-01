@@ -18,7 +18,7 @@ namespace CircuitResistanceCalculator
 
 		public void AddNode(Node node)
 		{
-			node.ValueChangedEvent += ValueChanged;
+			node.ValueChanged += ValueChanged;
 			_nodes.Add(node);
 		}
 
@@ -27,12 +27,11 @@ namespace CircuitResistanceCalculator
 			return null;
 		}
 
-		public void ValueChanged()
+		public void ValueChanged(object obj, EventArgs e)
 		{
-			CircutChangedEvent?.Invoke();
+			CircuitChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		public delegate void CircutChanged();
-		public event CircutChanged CircutChangedEvent;
+		public virtual event EventHandler<EventArgs> CircuitChanged;
 	}
 }

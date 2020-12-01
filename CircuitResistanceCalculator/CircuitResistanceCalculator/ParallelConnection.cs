@@ -18,7 +18,7 @@ namespace CircuitResistanceCalculator
 
 		public void AddNode(Node node)
 		{
-			node.ValueChangedEvent += ValueChanged;
+			node.ValueChanged += ChangeValue;
 			_nodes.Add(node);
 		}
 		public override Complex CalculateZ(double frequency)
@@ -32,11 +32,11 @@ namespace CircuitResistanceCalculator
 			return 1 / circuitResistance;
 		}
 
-		public void ValueChanged()
+		public void ChangeValue(object obj,  EventArgs e)
 		{
-			ValueChangedEvent?.Invoke();
+			ValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		public override event ValueChanged ValueChangedEvent;
+		public override event EventHandler<EventArgs> ValueChanged;
 	}
 }

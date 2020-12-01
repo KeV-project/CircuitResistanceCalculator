@@ -9,15 +9,17 @@ namespace CircuitResistanceCalculator
 {
 	public abstract class Node
 	{
-		public int Id { get; set; }
+		public int LastId { get; private set; } = 0;
+		public int Id { get; private set; }
+
 		public Node()
 		{
-			Id = 0;
+			Id = ++LastId;
 		}
 
 		public abstract Complex CalculateZ(double frequency);
 
-		public delegate void ValueChanged();
-		public virtual event ValueChanged ValueChangedEvent;
+		
+		public virtual event EventHandler<EventArgs> ValueChanged;
 	}
 }

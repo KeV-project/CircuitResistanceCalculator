@@ -9,7 +9,8 @@ namespace CircuitResistanceCalculator
 {
 	public class Resistor : Node
 	{
-		public byte Index { get; set; }
+		private static byte _lastIndex = 0;
+		public byte Index { get; private set; }
 		public double Value { get; set; }
 		public Resistor(double value) : base()
 		{
@@ -27,9 +28,9 @@ namespace CircuitResistanceCalculator
 				Value = value;
 			}
 
-			ValueChangedEvent?.Invoke();
+			ValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		public override event ValueChanged ValueChangedEvent;
+		public override event EventHandler<EventArgs> ValueChanged;
 	}
 }
