@@ -52,13 +52,13 @@ namespace CircuitResistanceCalculatorUI
 
 		private void CreateNewCircuitButton_Click(object sender, EventArgs e)
 		{
-			Circuit = new Circuit();
+			/*Circuit = new Circuit();
 			Circuit.CircuiChanged += CircuitChanged;
 
 			TreeNode root = new TreeNode();
 			root.Text = "Root";
 			root.Tag = Circuit;
-			CircuitTreeView.Nodes.Add(root);
+			CircuitTreeView.Nodes.Add(root);*/
 		}
 
 		private void AddConnectionButton_Click(object sender, EventArgs e)

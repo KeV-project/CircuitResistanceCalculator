@@ -85,7 +85,7 @@ namespace CircuitResistanceCalculatorUI
 			//	MainForm.Node = new Resistor(value);
 			//}
 
-			if (Node is Resistor)
+			/*if (Node is Resistor)
 			{
 				((Resistor)Node).Value = value;
 			}
@@ -98,7 +98,7 @@ namespace CircuitResistanceCalculatorUI
 				((Capacitor)Node).Value = value;
 			}
 
-			DialogResult = DialogResult.OK;
+			DialogResult = DialogResult.OK;*/
 		}
 	}
 }
