@@ -17,7 +17,7 @@ namespace CircuitResistanceCalculator
 		/// <summary>
 		/// Инициализирует объект класса <see cref="Resistor">
 		/// </summary>
-		/// <param name="value"></param>
+		/// <param name="value">Номинал элемента</param>
 		public Resistor(double value) : base(value)
 		{
 
