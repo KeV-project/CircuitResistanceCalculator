@@ -9,17 +9,17 @@ namespace CircuitResistanceCalculator
 {
 	public class Circuit
 	{
-		private List<Node> _nodes;
+		public Connection Connection { get; private set; } = null;
 
 		public Circuit()
 		{
-			_nodes = new List<Node>();
+
 		}
 
-		public void AddNode(Node node)
+		public void SetConnection(Connection connection)
 		{
-			node.ValueChanged += ValueChanged;
-			_nodes.Add(node);
+			connection.ValueChanged += ValueChanged;
+			Connection = connection;
 		}
 
 		public Complex[] CalculateZ(double[] frequencies)

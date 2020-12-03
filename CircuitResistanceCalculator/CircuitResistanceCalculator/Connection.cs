@@ -17,6 +17,10 @@ namespace CircuitResistanceCalculator
 
 		public void AddNode(Node node)
 		{
+			if(node is Element)
+			{
+				((Element)node).Index = Elements.GetIndex((Element)node);
+			}
 			node.ValueChanged += ChangeValue;
 			Connections.Add(node);
 		}

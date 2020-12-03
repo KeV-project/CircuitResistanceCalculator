@@ -13,92 +13,92 @@ namespace CircuitResistanceCalculatorUI
 {
 	public partial class AddElementForm : Form
 	{
-		private Node Node { get; set; }
-		public int SelectedElementIndex { get; private set; } = 2;
-		public AddElementForm(Node node)
+		public Element Element { get; private set; } 
+		public AddElementForm(Element element)
 		{
 			InitializeComponent();
 
-			Node = node;
+			Element = element;
 		}
 
 		private void AddElementForm_Load(object sender, EventArgs e)
 		{
-			this.Text = "Edit element";
-			ElementsDomainUpDown.Enabled = false;
-			if (Node is Resistor)
+			if (Element == null)
 			{
+				this.Text = "Add element";
 				ElementsDomainUpDown.SelectedIndex = 2;
 				ElementsUnitsLabel.Text = "Ω";
+				ElementsDomainUpDown.Enabled = true;
 			}
-			if (Node is Inductor)
+			else
 			{
-				ElementsDomainUpDown.SelectedIndex = 0;
-				ElementsUnitsLabel.Text = "H";
+				this.Text = "Edit element";
+				if(Element is Resistor)
+				{
+					ElementsDomainUpDown.SelectedIndex = 2;
+					ElementsUnitsLabel.Text = "Ω";
+				}
+				else if(Element is Inductor)
+				{
+					ElementsDomainUpDown.SelectedIndex = 0;
+					ElementsUnitsLabel.Text = "H";
+				}
+				else if(Element is Capacitor)
+				{
+					ElementsDomainUpDown.SelectedIndex = 1;
+					ElementsUnitsLabel.Text = "F";
+				}
+				ElementsDomainUpDown.Enabled = false;
 			}
-			if (Node is Capacitor)
-			{
-				ElementsDomainUpDown.SelectedIndex = 1;
-				ElementsUnitsLabel.Text = "F";
-			}
-
 		}
 
 		private void ElementsDomainUpDown_SelectedItemChanged(object sender,
 			EventArgs e)
 		{
-			//SelectedElementIndex = ElementsDomainUpDown.SelectedIndex;
+			if (ElementsDomainUpDown.SelectedIndex == 0)
+			{
+				ElementsUnitsLabel.Text = "H";
 
-			//if (SelectedElementIndex == 0)
-			//{
-			//	ElementsUnitsLabel.Text = "H";
-
-			//}
-			//else if (SelectedElementIndex == 1)
-			//{
-			//	ElementsUnitsLabel.Text = "F";
-			//}
-			//else if (SelectedElementIndex == 2)
-			//{
-			//	ElementsUnitsLabel.Text = "Ω";
-			//}
+			}
+			else if (ElementsDomainUpDown.SelectedIndex == 1)
+			{
+				ElementsUnitsLabel.Text = "F";
+			}
+			else if (ElementsDomainUpDown.SelectedIndex == 2)
+			{
+				ElementsUnitsLabel.Text = "Ω";
+			}
 		}
 
 		private void OkButton_Click(object sender, EventArgs e)
 		{
-			if (!double.TryParse(ValueTextBox.Text, out double value))
+			double value = 0.0;
+			if(!double.TryParse(ValueTextBox.Text, out value))
 			{
-				MessageBox.Show("Invalid value");
+				MessageBox.Show( "\"" + ValueTextBox.Text + "\" isn't a real number!");
 				return;
 			}
-
-			//if (SelectedElementIndex == 0)
-			//{
-			//	MainForm.Node = new Inductor(value);
-			//}
-			//else if (SelectedElementIndex == 1)
-			//{
-			//	MainForm.Node = new Capacitor(value);
-			//}
-			//else if (SelectedElementIndex == 2)
-			//{
-			//	MainForm.Node = new Resistor(value);
-			//}
-
-			/*if (Node is Resistor)
+			if(Element == null)
 			{
-				((Resistor)Node).Value = value;
+				if (ElementsDomainUpDown.SelectedIndex == 0)
+				{
+					Element = new Inductor(value);
+				}
+				else if (ElementsDomainUpDown.SelectedIndex == 1)
+				{
+					Element = new Capacitor(value);
+				}
+				else if (ElementsDomainUpDown.SelectedIndex == 2)
+				{
+					Element = new Resistor(value);
+				}
 			}
-			if (Node is Inductor)
+			else
 			{
-				((Inductor)Node).Value = value;
+				Element.ChangeValue(value);
 			}
-			if (Node is Capacitor)
-			{
-				((Capacitor)Node).Value = value;
-			}
-
-			DialogResult = DialogResult.OK;*/
+			
+			DialogResult = DialogResult.OK;
 		}
 	}
 }

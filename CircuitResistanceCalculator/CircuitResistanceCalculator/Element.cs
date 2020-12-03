@@ -8,9 +8,14 @@ namespace CircuitResistanceCalculator
 {
 	public abstract class Element : Node
 	{
-		public byte Index { get; private set; }
+		public byte Index { get; set; }
 
 		public double Value { get; private set; }
+
+		public Element(double value)
+		{
+			Value = value;
+		}
 
 		public void ChangeValue(double value)
 		{

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CircuitResistanceCalculator
 {
-	public class ParallelConnection : Connection
+	public class Parallel : Connection
 	{
 		public override Complex CalculateZ(double frequency)
 		{

@@ -289,6 +289,7 @@ namespace CircuitResistanceCalculatorUI
 			this.CircuitTreeView.Name = "CircuitTreeView";
 			this.CircuitTreeView.Size = new System.Drawing.Size(401, 579);
 			this.CircuitTreeView.TabIndex = 0;
+			this.CircuitTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CircuitTreeView_AfterSelect);
 			// 
 			// ResultTableLayoutPanel
 			// 

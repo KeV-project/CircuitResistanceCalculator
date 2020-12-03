@@ -9,6 +9,10 @@ namespace CircuitResistanceCalculator
 {
 	public class Capacitor : Element
 	{
+		public Capacitor(double value) : base(value)
+		{
+
+		}
 		public override Complex CalculateZ(double frequency)
 		{
 			return new Complex(0, 0);

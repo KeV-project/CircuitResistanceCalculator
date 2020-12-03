@@ -6,22 +6,35 @@ using System.Threading.Tasks;
 
 namespace CircuitResistanceCalculator
 {
-	public class Elements
+	public static class Elements
 	{
-		private byte _resistorLastIndex = 0;
-		private byte _indectorLastIndex = 0;
-		private byte _capacitorLastIndex = 0;
+		private static byte _resistorLastIndex = 0;
+		private static byte _indectorLastIndex = 0;
+		private static byte _capacitorLastIndex = 0;
 
-		private List<Element> _elements;
+		private static List<Element> _elements;
 
-		public Elements()
+		static Elements()
 		{
 			_elements = new List<Element>();
 		}
 
-		public void AddElement(Element element)
+		public static byte GetIndex(Element element)
 		{
 			_elements.Add(element);
+
+			if (element is Resistor)
+			{
+				return ++_resistorLastIndex;
+			}
+			else if(element is Inductor)
+			{
+				return ++_indectorLastIndex;
+			}
+			else
+			{
+				return _capacitorLastIndex;
+			}
 		}
 	}
 }

@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace CircuitResistanceCalculator
 {
-	public class SerialConnection : Connection
+	public class Serial : Connection
 	{
 		public override Complex CalculateZ(double frequency)
 		{
