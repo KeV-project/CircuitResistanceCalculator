@@ -47,6 +47,7 @@
     <Compile Include="Connection.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Element.cs" />
+    <Compile Include="Elements.cs" />
     <Compile Include="Inductor.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="ParallelConnection.cs" />
