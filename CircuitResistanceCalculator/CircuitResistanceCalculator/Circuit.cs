@@ -9,12 +9,7 @@ namespace CircuitResistanceCalculator
 {
 	public class Circuit
 	{
-		public Connection Connection { get; private set; } = null;
-
-		public Circuit()
-		{
-
-		}
+		public Connection Connection { get; private set; }
 
 		public void SetConnection(Connection connection)
 		{

@@ -19,22 +19,23 @@ namespace CircuitResistanceCalculator
 			_elements = new List<Element>();
 		}
 
-		public static byte GetIndex(Element element)
-		{
-			_elements.Add(element);
+		public static void SetIndex(Element element)
+		{ 
 
 			if (element is Resistor)
 			{
-				return ++_resistorLastIndex;
+				element.Index = ++_resistorLastIndex;
 			}
 			else if(element is Inductor)
 			{
-				return ++_indectorLastIndex;
+				element.Index = ++_indectorLastIndex;
 			}
 			else
 			{
-				return _capacitorLastIndex;
+				element.Index = _capacitorLastIndex;
 			}
+
+			_elements.Add(element);
 		}
 	}
 }

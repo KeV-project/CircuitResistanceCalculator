@@ -15,10 +15,12 @@ namespace CircuitResistanceCalculatorUI
 	{
 		private List<Data> _data;
 
-		public Circuit Circuit { get; private set; } = null;
+		public Circuit Circuit { get; private set; }
 		public MainForm()
 		{
 			InitializeComponent();
+
+			Circuit = null;
 
 			_data = new List<Data>();
 
@@ -54,6 +56,7 @@ namespace CircuitResistanceCalculatorUI
 			if (CircuitTreeView.SelectedNode.Tag is Circuit)
 			{
 				AddElementButton.Enabled = false;
+				EditNodeButton.Enabled = false;
 			}
 
 			if (CircuitTreeView.SelectedNode.Tag is Circuit &&
@@ -146,15 +149,15 @@ namespace CircuitResistanceCalculatorUI
 				TreeNode treeNode = new TreeNode();
 				if(addElementForm.Element is Resistor)
 				{
-					treeNode.Text = "R";
+					treeNode.Text = "R" + addElementForm.Element.Index;
 				}
 				else if (addElementForm.Element is Inductor)
 				{
-					treeNode.Text = "L";
+					treeNode.Text = "L" + addElementForm.Element.Index;
 				}
 				else if (addElementForm.Element is Capacitor)
 				{
-					treeNode.Text = "C";
+					treeNode.Text = "C" + addElementForm.Element.Index;
 				}
 				treeNode.Tag = addElementForm.Element;
 				CircuitTreeView.SelectedNode.Nodes.Add(treeNode);

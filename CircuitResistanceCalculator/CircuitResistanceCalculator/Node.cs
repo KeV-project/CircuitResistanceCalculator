@@ -9,7 +9,7 @@ namespace CircuitResistanceCalculator
 {
 	public abstract class Node
 	{
-		public int LastId { get; private set; }
+		public static int LastId { get; private set; }
 		public int Id { get; private set; }
 
 		public Node()
