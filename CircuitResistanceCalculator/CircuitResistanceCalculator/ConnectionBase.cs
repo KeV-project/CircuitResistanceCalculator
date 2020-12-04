@@ -33,10 +33,13 @@ namespace CircuitResistanceCalculator
 		/// <param name="node">Новый узел</param>
 		public void AddNode(NodeBase node)
 		{
+			node.SetId();
+
 			if(node is ElementBase)
 			{
-				Elements.SetIndex((ElementBase)node);
+				((ElementBase)node).SetIndex();
 			}
+
 			node.ValueChanged += ChangeValue;
 			Nodes.Add(node);
 		}

@@ -14,6 +14,7 @@ namespace CircuitResistanceCalculator
 		public void SetConnection(ConnectionBase connection)
 		{
 			connection.ValueChanged += ValueChanged;
+			Connection.SetId();
 			Connection = connection;
 		}
 

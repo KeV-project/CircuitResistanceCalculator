@@ -27,6 +27,14 @@ namespace CircuitResistanceCalculator
 			Id = 0;
 		}
 
+		public void SetId()
+		{
+			if (Id != 0)
+			{
+				Id = IdGenerator.GetId();
+			}
+		}
+
 		/// <summary>
 		/// Определяет сигнатуру метода для расчета комплексного
 		/// сопротивления элементов и подцепей

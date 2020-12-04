@@ -47,8 +47,8 @@
     <Compile Include="ConnectionBase.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="ElementBase.cs" />
-    <Compile Include="Elements.cs" />
     <Compile Include="IndexGenerator.cs" />
+    <Compile Include="IdGenerator.cs" />
     <Compile Include="Inductor.cs" />
     <Compile Include="NodeBase.cs" />
     <Compile Include="ParallelConnection.cs" />

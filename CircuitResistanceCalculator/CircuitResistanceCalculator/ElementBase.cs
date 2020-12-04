@@ -68,6 +68,14 @@ namespace CircuitResistanceCalculator
 			Value = value;
 		}
 
+		public void SetIndex()
+		{
+			if(Index != 0)
+			{
+				Index = IndexGenerator.GetIndex(this);
+			}
+		}
+
 		/// <summary>
 		/// Событие, возникающее при изменении свойства 
 		/// <see cref="Value">, предназныченное для
