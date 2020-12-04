@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace CircuitResistanceCalculator
 {
+	/// <summary>
+	/// Класс <see cref="Parallel"> представляет узел цепи,
+	/// организующий параллельное соединение элементов
+	/// </summary>
 	public class Parallel : Connection
 	{
+		/// <summary>
+		/// Расчитывает общее сопротивление параллельной цепи
+		/// </summary>
+		/// <param name="frequency">Частота сигнала</param>
+		/// <returns></returns>
 		public override Complex CalculateZ(double frequency)
 		{
 			Complex circuitResistance = new Complex(0,0);
