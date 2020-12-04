@@ -9,9 +9,9 @@ namespace CircuitResistanceCalculator
 {
 	public class Circuit
 	{
-		public Connection Connection { get; private set; }
+		public ConnectionBase Connection { get; private set; }
 
-		public void SetConnection(Connection connection)
+		public void SetConnection(ConnectionBase connection)
 		{
 			connection.ValueChanged += ValueChanged;
 			Connection = connection;

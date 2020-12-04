@@ -73,7 +73,7 @@ namespace CircuitResistanceCalculatorUI
 				AddConnectionButton.Enabled = false;
 			}
 
-			if(CircuitTreeView.SelectedNode.Tag is Connection)
+			if(CircuitTreeView.SelectedNode.Tag is ConnectionBase)
 			{
 				AddElementButton.Enabled = true;
 				AddConnectionButton.Enabled = true;
@@ -108,14 +108,14 @@ namespace CircuitResistanceCalculatorUI
 				{
 					Circuit.SetConnection(addConnectionsForm.Connection);
 				}
-				else if(CircuitTreeView.SelectedNode.Tag is Connection)
+				else if(CircuitTreeView.SelectedNode.Tag is ConnectionBase)
 				{
-					((Connection)CircuitTreeView.SelectedNode.Tag).AddNode(
+					((ConnectionBase)CircuitTreeView.SelectedNode.Tag).AddNode(
 						addConnectionsForm.Connection);
 				}
 
 				TreeNode treeNode = new TreeNode();
-				if(addConnectionsForm.Connection is Serial)
+				if(addConnectionsForm.Connection is SerialConnection)
 				{
 					treeNode.Text = "Serial";
 				}
@@ -143,7 +143,7 @@ namespace CircuitResistanceCalculatorUI
 
 			if (addElementForm.DialogResult == DialogResult.OK)
 			{
-				((Connection)CircuitTreeView.SelectedNode.Tag).AddNode(
+				((ConnectionBase)CircuitTreeView.SelectedNode.Tag).AddNode(
 					addElementForm.Element);
 
 				TreeNode treeNode = new TreeNode();
@@ -172,14 +172,14 @@ namespace CircuitResistanceCalculatorUI
 				return;
 			}
 
-			if(CircuitTreeView.SelectedNode.Tag is Connection)
+			if(CircuitTreeView.SelectedNode.Tag is ConnectionBase)
 			{
 				return;
 			}
-			else if(CircuitTreeView.SelectedNode.Tag is Element)
+			else if(CircuitTreeView.SelectedNode.Tag is ElementBase)
 			{
 				AddElementForm addElementForm = new AddElementForm(
-					(Element)CircuitTreeView.SelectedNode.Tag);
+					(ElementBase)CircuitTreeView.SelectedNode.Tag);
 				addElementForm.ShowDialog();
 			}
 		}

@@ -8,16 +8,11 @@ using System.Numerics;
 namespace CircuitResistanceCalculator
 {
 	/// <summary>
-	/// Класс <see cref="Node"> представляет общий 
+	/// Класс <see cref="NodeBase"> представляет общий 
 	/// функционал для узлов дерева электрической цепи
 	/// </summary>
-	public abstract class Node
+	public abstract class NodeBase
 	{
-		/// <summary>
-		/// Последний выданный узле идентификатор
-		/// </summary>
-		public static int LastId { get; private set; }
-
 		/// <summary>
 		/// Уникальный идентификатор каждого узла
 		/// </summary>
@@ -25,11 +20,11 @@ namespace CircuitResistanceCalculator
 
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
-		/// класса <see cref="Node">
+		/// класса <see cref="NodeBase">
 		/// </summary>
-		public Node()
+		public NodeBase()
 		{
-			Id = ++LastId;
+			Id = 0;
 		}
 
 		/// <summary>

@@ -12,7 +12,7 @@ namespace CircuitResistanceCalculator
 	/// представления резистивного элемента 
 	/// электрической цепи
 	/// </summary>
-	public class Resistor : Element
+	public class Resistor : ElementBase
 	{
 		/// <summary>
 		/// Инициализирует объект класса <see cref="Resistor">

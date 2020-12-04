@@ -12,7 +12,7 @@ namespace CircuitResistanceCalculator
 	/// представления емкостного элемента 
 	/// электрической цепи
 	/// </summary>
-	public class Capacitor : Element
+	public class Capacitor : ElementBase
 	{
 		/// <summary>
 		/// Инициализирует объект класса <see cref="Capacitor">

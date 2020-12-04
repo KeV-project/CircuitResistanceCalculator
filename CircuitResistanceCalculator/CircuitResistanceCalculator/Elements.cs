@@ -28,14 +28,14 @@ namespace CircuitResistanceCalculator
 		/// <summary>
 		/// Список всех элементов электрической цепи
 		/// </summary>
-		private static List<Element> _elements;
+		private static List<ElementBase> _elements;
 
 		/// <summary>
 		/// Инициализирует совйства класса <see cref="Elements">
 		/// </summary>
 		static Elements()
 		{
-			_elements = new List<Element>();
+			_elements = new List<ElementBase>();
 		}
 
 		/// <summary>
@@ -43,7 +43,7 @@ namespace CircuitResistanceCalculator
 		/// и назначает ему актуальный индекс
 		/// </summary>
 		/// <param name="element">Новый элемент цепи</param>
-		public static void SetIndex(Element element)
+		public static void SetIndex(ElementBase element)
 		{ 
 
 			if (element is Resistor)

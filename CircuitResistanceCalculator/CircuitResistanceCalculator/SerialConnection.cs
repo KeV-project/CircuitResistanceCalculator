@@ -8,10 +8,10 @@ using System.Numerics;
 namespace CircuitResistanceCalculator
 {
 	/// <summary>
-	/// Класс <see cref="Serial"> представляет узел цепи,
+	/// Класс <see cref="SerialConnection"> представляет узел цепи,
 	/// организующий последовательное соединение элементов
 	/// </summary>
-	public class Serial : Connection
+	public class SerialConnection : ConnectionBase
 	{
 		/// <summary>
 		/// Расчитывает общее сопротивление последовательное цепи
@@ -22,7 +22,7 @@ namespace CircuitResistanceCalculator
 		{
 			Complex circuitResistance = new Complex(0, 0);
 
-			foreach (Node node in Connections)
+			foreach (NodeBase node in Connections)
 			{
 				circuitResistance += node.CalculateZ(frequency);
 			}

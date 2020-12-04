@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace CircuitResistanceCalculator
 {
 	/// <summary>
-	/// Класс <see cref="Parallel"> представляет узел цепи,
+	/// Класс <see cref="ParallelConnection"> представляет узел цепи,
 	/// организующий параллельное соединение элементов
 	/// </summary>
-	public class Parallel : Connection
+	public class ParallelConnection : ConnectionBase
 	{
 		/// <summary>
 		/// Расчитывает общее сопротивление параллельной цепи
@@ -22,7 +22,7 @@ namespace CircuitResistanceCalculator
 		{
 			Complex circuitResistance = new Complex(0,0);
 
-			foreach(Node node in Connections)
+			foreach(NodeBase node in Connections)
 			{
 				circuitResistance += 1 / node.CalculateZ(frequency);
 			}

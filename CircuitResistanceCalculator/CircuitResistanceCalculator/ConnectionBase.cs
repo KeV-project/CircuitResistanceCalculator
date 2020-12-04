@@ -7,38 +7,38 @@ using System.Threading.Tasks;
 namespace CircuitResistanceCalculator
 {
 	/// <summary>
-	/// Класс <see cref="Connection"> предоставляет общий 
+	/// Класс <see cref="ConnectionBase"> предоставляет общий 
 	/// функционал узелов дерева, определяющих тип соединения элементов
 	/// </summary>
-	public abstract class Connection : Node
+	public abstract class ConnectionBase : NodeBase
 	{
 		/// <summary>
 		/// Сожержит список узлов подцепи, представляющих 
 		/// элементы или тип их соединения
 		/// </summary>
-		public List<Node> Connections { get; set; }
+		public List<NodeBase> Nodes { get; set; }
 
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
-		/// класса <see cref="Connection">
+		/// класса <see cref="ConnectionBase">
 		/// </summary>
-		public Connection()
+		public ConnectionBase()
 		{
-			Connections = new List<Node>();
+			Nodes = new List<NodeBase>();
 		}
 
 		/// <summary>
 		/// Добавляет узел в подцепь
 		/// </summary>
 		/// <param name="node">Новый узел</param>
-		public void AddNode(Node node)
+		public void AddNode(NodeBase node)
 		{
-			if(node is Element)
+			if(node is ElementBase)
 			{
-				Elements.SetIndex((Element)node);
+				Elements.SetIndex((ElementBase)node);
 			}
 			node.ValueChanged += ChangeValue;
-			Connections.Add(node);
+			Nodes.Add(node);
 		}
 
 		/// <summary>

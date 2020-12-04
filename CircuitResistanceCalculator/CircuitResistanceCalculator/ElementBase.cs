@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace CircuitResistanceCalculator
 {
 	/// <summary>
-	/// Класс <see cref="Element"> представляет базовый 
+	/// Класс <see cref="ElementBase"> представляет базовый 
 	/// функционал для пассивных элементов
 	/// электрической цепи
 	/// </summary>
-	public abstract class Element : Node
+	public abstract class ElementBase : NodeBase
 	{
 		/// <summary>
 		/// Предназначено для нумерации пассивных 
@@ -48,35 +48,24 @@ namespace CircuitResistanceCalculator
 				ValueValidator.AssertValueInRange(value, minValue, 
 					maxValue, "номинал элемента");
 
+				if (Value != value)
+				{
+					Value = value;
+				}
+
+				ValueChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
-		/// класса <see cref="Element">
+		/// класса <see cref="ElementBase">
 		/// </summary>
 		/// <param name="value"></param>
-		public Element(double value) : base()
+		public ElementBase(double value) : base()
 		{
 			Index = 0;
 			Value = value;
-		}
-
-		/// <summary>
-		/// Метод предоставляет возможность 
-		/// изменить значение свойства <see cref="Value">
-		/// из внешнего кода
-		/// </summary>
-		/// <param name="value">Новое значение 
-		/// свойства <see cref="Value"></param>
-		public void ChangeValue(double value)
-		{
-			if (Value != value)
-			{
-				Value = value;
-			}
-
-			ValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		/// <summary>

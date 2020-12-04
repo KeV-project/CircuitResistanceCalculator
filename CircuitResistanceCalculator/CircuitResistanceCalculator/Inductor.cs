@@ -12,7 +12,7 @@ namespace CircuitResistanceCalculator
 	/// представления индуктивного элемента 
 	/// электрической цепи
 	/// </summary>
-	public class Inductor : Element
+	public class Inductor : ElementBase
 	{
 		/// <summary>
 		/// Инициализирует объект класса <see cref="Inductor">
