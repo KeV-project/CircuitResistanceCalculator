@@ -22,7 +22,7 @@ namespace CircuitResistanceCalculator
 		{
 			Complex circuitResistance = new Complex(0,0);
 
-			foreach(NodeBase node in Connections)
+			foreach(NodeBase node in Nodes)
 			{
 				circuitResistance += 1 / node.CalculateZ(frequency);
 			}

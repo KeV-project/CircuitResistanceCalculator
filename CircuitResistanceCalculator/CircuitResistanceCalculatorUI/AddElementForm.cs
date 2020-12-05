@@ -95,7 +95,7 @@ namespace CircuitResistanceCalculatorUI
 			}
 			else
 			{
-				Element.ChangeValue(value);
+				//Element.ChangeValue(value);
 			}
 			
 			DialogResult = DialogResult.OK;

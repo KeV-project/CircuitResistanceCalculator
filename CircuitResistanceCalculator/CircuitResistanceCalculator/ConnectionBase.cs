@@ -41,7 +41,21 @@ namespace CircuitResistanceCalculator
 			}
 
 			node.ValueChanged += ChangeValue;
+			node.NodeChanged += ReplaceNode;
 			Nodes.Add(node);
+		}
+
+		public void ChangeConnection(ConnectionBase newConnection)
+		{
+			if(newConnection.GetType() != this.GetType())
+			{
+				foreach(NodeBase node in Nodes)
+				{
+					newConnection.AddNode(node);
+				}
+			}
+
+			this.NodeChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -60,5 +74,12 @@ namespace CircuitResistanceCalculator
 		/// <see cref="Value"> какого-либо элемента списка
 		/// </summary>
 		public override event EventHandler<EventArgs> ValueChanged;
+
+		public void ReplaceNode(object obj, EventArgs e)
+		{
+			
+		}
+
+		public override event EventHandler<EventArgs> NodeChanged;
 	}
 }

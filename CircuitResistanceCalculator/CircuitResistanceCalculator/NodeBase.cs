@@ -48,5 +48,7 @@ namespace CircuitResistanceCalculator
 		/// Определяет сигнатуру события <see cref="ValueChanged">
 		/// </summary>
 		public virtual event EventHandler<EventArgs> ValueChanged;
+
+		public virtual event EventHandler<EventArgs> NodeChanged;
 	}
 }

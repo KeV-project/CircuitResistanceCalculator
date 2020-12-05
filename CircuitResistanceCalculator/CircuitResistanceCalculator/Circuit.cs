@@ -20,7 +20,12 @@ namespace CircuitResistanceCalculator
 
 		public Complex[] CalculateZ(double[] frequencies)
 		{
-			return null;
+			Complex[] z = new Complex[frequencies.Length];
+			for(int i = 0; i < frequencies.Length; i++)
+			{
+				z[i] = Connection.CalculateZ(frequencies[i]);
+			}
+			return z;
 		}
 
 		public void ValueChanged(object obj, EventArgs e)
