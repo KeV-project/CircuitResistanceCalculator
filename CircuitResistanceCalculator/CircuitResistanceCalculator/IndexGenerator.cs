@@ -43,21 +43,21 @@ namespace CircuitResistanceCalculator
 		/// и назначает ему актуальный индекс
 		/// </summary>
 		/// <param name="element">Новый элемент цепи</param>
-		public static int GetIndex(ElementBase element)
+		public static void SetIndex(ElementBase newElement)
 		{
-			_elements.Add(element);
+			_elements.Add(newElement);
 
-			if (element is Resistor)
+			if (newElement is Resistor)
 			{
-				return ++_resistorLastIndex;
+				newElement.Index = ++_resistorLastIndex;
 			}
-			else if(element is Inductor)
+			else if(newElement is Inductor)
 			{
-				return ++_indectorLastIndex;
+				newElement.Index = ++_indectorLastIndex;
 			}
 			else
 			{
-				return ++_capacitorLastIndex;
+				newElement.Index = ++_capacitorLastIndex;
 			}
 		}
 	}

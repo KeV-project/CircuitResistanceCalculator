@@ -14,32 +14,42 @@ namespace CircuitResistanceCalculator
 	public abstract class ElementBase : NodeBase
 	{
 		/// <summary>
-		/// Предназначено для нумерации пассивных 
-		/// элементов электрической цепи
+		/// Содержит индекс элемента цепи
 		/// </summary>
-		public int Index { 
+		private int _index;
+
+		/// <summary>
+		/// Задает и возвращает индекс элемента цепи
+		/// </summary>
+		public int Index 
+		{ 
 			get
 			{
-				return Index;
+				return _index;
 			}
 			set
 			{
-				const int minIndex = 1;
+				const int minIndex = 0;
 				const int maxIndex = Int32.MaxValue;
 				ValueValidator.AssertValueInRange(value, minIndex, 
 					maxIndex, "индекс элемента");
-				Value = value;
+				_index = value;
 			}
 		}
 
 		/// <summary>
-		/// Хранит номинал элемента
+		/// Содержит номинал элемента
+		/// </summary>
+		private double _value;
+
+		/// <summary>
+		/// Задает и возвращает номинал элемента
 		/// </summary>
 		public double Value 
 		{ 
 			get
 			{
-				return Value;
+				return _value;
 			}
 			private set
 			{
@@ -48,9 +58,9 @@ namespace CircuitResistanceCalculator
 				ValueValidator.AssertValueInRange(value, minValue, 
 					maxValue, "номинал элемента");
 
-				if (Value != value)
+				if (_value != value)
 				{
-					Value = value;
+					_value = value;
 				}
 
 				ValueChanged?.Invoke(this, EventArgs.Empty);
@@ -68,19 +78,40 @@ namespace CircuitResistanceCalculator
 			Value = value;
 		}
 
-		public void SetIndex()
-		{
-			if(Index != 0)
-			{
-				Index = IndexGenerator.GetIndex(this);
-			}
-		}
-
 		/// <summary>
 		/// Событие, возникающее при изменении свойства 
 		/// <see cref="Value">, предназныченное для
 		/// перерасчета цепи
 		/// </summary>
 		public override event EventHandler<EventArgs> ValueChanged;
+
+		/// <summary>
+		/// Вызывает цепочку событий для замены текущего элемента
+		/// </summary>
+		/// <param name="newElement">Новый элемент</param>
+		public void ChangeElement(ElementBase newElement)
+		{
+			if(newElement.GetType() != this.GetType())
+			{
+				NodeChanged?.Invoke(this, new ChangeNodeArgs(newElement));
+			}
+			else
+			{
+				Value = newElement.Value;
+			}
+		}
+
+		/// <summary>
+		/// Вызывает метод родительского узла для замены выбранного элемента
+		/// </summary>
+		public override event EventHandler<ChangeNodeArgs> NodeChanged;
+
+		public override void RemoveNode()
+		{
+			NodeRemoved?.Invoke(this, EventArgs.Empty);
+
+		}
+
+		public override event EventHandler<EventArgs> NodeRemoved;
 	}
 }

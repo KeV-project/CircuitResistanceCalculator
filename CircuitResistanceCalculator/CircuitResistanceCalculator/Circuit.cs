@@ -9,11 +9,12 @@ namespace CircuitResistanceCalculator
 {
 	public class Circuit
 	{
-		public ConnectionBase Connection { get; private set; }
+		private ConnectionBase Connection { get; set; }
 
 		public void SetConnection(ConnectionBase connection)
 		{
 			connection.ValueChanged += ValueChanged;
+			connection.NodeChanged += ReplaceConnection;
 			Connection.SetId();
 			Connection = connection;
 		}
@@ -21,11 +22,24 @@ namespace CircuitResistanceCalculator
 		public Complex[] CalculateZ(double[] frequencies)
 		{
 			Complex[] z = new Complex[frequencies.Length];
-			for(int i = 0; i < frequencies.Length; i++)
+			for (int i = 0; i < frequencies.Length; i++)
 			{
 				z[i] = Connection.CalculateZ(frequencies[i]);
 			}
 			return z;
+		}
+
+		public void ReplaceConnection(object obj, ChangeNodeArgs e)
+		{
+			if(Connection.GetType() != e.Node.GetType())
+			{
+				Connection.ValueChanged -= ValueChanged;
+				Connection.NodeChanged -= ReplaceConnection;
+				Connection = (ConnectionBase)e.Node;
+				Connection.ValueChanged += ValueChanged;
+				Connection.NodeChanged += ReplaceConnection;
+
+			}
 		}
 
 		public void ValueChanged(object obj, EventArgs e)
@@ -33,6 +47,6 @@ namespace CircuitResistanceCalculator
 			CircuitChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		public virtual event EventHandler<EventArgs> CircuitChanged;
+		public event EventHandler<EventArgs> CircuitChanged;
 	}
 }

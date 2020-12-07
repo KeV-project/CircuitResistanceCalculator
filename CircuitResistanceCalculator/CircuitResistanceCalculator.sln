@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitResistanceCalculator
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitResistanceCalculator", "CircuitResistanceCalculator\CircuitResistanceCalculator.csproj", "{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitResistanceCalculator.UnitTests", "CircuitResistanceCalculator.UnitTests\CircuitResistanceCalculator.UnitTests.csproj", "{B74367B6-AE06-4936-AF07-DDC164A94F07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D1268EB-5E51-4FBD-AC3E-137E8E35ABF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B74367B6-AE06-4936-AF07-DDC164A94F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B74367B6-AE06-4936-AF07-DDC164A94F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B74367B6-AE06-4936-AF07-DDC164A94F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B74367B6-AE06-4936-AF07-DDC164A94F07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

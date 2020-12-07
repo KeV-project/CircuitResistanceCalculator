@@ -37,25 +37,14 @@ namespace CircuitResistanceCalculator
 
 			if(node is ElementBase)
 			{
-				((ElementBase)node).SetIndex();
+				IndexGenerator.SetIndex((ElementBase)node);
 			}
-
+			
 			node.ValueChanged += ChangeValue;
 			node.NodeChanged += ReplaceNode;
+			node.NodeRemoved += RemoveNode;
+
 			Nodes.Add(node);
-		}
-
-		public void ChangeConnection(ConnectionBase newConnection)
-		{
-			if(newConnection.GetType() != this.GetType())
-			{
-				foreach(NodeBase node in Nodes)
-				{
-					newConnection.AddNode(node);
-				}
-			}
-
-			this.NodeChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -75,11 +64,73 @@ namespace CircuitResistanceCalculator
 		/// </summary>
 		public override event EventHandler<EventArgs> ValueChanged;
 
-		public void ReplaceNode(object obj, EventArgs e)
+		/// <summary>
+		/// Вызывает цепочку события для замены текущего объкта
+		/// в дереве электрической цепи
+		/// </summary>
+		/// <param name="newConnection">Новый узел</param>
+		public void ChangeConnection(ConnectionBase newConnection)
 		{
-			
+			if(newConnection.GetType() != this.GetType())
+			{
+				foreach(NodeBase node in Nodes)
+				{
+					newConnection.AddNode(node);
+				}
+			}
+
+			this.NodeChanged?.Invoke(this, new ChangeNodeArgs(newConnection));
 		}
 
-		public override event EventHandler<EventArgs> NodeChanged;
+		/// <summary>
+		/// Вызывает метод <see cref="ReplaceNode(object, ChangeNodeArgs)"> 
+		/// родительского объекта для замены выбранного узла в списке
+		/// </summary>
+		public override event EventHandler<ChangeNodeArgs> NodeChanged;
+
+		/// <summary>
+		/// Заменяет выбранный узел на новый в скиске дочерних узлов
+		/// </summary>
+		/// <param name="obj">Заменяемый узел</param>
+		/// <param name="e">Хранит новый объект списка</param>
+		private void ReplaceNode(object obj, ChangeNodeArgs e)
+		{
+			int index = 0;
+			foreach(NodeBase node in Nodes)
+			{
+				if(node == obj)
+				{
+					break;
+				}
+				index++;
+			}
+
+			((NodeBase)obj).ValueChanged -= ChangeValue;
+			((NodeBase)obj).NodeChanged -= ReplaceNode;
+			Nodes.Remove((NodeBase)obj);
+
+			e.Node.ValueChanged += ChangeValue;
+			e.Node.NodeChanged += ReplaceNode;
+			Nodes.Insert(index, e.Node);
+		}
+
+		public override void RemoveNode()
+		{
+			foreach (NodeBase node in Nodes)
+			{
+				node.RemoveNode();
+			}
+			NodeRemoved?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void RemoveNode(object node, EventArgs e)
+		{
+			((NodeBase)node).ValueChanged -= ChangeValue;
+			((NodeBase)node).NodeChanged -= ReplaceNode;
+			((NodeBase)node).NodeRemoved -= RemoveNode;
+			Nodes.Remove((NodeBase)node);
+		}
+
+		public override event EventHandler<EventArgs> NodeRemoved;
 	}
 }

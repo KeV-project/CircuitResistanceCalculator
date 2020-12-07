@@ -16,7 +16,34 @@ namespace CircuitResistanceCalculator
 		/// <summary>
 		/// Уникальный идентификатор каждого узла
 		/// </summary>
-		public int Id { get; private set; }
+		private int _id;
+
+		/// <summary>
+		/// Задает и возвращает уникальный идентификатор 
+		/// каждого узла. Id узла должен быть неотрицательным 
+		/// числом, длинной не более 15 символов
+		/// </summary>
+		public int Id 
+		{ 
+			get
+			{
+				return _id;
+			}
+			private set
+			{
+				const int minId = 0;
+				const int maxId = Int32.MaxValue;
+				ValueValidator.AssertValueInRange(value, minId, maxId, 
+					"идентификатор элемента");
+
+				const int minIdLength = 1;
+				const int maxIdLength = 15;
+				ValueValidator.AssertLengthInRange(Convert.ToString(value), 
+					minIdLength, maxIdLength, "идентификатор элемента");
+
+				_id = value;
+			}
+		}
 
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
@@ -29,11 +56,22 @@ namespace CircuitResistanceCalculator
 
 		public void SetId()
 		{
-			if (Id != 0)
+			if (Id == 0)
 			{
 				Id = IdGenerator.GetId();
 			}
 		}
+
+		/// <summary>
+		/// Определяет сигнатуру события <see cref="ValueChanged">
+		/// </summary>
+		public abstract event EventHandler<EventArgs> ValueChanged;
+
+		public abstract event EventHandler<ChangeNodeArgs> NodeChanged;
+
+		public abstract void RemoveNode();
+
+		public abstract event EventHandler<EventArgs> NodeRemoved;
 
 		/// <summary>
 		/// Определяет сигнатуру метода для расчета комплексного
@@ -42,13 +80,5 @@ namespace CircuitResistanceCalculator
 		/// <param name="frequency">Частота сигнала</param>
 		/// <returns></returns>
 		public abstract Complex CalculateZ(double frequency);
-
-		
-		/// <summary>
-		/// Определяет сигнатуру события <see cref="ValueChanged">
-		/// </summary>
-		public virtual event EventHandler<EventArgs> ValueChanged;
-
-		public virtual event EventHandler<EventArgs> NodeChanged;
 	}
 }
