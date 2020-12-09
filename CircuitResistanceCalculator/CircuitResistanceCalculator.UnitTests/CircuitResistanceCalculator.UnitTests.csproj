@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CapacitorTest.cs" />
     <Compile Include="InductorTest.cs" />
     <Compile Include="ResistorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
