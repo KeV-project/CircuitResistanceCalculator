@@ -109,7 +109,6 @@ namespace CircuitResistanceCalculator
 		public override void RemoveNode()
 		{
 			NodeRemoved?.Invoke(this, EventArgs.Empty);
-
 		}
 
 		public override event EventHandler<EventArgs> NodeRemoved;

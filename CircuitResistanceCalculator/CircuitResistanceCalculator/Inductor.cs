@@ -31,7 +31,8 @@ namespace CircuitResistanceCalculator
 		/// <returns></returns>
 		public override Complex CalculateZ(double frequency)
 		{
-			return new Complex(0, 1) * 2 * Math.PI * frequency * Value;
+			return new Complex(0, 1) * 2 * Math.Round(Math.PI, 2) 
+				* frequency * Value;
 		}
 	}
 }
