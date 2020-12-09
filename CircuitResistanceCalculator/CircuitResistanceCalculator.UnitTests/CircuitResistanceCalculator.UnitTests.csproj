@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapacitorTest.cs" />
+    <Compile Include="ConnectionBaseTest.cs" />
     <Compile Include="ElementBaseTest.cs" />
     <Compile Include="InductorTest.cs" />
     <Compile Include="ParallelConnectionTest.cs" />

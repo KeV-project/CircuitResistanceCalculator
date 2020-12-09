@@ -16,7 +16,7 @@ namespace CircuitResistanceCalculator
 		/// Сожержит список узлов подцепи, представляющих 
 		/// элементы или тип их соединения
 		/// </summary>
-		public List<NodeBase> Nodes { get; set; }
+		public List<NodeBase> Nodes { get; private set; }
 
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
