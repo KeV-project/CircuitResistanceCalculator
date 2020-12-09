@@ -26,7 +26,10 @@ namespace CircuitResistanceCalculator
 			{
 				circuitResistance += 1 / node.CalculateZ(frequency);
 			}
-			return 1 / circuitResistance;
+
+			circuitResistance = 1 / circuitResistance;
+			return new Complex(Math.Round(circuitResistance.Real, 3),
+				Math.Round(circuitResistance.Imaginary, 3));
 		}
 	}
 }
