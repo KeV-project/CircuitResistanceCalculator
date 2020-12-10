@@ -112,5 +112,20 @@ namespace CircuitResistanceCalculator
 		}
 
 		public override event EventHandler<EventArgs> NodeRemoved;
+
+		public bool IsValueChangedNull()
+		{
+			return ValueChanged == null;
+		}
+
+		public bool IsNodeChangedNull()
+		{
+			return NodeChanged == null;
+		}
+
+		public bool IsNodeRemovedNull()
+		{
+			return NodeRemoved == null;
+		}
 	}
 }

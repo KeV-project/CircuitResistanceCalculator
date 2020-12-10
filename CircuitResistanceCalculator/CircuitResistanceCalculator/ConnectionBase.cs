@@ -53,7 +53,7 @@ namespace CircuitResistanceCalculator
 		/// </summary>
 		/// <param name="obj">Узел, вызвавший метод</param>
 		/// <param name="e">Прочие данные</param>
-		public void ChangeValue(object obj, EventArgs e)
+		private void ChangeValue(object obj, EventArgs e)
 		{
 			ValueChanged?.Invoke(this, EventArgs.Empty);
 		}
@@ -123,14 +123,19 @@ namespace CircuitResistanceCalculator
 			NodeRemoved?.Invoke(this, EventArgs.Empty);
 		}
 
-		private void RemoveNode(object node, EventArgs e)
+		private void RemoveNode(object obj, EventArgs e)
 		{
-			((NodeBase)node).ValueChanged -= ChangeValue;
-			((NodeBase)node).NodeChanged -= ReplaceNode;
-			((NodeBase)node).NodeRemoved -= RemoveNode;
-			Nodes.Remove((NodeBase)node);
+			((NodeBase)obj).ValueChanged -= ChangeValue;
+			((NodeBase)obj).NodeChanged -= ReplaceNode;
+			((NodeBase)obj).NodeRemoved -= RemoveNode;
+			Nodes.Remove((NodeBase)obj);
 		}
 
 		public override event EventHandler<EventArgs> NodeRemoved;
+
+		public EventHandler<EventArgs> GetChangeValueDelegate()
+		{
+			return ChangeValue;
+		}
 	}
 }
