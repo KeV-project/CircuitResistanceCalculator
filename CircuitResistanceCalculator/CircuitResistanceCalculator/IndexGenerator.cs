@@ -15,27 +15,27 @@ namespace CircuitResistanceCalculator
 		/// <summary>
 		/// Последний выданный индекс резистивному элементу
 		/// </summary>
-		private static byte _resistorLastIndex = 0;
+		private static byte ResistorLastIndex { get; set; } = 0;
 		/// <summary>
 		/// Последний выданный индекс индуктивному элементу
 		/// </summary>
-		private static byte _indectorLastIndex = 0;
+		private static byte IndectorLastIndex { get; set; } = 0;
 		/// <summary>
 		/// Последний выданный индекс емкостному элементу
 		/// </summary>
-		private static byte _capacitorLastIndex = 0;
+		private static byte CapacitorLastIndex { get; set; } = 0;
 
 		/// <summary>
 		/// Список всех элементов электрической цепи
 		/// </summary>
-		private static List<ElementBase> _elements;
+		private static List<ElementBase> Elements { get; set; }
 
 		/// <summary>
 		/// Инициализирует совйства класса <see cref="IndexGenerator">
 		/// </summary>
 		static IndexGenerator()
 		{
-			_elements = new List<ElementBase>();
+			Elements = new List<ElementBase>();
 		}
 
 		/// <summary>
@@ -45,19 +45,49 @@ namespace CircuitResistanceCalculator
 		/// <param name="element">Новый элемент цепи</param>
 		public static void SetIndex(ElementBase newElement)
 		{
-			_elements.Add(newElement);
+			Elements.Add(newElement);
 
 			if (newElement is Resistor)
 			{
-				newElement.Index = ++_resistorLastIndex;
+				newElement.Index = ++ResistorLastIndex;
 			}
 			else if(newElement is Inductor)
 			{
-				newElement.Index = ++_indectorLastIndex;
+				newElement.Index = ++IndectorLastIndex;
 			}
 			else
 			{
-				newElement.Index = ++_capacitorLastIndex;
+				newElement.Index = ++CapacitorLastIndex;
+			}
+		}
+
+		/// <summary>
+		/// Удаляет этемент из списка класса <see cref="IndexGenerator">
+		/// и переопределяет индексы оставшихся элементов
+		/// </summary>
+		/// <param name="removedElement">Удаляемый элемент</param>
+		public static void RemoveElement(ElementBase removedElement)
+		{
+			Elements.Remove(removedElement);
+
+			ResistorLastIndex = 0;
+			IndectorLastIndex = 0;
+			CapacitorLastIndex = 0;
+
+			foreach(ElementBase element in Elements)
+			{
+				if (element is Resistor)
+				{
+					element.Index = ++ResistorLastIndex;
+				}
+				else if (element is Inductor)
+				{
+					element.Index = ++IndectorLastIndex;
+				}
+				else
+				{
+					element.Index = ++CapacitorLastIndex;
+				}
 			}
 		}
 	}

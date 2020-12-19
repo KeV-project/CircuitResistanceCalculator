@@ -11,6 +11,13 @@ namespace CircuitResistanceCalculator.UnitTests
 	[TestFixture]
 	class ConnectionBaseTest
 	{
+
+		[Test (Description = "Позитивный тест индексатора Nodes")]
+		public void TestIndexerGet_CorrectValue()
+		{
+
+		}
+
 		[Test(Description = "Позитивный тест метода AddNode " +
 			"для добавления узла типа элемент")]
 		public void TestAddNode_AddElement()
@@ -24,9 +31,9 @@ namespace CircuitResistanceCalculator.UnitTests
 
 			// act
 			serialConnection.AddNode(resistor);
-			int actualId = serialConnection.Nodes[0].Id;
-			int actualIndex = ((ElementBase)serialConnection.Nodes[0]).Index;
-			double actualValue = ((ElementBase)serialConnection.Nodes[0]).Value;
+			int actualId = serialConnection[0].Id;
+			int actualIndex = ((ElementBase)serialConnection[0]).Index;
+			double actualValue = ((ElementBase)serialConnection[0]).Value;
 
 			// assert
 			Assert.AreEqual(expectedId, actualId, "");
@@ -35,6 +42,7 @@ namespace CircuitResistanceCalculator.UnitTests
 			Assert.IsFalse(resistor.IsValueChangedNull(), "");
 			Assert.IsFalse(resistor.IsNodeChangedNull(), "");
 			Assert.IsFalse(resistor.IsNodeRemovedNull(), "");
+
 		}
 	}
 }

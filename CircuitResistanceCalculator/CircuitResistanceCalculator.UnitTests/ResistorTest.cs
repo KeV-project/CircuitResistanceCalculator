@@ -11,39 +11,6 @@ namespace CircuitResistanceCalculator.UnitTests
     [TestFixture]
     public class ResistorTest
     {
-        //[Test(Description = "Позитивный тест геттера Id")]
-        //public void TestIdGet_CorrectValue()
-        //{
-        //    // arrange
-        //    Resistor resistor = new Resistor(1000.0);
-        //    resistor.SetId();
-        //    int expected = 1;
-
-        //    // act
-        //    int actual = resistor.Id;
-
-        //    // assert
-        //    Assert.AreEqual(expected, actual, "Геттер Id " +
-        //        "возвращает некорректное значение");
-        //}
-
-        //[Test(Description = "Негативный тест метода SetId")]
-        //public void TestSetId_IncorrectValue()
-        //{
-        //    // arrange
-        //    Resistor resistor = new Resistor(1000.0);
-        //    resistor.SetId();
-        //    int expected = 2;
-
-        //    // act
-        //    resistor.SetId();
-        //    int actual = resistor.Id;
-
-        //    // assert
-        //    Assert.AreEqual(expected, actual, "Метод SetId " +
-        //        "не должен переопределять Id элемента");
-        //}
-
         [Test(Description = "Позитивный тест конструктора Resistor")]
         public void TestConstructor_CorrectValue()
         {

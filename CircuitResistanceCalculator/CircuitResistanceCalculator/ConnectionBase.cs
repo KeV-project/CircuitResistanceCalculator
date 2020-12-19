@@ -16,7 +16,16 @@ namespace CircuitResistanceCalculator
 		/// Сожержит список узлов подцепи, представляющих 
 		/// элементы или тип их соединения
 		/// </summary>
-		public List<NodeBase> Nodes { get; private set; }
+		private List<NodeBase> Nodes { get; set; }
+
+		/// <summary>
+		/// Позволяет получить или добавить узел в список 
+		/// по указанному индуксу
+		/// </summary>
+		/// <param name="index">Индекс возвращаемого узла
+		/// или позиция для добавления узла в список</param>
+		/// <returns>Возвращает узел по указанному индексу</returns>
+		public NodeBase this[int index] => Nodes[index];
 
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
