@@ -79,9 +79,9 @@ namespace CircuitResistanceCalculator
 		}
 
 		/// <summary>
-		/// Событие, возникающее при изменении свойства 
+		/// Событие, возникающее при изменении значения свойства 
 		/// <see cref="Value">, предназныченное для
-		/// перерасчета цепи
+		/// вызова перерасчета цепи
 		/// </summary>
 		public override event EventHandler<EventArgs> ValueChanged;
 
@@ -102,27 +102,55 @@ namespace CircuitResistanceCalculator
 		}
 
 		/// <summary>
-		/// Вызывает метод родительского узла для замены выбранного элемента
+		/// Событие, возникающее при попытке заменить текущий 
+		/// элемент цепи. Предназначено для замены текущего 
+		/// элемента и вызова перерасчета цепи
 		/// </summary>
 		public override event EventHandler<ChangeNodeArgs> NodeChanged;
 
+		/// <summary>
+		/// Вызывает цепочку событий для удаления текущего элемента цепи
+		/// </summary>
 		public override void RemoveNode()
 		{
 			NodeRemoved?.Invoke(this, EventArgs.Empty);
 		}
 
+		/// <summary>
+		/// Событие, возникающее при попытке удалить элемент из цепи.
+		/// Предназначено для удаления текущего элемента и вызова 
+		/// перерасчета цепи.
+		/// </summary>
 		public override event EventHandler<EventArgs> NodeRemoved;
 
+		/// <summary>
+		/// Метод предназначен для проверки подписки события
+		/// <see cref="ValueChanged">по обработчик 
+		/// </summary>
+		/// <returns>true, если событие не подписано на обработчик,
+		/// false - если событие подписано на обработчик</returns>
 		public bool IsValueChangedNull()
 		{
 			return ValueChanged == null;
 		}
 
+		/// <summary>
+		/// Метод предназначен для проверки подписки события
+		/// <see cref="NodeChanged">по обработчик 
+		/// </summary>
+		/// <returns>true, если событие не подписано на обработчик,
+		/// false - если событие подписано на обработчик</returns>
 		public bool IsNodeChangedNull()
 		{
 			return NodeChanged == null;
 		}
 
+		/// <summary>
+		/// Метод предназначен для проверки подписки события
+		/// <see cref="NodeRemoved">по обработчик 
+		/// </summary>
+		/// <returns>true, если событие не подписано на обработчик,
+		/// false - если событие подписано на обработчик</returns>
 		public bool IsNodeRemovedNull()
 		{
 			return NodeRemoved == null;
