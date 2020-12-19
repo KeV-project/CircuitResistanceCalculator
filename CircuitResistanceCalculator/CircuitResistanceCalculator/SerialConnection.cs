@@ -22,10 +22,11 @@ namespace CircuitResistanceCalculator
 		{
 			Complex circuitResistance = new Complex(0, 0);
 
-			foreach (NodeBase node in Nodes)
+			for (int i = 0; i < GetNodesCount(); i++)
 			{
-				circuitResistance += node.CalculateZ(frequency);
+				circuitResistance += this[i].CalculateZ(frequency);
 			}
+			
 			return new Complex(Math.Round(circuitResistance.Real,  3), 
 				Math.Round(circuitResistance.Imaginary, 3));
 		}

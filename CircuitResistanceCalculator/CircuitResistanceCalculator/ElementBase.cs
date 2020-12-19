@@ -51,7 +51,7 @@ namespace CircuitResistanceCalculator
 			{
 				return _value;
 			}
-			private set
+			set
 			{
 				const double minValue = 0.000000000001;
 				const double maxValue = 1000000000.0;
@@ -61,9 +61,8 @@ namespace CircuitResistanceCalculator
 				if (_value != value)
 				{
 					_value = value;
+					ValueChanged?.Invoke(this, EventArgs.Empty);
 				}
-
-				ValueChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 

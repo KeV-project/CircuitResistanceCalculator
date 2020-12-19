@@ -125,5 +125,107 @@ namespace CircuitResistanceCalculator.UnitTests
 			// assert
 			Assert.IsTrue(eventRaised, "Событие должно вызывать обработчик");
 		}
+
+		[Test(Description = "Позитивный тест метода IsValueChangedNull")]
+		public void IsValueChangedNull_CorrectValue()
+		{
+			// arrenge
+			Resistor resistor = new Resistor(1000.0);
+			bool expectedMethodRaised = true;
+
+			// act
+			bool actualMethodRaised = resistor.IsValueChangedNull();
+
+			// assert
+			Assert.AreEqual(expectedMethodRaised, actualMethodRaised,
+				"Подписка на обработчик события не должны быть зафиксирована");
+		}
+
+		[Test(Description = "Негативный тест метода IsValueChangedNull")]
+		public void IsValueChangedNull_IncorrectValue()
+		{
+			// arrenge
+			Resistor resistor = new Resistor(1000.0);
+			resistor.ValueChanged += delegate (object node, EventArgs e)
+			{
+				
+			};
+			bool expectedMethodRaised = false;
+
+			// act
+			bool actualMethodRaised = resistor.IsValueChangedNull();
+
+			// assert
+			Assert.AreEqual(expectedMethodRaised, actualMethodRaised, 
+				"Метод не зафиксировал подписку события на обработчик");
+		}
+
+		[Test(Description = "Позитивный тест метода IsNodeChangedNull")]
+		public void IsNodeChangedNull_CorrectValue()
+		{
+			// arrenge
+			Resistor resistor = new Resistor(1000.0);
+			bool expectedMethodRaised = true;
+
+			// act
+			bool actualMethodRaised = resistor.IsNodeChangedNull();
+
+			// assert
+			Assert.AreEqual(expectedMethodRaised, actualMethodRaised,
+				"Подписка на обработчик события не должны быть зафиксирована");
+		}
+
+		[Test(Description = "Негативный тест метода IsNodeChangedNull")]
+		public void IsNodeChangedNull_Incorrect()
+		{
+			// arrenge
+			Resistor resistor = new Resistor(1000.0);
+			bool expectedMethodRaised = false;
+			resistor.NodeChanged += delegate (object node, ChangeNodeArgs e)
+			{
+				
+			};
+
+			// act
+			bool actualMethodRaised = resistor.IsNodeChangedNull();
+
+			// assert
+			Assert.AreEqual(expectedMethodRaised, actualMethodRaised, 
+				"Метод не зафиксировал подписку события на обработчик");
+		}
+
+		[Test(Description = "Позитивный тест метода IsNodeRemovedNull")]
+		public void IsNodeRemovedNull_CorrectValue()
+		{
+			// arrenge
+			Resistor resistor = new Resistor(1000.0);
+			bool expectedMethodRaised = true;
+
+			// act
+			bool actualMethodRaised = resistor.IsNodeRemovedNull();
+
+			// assert
+			Assert.AreEqual(expectedMethodRaised, actualMethodRaised,
+				"Подписка на обработчик события не должны быть зафиксирована");
+		}
+
+		[Test(Description = "Негативный тест метода IsNodeRemovedNull")]
+		public void IsNodeRemovedNull_IncorrectValue()
+		{
+			// arrenge
+			Resistor resistor = new Resistor(1000.0);
+			bool expectedMethodRaised = false;
+			resistor.NodeRemoved += delegate (object node, EventArgs e)
+			{
+				
+			};
+
+			// act
+			bool actualMethodRaised = resistor.IsNodeRemovedNull();
+
+			// assert
+			Assert.AreEqual(expectedMethodRaised, actualMethodRaised, 
+				"Метод не зафиксировал подписку события на обработчик");
+		}
 	}
 }

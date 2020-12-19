@@ -37,6 +37,15 @@ namespace CircuitResistanceCalculator
 		}
 
 		/// <summary>
+		/// Возвращает количество узлов в списке соединения
+		/// </summary>
+		/// <returns></returns>
+		public int GetNodesCount()
+		{
+			return Nodes.Count;
+		}
+
+		/// <summary>
 		/// Добавляет узел в подцепь
 		/// </summary>
 		/// <param name="node">Новый узел</param>
