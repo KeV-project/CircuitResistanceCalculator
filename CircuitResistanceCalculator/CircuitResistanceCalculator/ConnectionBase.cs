@@ -51,8 +51,6 @@ namespace CircuitResistanceCalculator
 		/// <param name="node">Новый узел</param>
 		public void AddNode(NodeBase node)
 		{
-			node.SetId();
-
 			if(node is ElementBase)
 			{
 				IndexGenerator.SetIndex((ElementBase)node);
@@ -154,6 +152,40 @@ namespace CircuitResistanceCalculator
 		public EventHandler<EventArgs> GetChangeValueDelegate()
 		{
 			return ChangeValue;
+		}
+
+
+		/// <summary>
+		/// Метод предназначен для проверки подписки события
+		/// <see cref="ValueChanged"> на обработчик 
+		/// </summary>
+		/// <returns>true, если событие не подписано на обработчик,
+		/// false - если событие подписано на обработчик</returns>
+		public bool IsValueChangedNull()
+		{
+			return ValueChanged == null;
+		}
+
+		/// <summary>
+		/// Метод предназначен для проверки подписки события
+		/// <see cref="NodeChanged"> на обработчик 
+		/// </summary>
+		/// <returns>true, если событие не подписано на обработчик,
+		/// false - если событие подписано на обработчик</returns>
+		public bool IsNodeChangedNull()
+		{
+			return NodeChanged == null;
+		}
+
+		/// <summary>
+		/// Метод предназначен для проверки подписки события
+		/// <see cref="NodeRemoved"> на обработчик 
+		/// </summary>
+		/// <returns>true, если событие не подписано на обработчик,
+		/// false - если событие подписано на обработчик</returns>
+		public bool IsNodeRemovedNull()
+		{
+			return NodeRemoved == null;
 		}
 	}
 }

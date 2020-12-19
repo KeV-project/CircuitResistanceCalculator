@@ -124,7 +124,7 @@ namespace CircuitResistanceCalculator
 
 		/// <summary>
 		/// Метод предназначен для проверки подписки события
-		/// <see cref="ValueChanged">по обработчик 
+		/// <see cref="ValueChanged"> на обработчик 
 		/// </summary>
 		/// <returns>true, если событие не подписано на обработчик,
 		/// false - если событие подписано на обработчик</returns>
@@ -135,7 +135,7 @@ namespace CircuitResistanceCalculator
 
 		/// <summary>
 		/// Метод предназначен для проверки подписки события
-		/// <see cref="NodeChanged">по обработчик 
+		/// <see cref="NodeChanged"> на обработчик 
 		/// </summary>
 		/// <returns>true, если событие не подписано на обработчик,
 		/// false - если событие подписано на обработчик</returns>
@@ -146,7 +146,7 @@ namespace CircuitResistanceCalculator
 
 		/// <summary>
 		/// Метод предназначен для проверки подписки события
-		/// <see cref="NodeRemoved">по обработчик 
+		/// <see cref="NodeRemoved"> на обработчик 
 		/// </summary>
 		/// <returns>true, если событие не подписано на обработчик,
 		/// false - если событие подписано на обработчик</returns>

@@ -15,12 +15,12 @@ namespace CircuitResistanceCalculator.UnitTests
         public void TestConstructor_CorrectValue()
         {
             // arrange
-            int expectedId = 0;
-            int expectedIndex = 0;
-            double expectedValue = 1000.0;
+            int expectedId = 3;
+            int expectedIndex = 1;
+            double expectedValue = 0.016;
 
             // act
-            Inductor inductor = new Inductor(1000.0);
+            Inductor inductor = (Inductor)InitCircuit.Circuit.Connection[1];
             int actualId = inductor.Id;
             int actualIndex = inductor.Index;
             double actualValue = inductor.Value;
@@ -38,7 +38,7 @@ namespace CircuitResistanceCalculator.UnitTests
         public void TestCalculateZ_CorrectValue()
         {
             // arrenge
-            Inductor inductor = new Inductor(0.016);
+            Inductor inductor = (Inductor)InitCircuit.Circuit.Connection[1];
             Complex expectedZ = new Complex(0, 5.024);
 
             // act

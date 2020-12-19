@@ -10,18 +10,17 @@ namespace CircuitResistanceCalculator.UnitTests
 {
 	[TestFixture]
 	class CapacitorTest
-	{
-
+    { 
         [Test(Description = "Позитивный тест конструктора Capacitor")]
         public void TestConstructor_CorrectValue()
         {
             // arrange
-            int expectedId = 0;
-            int expectedIndex = 0;
-            double expectedValue = 1000.0;
+            int expectedId = 4;
+            int expectedIndex = 1;
+            double expectedValue = 0.00022116;
 
             // act
-            Capacitor capacitor = new Capacitor(1000.0);
+            Capacitor capacitor = (Capacitor)InitCircuit.Circuit.Connection[2];
             int actualId = capacitor.Id;
             int actualIndex = capacitor.Index;
             double actualValue = capacitor.Value;
@@ -39,7 +38,7 @@ namespace CircuitResistanceCalculator.UnitTests
         public void TestCalculateZ_CorrectValue()
         {
             // arrenge
-            Capacitor capacitor = new Capacitor(0.00022116);
+            Capacitor capacitor = (Capacitor)InitCircuit.Circuit.Connection[2];
             Complex expectedZ = new Complex(0, -14.4);
 
             // act

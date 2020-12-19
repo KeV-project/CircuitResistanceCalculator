@@ -51,15 +51,7 @@ namespace CircuitResistanceCalculator
 		/// </summary>
 		public NodeBase()
 		{
-			Id = 0;
-		}
-
-		public void SetId()
-		{
-			if (Id == 0)
-			{
-				Id = IdGenerator.GetId();
-			}
+			Id = IdGenerator.GetId();
 		}
 
 		/// <summary>

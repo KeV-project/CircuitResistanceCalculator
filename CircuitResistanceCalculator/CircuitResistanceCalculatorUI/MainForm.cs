@@ -59,11 +59,11 @@ namespace CircuitResistanceCalculatorUI
 				EditNodeButton.Enabled = false;
 			}
 
-			if (CircuitTreeView.SelectedNode.Tag is Circuit &&
-				((Circuit)CircuitTreeView.SelectedNode.Tag).Connection != null)
-			{
-				AddConnectionButton.Enabled = false;
-			}
+			//if (CircuitTreeView.SelectedNode.Tag is Circuit &&
+			//	((Circuit)CircuitTreeView.SelectedNode.Tag).Connection != null)
+			//{
+			//	AddConnectionButton.Enabled = false;
+			//}
 
 			if (CircuitTreeView.SelectedNode.Tag is Resistor ||
 				CircuitTreeView.SelectedNode.Tag is Inductor ||
