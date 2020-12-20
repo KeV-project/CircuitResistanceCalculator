@@ -13,7 +13,7 @@ namespace CircuitResistanceCalculatorUI
 {
 	public partial class MainForm : Form
 	{
-		private List<Data> _data;
+		//private List<Data> _data;
 
 		public Circuit Circuit { get; private set; }
 		public MainForm()
@@ -22,28 +22,28 @@ namespace CircuitResistanceCalculatorUI
 
 			Circuit = null;
 
-			_data = new List<Data>();
+			//_data = new List<Data>();
 
-			_data.Add(new Data(22.55, 55.33));
-			_data.Add(new Data(13.12, 77.14));
-			_data.Add(new Data(29.31, 97.05));
-			_data.Add(new Data(71.23, 10.17));
-			_data.Add(new Data(65.02, 12.15));
-			_data.Add(new Data(87.10, 45.62));
-			_data.Add(new Data(22.55, 55.33));
-			_data.Add(new Data(13.12, 77.14));
-			_data.Add(new Data(29.31, 97.05));
-			_data.Add(new Data(71.23, 10.17));
-			_data.Add(new Data(65.02, 12.15));
-			_data.Add(new Data(87.10, 45.62));
-			_data.Add(new Data(22.55, 55.33));
-			_data.Add(new Data(13.12, 77.14));
-			_data.Add(new Data(29.31, 97.05));
-			_data.Add(new Data(71.23, 10.17));
-			_data.Add(new Data(65.02, 12.15));
-			_data.Add(new Data(87.10, 45.62));
+			//_data.Add(new Data(22.55, 55.33));
+			//_data.Add(new Data(13.12, 77.14));
+			//_data.Add(new Data(29.31, 97.05));
+			//_data.Add(new Data(71.23, 10.17));
+			//_data.Add(new Data(65.02, 12.15));
+			//_data.Add(new Data(87.10, 45.62));
+			//_data.Add(new Data(22.55, 55.33));
+			//_data.Add(new Data(13.12, 77.14));
+			//_data.Add(new Data(29.31, 97.05));
+			//_data.Add(new Data(71.23, 10.17));
+			//_data.Add(new Data(65.02, 12.15));
+			//_data.Add(new Data(87.10, 45.62));
+			//_data.Add(new Data(22.55, 55.33));
+			//_data.Add(new Data(13.12, 77.14));
+			//_data.Add(new Data(29.31, 97.05));
+			//_data.Add(new Data(71.23, 10.17));
+			//_data.Add(new Data(65.02, 12.15));
+			//_data.Add(new Data(87.10, 45.62));
 
-			CircuitResistanceGridView.DataSource = _data;
+			//CircuitResistanceGridView.DataSource = _data;
 		}
 
 		private void CircuitChanged(object sender, EventArgs e)
@@ -106,7 +106,7 @@ namespace CircuitResistanceCalculatorUI
 			{
 				if(CircuitTreeView.SelectedNode.Tag is Circuit)
 				{
-					Circuit.SetConnection(addConnectionsForm.Connection);
+					//Circuit.SetConnection(addConnectionsForm.Connection);
 				}
 				else if(CircuitTreeView.SelectedNode.Tag is ConnectionBase)
 				{

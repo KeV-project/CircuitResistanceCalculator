@@ -87,15 +87,14 @@ namespace CircuitResistanceCalculator
 		/// <param name="newConnection">Новый узел</param>
 		public void ChangeConnection(ConnectionBase newConnection)
 		{
-			if(newConnection.GetType() != this.GetType())
+			if (newConnection.GetType() != this.GetType())
 			{
-				foreach(NodeBase node in Nodes)
+				for (int i = 0; i < Nodes.Count; i++)
 				{
-					newConnection.AddNode(node);
+					newConnection.AddNode(this[i]);
 				}
+				this.NodeChanged?.Invoke(this, new ChangeNodeArgs(newConnection));
 			}
-
-			this.NodeChanged?.Invoke(this, new ChangeNodeArgs(newConnection));
 		}
 
 		/// <summary>
@@ -112,29 +111,31 @@ namespace CircuitResistanceCalculator
 		private void ReplaceNode(object obj, ChangeNodeArgs e)
 		{
 			int index = 0;
-			foreach(NodeBase node in Nodes)
+			for (int i = 0; i < Nodes.Count; i++)
 			{
-				if(node == obj)
+				if(this[i] == obj)
 				{
 					break;
 				}
-				index++;
+				index = i + 1;
 			}
 
 			((NodeBase)obj).ValueChanged -= ChangeValue;
 			((NodeBase)obj).NodeChanged -= ReplaceNode;
+			((NodeBase)obj).NodeRemoved -= RemoveNode;
 			Nodes.Remove((NodeBase)obj);
 
 			e.Node.ValueChanged += ChangeValue;
 			e.Node.NodeChanged += ReplaceNode;
+			e.Node.NodeRemoved += RemoveNode;
 			Nodes.Insert(index, e.Node);
 		}
 
 		public override void RemoveNode()
 		{
-			foreach (NodeBase node in Nodes)
+			for(int i = 0; i < Nodes.Count; i++)
 			{
-				node.RemoveNode();
+				this[i].RemoveNode();
 			}
 			NodeRemoved?.Invoke(this, EventArgs.Empty);
 		}
@@ -148,11 +149,6 @@ namespace CircuitResistanceCalculator
 		}
 
 		public override event EventHandler<EventArgs> NodeRemoved;
-
-		public EventHandler<EventArgs> GetChangeValueDelegate()
-		{
-			return ChangeValue;
-		}
 
 
 		/// <summary>

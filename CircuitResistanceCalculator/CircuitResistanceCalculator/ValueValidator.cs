@@ -48,36 +48,6 @@ namespace CircuitResistanceCalculator
         }
 
         /// <summary>
-        /// Метод предназначен для проверки строки
-        /// на содержание только букв
-        /// </summary>
-        /// <param name="value">Проверяемая строка</param>
-        /// <returns>Значение показывает 
-        /// состоит ли строка только из букв</returns>
-        private static bool IsOnlyLettersInString(string value)
-        {
-            value = value.ToLower();
-            return value.All(symbol =>
-                    symbol >= 'a' && symbol <= 'z' ||
-                    symbol >= 'а' && symbol <= 'я');
-        }
-
-        /// <summary>
-        /// Метод предназначен для проверки даты 
-        /// на вхождение в определенный временной диапазон
-        /// </summary>
-        /// <param name="date">Проверяемая дата</param>
-        /// <param name="minDate">Минимальная дата</param>
-        /// <param name="maxDate">Максимальная дата</param>
-        /// <returns>Значение показыает, 
-        /// входит ли дата в допустимый временной диапазон</returns>
-        private static bool IsCorrectDate(DateTime date,
-            DateTime minDate, DateTime maxDate)
-        {
-            return minDate <= date && date <= maxDate;
-        }
-
-        /// <summary>
         /// Метод предназначен для генерации исключения
         /// в случае, если число не входит в допустимый диапазон
         /// </summary>
@@ -124,54 +94,6 @@ namespace CircuitResistanceCalculator
                     + value + "\"\n превышает допустимую длину ["
                     + minLength + ", " + maxLength + "]"
                     + "\nи не может определять " + context);
-            }
-        }
-
-        /// <summary>
-        /// Метод предназначен для генерации исключения
-        /// в случае, если имя или фамилия содержат более 50 символов
-        /// или содержат символы кроме букв
-        /// </summary>
-        /// <param name="name">Проферяемая строка</param>
-        /// <param name="minLength">Минимальное количество символов</param>
-        /// <param name="maxLength">Максимальное количество символов</param>
-        /// <param name="context">Поле объекта, которое будет 
-        /// инициализировано проверяемым значением 
-        /// в именительном падеже</param>
-        public static void AssertCorrectName(string name,
-            int minLength, int maxLength, string context)
-        {
-            AssertLengthInRange(name, minLength, maxLength, context);
-
-            if (!IsOnlyLettersInString(name))
-            {
-                throw new ArgumentException("ИСКЛЮЧЕНИЕ: строка "
-                                 + "\"" + name
-                                 + "\",\nопределяющая " + context
-                                 + ",\nможет соделжать только буквы");
-            }
-        }
-
-        /// <summary>
-        /// Метод предназначен для генерации исключения
-        /// в случае, если дата не входит в допустимый 
-        /// временной промежуток
-        /// </summary>
-        /// <param name="newDate">Проверяемая дата</param>
-        /// <param name="minDate">Минимальная дата</param>
-        /// <param name="maxDate">Максималная дата</param>
-        /// <param name="context">Поле объекта, которое 
-        /// будет инициализировано проверяемым значением 
-        /// в именительном падеже</param>
-        public static void AssertCorrectDate(DateTime newDate,
-            DateTime minDate, DateTime maxDate, string context)
-        {
-            if (!IsCorrectDate(newDate, minDate, maxDate))
-            {
-                throw new ArgumentException("ИСКЛЮЧЕНИЕ: "
-                    + "выбранная дата " + context + " \""
-                    + newDate + "\"\nне может быть раньше "
-                    + minDate + " и позже " + maxDate);
             }
         }
     }
