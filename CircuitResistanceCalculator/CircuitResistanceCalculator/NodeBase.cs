@@ -56,13 +56,26 @@ namespace CircuitResistanceCalculator
 
 		/// <summary>
 		/// Определяет сигнатуру события <see cref="ValueChanged">
+		/// и обязует наследников реализовать данное событие
 		/// </summary>
 		public abstract event EventHandler<EventArgs> ValueChanged;
 
+		/// <summary>
+		/// Определяет сигнатуру события <see cref="NodeChanged">
+		/// и обязует наследников реализовать данное событие
+		/// </summary>
 		public abstract event EventHandler<ChangeNodeArgs> NodeChanged;
 
+		/// <summary>
+		/// Обпределяет сигнатуру метода RemoveNode 
+		/// и обязует наследников реализовать данный метод
+		/// </summary>
 		public abstract void RemoveNode();
 
+		/// <summary>
+		/// Определяет сигнатуру события <see cref="NodeRemoved">
+		/// и обязует наследников реализовать данное событие
+		/// </summary>
 		public abstract event EventHandler<EventArgs> NodeRemoved;
 
 		/// <summary>

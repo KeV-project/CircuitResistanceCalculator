@@ -131,6 +131,9 @@ namespace CircuitResistanceCalculator
 			Nodes.Insert(index, e.Node);
 		}
 
+		/// <summary>
+		/// Вызывет цепочку событий для удаления текущего узла из цепи
+		/// </summary>
 		public override void RemoveNode()
 		{
 			for(int i = 0; i < Nodes.Count; i++)
@@ -140,6 +143,11 @@ namespace CircuitResistanceCalculator
 			NodeRemoved?.Invoke(this, EventArgs.Empty);
 		}
 
+		/// <summary>
+		/// Удаляет узел из цепи
+		/// </summary>
+		/// <param name="obj">Удаляемый узел</param>
+		/// <param name="e">Прочие данные</param>
 		private void RemoveNode(object obj, EventArgs e)
 		{
 			((NodeBase)obj).ValueChanged -= ChangeValue;
@@ -148,6 +156,9 @@ namespace CircuitResistanceCalculator
 			Nodes.Remove((NodeBase)obj);
 		}
 
+		/// <summary>
+		/// Событие, возникающее при попытке удалить узел из цепи
+		/// </summary>
 		public override event EventHandler<EventArgs> NodeRemoved;
 
 

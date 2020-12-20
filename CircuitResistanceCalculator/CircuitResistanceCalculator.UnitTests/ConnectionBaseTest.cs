@@ -238,8 +238,8 @@ namespace CircuitResistanceCalculator.UnitTests
 		public void IsValueChangedNull_IncorrectValue()
 		{
 			// arrenge
-			ParallelConnection parallelConnection = 
-				(ParallelConnection)InitCircuit.Circuit.Connection;
+			ParallelConnection parallelConnection =
+				(ParallelConnection)InitCircuit.Circuit.Connection[4];
 			bool expectedMethodRaised = false;
 
 			// act
@@ -272,7 +272,7 @@ namespace CircuitResistanceCalculator.UnitTests
 		{
 			// arrenge
 			ParallelConnection parallelConnection =
-				(ParallelConnection)InitCircuit.Circuit.Connection;
+				(ParallelConnection)InitCircuit.Circuit.Connection[4];
 			bool expectedMethodRaised = false;
 
 			// act

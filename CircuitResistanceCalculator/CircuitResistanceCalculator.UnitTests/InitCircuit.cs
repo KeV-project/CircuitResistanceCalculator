@@ -15,7 +15,7 @@ namespace CircuitResistanceCalculator.UnitTests
 			Circuit = new Circuit();
 			// Id = 1
 			ParallelConnection parallelConnection = new ParallelConnection();
-			Circuit.Connection = parallelConnection;
+			Circuit.SetConnection(parallelConnection);
 
 			//////////////////////////////////////////////////////////////////////////////////////////
 			// Id = 2, Index = 1

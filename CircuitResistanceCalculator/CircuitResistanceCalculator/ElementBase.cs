@@ -113,6 +113,7 @@ namespace CircuitResistanceCalculator
 		public override void RemoveNode()
 		{
 			NodeRemoved?.Invoke(this, EventArgs.Empty);
+			IndexGenerator.RemoveElement(this);
 		}
 
 		/// <summary>
