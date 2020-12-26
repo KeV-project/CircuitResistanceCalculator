@@ -42,6 +42,20 @@ namespace CircuitResistanceCalculator.UnitTests
 			"если проверяемое число не входит в допустимый диапазон");
 		}
 
+		[Test(Description = "Позитивный тест метода AssertLengthInRange")]
+		public void TestAssertLengthInRange_CorrectValue()
+		{
+			// arrange
+			var value = "Резистор";
+			var minLimit = 0;
+			var maxLimit = 15;
+			var context = "экспериментальное значение";
+
+			// arrest
+			ValueValidator.AssertLengthInRange(value,
+					minLimit, maxLimit, context);
+		}
+
 		[Test(Description = "Негативный тест метода AssertLengthInRange")]
 		public void TestAssertLengthInRange_IncorrectValue()
 		{

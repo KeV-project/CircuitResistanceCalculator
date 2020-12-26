@@ -95,47 +95,61 @@ namespace CircuitResistanceCalculator.UnitTests
 
 		}
 
-		//[Test(Description = "Негативный тест метода ChangeElement")]
-		//public void TestChangeElement_IncorrectValue()
-		//{
-		//	// arrenge
-		//	Resistor currentElement = 
-		//		(Resistor)InitCircuit.Circuit.Connection[6];
-		//	Resistor newElement = new Resistor(1500.0);
+		[Test(Description = "Негативный тест метода ChangeElement")]
+		public void TestChangeElement_IncorrectValue()
+		{
+			// arrenge
+			SerialConnection serialConnection = new SerialConnection();
+			ElementBase currentElement = new Resistor(1000.0, 1);
+			serialConnection.AddNode(currentElement);
+			ElementBase newElement = new Resistor(2000.0, 1);
 
-		//	double expectedValue = 1500.0;
+			double expectedValue = 2000.0;
 
-		//	// act
-		//	currentElement.ChangeElement(newElement);
-		//	double actualValue = currentElement.Value;
+			// act
+			currentElement.ChangeElement(newElement);
+			double actualValue = currentElement.Value;
 
-		//	// assert
-		//	Assert.AreEqual(expectedValue, actualValue, "Метод " +
-		//		"ChangeElement неверно обрабатывает случай передачи " +
-		//		"в качестве параметров элементов, имеющих одинаковый тип");
+			// assert
+			Assert.AreEqual(expectedValue, actualValue, "Метод " +
+				"ChangeElement неверно обрабатывает попытку " +
+				"заменить текущий элемент объектом того же типа");
+		}
 
-		//}
+		[Test(Description = "Позитивный тест метода RemoveNode")]
+		public void TestRemoveNode_CorrectValue()
+		{
+			// arrenge
+			SerialConnection serialConnection = new SerialConnection();
+			ElementBase removedElement = new Resistor(1000.0, 1);
+			serialConnection.AddNode(removedElement);
 
-		//[Test(Description = "Позитивный тест метода RemoveNode")]
-		//public void TestRemoveNode_CorrectValue()
-		//{
-		//	// arrenge
-		//	NodeBase removedElement = InitCircuit.Circuit.Connection[7];
-		//	// act
-		//	removedElement.RemoveNode();
+			int expectedSerialConnectionNodesCount = 0;
 
-		//	// assert
-		//	Assert.Throws<ArgumentOutOfRangeException>(() =>
-		//	{
-		//		InitCircuit.Circuit.Connection[7].RemoveNode();
-		//	},
-		//	"Должно возникать исключение при обращении к несущестующему элементу");
-		//	Assert.IsTrue(((ElementBase)removedElement).IsValueChangedNull(),
-		//		"Событие ValueChanged должно быть отписано от обработчика");
-		//	Assert.IsTrue(((ElementBase)removedElement).IsNodeChangedNull(),
-		//		"Событие NodeChanged должно быть отписано от обработчика");
-		//	Assert.IsTrue(((ElementBase)removedElement).IsNodeRemovedNull(),
-		//		"Событие NodeRemoved должно быть отписано от обработчика");
-		//}
+			// act
+			removedElement.RemoveNode();
+
+			int actualSerialConnectionNodesCount = serialConnection.GetNodesCount();
+
+			// assert
+			Assert.AreEqual(expectedSerialConnectionNodesCount, 
+				actualSerialConnectionNodesCount, "Метод не удаляет элемент " +
+				"из списка родительского узла");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.VerifyDelegateAttachedTo(removedElement,
+					nameof(ElementBase.ValueChanged));
+			}, "Событие ValueChanged должно быть отписано от обработчика");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.VerifyDelegateAttachedTo(removedElement,
+					nameof(ElementBase.NodeChanged));
+			}, "Событие NodeChanged должно быть отписано от обработчика");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.VerifyDelegateAttachedTo(removedElement,
+					nameof(ElementBase.NodeRemoved));
+			}, "Событие NodeRemoved должно быть отписано от обработчика");
+		}
 	}
 }

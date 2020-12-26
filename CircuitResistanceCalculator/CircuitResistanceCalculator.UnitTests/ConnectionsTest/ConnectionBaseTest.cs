@@ -11,210 +11,161 @@ namespace CircuitResistanceCalculator.UnitTests
 	[TestFixture]
 	class ConnectionBaseTest
 	{
-		//[Test(Description = "Позитивный тест геттера индексатора Nodes")]
-		//public void TestIndexerGet_CorrectValue()
-		//{
-		//	// arrenge
-		//	SerialConnection serialConnection = 
-		//		(SerialConnection)InitCircuit.Circuit.Connection[3];
-		//	ElementBase expectedElement = new Resistor(5000.0);
-		//	serialConnection.AddNode(expectedElement);
+		[Test(Description = "Позитивный тест геттера индексатора Nodes")]
+		public void TestIndexerGet_CorrectValue()
+		{
+			// arrenge
+			SerialConnection serialConnection = new SerialConnection();
+			ElementBase expectedElement = new Resistor(5000.0, 1);
+			serialConnection.AddNode(expectedElement);
 
-		//	// act
-		//	ElementBase actualElement = (ElementBase)serialConnection[3];
+			// act
+			ElementBase actualElement = (ElementBase)serialConnection[0];
 
-		//	// Assert
-		//	Assert.AreEqual(expectedElement, actualElement,
-		//		"Геттер индексатора вернул неверный элемент");
+			// Assert
+			Assert.AreEqual(expectedElement, actualElement,
+				"Геттер индексатора возвращает неверный объект");
+		}
 
-		//	serialConnection[3].RemoveNode();
-		//}
+		[Test(Description = "Позитивный тест метода GetNodesCount")]
+		public void GetNodesCount_CorrectValue()
+		{
+			// arrenge
+			SerialConnection serialConnection = new SerialConnection();
+			ElementBase expectedElement = new Resistor(5000.0, 1);
+			serialConnection.AddNode(expectedElement);
+			int expectedNodesCount = 1;
 
-		//[Test(Description = "Позитивный тест метода GetNodesCount")]
-		//public void GetNodesCount_CorrectValue()
-		//{
-		//	// arrenge
-		//	int expectedNodesCount = 3;
+			// act
+			int actualNodesCount = serialConnection.GetNodesCount();
 
-		//	// act
-		//	int actualNodesCount = ((SerialConnection)InitCircuit.
-		//		Circuit.Connection[3]).GetNodesCount(); ;
+			Assert.AreEqual(expectedNodesCount, actualNodesCount,
+				"Метод возвращает неверное количество узлов " +
+				"в списке соединения");
+		}
 
-		//	Assert.AreEqual(expectedNodesCount, actualNodesCount,
-		//		"Метод возвращает неверное количество узлов " +
-		//		"в списке соединения");
-		//}
+		[Test(Description = "Позитивный тест метода AddNode")]
+		public void TestAddNode_AddElement()
+		{
+			// arrenge
+			ConnectionBase connection = new SerialConnection();
+			ElementBase newElement = new Resistor(2000.0, 1);
+			int expectedConnectionNodesCount = 1;
 
-		//[Test(Description = "Позитивный тест метода AddNode " +
-		//	"для добавления узла типа элемент")]
-		//public void TestAddNode_AddElement()
-		//{
-		//	// arrenge
-		//	SerialConnection serialConnection = 
-		//		(SerialConnection)InitCircuit.Circuit.Connection[3];
-		//	ElementBase expectedElement = new Resistor(5000.0);
+			// act
+			connection.AddNode(newElement);
+			int actualConnectionNodesCount = connection.GetNodesCount();
 
-		//	// act
-		//	serialConnection.AddNode(expectedElement);
-		//	ElementBase actualElement = (ElementBase)serialConnection[3];
+			// assert
+			Assert.AreEqual(expectedConnectionNodesCount,
+				actualConnectionNodesCount, "Метод некорректно " +
+				"добавляет узел в список соединения");
+			HelperMethods.VerifyDelegateAttachedTo(newElement,
+				nameof(ElementBase.ValueChanged));
+			HelperMethods.VerifyDelegateAttachedTo(newElement,
+				nameof(ElementBase.NodeChanged));
+			HelperMethods.VerifyDelegateAttachedTo(newElement,
+				nameof(ElementBase.NodeRemoved));
+		}
 
-		//	// assert
-		//	Assert.AreEqual(expectedElement, actualElement,
-		//		"Метод неверно добавляет элемент в список соединения");
-		//	Assert.IsFalse(actualElement.IsValueChangedNull(),
-		//		"Событие ValueChanged добавленного в список " +
-		//		"объекта не было подписано на обработчик");
-		//	Assert.IsFalse(actualElement.IsNodeChangedNull(),
-		//		"Событие NodeChnged добавленного в список " +
-		//		"объекта не было подписано на обработчик");
-		//	Assert.IsFalse(actualElement.IsNodeRemovedNull(),
-		//		"Событие NodeRemoved добавленного в список " +
-		//		"объекта не было подписано на обработчик");
+		[Test(Description = "Позитивный тест метода ChangeConnection")]
+		public void ChangeConnection()
+		{
+			// arrenge
+			SerialConnection serialConnection = new SerialConnection();
 
-		//	serialConnection[3].RemoveNode();
-		//}
+			Capacitor capacitor = new Capacitor(0.000004, 1);
+			ConnectionBase currentConnection = new SerialConnection();
+			Resistor resistor = new Resistor(1000.0, 1);
+			ParallelConnection parallelConnection = new ParallelConnection();
+			Inductor inductor = new Inductor(0.004, 1);
 
-		//[Test(Description = "Позитивный тест метода AddNode для " +
-		//	"для добавления узла типа соединение")]
-		//public void TestAddNode_AddConnection()
-		//{
-		//	// arrenge
-		//	SerialConnection serialConnection = 
-		//		(SerialConnection)InitCircuit.Circuit.Connection[3];
-		//	ConnectionBase expectedConnection = new ParallelConnection();
+			serialConnection.AddNode(capacitor);
+			serialConnection.AddNode(currentConnection);
+			currentConnection.AddNode(parallelConnection);
+			currentConnection.AddNode(resistor);
+			parallelConnection.AddNode(inductor);
 
-		//	// act
-		//	serialConnection.AddNode(expectedConnection);
-		//	ConnectionBase actualConnection = (ConnectionBase)serialConnection[3];
+			ConnectionBase newConnection = new ParallelConnection();
 
-		//	// assert
-		//	Assert.AreEqual(expectedConnection, actualConnection,
-		//		"Метод неверно добавляет узел типа соединение " +
-		//		"в список соединения");
-		//	Assert.IsFalse(actualConnection.IsValueChangedNull(),
-		//		"Событи ValueChanged добавленного в список объекта " +
-		//		"не было подписано на обработчик");
-		//	Assert.IsFalse(actualConnection.IsNodeChangedNull(),
-		//		"Событие NodeChanged добавленного в список объекта " +
-		//		"не было подписано на обработчки");
-		//	Assert.IsFalse(actualConnection.IsNodeRemovedNull(),
-		//		"Событие NodeRemoved добавленного в список объека " +
-		//		"не было подписано на обработчик");
+			// act
+			currentConnection.ChangeConnection(newConnection);
 
-		//	serialConnection[3].RemoveNode();
-		//}
+			// assert
+			HelperMethods.VerifyDelegateAttachedTo(newConnection,
+				nameof(ElementBase.ValueChanged));
+			HelperMethods.VerifyDelegateAttachedTo(newConnection,
+				nameof(ElementBase.NodeChanged));
+			HelperMethods.VerifyDelegateAttachedTo(newConnection,
+				nameof(ElementBase.NodeRemoved));
 
-		//[Test(Description = "Позитивный тест метода ChangeConnection")]
-		//public void ChangeConnection()
-		//{
-		//	// arrenge
-		//	SerialConnection serialConnection = new SerialConnection();
-		//	Resistor resistor = new Resistor(1000.0);
-		//	serialConnection.AddNode(resistor);
-		//	InitCircuit.Circuit.Connection.AddNode(serialConnection);
-		//	int expectedCircuitConnectionCount =
-		//		InitCircuit.Circuit.Connection.GetNodesCount();
-		//	ConnectionBase expectedConnection = new ParallelConnection();
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.VerifyDelegateAttachedTo(currentConnection,
+					nameof(ElementBase.ValueChanged));
+			}, "Событие ValueChanged должно быть отписано от обработчика");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.VerifyDelegateAttachedTo(currentConnection,
+					nameof(ElementBase.NodeChanged));
+			}, "Событие NodeChanged должно быть отписано от обработчика");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.VerifyDelegateAttachedTo(currentConnection,
+					nameof(ElementBase.NodeRemoved));
+			}, "Событие NodeRemoved должно быть отписано от обработчика");
+		}
 
-		//	// act
-		//	serialConnection.ChangeConnection(expectedConnection);
-		//	int actualCircuitConnectionCount =
-		//		InitCircuit.Circuit.Connection.GetNodesCount();
+		[Test(Description = "Негативный тест метода ChangeConnection")]
+		public void TestChangedConnection_IncorrectValue()
+		{
+			// arrenge
+			SerialConnection serialConnection = new SerialConnection();
+			ConnectionBase currentConnection = new ParallelConnection();
+			serialConnection.AddNode(currentConnection);
+			ConnectionBase newConnection = new ParallelConnection();
 
-		//	// assert
-		//	Assert.AreEqual(expectedCircuitConnectionCount, 
-		//		actualCircuitConnectionCount, "Количество элементов в " +
-		//		"списке родительского узла не должно меняться после " +
-		//		"замены элемента");
-		//	Assert.AreEqual(InitCircuit.Circuit.
-		//		Connection[expectedCircuitConnectionCount - 1], 
-		//		expectedConnection, "Замена узла типа соединение " +
-		//		"происходит некорректно");
+			// act
+			currentConnection.ChangeConnection(newConnection);
 
-		//	Assert.IsTrue(serialConnection.IsValueChangedNull(),
-		//		"Событие ValueChanged удаленного элемента должно быть " +
-		//		"отписано от обработчиков");
-		//	Assert.IsTrue(serialConnection.IsNodeChangedNull(),
-		//		"Событие NodeChanged удаленного элемента должно быть " +
-		//		"отписано от обработчиков");
-		//	Assert.IsTrue(serialConnection.IsNodeRemovedNull(),
-		//		"Событие NodeRemoved удаленного элемента должно быть " +
-		//		"отписано от обработчиков");
+			// assert
+			Assert.AreEqual(serialConnection[0], currentConnection, 
+				"Метод неверно обрабатывает попытку заменить " +
+				"текущее соединение на объект того же типа");
+		}
 
-		//	Assert.IsFalse(resistor.IsValueChangedNull(), "Событие ValueChanged " +
-		//		"удаленного элемента должно быть отписано от обработчиков");
-		//	Assert.IsFalse(resistor.IsNodeChangedNull(), "Событие NodeChanged " +
-		//		"удаленного элемента должно быть отписано от обработчиков");
-		//	Assert.IsFalse(resistor.IsNodeRemovedNull(), "Событие NodeRemoved " +
-		//		"удаленного элемента должно быть отписано от обработчиков");
+		[Test(Description = "Позитивный тест метода RemoveNode")]
+		public void TestRemoveNode_CorrectValue()
+		{
+			// arrenge
+			SerialConnection serialConnection = new SerialConnection();
+			ConnectionBase removedConnection = new ParallelConnection();
+			serialConnection.AddNode(removedConnection);
+			int expectedSerialConnectionNodesCount = 0;
 
-		//	Assert.IsFalse(expectedConnection.IsValueChangedNull(), 
-		//		"После добавления в цепь событие ValueChanged нового элемента " +
-		//		"должно быть подписано на событие");
-		//	Assert.IsFalse(expectedConnection.IsNodeChangedNull(),
-		//		"После добавления в цепь событие NodeChanged нового элемента " +
-		//		"должно быть подписано на событие");
-		//	Assert.IsFalse(expectedConnection.IsNodeRemovedNull(),
-		//		"После добавления в цепь событие NodeRemoved нового элемента " +
-		//		"должно быть подписано на событие");
+			// act
+			serialConnection.RemoveNode();
+			int actualSerialConnectionNodesCount = serialConnection.GetNodesCount();
 
-		//	InitCircuit.Circuit.Connection[expectedCircuitConnectionCount - 1].
-		//		RemoveNode();
-		//}
-
-		//[Test(Description = "Негативный тест метода ChangeConnection")]
-		//public void TestChangedConnection_IncorrectValue()
-		//{
-		//	// arrenge
-		//	ConnectionBase expectedConnection = InitCircuit.Circuit.Connection;
-
-		//	// act
-		//	expectedConnection.ChangeConnection(new ParallelConnection());
-
-		//	// assert
-		//	Assert.AreEqual(expectedConnection, InitCircuit.Circuit.Connection, 
-		//		"Метод не должен заменять текущий узел, если его тип " +
-		//		"совпадает с типом нового узла");
-		//}
-
-		//[Test(Description = "Позитивный тест метода RemoveNode")]
-		//public void TestRemoveNode_CorrectValue()
-		//{
-		//	// arrenge
-		//	int expectedCircuitConnectionCount = 
-		//		InitCircuit.Circuit.Connection.GetNodesCount();
-		//	SerialConnection serialConnection = new SerialConnection();
-		//	Resistor resistor = new Resistor(1000.0);
-		//	serialConnection.AddNode(resistor);
-		//	InitCircuit.Circuit.Connection.AddNode(serialConnection);
-
-		//	// act
-		//	((ConnectionBase)InitCircuit.Circuit.
-		//		Connection[expectedCircuitConnectionCount]).RemoveNode();
-		//	int actualCircuitConnectionCount = 
-		//		InitCircuit.Circuit.Connection.GetNodesCount();
-
-		//	// assert
-		//	Assert.AreEqual(expectedCircuitConnectionCount, 
-		//		actualCircuitConnectionCount, "Количество узлов в " +
-		//		"списке соединения не должно было измениться");
-			
-		//	Assert.IsTrue(resistor.IsValueChangedNull(), "Событие ValueChanged " +
-		//		"удаленного элемента должно быть отписано от обработчиков");
-		//	Assert.IsTrue(resistor.IsNodeChangedNull(), "Событие NodeChanged " +
-		//		"удаленного элемента должно быть отписано от обработчиков");
-		//	Assert.IsTrue(resistor.IsNodeRemovedNull(), "Событие NodeRemoved " +
-		//		"удаленного элемента должно быть отписано от обработчиков");
-
-		//	Assert.IsTrue(serialConnection.IsValueChangedNull(), 
-		//		"Событие ValueChanged удаленного элемента должно быть " +
-		//		"отписано от обработчиков");
-		//	Assert.IsTrue(serialConnection.IsNodeChangedNull(),
-		//		"Событие NodeChanged удаленного элемента должно быть " +
-		//		"отписано от обработчиков");
-		//	Assert.IsTrue(serialConnection.IsNodeRemovedNull(),
-		//		"Событие NodeRemoved удаленного элемента должно быть " +
-		//		"отписано от обработчиков");
-		//}
+			// assert
+			Assert.AreEqual(expectedSerialConnectionNodesCount, 
+				actualSerialConnectionNodesCount, "Метод некорректно выполняет " +
+				"удаление соединения из списка родительского узла");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.VerifyDelegateAttachedTo(removedConnection,
+					nameof(ElementBase.ValueChanged));
+			}, "Событие ValueChanged должно быть отписано от обработчика");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.VerifyDelegateAttachedTo(removedConnection,
+					nameof(ElementBase.NodeChanged));
+			}, "Событие NodeChanged должно быть отписано от обработчика");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.VerifyDelegateAttachedTo(removedConnection,
+					nameof(ElementBase.NodeRemoved));
+			}, "Событие NodeRemoved должно быть отписано от обработчика");
+		}
 	}
 }

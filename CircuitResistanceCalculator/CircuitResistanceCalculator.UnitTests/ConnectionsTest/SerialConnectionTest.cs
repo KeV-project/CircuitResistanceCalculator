@@ -11,24 +11,31 @@ namespace CircuitResistanceCalculator.UnitTests
 	[TestFixture]
 	class SerialConnectionTest
 	{
-		//[Test(Description = "Позитивный тест метода CalculateZ")]
-		//public void TestCalculateZ_CorrectValue()
-		//{
-		//	// arrenge
-		//	SerialConnection serialConnection = 
-		//		(SerialConnection)InitCircuit.Circuit.Connection[3];
+		[Test(Description = "Позитивный тест метода CalculateZ")]
+		public void TestCalculateZ_CorrectValue()
+		{
+			// arrenge
+			SerialConnection serialConnection = new SerialConnection();
 
-		//	double frequency = 50.0;
-		//	Complex expectedZ = new Complex(1000, -9.376);
+			Resistor resistor = new Resistor(1000.0, 1);
+			Inductor inductor = new Inductor(0.016, 1);
+			Capacitor capacitor = new Capacitor(0.00022116, 1);
 
-		//	// act
-		//	Complex actualZ = serialConnection.CalculateZ(frequency);
+			serialConnection.AddNode(resistor);
+			serialConnection.AddNode(inductor);
+			serialConnection.AddNode(capacitor);
 
-		//	// assert
-		//	Assert.AreEqual(expectedZ, actualZ, "Метод неверно " +
-		//		"рассчитывает комплексное сопротивление " +
-		//		"последовательно цепи");
+			double frequency = 50.0;
+			Complex expectedZ = new Complex(1000, -9.376);
 
-		//}
+			// act
+			Complex actualZ = serialConnection.CalculateZ(frequency);
+
+			// assert
+			Assert.AreEqual(expectedZ, actualZ, "Метод неверно " +
+				"рассчитывает комплексное сопротивление " +
+				"последовательно цепи");
+
+		}
 	}
 }
