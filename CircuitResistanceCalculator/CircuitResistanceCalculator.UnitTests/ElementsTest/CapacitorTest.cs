@@ -8,26 +8,22 @@ using System.Numerics;
 
 namespace CircuitResistanceCalculator.UnitTests
 {
-    [TestFixture]
-    public class ResistorTest
-    {
-        [Test(Description = "Позитивный тест конструктора Resistor")]
+	[TestFixture]
+	class CapacitorTest
+    { 
+        [Test(Description = "Позитивный тест конструктора Capacitor")]
         public void TestConstructor_CorrectValue()
         {
             // arrange
-            int expectedId = 2;
             int expectedIndex = 1;
-            double expectedValue = 2000.0;
+            double expectedValue = 0.00022116;
 
             // act
-            Resistor resistor = (Resistor)InitCircuit.Circuit.Connection[0];
-            int actualId = resistor.Id;
-            int actualIndex = resistor.Index;
-            double actualValue = resistor.Value;
+            Capacitor capacitor = new Capacitor(expectedValue, expectedIndex);
+            int actualIndex = capacitor.Index;
+            double actualValue = capacitor.Value;
 
             // assert
-            Assert.AreEqual(expectedId, actualId, "Конструктор неверно " +
-                "инициализирует свойство Id");
             Assert.AreEqual(expectedIndex, actualIndex, "Конструктор неверно " +
                 "инициализирует свойство Index");
             Assert.AreEqual(expectedValue, actualValue, "Конструктор неверно " +
@@ -36,18 +32,18 @@ namespace CircuitResistanceCalculator.UnitTests
 
         [Test(Description = "Позитивный тест метода CalculateZ")]
         public void TestCalculateZ_CorrectValue()
-		{
+        {
             // arrenge
-            Resistor resistor = (Resistor)InitCircuit.Circuit.Connection[0];
-            Complex expectedZ = new Complex(2000.0, 0);
+            Capacitor capacitor = new Capacitor(0.00022116, 1) ;
+            Complex expectedZ = new Complex(0, -14.4);
 
             // act
             double frequency = 50;
-            Complex actualZ = resistor.CalculateZ(frequency);
+            Complex actualZ = capacitor.CalculateZ(frequency);
 
             // assert
             Assert.AreEqual(expectedZ, actualZ, "Метод неверно " +
-                "рассчитывает комплексное сопротивление резистора");
-		}
+                "рассчитывает комплексное сопротивление конденсатора");
+        }
     }
 }

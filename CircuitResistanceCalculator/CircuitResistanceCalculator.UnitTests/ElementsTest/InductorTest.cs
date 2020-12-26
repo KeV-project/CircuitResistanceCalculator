@@ -8,26 +8,22 @@ using System.Numerics;
 
 namespace CircuitResistanceCalculator.UnitTests
 {
-	[TestFixture]
-	class CapacitorTest
-    { 
-        [Test(Description = "Позитивный тест конструктора Capacitor")]
+    [TestFixture]
+    class InductorTest
+	{
+        [Test(Description = "Позитивный тест конструктора Indector")]
         public void TestConstructor_CorrectValue()
         {
             // arrange
-            int expectedId = 4;
             int expectedIndex = 1;
-            double expectedValue = 0.00022116;
+            double expectedValue = 0.016;
 
             // act
-            Capacitor capacitor = (Capacitor)InitCircuit.Circuit.Connection[2];
-            int actualId = capacitor.Id;
-            int actualIndex = capacitor.Index;
-            double actualValue = capacitor.Value;
+            Inductor inductor = new Inductor(expectedValue, expectedIndex);
+            int actualIndex = inductor.Index;
+            double actualValue = inductor.Value;
 
             // assert
-            Assert.AreEqual(expectedId, actualId, "Конструктор неверно " +
-                "инициализирует свойство Id");
             Assert.AreEqual(expectedIndex, actualIndex, "Конструктор неверно " +
                 "инициализирует свойство Index");
             Assert.AreEqual(expectedValue, actualValue, "Конструктор неверно " +
@@ -38,16 +34,16 @@ namespace CircuitResistanceCalculator.UnitTests
         public void TestCalculateZ_CorrectValue()
         {
             // arrenge
-            Capacitor capacitor = (Capacitor)InitCircuit.Circuit.Connection[2];
-            Complex expectedZ = new Complex(0, -14.4);
+            Inductor inductor = new Inductor(0.016, 1);
+            Complex expectedZ = new Complex(0, 5.024);
 
             // act
             double frequency = 50;
-            Complex actualZ = capacitor.CalculateZ(frequency);
+            Complex actualZ = inductor.CalculateZ(frequency);
 
             // assert
             Assert.AreEqual(expectedZ, actualZ, "Метод неверно " +
-                "рассчитывает комплексное сопротивление конденсатора");
+                "рассчитывает комплексное сопротивление индуктора");
         }
     }
 }

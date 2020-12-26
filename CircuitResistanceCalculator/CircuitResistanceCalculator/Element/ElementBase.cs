@@ -71,10 +71,10 @@ namespace CircuitResistanceCalculator
 		/// класса <see cref="ElementBase">
 		/// </summary>
 		/// <param name="value"></param>
-		public ElementBase(double value) : base()
+		protected ElementBase(double value, int index) : base()
 		{
-			Index = 0;
 			Value = value;
+			Index = index;
 		}
 
 		/// <summary>
@@ -113,7 +113,6 @@ namespace CircuitResistanceCalculator
 		public override void RemoveNode()
 		{
 			NodeRemoved?.Invoke(this, EventArgs.Empty);
-			IndexGenerator.RemoveElement(this);
 		}
 
 		/// <summary>
@@ -122,38 +121,5 @@ namespace CircuitResistanceCalculator
 		/// перерасчета цепи.
 		/// </summary>
 		public override event EventHandler<EventArgs> NodeRemoved;
-
-		/// <summary>
-		/// Метод предназначен для проверки подписки события
-		/// <see cref="ValueChanged"> на обработчик 
-		/// </summary>
-		/// <returns>true, если событие не подписано на обработчик,
-		/// false - если событие подписано на обработчик</returns>
-		public bool IsValueChangedNull()
-		{
-			return ValueChanged == null;
-		}
-
-		/// <summary>
-		/// Метод предназначен для проверки подписки события
-		/// <see cref="NodeChanged"> на обработчик 
-		/// </summary>
-		/// <returns>true, если событие не подписано на обработчик,
-		/// false - если событие подписано на обработчик</returns>
-		public bool IsNodeChangedNull()
-		{
-			return NodeChanged == null;
-		}
-
-		/// <summary>
-		/// Метод предназначен для проверки подписки события
-		/// <see cref="NodeRemoved"> на обработчик 
-		/// </summary>
-		/// <returns>true, если событие не подписано на обработчик,
-		/// false - если событие подписано на обработчик</returns>
-		public bool IsNodeRemovedNull()
-		{
-			return NodeRemoved == null;
-		}
 	}
 }

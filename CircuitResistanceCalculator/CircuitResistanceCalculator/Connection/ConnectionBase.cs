@@ -31,7 +31,7 @@ namespace CircuitResistanceCalculator
 		/// Инициализирует общие свойства наследников 
 		/// класса <see cref="ConnectionBase">
 		/// </summary>
-		public ConnectionBase()
+		protected ConnectionBase()
 		{
 			Nodes = new List<NodeBase>();
 		}
@@ -50,12 +50,7 @@ namespace CircuitResistanceCalculator
 		/// </summary>
 		/// <param name="node">Новый узел</param>
 		public void AddNode(NodeBase node)
-		{
-			if(node is ElementBase)
-			{
-				IndexGenerator.SetIndex((ElementBase)node);
-			}
-			
+		{ 
 			node.ValueChanged += ChangeValue;
 			node.NodeChanged += ReplaceNode;
 			node.NodeRemoved += RemoveNode;
@@ -160,39 +155,5 @@ namespace CircuitResistanceCalculator
 		/// Событие, возникающее при попытке удалить узел из цепи
 		/// </summary>
 		public override event EventHandler<EventArgs> NodeRemoved;
-
-
-		/// <summary>
-		/// Метод предназначен для проверки подписки события
-		/// <see cref="ValueChanged"> на обработчик 
-		/// </summary>
-		/// <returns>true, если событие не подписано на обработчик,
-		/// false - если событие подписано на обработчик</returns>
-		public bool IsValueChangedNull()
-		{
-			return ValueChanged == null;
-		}
-
-		/// <summary>
-		/// Метод предназначен для проверки подписки события
-		/// <see cref="NodeChanged"> на обработчик 
-		/// </summary>
-		/// <returns>true, если событие не подписано на обработчик,
-		/// false - если событие подписано на обработчик</returns>
-		public bool IsNodeChangedNull()
-		{
-			return NodeChanged == null;
-		}
-
-		/// <summary>
-		/// Метод предназначен для проверки подписки события
-		/// <see cref="NodeRemoved"> на обработчик 
-		/// </summary>
-		/// <returns>true, если событие не подписано на обработчик,
-		/// false - если событие подписано на обработчик</returns>
-		public bool IsNodeRemovedNull()
-		{
-			return NodeRemoved == null;
-		}
 	}
 }
