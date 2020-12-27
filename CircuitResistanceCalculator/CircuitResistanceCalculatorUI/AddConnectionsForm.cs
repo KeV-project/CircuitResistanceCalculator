@@ -13,7 +13,6 @@ namespace CircuitResistanceCalculatorUI
 { 
 	public partial class AddConnectionsForm : Form
 	{
-		public ConnectionBase Connection { get; private set; }
 		public AddConnectionsForm()
 		{
 			InitializeComponent();
@@ -21,15 +20,7 @@ namespace CircuitResistanceCalculatorUI
 
 		private void OkButton_Click(object sender, EventArgs e)
 		{
-			if (ParallelRadioButton.Checked)
-			{
-				Connection = new CircuitResistanceCalculator.ParallelConnection();
-			}
-			else if (SerialRadioButton.Checked)
-			{
-				Connection = new SerialConnection();
-			}
-			DialogResult = DialogResult.OK;
+			
 		}
 	}
 }
