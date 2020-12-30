@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
+//TODO: Если класс вложен в папку, namespace долен быть составным
 namespace CircuitResistanceCalculator
 {
+	//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 	/// <summary>
 	/// Класс <see cref="Capacitor"> предназначен для 
 	/// представления емкостного элемента 
@@ -14,9 +16,11 @@ namespace CircuitResistanceCalculator
 	/// </summary>
 	public class Capacitor : ElementBase
 	{
+		//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 		/// <summary>
 		/// Инициализирует объект класса <see cref="Capacitor">
 		/// </summary>
+		/// TODO: XML комментарии стоят не для всех аргументов
 		/// <param name="value">Номинал элемента</param>
 		public Capacitor(double value, int index) : base(value, index)
 		{
@@ -32,6 +36,7 @@ namespace CircuitResistanceCalculator
 		{
 			Complex capacitorZ = new Complex(0, -1) * 1 / 
 				(2 * Math.Round(Math.PI, 2) * frequency * Value);
+            //TODO: Округление на нижнем уровне - плохая практика, т.к. это приведёт к потери точности.
 			return new Complex(Math.Round(capacitorZ.Real, 3), 
 				Math.Round(capacitorZ.Imaginary, 3));
 		}

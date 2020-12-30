@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//TODO: Если класс вложен в папку, namespace долен быть составным
 namespace CircuitResistanceCalculator
 {
+	//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 	/// <summary>
 	/// Класс <see cref="ElementBase"> представляет базовый 
 	/// функционал для пассивных элементов
@@ -66,10 +68,12 @@ namespace CircuitResistanceCalculator
 			}
 		}
 
+		//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
 		/// класса <see cref="ElementBase">
 		/// </summary>
+		/// //TODO: XML комментарии стоят не для всех аргументов
 		/// <param name="value"></param>
 		protected ElementBase(double value, int index) : base()
 		{

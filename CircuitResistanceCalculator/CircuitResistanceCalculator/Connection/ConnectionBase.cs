@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//TODO: Правильнее тогда Connection.CircuitResistanceCalculator в качестве namespace
+//TODO: Проблема есть практически в каждом классе, который вложен в папку.
+//TODO: Если класс вложен в папку, namespace долен быть составным
 namespace CircuitResistanceCalculator
 {
 	/// <summary>
@@ -12,6 +15,7 @@ namespace CircuitResistanceCalculator
 	/// </summary>
 	public abstract class ConnectionBase : NodeBase
 	{
+		//TODO: set можно убрать, т.к. используется только внутри
 		/// <summary>
 		/// Сожержит список узлов подцепи, представляющих 
 		/// элементы или тип их соединения
@@ -27,6 +31,7 @@ namespace CircuitResistanceCalculator
 		/// <returns>Возвращает узел по указанному индексу</returns>
 		public NodeBase this[int index] => Nodes[index];
 
+		//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
 		/// класса <see cref="ConnectionBase">
@@ -36,6 +41,7 @@ namespace CircuitResistanceCalculator
 			Nodes = new List<NodeBase>();
 		}
 
+		//TODO: В свойство вместо метода
 		/// <summary>
 		/// Возвращает количество узлов в списке соединения
 		/// </summary>
@@ -69,6 +75,7 @@ namespace CircuitResistanceCalculator
 			ValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 
+		//TODO: Т.к. тут нет такого свойства - тегу не к чему привязаться
 		/// <summary>
 		/// Событие, возникающее при изменении свойства 
 		/// <see cref="Value"> какого-либо элемента списка
@@ -92,6 +99,8 @@ namespace CircuitResistanceCalculator
 			}
 		}
 
+		//TODO: В комментарии неверная информация, т.к. это просто событие, обработчик в котором может вызвать всё что угодно т.к. 
+		//TODO: событие публичное
 		/// <summary>
 		/// Вызывает метод <see cref="ReplaceNode(object, ChangeNodeArgs)"> 
 		/// родительского объекта для замены выбранного узла в списке

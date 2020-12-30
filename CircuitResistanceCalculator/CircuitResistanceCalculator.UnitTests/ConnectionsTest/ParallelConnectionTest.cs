@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Numerics;
 
+//TODO: Если класс вложен в папку, namespace долен быть составным
 namespace CircuitResistanceCalculator.UnitTests
 {
 	[TestFixture]

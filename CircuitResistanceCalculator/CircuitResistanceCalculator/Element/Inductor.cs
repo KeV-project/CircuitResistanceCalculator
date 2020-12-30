@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
+//TODO: Если класс вложен в папку, namespace долен быть составным
 namespace CircuitResistanceCalculator
 {
 	/// <summary>
+	/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 	/// Класс <see cref="Inductor"> предназначен для 
 	/// представления индуктивного элемента 
 	/// электрической цепи
@@ -15,8 +17,10 @@ namespace CircuitResistanceCalculator
 	public class Inductor : ElementBase
 	{
 		/// <summary>
+		/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 		/// Инициализирует объект класса <see cref="Inductor">
 		/// </summary>
+		/// //TODO: XML комментарии стоят не для всех аргументов
 		/// <param name="value">Номинал элемента</param>
 		public Inductor(double value, int index) : base(value, index)
 		{
@@ -33,6 +37,7 @@ namespace CircuitResistanceCalculator
 		{
 			Complex inductorZ = new Complex(0, 1) * 2 * Math.Round(Math.PI, 2) 
 				* frequency * Value;
+			//TODO: Округление на нижнем уровне - плохая практика, т.к. это приведёт к потери точности.
 			return new Complex(Math.Round(inductorZ.Real, 3),
 				Math.Round(inductorZ.Imaginary, 3));
 		}

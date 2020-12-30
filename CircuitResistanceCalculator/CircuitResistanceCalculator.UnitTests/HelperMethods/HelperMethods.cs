@@ -10,6 +10,7 @@ namespace CircuitResistanceCalculator.UnitTests
 {
 	public static class HelperMethods
 	{
+		//TODO: XML комментарии?
 		public static void VerifyDelegateAttachedTo(object node,
 			string eventName)
 		{
@@ -26,6 +27,7 @@ namespace CircuitResistanceCalculator.UnitTests
 			if (handler == null)
 			{
 				throw new ArgumentNullException("Событие " + eventName +
+												//TODO: Опечатка
 					" должно быть подвисано на обработчк");
 			}
 		}

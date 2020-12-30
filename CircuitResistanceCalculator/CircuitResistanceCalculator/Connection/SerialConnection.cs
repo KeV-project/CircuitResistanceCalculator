@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
+//TODO: Если класс вложен в папку, namespace долен быть составным
 namespace CircuitResistanceCalculator
 {
+	//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 	/// <summary>
 	/// Класс <see cref="SerialConnection"> представляет узел цепи,
 	/// организующий последовательное соединение элементов
@@ -26,7 +28,7 @@ namespace CircuitResistanceCalculator
 			{
 				circuitResistance += this[i].CalculateZ(frequency);
 			}
-			
+			//TODO: Округление на нижнем уровне - плохая практика, т.к. это приведёт к потери точности.
 			return new Complex(Math.Round(circuitResistance.Real,  3), 
 				Math.Round(circuitResistance.Imaginary, 3));
 		}

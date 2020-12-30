@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Numerics;
 
+//TODO: Если класс вложен в папку, namespace долен быть составным
 namespace CircuitResistanceCalculator.UnitTests
 {
 	[TestFixture]
@@ -14,6 +15,9 @@ namespace CircuitResistanceCalculator.UnitTests
 		[Test(Description = "Позитивный тест геттера индексатора Nodes")]
 		public void TestIndexerGet_CorrectValue()
 		{
+			//TODO: Это уже мой косяк, когда я объяснял. В процессе работы с тестами выяснилось, что мы на внутреннем семинаре приняли формате не ААА, а
+			//TODO: SAA, где S - это Setup, т.е. Setup понятнее чем Arrange. Тут можете не исправлять, а дальше, когда будете писать тесты - пожалуйста
+			//TODO: придерживайтесь SAA
 			// arrenge
 			SerialConnection serialConnection = new SerialConnection();
 			ElementBase expectedElement = new Resistor(5000.0, 1);
