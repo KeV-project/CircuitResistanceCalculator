@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Connections
 {
-    //TODO: Не закрыт тег <see... должно быть <see cref=".."/>
+    //TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 	/// <summary>
-	/// Класс <see cref="ParallelConnection"> представляет узел цепи,
+	/// Класс <see cref="ParallelConnection"/> представляет узел цепи,
 	/// организующий параллельное соединение элементов
 	/// </summary>
 	public class ParallelConnection : ConnectionBase

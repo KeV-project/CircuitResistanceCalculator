@@ -8,9 +8,9 @@ using System.Numerics;
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Connections
 {
-	//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
+	//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 	/// <summary>
-	/// Класс <see cref="SerialConnection"> представляет узел цепи,
+	/// Класс <see cref="SerialConnection"/> представляет узел цепи,
 	/// организующий последовательное соединение элементов
 	/// </summary>
 	public class SerialConnection : ConnectionBase

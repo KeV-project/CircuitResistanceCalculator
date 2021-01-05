@@ -9,16 +9,16 @@ using System.Numerics;
 namespace CircuitResistanceCalculator.Elements
 {
 	/// <summary>
-	/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/>
-	/// Класс <see cref="Inductor"> предназначен для 
+	/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
+	/// Класс <see cref="Inductor"/> предназначен для 
 	/// представления индуктивного элемента 
 	/// электрической цепи
 	/// </summary>
 	public class Inductor : ElementBase
 	{
 		/// <summary>
-		/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/>
-		/// Инициализирует объект класса <see cref="Inductor">
+		/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
+		/// Инициализирует объект класса <see cref="Inductor"/>
 		/// </summary>
 		/// //TODO: XML комментарии стоят не для всех аргументов
 		/// <param name="value">Номинал элемента</param>

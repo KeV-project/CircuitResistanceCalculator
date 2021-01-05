@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace CircuitResistanceCalculator.Connections
 {
 	/// <summary>
-	/// Класс <see cref="ConnectionBase"> предоставляет общий 
+	/// Класс <see cref="ConnectionBase"/> предоставляет общий 
 	/// функционал узелов дерева, определяющих тип соединения элементов
 	/// </summary>
 	public abstract class ConnectionBase : Node.NodeBase
@@ -31,10 +31,10 @@ namespace CircuitResistanceCalculator.Connections
 		/// <returns>Возвращает узел по указанному индексу</returns>
 		public Node.NodeBase this[int index] => Nodes[index];
 
-		//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
+		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
-		/// класса <see cref="ConnectionBase">
+		/// класса <see cref="ConnectionBase"/>
 		/// </summary>
 		protected ConnectionBase()
 		{
@@ -75,10 +75,10 @@ namespace CircuitResistanceCalculator.Connections
 			ValueChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		//TODO: Т.к. тут нет такого свойства - тегу не к чему привязаться
+		//TODO: Т.к. тут нет такого свойства - тегу не к чему привязаться +
 		/// <summary>
 		/// Событие, возникающее при изменении свойства 
-		/// <see cref="Value"> какого-либо элемента списка
+		/// value какого-либо элемента списка
 		/// </summary>
 		public override event EventHandler<EventArgs> ValueChanged;
 
@@ -102,7 +102,7 @@ namespace CircuitResistanceCalculator.Connections
 		//TODO: В комментарии неверная информация, т.к. это просто событие, обработчик в котором может вызвать всё что угодно т.к. 
 		//TODO: событие публичное
 		/// <summary>
-		/// Вызывает метод <see cref="ReplaceNode(object, ChangeNodeArgs)"> 
+		/// Вызывает метод <see cref="ReplaceNode(object, ChangeNodeArgs)"/> 
 		/// родительского объекта для замены выбранного узла в списке
 		/// </summary>
 		public override event EventHandler<Node.ChangeNodeArgs> NodeChanged;

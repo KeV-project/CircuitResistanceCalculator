@@ -8,17 +8,17 @@ using System.Numerics;
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Elements
 {
-	//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
+	//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 	/// <summary>
-	/// Класс <see cref="Capacitor"> предназначен для 
+	/// Класс <see cref="Capacitor"/> предназначен для 
 	/// представления емкостного элемента 
 	/// электрической цепи
 	/// </summary>
 	public class Capacitor : ElementBase
 	{
-		//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
+		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
-		/// Инициализирует объект класса <see cref="Capacitor">
+		/// Инициализирует объект класса <see cref="Capacitor"/>
 		/// </summary>
 		/// TODO: XML комментарии стоят не для всех аргументов
 		/// <param name="value">Номинал элемента</param>

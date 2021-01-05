@@ -9,16 +9,16 @@ using System.Numerics;
 namespace CircuitResistanceCalculator.Elements
 {
 	/// <summary>
-	/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/>
-	/// Класс <see cref="Resistor"> предназначен для 
+	/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
+	/// Класс <see cref="Resistor"/> предназначен для 
 	/// представления резистивного элемента 
 	/// электрической цепи
 	/// </summary>
 	public class Resistor : ElementBase
 	{
 		/// <summary>
-		/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/>
-		/// Инициализирует объект класса <see cref="Resistor">
+		/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
+		/// Инициализирует объект класса <see cref="Resistor"/>
 		/// </summary>
 		/// //TODO: XML комментарии стоят не для всех аргументов
 		/// <param name="value">Номинал элемента</param>
