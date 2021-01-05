@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
-namespace CircuitResistanceCalculator
+//TODO: Если класс вложен в папку, namespace долен быть составным +
+namespace CircuitResistanceCalculator.Node
 {
 	//TODO: Тут и много где ещё не закрываете тег <see... должно быть <see cref=".."/>
 	/// <summary>

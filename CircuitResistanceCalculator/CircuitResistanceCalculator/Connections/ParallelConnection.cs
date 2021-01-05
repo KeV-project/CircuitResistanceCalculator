@@ -5,8 +5,8 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Если класс вложен в папку, namespace долен быть составным
-namespace CircuitResistanceCalculator
+//TODO: Если класс вложен в папку, namespace долен быть составным +
+namespace CircuitResistanceCalculator.Connections
 {
     //TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 	/// <summary>

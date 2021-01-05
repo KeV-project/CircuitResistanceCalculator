@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Если класс вложен в папку, namespace долен быть составным
-namespace CircuitResistanceCalculator
+//TODO: Если класс вложен в папку, namespace долен быть составным +
+namespace CircuitResistanceCalculator.Elements
 {
 	//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 	/// <summary>
@@ -13,7 +13,7 @@ namespace CircuitResistanceCalculator
 	/// функционал для пассивных элементов
 	/// электрической цепи
 	/// </summary>
-	public abstract class ElementBase : NodeBase
+	public abstract class ElementBase : Node.NodeBase
 	{
 		/// <summary>
 		/// Содержит индекс элемента цепи
@@ -33,7 +33,7 @@ namespace CircuitResistanceCalculator
 			{
 				const int minIndex = 0;
 				const int maxIndex = Int32.MaxValue;
-				ValueValidator.AssertValueInRange(value, minIndex, 
+				Validators.ValueValidator.AssertValueInRange(value, minIndex, 
 					maxIndex, "индекс элемента");
 				_index = value;
 			}
@@ -57,7 +57,7 @@ namespace CircuitResistanceCalculator
 			{
 				const double minValue = 0.000000000001;
 				const double maxValue = 1000000000.0;
-				ValueValidator.AssertValueInRange(value, minValue, 
+				Validators.ValueValidator.AssertValueInRange(value, minValue, 
 					maxValue, "номинал элемента");
 
 				if (_value != value)
@@ -96,7 +96,7 @@ namespace CircuitResistanceCalculator
 		{
 			if(newElement.GetType() != this.GetType())
 			{
-				NodeChanged?.Invoke(this, new ChangeNodeArgs(newElement));
+				NodeChanged?.Invoke(this, new Node.ChangeNodeArgs(newElement));
 			}
 			else
 			{
@@ -109,7 +109,7 @@ namespace CircuitResistanceCalculator
 		/// элемент цепи. Предназначено для замены текущего 
 		/// элемента и вызова перерасчета цепи
 		/// </summary>
-		public override event EventHandler<ChangeNodeArgs> NodeChanged;
+		public override event EventHandler<Node.ChangeNodeArgs> NodeChanged;
 
 		/// <summary>
 		/// Вызывает цепочку событий для удаления текущего элемента цепи

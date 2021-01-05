@@ -49,16 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ElementsTest\CapacitorTest.cs" />
-    <Compile Include="ConnectionsTest\ConnectionBaseTest.cs" />
-    <Compile Include="ElementsTest\ElementBaseTest.cs" />
-    <Compile Include="ElementsTest\InductorTest.cs" />
-    <Compile Include="ConnectionsTest\ParallelConnectionTest.cs" />
-    <Compile Include="ElementsTest\ResistorTest.cs" />
+    <Compile Include="ElementsTests\CapacitorTest.cs" />
+    <Compile Include="ConnectionsTests\ConnectionBaseTest.cs" />
+    <Compile Include="ElementsTests\ElementBaseTest.cs" />
+    <Compile Include="ElementsTests\InductorTest.cs" />
+    <Compile Include="ConnectionsTests\ParallelConnectionTest.cs" />
+    <Compile Include="ElementsTests\ResistorTest.cs" />
     <Compile Include="HelperMethods\HelperMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConnectionsTest\SerialConnectionTest.cs" />
-    <Compile Include="ValidatorsTest\ValueValidatorTest.cs" />
+    <Compile Include="ConnectionsTests\SerialConnectionTest.cs" />
+    <Compile Include="ValidatorsTests\ValueValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

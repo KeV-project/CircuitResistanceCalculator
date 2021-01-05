@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 //TODO: Правильнее тогда Connection.CircuitResistanceCalculator в качестве namespace
 //TODO: Проблема есть практически в каждом классе, который вложен в папку.
-//TODO: Если класс вложен в папку, namespace долен быть составным
-namespace CircuitResistanceCalculator
+//TODO: Если класс вложен в папку, namespace долен быть составным +
+namespace CircuitResistanceCalculator.Connections
 {
 	/// <summary>
 	/// Класс <see cref="ConnectionBase"> предоставляет общий 
 	/// функционал узелов дерева, определяющих тип соединения элементов
 	/// </summary>
-	public abstract class ConnectionBase : NodeBase
+	public abstract class ConnectionBase : Node.NodeBase
 	{
 		//TODO: set можно убрать, т.к. используется только внутри
 		/// <summary>
 		/// Сожержит список узлов подцепи, представляющих 
 		/// элементы или тип их соединения
 		/// </summary>
-		private List<NodeBase> Nodes { get; set; }
+		private List<Node.NodeBase> Nodes { get; set; }
 
 		/// <summary>
 		/// Позволяет получить или добавить узел в список 
@@ -29,7 +29,7 @@ namespace CircuitResistanceCalculator
 		/// <param name="index">Индекс возвращаемого узла
 		/// или позиция для добавления узла в список</param>
 		/// <returns>Возвращает узел по указанному индексу</returns>
-		public NodeBase this[int index] => Nodes[index];
+		public Node.NodeBase this[int index] => Nodes[index];
 
 		//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
 		/// <summary>
@@ -38,7 +38,7 @@ namespace CircuitResistanceCalculator
 		/// </summary>
 		protected ConnectionBase()
 		{
-			Nodes = new List<NodeBase>();
+			Nodes = new List<Node.NodeBase>();
 		}
 
 		//TODO: В свойство вместо метода
@@ -55,7 +55,7 @@ namespace CircuitResistanceCalculator
 		/// Добавляет узел в подцепь
 		/// </summary>
 		/// <param name="node">Новый узел</param>
-		public void AddNode(NodeBase node)
+		public void AddNode(Node.NodeBase node)
 		{ 
 			node.ValueChanged += ChangeValue;
 			node.NodeChanged += ReplaceNode;
@@ -95,7 +95,7 @@ namespace CircuitResistanceCalculator
 				{
 					newConnection.AddNode(this[i]);
 				}
-				this.NodeChanged?.Invoke(this, new ChangeNodeArgs(newConnection));
+				this.NodeChanged?.Invoke(this, new Node.ChangeNodeArgs(newConnection));
 			}
 		}
 
@@ -105,14 +105,14 @@ namespace CircuitResistanceCalculator
 		/// Вызывает метод <see cref="ReplaceNode(object, ChangeNodeArgs)"> 
 		/// родительского объекта для замены выбранного узла в списке
 		/// </summary>
-		public override event EventHandler<ChangeNodeArgs> NodeChanged;
+		public override event EventHandler<Node.ChangeNodeArgs> NodeChanged;
 
 		/// <summary>
 		/// Заменяет выбранный узел на новый в скиске дочерних узлов
 		/// </summary>
 		/// <param name="obj">Заменяемый узел</param>
 		/// <param name="e">Хранит новый объект списка</param>
-		private void ReplaceNode(object obj, ChangeNodeArgs e)
+		private void ReplaceNode(object obj, Node.ChangeNodeArgs e)
 		{
 			int index = 0;
 			for (int i = 0; i < Nodes.Count; i++)
@@ -124,10 +124,10 @@ namespace CircuitResistanceCalculator
 				index = i + 1;
 			}
 
-			((NodeBase)obj).ValueChanged -= ChangeValue;
-			((NodeBase)obj).NodeChanged -= ReplaceNode;
-			((NodeBase)obj).NodeRemoved -= RemoveNode;
-			Nodes.Remove((NodeBase)obj);
+			((Node.NodeBase)obj).ValueChanged -= ChangeValue;
+			((Node.NodeBase)obj).NodeChanged -= ReplaceNode;
+			((Node.NodeBase)obj).NodeRemoved -= RemoveNode;
+			Nodes.Remove((Node.NodeBase)obj);
 
 			e.Node.ValueChanged += ChangeValue;
 			e.Node.NodeChanged += ReplaceNode;
@@ -154,10 +154,10 @@ namespace CircuitResistanceCalculator
 		/// <param name="e">Прочие данные</param>
 		private void RemoveNode(object obj, EventArgs e)
 		{
-			((NodeBase)obj).ValueChanged -= ChangeValue;
-			((NodeBase)obj).NodeChanged -= ReplaceNode;
-			((NodeBase)obj).NodeRemoved -= RemoveNode;
-			Nodes.Remove((NodeBase)obj);
+			((Node.NodeBase)obj).ValueChanged -= ChangeValue;
+			((Node.NodeBase)obj).NodeChanged -= ReplaceNode;
+			((Node.NodeBase)obj).NodeRemoved -= RemoveNode;
+			Nodes.Remove((Node.NodeBase)obj);
 		}
 
 		/// <summary>

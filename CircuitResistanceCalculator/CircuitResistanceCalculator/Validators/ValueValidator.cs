@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CircuitResistanceCalculator
+//TODO: Если класс вложен в папку, namespace долен быть составным +
+namespace CircuitResistanceCalculator.Validators
 {
     /// <summary>
     /// Класс <see cref="ValueValidator"/> предназначен для 
