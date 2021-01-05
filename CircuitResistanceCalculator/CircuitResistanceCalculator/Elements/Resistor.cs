@@ -20,8 +20,9 @@ namespace CircuitResistanceCalculator.Elements
 		/// //TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// Инициализирует объект класса <see cref="Resistor"/>
 		/// </summary>
-		/// //TODO: XML комментарии стоят не для всех аргументов
+		/// // TODO: XML комментарии стоят не для всех аргументов +
 		/// <param name="value">Номинал элемента</param>
+		/// <param name="index">Индекс элемента</param>
 		public Resistor(double value, int index) : base(value, index)
 		{
 
@@ -34,8 +35,8 @@ namespace CircuitResistanceCalculator.Elements
 		/// <returns></returns>
 		public override Complex CalculateZ(double frequency)
 		{
-			//TODO: Округление на нижнем уровне - плохая практика, т.к. это приведёт к потери точности.
-			return new Complex(Math.Round(Value, 3), 0);
+			//TODO: Округление на нижнем уровне - плохая практика, т.к. это приведёт к потери точности. +
+			return new Complex(Value, 0);
 		}
 	}
 }
