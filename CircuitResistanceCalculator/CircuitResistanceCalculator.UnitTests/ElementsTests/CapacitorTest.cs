@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Numerics;
 
-namespace CircuitResistanceCalculator.UnitTests
+namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 {
 	[TestFixture]
 	class CapacitorTest
@@ -19,7 +19,8 @@ namespace CircuitResistanceCalculator.UnitTests
             double expectedValue = 0.00022116;
 
             // act
-            Capacitor capacitor = new Capacitor(expectedValue, expectedIndex);
+            Elements.Capacitor capacitor = 
+                new Elements.Capacitor(expectedValue, expectedIndex);
             int actualIndex = capacitor.Index;
             double actualValue = capacitor.Value;
 
@@ -34,7 +35,8 @@ namespace CircuitResistanceCalculator.UnitTests
         public void TestCalculateZ_CorrectValue()
         {
             // arrenge
-            Capacitor capacitor = new Capacitor(0.00022116, 1) ;
+            Elements.Capacitor capacitor = 
+                new Elements.Capacitor(0.00022116, 1) ;
             Complex expectedZ = new Complex(0, -14.4);
 
             // act

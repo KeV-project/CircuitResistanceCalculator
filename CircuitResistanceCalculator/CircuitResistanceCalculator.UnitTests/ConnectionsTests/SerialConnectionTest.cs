@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Numerics;
 
-namespace CircuitResistanceCalculator.UnitTests
+namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 {
 	[TestFixture]
 	class SerialConnectionTest
@@ -15,11 +15,12 @@ namespace CircuitResistanceCalculator.UnitTests
 		public void TestCalculateZ_CorrectValue()
 		{
 			// arrenge
-			SerialConnection serialConnection = new SerialConnection();
+			Connections.SerialConnection serialConnection = 
+				new Connections.SerialConnection();
 
-			Resistor resistor = new Resistor(1000.0, 1);
-			Inductor inductor = new Inductor(0.016, 1);
-			Capacitor capacitor = new Capacitor(0.00022116, 1);
+			Elements.Resistor resistor = new Elements.Resistor(1000.0, 1);
+			Elements.Inductor inductor = new Elements.Inductor(0.016, 1);
+			Elements.Capacitor capacitor = new Elements.Capacitor(0.00022116, 1);
 
 			serialConnection.AddNode(resistor);
 			serialConnection.AddNode(inductor);

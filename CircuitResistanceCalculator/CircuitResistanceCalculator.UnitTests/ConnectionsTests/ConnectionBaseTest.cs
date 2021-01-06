@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Numerics;
 
-//TODO: Если класс вложен в папку, namespace долен быть составным
-namespace CircuitResistanceCalculator.UnitTests
+//TODO: Если класс вложен в папку, namespace долен быть составным +
+namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 {
 	[TestFixture]
 	class ConnectionBaseTest
@@ -19,12 +19,15 @@ namespace CircuitResistanceCalculator.UnitTests
 			//TODO: SAA, где S - это Setup, т.е. Setup понятнее чем Arrange. Тут можете не исправлять, а дальше, когда будете писать тесты - пожалуйста
 			//TODO: придерживайтесь SAA
 			// arrenge
-			SerialConnection serialConnection = new SerialConnection();
-			ElementBase expectedElement = new Resistor(5000.0, 1);
+			Connections.SerialConnection serialConnection = 
+				new Connections.SerialConnection();
+			Elements.ElementBase expectedElement = 
+				new Elements.Resistor(5000.0, 1);
 			serialConnection.AddNode(expectedElement);
 
 			// act
-			ElementBase actualElement = (ElementBase)serialConnection[0];
+			Elements.ElementBase actualElement = 
+				(Elements.ElementBase)serialConnection[0];
 
 			// Assert
 			Assert.AreEqual(expectedElement, actualElement,
@@ -35,13 +38,15 @@ namespace CircuitResistanceCalculator.UnitTests
 		public void GetNodesCount_CorrectValue()
 		{
 			// arrenge
-			SerialConnection serialConnection = new SerialConnection();
-			ElementBase expectedElement = new Resistor(5000.0, 1);
+			Connections.SerialConnection serialConnection = 
+				new Connections.SerialConnection();
+			Elements.ElementBase expectedElement = 
+				new Elements.Resistor(5000.0, 1);
 			serialConnection.AddNode(expectedElement);
 			int expectedNodesCount = 1;
 
 			// act
-			int actualNodesCount = serialConnection.GetNodesCount();
+			int actualNodesCount = serialConnection.NodesCount;
 
 			Assert.AreEqual(expectedNodesCount, actualNodesCount,
 				"Метод возвращает неверное количество узлов " +
@@ -52,37 +57,41 @@ namespace CircuitResistanceCalculator.UnitTests
 		public void TestAddNode_AddElement()
 		{
 			// arrenge
-			ConnectionBase connection = new SerialConnection();
-			ElementBase newElement = new Resistor(2000.0, 1);
+			Connections.ConnectionBase connection = 
+				new Connections.SerialConnection();
+			Elements.ElementBase newElement = new Elements.Resistor(2000.0, 1);
 			int expectedConnectionNodesCount = 1;
 
 			// act
 			connection.AddNode(newElement);
-			int actualConnectionNodesCount = connection.GetNodesCount();
+			int actualConnectionNodesCount = connection.NodesCount;
 
 			// assert
 			Assert.AreEqual(expectedConnectionNodesCount,
 				actualConnectionNodesCount, "Метод некорректно " +
 				"добавляет узел в список соединения");
 			HelperMethods.VerifyDelegateAttachedTo(newElement,
-				nameof(ElementBase.ValueChanged));
+				nameof(Elements.ElementBase.ValueChanged));
 			HelperMethods.VerifyDelegateAttachedTo(newElement,
-				nameof(ElementBase.NodeChanged));
+				nameof(Elements.ElementBase.NodeChanged));
 			HelperMethods.VerifyDelegateAttachedTo(newElement,
-				nameof(ElementBase.NodeRemoved));
+				nameof(Elements.ElementBase.NodeRemoved));
 		}
 
 		[Test(Description = "Позитивный тест метода ChangeConnection")]
 		public void ChangeConnection()
 		{
 			// arrenge
-			SerialConnection serialConnection = new SerialConnection();
+			Connections.SerialConnection serialConnection = 
+				new Connections.SerialConnection();
 
-			Capacitor capacitor = new Capacitor(0.000004, 1);
-			ConnectionBase currentConnection = new SerialConnection();
-			Resistor resistor = new Resistor(1000.0, 1);
-			ParallelConnection parallelConnection = new ParallelConnection();
-			Inductor inductor = new Inductor(0.004, 1);
+			Elements.Capacitor capacitor = new Elements.Capacitor(0.000004, 1);
+			Connections.ConnectionBase currentConnection = 
+				new Connections.SerialConnection();
+			Elements.Resistor resistor = new Elements.Resistor(1000.0, 1);
+			Connections.ParallelConnection parallelConnection = 
+				new Connections.ParallelConnection();
+			Elements.Inductor inductor = new Elements.Inductor(0.004, 1);
 
 			serialConnection.AddNode(capacitor);
 			serialConnection.AddNode(currentConnection);
@@ -90,33 +99,34 @@ namespace CircuitResistanceCalculator.UnitTests
 			currentConnection.AddNode(resistor);
 			parallelConnection.AddNode(inductor);
 
-			ConnectionBase newConnection = new ParallelConnection();
+			Connections.ConnectionBase newConnection = 
+				new Connections.ParallelConnection();
 
 			// act
 			currentConnection.ChangeConnection(newConnection);
 
 			// assert
 			HelperMethods.VerifyDelegateAttachedTo(newConnection,
-				nameof(ElementBase.ValueChanged));
+				nameof(Elements.ElementBase.ValueChanged));
 			HelperMethods.VerifyDelegateAttachedTo(newConnection,
-				nameof(ElementBase.NodeChanged));
+				nameof(Elements.ElementBase.NodeChanged));
 			HelperMethods.VerifyDelegateAttachedTo(newConnection,
-				nameof(ElementBase.NodeRemoved));
+				nameof(Elements.ElementBase.NodeRemoved));
 
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(currentConnection,
-					nameof(ElementBase.ValueChanged));
+					nameof(Elements.ElementBase.ValueChanged));
 			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(currentConnection,
-					nameof(ElementBase.NodeChanged));
+					nameof(Elements.ElementBase.NodeChanged));
 			}, "Событие NodeChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(currentConnection,
-					nameof(ElementBase.NodeRemoved));
+					nameof(Elements.ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 		}
 
@@ -124,10 +134,13 @@ namespace CircuitResistanceCalculator.UnitTests
 		public void TestChangedConnection_IncorrectValue()
 		{
 			// arrenge
-			SerialConnection serialConnection = new SerialConnection();
-			ConnectionBase currentConnection = new ParallelConnection();
+			Connections.SerialConnection serialConnection = 
+				new Connections.SerialConnection();
+			Connections.ConnectionBase currentConnection = 
+				new Connections.ParallelConnection();
 			serialConnection.AddNode(currentConnection);
-			ConnectionBase newConnection = new ParallelConnection();
+			Connections.ConnectionBase newConnection = 
+				new Connections.ParallelConnection();
 
 			// act
 			currentConnection.ChangeConnection(newConnection);
@@ -142,14 +155,16 @@ namespace CircuitResistanceCalculator.UnitTests
 		public void TestRemoveNode_CorrectValue()
 		{
 			// arrenge
-			SerialConnection serialConnection = new SerialConnection();
-			ConnectionBase removedConnection = new ParallelConnection();
+			Connections.SerialConnection serialConnection = 
+				new Connections.SerialConnection();
+			Connections.ConnectionBase removedConnection = 
+				new Connections.ParallelConnection();
 			serialConnection.AddNode(removedConnection);
 			int expectedSerialConnectionNodesCount = 0;
 
 			// act
 			serialConnection.RemoveNode();
-			int actualSerialConnectionNodesCount = serialConnection.GetNodesCount();
+			int actualSerialConnectionNodesCount = serialConnection.NodesCount;
 
 			// assert
 			Assert.AreEqual(expectedSerialConnectionNodesCount, 
@@ -158,17 +173,17 @@ namespace CircuitResistanceCalculator.UnitTests
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(removedConnection,
-					nameof(ElementBase.ValueChanged));
+					nameof(Elements.ElementBase.ValueChanged));
 			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(removedConnection,
-					nameof(ElementBase.NodeChanged));
+					nameof(Elements.ElementBase.NodeChanged));
 			}, "Событие NodeChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(removedConnection,
-					nameof(ElementBase.NodeRemoved));
+					nameof(Elements.ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 		}
 	}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 
 
-namespace CircuitResistanceCalculator.UnitTests
+namespace CircuitResistanceCalculator.UnitTests.HelperMethods
 {
 	public static class HelperMethods
 	{
@@ -27,8 +27,8 @@ namespace CircuitResistanceCalculator.UnitTests
 			if (handler == null)
 			{
 				throw new ArgumentNullException("Событие " + eventName +
-												//TODO: Опечатка
-					" должно быть подвисано на обработчк");
+				//TODO: Опечатка +
+					" должно быть подписано на обработчик");
 			}
 		}
 	}

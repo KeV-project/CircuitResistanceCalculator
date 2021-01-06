@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Numerics;
 
-namespace CircuitResistanceCalculator.UnitTests
+namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 {
     [TestFixture]
     class InductorTest
@@ -19,7 +19,8 @@ namespace CircuitResistanceCalculator.UnitTests
             double expectedValue = 0.016;
 
             // act
-            Inductor inductor = new Inductor(expectedValue, expectedIndex);
+            Elements.Inductor inductor = 
+                new Elements.Inductor(expectedValue, expectedIndex);
             int actualIndex = inductor.Index;
             double actualValue = inductor.Value;
 
@@ -34,7 +35,8 @@ namespace CircuitResistanceCalculator.UnitTests
         public void TestCalculateZ_CorrectValue()
         {
             // arrenge
-            Inductor inductor = new Inductor(0.016, 1);
+            Elements.Inductor inductor = 
+                new Elements.Inductor(0.016, 1);
             Complex expectedZ = new Complex(0, 5.024);
 
             // act

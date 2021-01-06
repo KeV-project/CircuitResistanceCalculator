@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace CircuitResistanceCalculator.UnitTests
+namespace CircuitResistanceCalculator.UnitTests.ValidatorsTests
 {
 	[TestFixture]
 	class ValueValidatorTest
@@ -20,7 +20,7 @@ namespace CircuitResistanceCalculator.UnitTests
 			var context = "экспериментальное значение";
 
 			// act
-			ValueValidator.AssertValueInRange(value, minLimit,
+			Validators.ValueValidator.AssertValueInRange(value, minLimit,
 			  maxLimit, context);
 		}
 
@@ -36,7 +36,7 @@ namespace CircuitResistanceCalculator.UnitTests
 			// assert
 			Assert.Throws<ArgumentException>(() =>
 			{
-				ValueValidator.AssertValueInRange(wrongValue, minLimit,
+				Validators.ValueValidator.AssertValueInRange(wrongValue, minLimit,
 					maxLimit, context);
 			}, "Должно возникать искючение, " +
 			"если проверяемое число не входит в допустимый диапазон");
@@ -52,7 +52,7 @@ namespace CircuitResistanceCalculator.UnitTests
 			var context = "экспериментальное значение";
 
 			// arrest
-			ValueValidator.AssertLengthInRange(value,
+			Validators.ValueValidator.AssertLengthInRange(value,
 					minLimit, maxLimit, context);
 		}
 
@@ -68,7 +68,7 @@ namespace CircuitResistanceCalculator.UnitTests
 			// arrest
 			Assert.Throws<ArgumentException>(() =>
 			{
-				ValueValidator.AssertLengthInRange(wrongValue,
+				Validators.ValueValidator.AssertLengthInRange(wrongValue,
 					minLimit, maxLimit, context);
 			}, "Должно возникать искючение, если количество символов " +
 			"в проверяемой строке не входит в допустимый диапазон");

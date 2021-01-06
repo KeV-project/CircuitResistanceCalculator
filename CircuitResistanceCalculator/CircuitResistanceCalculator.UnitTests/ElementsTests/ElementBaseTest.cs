@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Numerics;
 
-namespace CircuitResistanceCalculator.UnitTests
+namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 {
 	[TestFixture]
 	class ElementBaseTest
@@ -16,9 +16,9 @@ namespace CircuitResistanceCalculator.UnitTests
 		{
 			// arrange
 			int expectedIndex = 1;
-			Resistor resistor = new Resistor(2000, expectedIndex);
+			Elements.Resistor resistor = 
+				new Elements.Resistor(2000, expectedIndex);
 			
-
 			// act
 			int actualIndex = resistor.Index;
 
@@ -36,7 +36,8 @@ namespace CircuitResistanceCalculator.UnitTests
 			// assert
 			Assert.Throws<ArgumentException>(() =>
 			{
-				Resistor resistor = new Resistor(2000.0, inCorrectIndex);
+				Elements.Resistor resistor = 
+				new Elements.Resistor(2000.0, inCorrectIndex);
 			}, "Должно возникать исключение если новый индек элемента " +
 			"не входит в диапазон [0, 2147483647]");
 		}
@@ -46,7 +47,8 @@ namespace CircuitResistanceCalculator.UnitTests
 		{
 			// arrange
 			double expectedValue = 2000.0;
-			Resistor resistor = new Resistor(expectedValue, 1);
+			Elements.Resistor resistor = 
+				new Elements.Resistor(expectedValue, 1);
 			
 
 			// act
@@ -61,36 +63,39 @@ namespace CircuitResistanceCalculator.UnitTests
 		public void TestChangeElement_CorrectValue()
 		{
 			// arrange
-			SerialConnection serialConnection = new SerialConnection();
-			ElementBase currentElement = new Resistor(2000.0, 1);
+			Connections.SerialConnection serialConnection = 
+				new Connections.SerialConnection();
+			Elements.ElementBase currentElement = 
+				new Elements.Resistor(2000.0, 1);
 			serialConnection.AddNode(currentElement);
-			ElementBase newElement = new Inductor(0.005, 1);
+			Elements.ElementBase newElement = 
+				new Elements.Inductor(0.005, 1);
 
 			// act
 			currentElement.ChangeElement(newElement);
 
 			// assert
 			HelperMethods.VerifyDelegateAttachedTo(newElement, 
-				nameof(ElementBase.ValueChanged));
+				nameof(Elements.ElementBase.ValueChanged));
 			HelperMethods.VerifyDelegateAttachedTo(newElement, 
-				nameof(ElementBase.NodeChanged));
+				nameof(Elements.ElementBase.NodeChanged));
 			HelperMethods.VerifyDelegateAttachedTo(newElement, 
-				nameof(ElementBase.NodeRemoved));
+				nameof(Elements.ElementBase.NodeRemoved));
 
 			Assert.Throws<ArgumentNullException>(()=>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(currentElement, 
-					nameof(ElementBase.ValueChanged));
+					nameof(Elements.ElementBase.ValueChanged));
 			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(currentElement, 
-					nameof(ElementBase.NodeChanged));
+					nameof(Elements.ElementBase.NodeChanged));
 			}, "Событие NodeChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(currentElement, 
-					nameof(ElementBase.NodeRemoved));
+					nameof(Elements.ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 
 		}
@@ -99,10 +104,13 @@ namespace CircuitResistanceCalculator.UnitTests
 		public void TestChangeElement_IncorrectValue()
 		{
 			// arrenge
-			SerialConnection serialConnection = new SerialConnection();
-			ElementBase currentElement = new Resistor(1000.0, 1);
+			Connections.SerialConnection serialConnection = 
+				new Connections.SerialConnection();
+			Elements.ElementBase currentElement = 
+				new Elements.Resistor(1000.0, 1);
 			serialConnection.AddNode(currentElement);
-			ElementBase newElement = new Resistor(2000.0, 1);
+			Elements.ElementBase newElement = 
+				new Elements.Resistor(2000.0, 1);
 
 			double expectedValue = 2000.0;
 
@@ -120,8 +128,9 @@ namespace CircuitResistanceCalculator.UnitTests
 		public void TestRemoveNode_CorrectValue()
 		{
 			// arrenge
-			SerialConnection serialConnection = new SerialConnection();
-			ElementBase removedElement = new Resistor(1000.0, 1);
+			Connections.SerialConnection serialConnection = new Connections.SerialConnection();
+			Elements.ElementBase removedElement = 
+				new Elements.Resistor(1000.0, 1);
 			serialConnection.AddNode(removedElement);
 
 			int expectedSerialConnectionNodesCount = 0;
@@ -129,7 +138,7 @@ namespace CircuitResistanceCalculator.UnitTests
 			// act
 			removedElement.RemoveNode();
 
-			int actualSerialConnectionNodesCount = serialConnection.GetNodesCount();
+			int actualSerialConnectionNodesCount = serialConnection.NodesCount;
 
 			// assert
 			Assert.AreEqual(expectedSerialConnectionNodesCount, 
@@ -138,17 +147,17 @@ namespace CircuitResistanceCalculator.UnitTests
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(removedElement,
-					nameof(ElementBase.ValueChanged));
+					nameof(Elements.ElementBase.ValueChanged));
 			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(removedElement,
-					nameof(ElementBase.NodeChanged));
+					nameof(Elements.ElementBase.NodeChanged));
 			}, "Событие NodeChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.VerifyDelegateAttachedTo(removedElement,
-					nameof(ElementBase.NodeRemoved));
+					nameof(Elements.ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 		}
 	}
