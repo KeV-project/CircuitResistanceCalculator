@@ -13,7 +13,7 @@ namespace CircuitResistanceCalculatorUI
 {
 	public partial class AddElementForm : Form
 	{
-		public AddElementForm(ElementBase element)
+		public AddElementForm(/*ElementBase element*/)
 		{
 			InitializeComponent();
 

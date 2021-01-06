@@ -29,7 +29,7 @@ namespace CircuitResistanceCalculator.Elements
 		}
 
 		/// <summary>
-		/// Производит рассчет комплексного соротивления конденсатора
+		/// Производит расчет комплексного соротивления конденсатора
 		/// </summary>
 		/// <param name="frequency"> Частота сигнала</param>
 		/// <returns></returns>

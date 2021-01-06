@@ -19,7 +19,8 @@ namespace CircuitResistanceCalculator.Connections
 		/// Расчитывает общее сопротивление параллельной цепи
 		/// </summary>
 		/// <param name="frequency">Частота сигнала</param>
-		/// <returns></returns>
+		/// <returns>Общее сопротисление параллельной цепи 
+		/// в комплексной форме</returns>
 		public override Complex CalculateZ(double frequency)
 		{
 			Complex circuitResistance = new Complex(0,0);
@@ -30,9 +31,8 @@ namespace CircuitResistanceCalculator.Connections
 			}
 
 			circuitResistance = 1 / circuitResistance;
-            //TODO: Округление на нижнем уровне - плохая практика, т.к. это приведёт к потери точности.
-			return new Complex(Math.Round(circuitResistance.Real, 3),
-				Math.Round(circuitResistance.Imaginary, 3));
+            //TODO: Округление на нижнем уровне - плохая практика, т.к. это приведёт к потери точности. +
+			return new Complex(circuitResistance.Real, circuitResistance.Imaginary);
 		}
 	}
 }

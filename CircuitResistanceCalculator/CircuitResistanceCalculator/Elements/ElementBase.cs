@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Elements
 {
-	//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
+	//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 	/// <summary>
-	/// Класс <see cref="ElementBase"> представляет базовый 
+	/// Класс <see cref="ElementBase"/> представляет базовый 
 	/// функционал для пассивных элементов
 	/// электрической цепи
 	/// </summary>
@@ -68,13 +68,14 @@ namespace CircuitResistanceCalculator.Elements
 			}
 		}
 
-		//TODO: Не закрыт тег <see... должно быть <see cref=".."/>
+		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
-		/// класса <see cref="ElementBase">
+		/// класса <see cref="ElementBase"/>
 		/// </summary>
-		/// //TODO: XML комментарии стоят не для всех аргументов
-		/// <param name="value"></param>
+		/// //TODO: XML комментарии стоят не для всех аргументов +
+		/// <param name="value">Номинал элемета</param>
+		/// <param name="index">Индекс элемента</param>
 		protected ElementBase(double value, int index) : base()
 		{
 			Value = value;
@@ -83,8 +84,7 @@ namespace CircuitResistanceCalculator.Elements
 
 		/// <summary>
 		/// Событие, возникающее при изменении значения свойства 
-		/// <see cref="Value">, предназныченное для
-		/// вызова перерасчета цепи
+		/// value, предназныченное для вызова перерасчета цепи
 		/// </summary>
 		public override event EventHandler<EventArgs> ValueChanged;
 

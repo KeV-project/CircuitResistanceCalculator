@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Правильнее тогда Connection.CircuitResistanceCalculator в качестве namespace
-//TODO: Проблема есть практически в каждом классе, который вложен в папку.
+// Почему не наоборот CircuitResistanceCalculator.Connections?
+
+//TODO: Правильнее тогда Connection.CircuitResistanceCalculator в качестве namespace +
+//TODO: Проблема есть практически в каждом классе, который вложен в папку. +
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Connections
 {
@@ -15,12 +17,12 @@ namespace CircuitResistanceCalculator.Connections
 	/// </summary>
 	public abstract class ConnectionBase : Node.NodeBase
 	{
-		//TODO: set можно убрать, т.к. используется только внутри
+		//TODO: set можно убрать, т.к. используется только внутри +
 		/// <summary>
 		/// Сожержит список узлов подцепи, представляющих 
 		/// элементы или тип их соединения
 		/// </summary>
-		private List<Node.NodeBase> Nodes { get; set; }
+		private List<Node.NodeBase> Nodes { get; }
 
 		/// <summary>
 		/// Позволяет получить или добавить узел в список 
@@ -31,6 +33,19 @@ namespace CircuitResistanceCalculator.Connections
 		/// <returns>Возвращает узел по указанному индексу</returns>
 		public Node.NodeBase this[int index] => Nodes[index];
 
+		//TODO: В свойство вместо метода +
+		/// <summary>
+		/// Возвращает количество узлов в списке соединения
+		/// </summary>
+		/// <returns>Количество узлов в списке соединения</returns>
+		public int NodesCount 
+		{
+			get
+			{
+				return Nodes.Count;
+			}
+		}
+
 		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
@@ -39,16 +54,6 @@ namespace CircuitResistanceCalculator.Connections
 		protected ConnectionBase()
 		{
 			Nodes = new List<Node.NodeBase>();
-		}
-
-		//TODO: В свойство вместо метода
-		/// <summary>
-		/// Возвращает количество узлов в списке соединения
-		/// </summary>
-		/// <returns></returns>
-		public int GetNodesCount()
-		{
-			return Nodes.Count;
 		}
 
 		/// <summary>
@@ -99,11 +104,10 @@ namespace CircuitResistanceCalculator.Connections
 			}
 		}
 
-		//TODO: В комментарии неверная информация, т.к. это просто событие, обработчик в котором может вызвать всё что угодно т.к. 
+		//TODO: В комментарии неверная информация, т.к. это просто событие, обработчик в котором может вызвать всё что угодно т.к. +
 		//TODO: событие публичное
 		/// <summary>
-		/// Вызывает метод <see cref="ReplaceNode(object, ChangeNodeArgs)"/> 
-		/// родительского объекта для замены выбранного узла в списке
+		/// Событие, возникающее при попытке заменить текущий узел в цепи
 		/// </summary>
 		public override event EventHandler<Node.ChangeNodeArgs> NodeChanged;
 
