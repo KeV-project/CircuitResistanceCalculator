@@ -25,7 +25,7 @@ namespace CircuitResistanceCalculator.Connections
 		{
 			Complex circuitResistance = new Complex(0,0);
 
-			for(int i = 0; i < GetNodesCount(); i++)
+			for(int i = 0; i < NodesCount; i++)
 			{
 				circuitResistance += 1 / this[i].CalculateZ(frequency);
 			}

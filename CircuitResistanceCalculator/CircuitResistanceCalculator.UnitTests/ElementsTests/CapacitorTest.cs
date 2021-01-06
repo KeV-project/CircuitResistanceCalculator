@@ -42,6 +42,8 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
             // act
             double frequency = 50;
             Complex actualZ = capacitor.CalculateZ(frequency);
+            actualZ = new Complex(actualZ.Real, 
+                Math.Round(actualZ.Imaginary, 1));
 
             // assert
             Assert.AreEqual(expectedZ, actualZ, "Метод неверно " +

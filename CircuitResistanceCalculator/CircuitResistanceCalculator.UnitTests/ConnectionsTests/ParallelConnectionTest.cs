@@ -32,6 +32,8 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 
 			// act
 			Complex actualZ = parallelConnection.CalculateZ(frequency);
+			actualZ = new Complex(Math.Round(actualZ.Real, 2), 
+				Math.Round(actualZ.Imaginary, 3));
 
 			// assert
 			Assert.AreEqual(expectedZ, actualZ, "Метод неверно " +
