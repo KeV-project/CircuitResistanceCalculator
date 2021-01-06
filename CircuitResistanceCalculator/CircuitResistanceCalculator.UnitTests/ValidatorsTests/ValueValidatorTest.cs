@@ -13,7 +13,7 @@ namespace CircuitResistanceCalculator.UnitTests.ValidatorsTests
 		[Test(Description = "Позитивный тест метода AssertValueInRange")]
 		public void TestAssertValueInRange_СorrectValue()
 		{
-			// arrange
+			// setup
 			var value = 5.5;
 			var minLimit = 0;
 			var maxLimit = 10;
@@ -27,7 +27,7 @@ namespace CircuitResistanceCalculator.UnitTests.ValidatorsTests
 		[Test(Description = "Негативный тест метода AssertValueInRange")]
 		public void TestAssertValueInRange_IncorrectValue()
 		{
-			// arrange
+			// setup
 			var wrongValue = 10.5;
 			var minLimit = 0;
 			var maxLimit = 10;
@@ -45,7 +45,7 @@ namespace CircuitResistanceCalculator.UnitTests.ValidatorsTests
 		[Test(Description = "Позитивный тест метода AssertLengthInRange")]
 		public void TestAssertLengthInRange_CorrectValue()
 		{
-			// arrange
+			// setup
 			var value = "Резистор";
 			var minLimit = 0;
 			var maxLimit = 15;
@@ -59,7 +59,7 @@ namespace CircuitResistanceCalculator.UnitTests.ValidatorsTests
 		[Test(Description = "Негативный тест метода AssertLengthInRange")]
 		public void TestAssertLengthInRange_IncorrectValue()
 		{
-			// arrange
+			// setup
 			var wrongValue = "Николай";
 			var minLimit = 0;
 			var maxLimit = 5;

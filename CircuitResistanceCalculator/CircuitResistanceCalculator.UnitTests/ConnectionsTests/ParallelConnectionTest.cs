@@ -15,7 +15,7 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 		[Test(Description = "Позитивный тест метода CalculateZ")]
 		public void TestCalculateZ_CorrectValue()
 		{
-			// arrenge
+			// setup
 			Connections.ParallelConnection parallelConnection = 
 				new Connections.ParallelConnection();
 
@@ -37,7 +37,6 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 			Assert.AreEqual(expectedZ, actualZ, "Метод неверно " +
 				"рассчитывает комплексное сопротивление " +
 				"последовательно цепи");
-
 		}
 	}
 }

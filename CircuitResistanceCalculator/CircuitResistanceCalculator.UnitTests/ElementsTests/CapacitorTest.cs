@@ -14,7 +14,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
         [Test(Description = "Позитивный тест конструктора Capacitor")]
         public void TestConstructor_CorrectValue()
         {
-            // arrange
+            // setup
             int expectedIndex = 1;
             double expectedValue = 0.00022116;
 
@@ -34,7 +34,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
         [Test(Description = "Позитивный тест метода CalculateZ")]
         public void TestCalculateZ_CorrectValue()
         {
-            // arrenge
+            // setup
             Elements.Capacitor capacitor = 
                 new Elements.Capacitor(0.00022116, 1) ;
             Complex expectedZ = new Complex(0, -14.4);

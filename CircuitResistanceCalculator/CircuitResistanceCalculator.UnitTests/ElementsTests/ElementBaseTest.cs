@@ -14,7 +14,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 		[Test(Description = "Позитивный тест геттера Index")]
 		public void TestGetIndex_CorrectValue()
 		{
-			// arrange
+			// setup
 			int expectedIndex = 1;
 			Elements.Resistor resistor = 
 				new Elements.Resistor(2000, expectedIndex);
@@ -30,7 +30,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 		[Test(Description = "Негативный тест сеттера Index")]
 		public void TestSetIndex_IncorrectValue()
 		{
-			// arrange
+			// setup
 			int inCorrectIndex = -5;
 
 			// assert
@@ -45,12 +45,11 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 		[Test(Description = "Позитивный тест геттера Value")]
 		public void TestGetValaue_CorrectValue()
 		{
-			// arrange
+			// setup
 			double expectedValue = 2000.0;
 			Elements.Resistor resistor = 
 				new Elements.Resistor(expectedValue, 1);
 			
-
 			// act
 			double actualValue = resistor.Value;
 
@@ -62,7 +61,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 		[Test(Description = "Позитивный тест метода ChangeElement")]
 		public void TestChangeElement_CorrectValue()
 		{
-			// arrange
+			// setup
 			Connections.SerialConnection serialConnection = 
 				new Connections.SerialConnection();
 			Elements.ElementBase currentElement = 
@@ -75,26 +74,26 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 			currentElement.ChangeElement(newElement);
 
 			// assert
-			HelperMethods.VerifyDelegateAttachedTo(newElement, 
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement, 
 				nameof(Elements.ElementBase.ValueChanged));
-			HelperMethods.VerifyDelegateAttachedTo(newElement, 
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement, 
 				nameof(Elements.ElementBase.NodeChanged));
-			HelperMethods.VerifyDelegateAttachedTo(newElement, 
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement, 
 				nameof(Elements.ElementBase.NodeRemoved));
 
 			Assert.Throws<ArgumentNullException>(()=>
 			{
-				HelperMethods.VerifyDelegateAttachedTo(currentElement, 
+				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(currentElement, 
 					nameof(Elements.ElementBase.ValueChanged));
 			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-				HelperMethods.VerifyDelegateAttachedTo(currentElement, 
+				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(currentElement, 
 					nameof(Elements.ElementBase.NodeChanged));
 			}, "Событие NodeChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-				HelperMethods.VerifyDelegateAttachedTo(currentElement, 
+				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(currentElement, 
 					nameof(Elements.ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 
@@ -103,7 +102,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 		[Test(Description = "Негативный тест метода ChangeElement")]
 		public void TestChangeElement_IncorrectValue()
 		{
-			// arrenge
+			// setup
 			Connections.SerialConnection serialConnection = 
 				new Connections.SerialConnection();
 			Elements.ElementBase currentElement = 
@@ -127,7 +126,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 		[Test(Description = "Позитивный тест метода RemoveNode")]
 		public void TestRemoveNode_CorrectValue()
 		{
-			// arrenge
+			// setup
 			Connections.SerialConnection serialConnection = new Connections.SerialConnection();
 			Elements.ElementBase removedElement = 
 				new Elements.Resistor(1000.0, 1);
@@ -146,17 +145,17 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 				"из списка родительского узла");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-				HelperMethods.VerifyDelegateAttachedTo(removedElement,
+				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(removedElement,
 					nameof(Elements.ElementBase.ValueChanged));
 			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-				HelperMethods.VerifyDelegateAttachedTo(removedElement,
+				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(removedElement,
 					nameof(Elements.ElementBase.NodeChanged));
 			}, "Событие NodeChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-				HelperMethods.VerifyDelegateAttachedTo(removedElement,
+				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(removedElement,
 					nameof(Elements.ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 		}

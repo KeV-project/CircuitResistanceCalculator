@@ -14,7 +14,7 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 		[Test(Description = "Позитивный тест метода CalculateZ")]
 		public void TestCalculateZ_CorrectValue()
 		{
-			// arrenge
+			// setup
 			Connections.SerialConnection serialConnection = 
 				new Connections.SerialConnection();
 
