@@ -9,10 +9,10 @@ namespace CircuitResistanceCalculator.Node
 {
 	//TODO: XML комментарии? +
 	/// <summary>
-	/// Класс <see cref="ChangeNodeArgs"/> предназначен для
+	/// Класс <see cref="AddedNodeArgs"/> предназначен для
 	/// хранения нового узла электрической цепи
 	/// </summary>
-	public class ChangeNodeArgs : EventArgs
+	public class AddedNodeArgs : EventArgs
 	{
 		/// <summary>
 		/// Устанавливает и возвращает новый узел электрической цепи
@@ -21,10 +21,10 @@ namespace CircuitResistanceCalculator.Node
 
 		/// <summary>
 		/// Инициализирует свойство <see cref="Node"/> объекта
-		/// класса <see cref="ChangeNodeArgs"/>
+		/// класса <see cref="AddedNodeArgs"/>
 		/// </summary>
 		/// <param name="node">Новый узел</param>
-		public ChangeNodeArgs(NodeBase node)
+		public AddedNodeArgs(NodeBase node)
 		{
 			Node = node;
 		}

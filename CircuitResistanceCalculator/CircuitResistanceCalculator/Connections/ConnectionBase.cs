@@ -100,7 +100,7 @@ namespace CircuitResistanceCalculator.Connections
 				{
 					newConnection.AddNode(this[i]);
 				}
-				this.NodeChanged?.Invoke(this, new Node.ChangeNodeArgs(newConnection));
+				this.NodeChanged?.Invoke(this, new Node.AddedNodeArgs(newConnection));
 			}
 		}
 
@@ -109,14 +109,14 @@ namespace CircuitResistanceCalculator.Connections
 		/// <summary>
 		/// Событие, возникающее при попытке заменить текущий узел в цепи
 		/// </summary>
-		public override event EventHandler<Node.ChangeNodeArgs> NodeChanged;
+		public override event EventHandler<Node.AddedNodeArgs> NodeChanged;
 
 		/// <summary>
 		/// Заменяет выбранный узел на новый в скиске дочерних узлов
 		/// </summary>
 		/// <param name="obj">Заменяемый узел</param>
 		/// <param name="e">Хранит новый объект списка</param>
-		private void ReplaceNode(object obj, Node.ChangeNodeArgs e)
+		private void ReplaceNode(object obj, Node.AddedNodeArgs e)
 		{
 			int index = 0;
 			for (int i = 0; i < Nodes.Count; i++)

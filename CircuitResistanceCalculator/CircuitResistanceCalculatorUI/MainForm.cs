@@ -7,67 +7,106 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CircuitResistanceCalculator;
+using CircuitResistanceCalculator.Node;
+using CircuitResistanceCalculator.Connections;
+using CircuitResistanceCalculator.Elements;
 
 namespace CircuitResistanceCalculatorUI
 {
 	public partial class MainForm : Form
-	{ 
+	{
+		private ConnectionBase _circuit;
+		private NodeBase _newNode;
 		public MainForm()
 		{
 			InitializeComponent();
-
-			//_data = new List<Data>();
-
-			//_data.Add(new Data(22.55, 55.33));
-			//_data.Add(new Data(13.12, 77.14));
-			//_data.Add(new Data(29.31, 97.05));
-			//_data.Add(new Data(71.23, 10.17));
-			//_data.Add(new Data(65.02, 12.15));
-			//_data.Add(new Data(87.10, 45.62));
-			//_data.Add(new Data(22.55, 55.33));
-			//_data.Add(new Data(13.12, 77.14));
-			//_data.Add(new Data(29.31, 97.05));
-			//_data.Add(new Data(71.23, 10.17));
-			//_data.Add(new Data(65.02, 12.15));
-			//_data.Add(new Data(87.10, 45.62));
-			//_data.Add(new Data(22.55, 55.33));
-			//_data.Add(new Data(13.12, 77.14));
-			//_data.Add(new Data(29.31, 97.05));
-			//_data.Add(new Data(71.23, 10.17));
-			//_data.Add(new Data(65.02, 12.15));
-			//_data.Add(new Data(87.10, 45.62));
 		}
 
-		private void CircuitChanged(object sender, EventArgs e)
+		public void AddedNode(object obj, AddedNodeArgs e)
 		{
-		
+			_newNode = e.Node;
 		}
 
-		private void CircuitTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+		private void NewElectricalCircuitToolStripMenuItem_Click(object sender,
+			EventArgs e)
 		{
-			
+			_circuit = new SerialConnection();
+
+			TreeNode root = new TreeNode("Root");
+			root.Tag = _circuit;
+			CircuitTreeView.Nodes.Add(root);
 		}
 
-		private void CreateNewCircuitButton_Click(object sender, EventArgs e)
+		private void ConnectionButton_Click(object sender, EventArgs e)
 		{
-		
+			if(CircuitTreeView.SelectedNode == null)
+			{
+				MessageBox.Show("Please, select a node to add!");
+				return;
+			}
+
+			if(CircuitTreeView.SelectedNode.Tag == _circuit)
+			{
+				if(_circuit.NodesCount != 0)
+				{
+					MessageBox.Show("Root connection already established!");
+					return;
+				}
+			}
+
+			if(CircuitTreeView.SelectedNode.Tag is ElementBase)
+			{
+				MessageBox.Show("Element cannot have child nodes!");
+				return;
+			}
+
+			AddConnectionsForm addConnectionsForm = 
+				new AddConnectionsForm(this);
+			addConnectionsForm.ShowDialog();
+
+			if(addConnectionsForm.DialogResult == DialogResult.OK)
+			{
+				((ConnectionBase)CircuitTreeView.SelectedNode.Tag).
+					AddNode(_newNode);
+				TreeNode newConnection = new TreeNode();
+
+				if (_newNode is ParallelConnection)
+				{
+					newConnection.Text = "Parallel";
+				}
+				else
+				{
+					newConnection.Text = "Serial";
+				}
+
+				newConnection.Tag = _newNode;
+				CircuitTreeView.SelectedNode.Nodes.Add(newConnection);
+			}
+
+			CircuitTreeView.ExpandAll();
 		}
 
-		private void AddConnectionButton_Click(object sender, EventArgs e)
+		private void ElementButton_Click(object sender, EventArgs e)
 		{
+			if (CircuitTreeView.SelectedNode == null)
+			{
+				MessageBox.Show("Please, select a node to add!");
+				return;
+			}
 
+			if (CircuitTreeView.SelectedNode.Tag == _circuit)
+			{
+				MessageBox.Show("Unable to add item to circuit root!");
+				return;
+			}
+
+			if (CircuitTreeView.SelectedNode.Tag is ElementBase)
+			{
+				MessageBox.Show("Element cannot have child nodes!");
+				return;
+			}
+
+			CircuitTreeView.ExpandAll();
 		}
-
-		private void AddElementButton_Click(object sender, EventArgs e)
-		{
-			
-		}
-
-		private void EditNodeButton_Click(object sender, EventArgs e)
-		{
-			
-		}
-
 	}
 }

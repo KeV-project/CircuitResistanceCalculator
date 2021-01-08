@@ -27,7 +27,7 @@ namespace CircuitResistanceCalculator.Node
 		/// Определяет сигнатуру события <see cref="NodeChanged"/>
 		/// и обязует наследников реализовать данное событие
 		/// </summary>
-		public abstract event EventHandler<ChangeNodeArgs> NodeChanged;
+		public abstract event EventHandler<AddedNodeArgs> NodeChanged;
 
 		/// <summary>
 		/// Обпределяет сигнатуру метода RemoveNode 

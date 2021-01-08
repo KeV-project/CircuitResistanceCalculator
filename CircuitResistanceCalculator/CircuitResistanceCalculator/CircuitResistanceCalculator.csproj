@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\Capacitor.cs" />
-    <Compile Include="Node\ChangeNodeArgs.cs" />
+    <Compile Include="Node\AddedNodeArgs.cs" />
     <Compile Include="Connections\ConnectionBase.cs" />
     <Compile Include="Elements\ElementBase.cs" />
     <Compile Include="Elements\Inductor.cs" />

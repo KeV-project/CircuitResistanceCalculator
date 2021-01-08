@@ -7,20 +7,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CircuitResistanceCalculator;
+using CircuitResistanceCalculator.Connections;
+using CircuitResistanceCalculator.Node;
 
 namespace CircuitResistanceCalculatorUI
 { 
 	public partial class AddConnectionsForm : Form
 	{
-		public AddConnectionsForm()
+		private event EventHandler<AddedNodeArgs> AddedNode;
+		public AddConnectionsForm(MainForm mainForm)
 		{
 			InitializeComponent();
+
+			AddedNode += mainForm.AddedNode;
 		}
 
 		private void OkButton_Click(object sender, EventArgs e)
 		{
-			
+			if(ParallelRadioButton.Checked)
+			{
+				AddedNode?.Invoke(this, new AddedNodeArgs(new ParallelConnection()));
+			}
+			else
+			{
+				AddedNode?.Invoke(this, new AddedNodeArgs(new SerialConnection()));
+			}
+
+			DialogResult = DialogResult.OK;
+			Close();
+		}
+
+		private void CancelButton_Click(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.Cancel;
+			Close();
 		}
 	}
 }

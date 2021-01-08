@@ -96,7 +96,7 @@ namespace CircuitResistanceCalculator.Elements
 		{
 			if(newElement.GetType() != this.GetType())
 			{
-				NodeChanged?.Invoke(this, new Node.ChangeNodeArgs(newElement));
+				NodeChanged?.Invoke(this, new Node.AddedNodeArgs(newElement));
 			}
 			else
 			{
@@ -109,7 +109,7 @@ namespace CircuitResistanceCalculator.Elements
 		/// элемент цепи. Предназначено для замены текущего 
 		/// элемента и вызова перерасчета цепи
 		/// </summary>
-		public override event EventHandler<Node.ChangeNodeArgs> NodeChanged;
+		public override event EventHandler<Node.AddedNodeArgs> NodeChanged;
 
 		/// <summary>
 		/// Вызывает цепочку событий для удаления текущего элемента цепи
