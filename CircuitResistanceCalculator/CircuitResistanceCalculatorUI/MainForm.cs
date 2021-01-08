@@ -60,8 +60,8 @@ namespace CircuitResistanceCalculatorUI
 				return;
 			}
 
-			AddConnectionsForm addConnectionsForm = 
-				new AddConnectionsForm(this);
+			AddConnectionsForm addConnectionsForm = new AddConnectionsForm();
+			addConnectionsForm.AddedNode += AddedNode;
 			addConnectionsForm.ShowDialog();
 
 			if(addConnectionsForm.DialogResult == DialogResult.OK)
@@ -104,6 +104,33 @@ namespace CircuitResistanceCalculatorUI
 			{
 				MessageBox.Show("Element cannot have child nodes!");
 				return;
+			}
+
+			AddElementForm addElementForm = new AddElementForm();
+			addElementForm.AddedNode += AddedNode;
+			addElementForm.ShowDialog();
+
+			if(addElementForm.DialogResult == DialogResult.OK)
+			{
+				((ConnectionBase)CircuitTreeView.SelectedNode.Tag).
+					AddNode(_newNode);
+				TreeNode newElement = new TreeNode();
+
+				if(_newNode is Resistor)
+				{
+					newElement.Text = "R" + ((ElementBase)_newNode).Index;
+				}
+				else if(_newNode is Inductor)
+				{
+					newElement.Text = "L" + ((ElementBase)_newNode).Index;
+				}
+				else
+				{
+					newElement.Text = "C" + ((ElementBase)_newNode).Index;
+				}
+
+				newElement.Tag = _newNode;
+				CircuitTreeView.SelectedNode.Nodes.Add(newElement);
 			}
 
 			CircuitTreeView.ExpandAll();

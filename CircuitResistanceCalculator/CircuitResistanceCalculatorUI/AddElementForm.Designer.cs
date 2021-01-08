@@ -37,6 +37,8 @@ namespace CircuitResistanceCalculatorUI
 			this.ElementsDomainUpDown = new System.Windows.Forms.DomainUpDown();
 			this.CancelButton = new System.Windows.Forms.Button();
 			this.OkButton = new System.Windows.Forms.Button();
+			this.IndexLabel = new System.Windows.Forms.Label();
+			this.IndexTextBox = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// ElementLabel
@@ -53,7 +55,7 @@ namespace CircuitResistanceCalculatorUI
 			// 
 			this.ValueLabel.AutoSize = true;
 			this.ValueLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ValueLabel.Location = new System.Drawing.Point(128, 21);
+			this.ValueLabel.Location = new System.Drawing.Point(204, 21);
 			this.ValueLabel.Name = "ValueLabel";
 			this.ValueLabel.Size = new System.Drawing.Size(42, 17);
 			this.ValueLabel.TabIndex = 1;
@@ -63,7 +65,7 @@ namespace CircuitResistanceCalculatorUI
 			// 
 			this.UnitsLabel.AutoSize = true;
 			this.UnitsLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.UnitsLabel.Location = new System.Drawing.Point(219, 21);
+			this.UnitsLabel.Location = new System.Drawing.Point(283, 21);
 			this.UnitsLabel.Name = "UnitsLabel";
 			this.UnitsLabel.Size = new System.Drawing.Size(40, 17);
 			this.UnitsLabel.TabIndex = 2;
@@ -73,7 +75,7 @@ namespace CircuitResistanceCalculatorUI
 			// 
 			this.ElementsUnitsLabel.AutoSize = true;
 			this.ElementsUnitsLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ElementsUnitsLabel.Location = new System.Drawing.Point(219, 50);
+			this.ElementsUnitsLabel.Location = new System.Drawing.Point(283, 50);
 			this.ElementsUnitsLabel.Name = "ElementsUnitsLabel";
 			this.ElementsUnitsLabel.Size = new System.Drawing.Size(40, 17);
 			this.ElementsUnitsLabel.TabIndex = 3;
@@ -82,7 +84,7 @@ namespace CircuitResistanceCalculatorUI
 			// ValueTextBox
 			// 
 			this.ValueTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ValueTextBox.Location = new System.Drawing.Point(118, 47);
+			this.ValueTextBox.Location = new System.Drawing.Point(194, 47);
 			this.ValueTextBox.Name = "ValueTextBox";
 			this.ValueTextBox.Size = new System.Drawing.Size(62, 24);
 			this.ValueTextBox.TabIndex = 4;
@@ -97,14 +99,13 @@ namespace CircuitResistanceCalculatorUI
 			this.ElementsDomainUpDown.ReadOnly = true;
 			this.ElementsDomainUpDown.Size = new System.Drawing.Size(54, 20);
 			this.ElementsDomainUpDown.TabIndex = 5;
-			this.ElementsDomainUpDown.Text = "R";
 			this.ElementsDomainUpDown.Wrap = true;
 			this.ElementsDomainUpDown.SelectedItemChanged += new System.EventHandler(this.ElementsDomainUpDown_SelectedItemChanged);
 			// 
 			// CancelButton
 			// 
 			this.CancelButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.CancelButton.Location = new System.Drawing.Point(92, 113);
+			this.CancelButton.Location = new System.Drawing.Point(158, 126);
 			this.CancelButton.Name = "CancelButton";
 			this.CancelButton.Size = new System.Drawing.Size(84, 28);
 			this.CancelButton.TabIndex = 6;
@@ -114,7 +115,7 @@ namespace CircuitResistanceCalculatorUI
 			// OkButton
 			// 
 			this.OkButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.OkButton.Location = new System.Drawing.Point(182, 113);
+			this.OkButton.Location = new System.Drawing.Point(248, 126);
 			this.OkButton.Name = "OkButton";
 			this.OkButton.Size = new System.Drawing.Size(84, 28);
 			this.OkButton.TabIndex = 7;
@@ -122,11 +123,31 @@ namespace CircuitResistanceCalculatorUI
 			this.OkButton.UseVisualStyleBackColor = true;
 			this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
 			// 
+			// IndexLabel
+			// 
+			this.IndexLabel.AutoSize = true;
+			this.IndexLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.IndexLabel.Location = new System.Drawing.Point(115, 21);
+			this.IndexLabel.Name = "IndexLabel";
+			this.IndexLabel.Size = new System.Drawing.Size(42, 17);
+			this.IndexLabel.TabIndex = 8;
+			this.IndexLabel.Text = "Index";
+			// 
+			// IndexTextBox
+			// 
+			this.IndexTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.IndexTextBox.Location = new System.Drawing.Point(107, 47);
+			this.IndexTextBox.Name = "IndexTextBox";
+			this.IndexTextBox.Size = new System.Drawing.Size(62, 24);
+			this.IndexTextBox.TabIndex = 9;
+			// 
 			// AddElementForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(278, 153);
+			this.ClientSize = new System.Drawing.Size(344, 167);
+			this.Controls.Add(this.IndexTextBox);
+			this.Controls.Add(this.IndexLabel);
 			this.Controls.Add(this.OkButton);
 			this.Controls.Add(this.CancelButton);
 			this.Controls.Add(this.ElementsDomainUpDown);
@@ -136,11 +157,11 @@ namespace CircuitResistanceCalculatorUI
 			this.Controls.Add(this.ValueLabel);
 			this.Controls.Add(this.ElementLabel);
 			this.MaximizeBox = false;
-			this.MaximumSize = new System.Drawing.Size(294, 191);
+			this.MaximumSize = new System.Drawing.Size(360, 205);
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(294, 191);
+			this.MinimumSize = new System.Drawing.Size(360, 205);
 			this.Name = "AddElementForm";
-			this.Load += new System.EventHandler(this.AddElementForm_Load);
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -156,5 +177,7 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.DomainUpDown ElementsDomainUpDown;
 		private System.Windows.Forms.Button CancelButton;
 		private System.Windows.Forms.Button OkButton;
+		private System.Windows.Forms.Label IndexLabel;
+		private System.Windows.Forms.TextBox IndexTextBox;
 	}
 }

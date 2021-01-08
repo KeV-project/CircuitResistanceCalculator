@@ -14,12 +14,10 @@ namespace CircuitResistanceCalculatorUI
 { 
 	public partial class AddConnectionsForm : Form
 	{
-		private event EventHandler<AddedNodeArgs> AddedNode;
-		public AddConnectionsForm(MainForm mainForm)
+		public event EventHandler<AddedNodeArgs> AddedNode;
+		public AddConnectionsForm()
 		{
 			InitializeComponent();
-
-			AddedNode += mainForm.AddedNode;
 		}
 
 		private void OkButton_Click(object sender, EventArgs e)
