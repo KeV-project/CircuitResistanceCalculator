@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Numerics;
 using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
@@ -17,14 +18,35 @@ namespace CircuitResistanceCalculatorUI
 	{
 		private ConnectionBase _circuit;
 		private NodeBase _newNode;
+
+		private List<double> _frequencies;
+		private List<Complex> _resistance;
+
 		public MainForm()
 		{
 			InitializeComponent();
+
+			_frequencies = new List<double>();
 		}
 
 		public void AddedNode(object obj, AddedNodeArgs e)
 		{
 			_newNode = e.Node;
+		}
+
+		private void RecalculateCircuit()
+		{
+			CircuitResistanceGridView.Rows.Clear();
+			_resistance = new List<Complex>();
+			int i = 1;
+			foreach(double frequency in _frequencies)
+			{
+				Complex z = _circuit.CalculateZ(frequency);
+				z = new Complex(Math.Round(z.Real, 3), Math.Round(z.Imaginary, 3));
+				_resistance.Add(z);
+				CircuitResistanceGridView.Rows.Add(i, frequency, _resistance.Last());
+				i++;
+			}
 		}
 
 		private void NewElectricalCircuitToolStripMenuItem_Click(object sender,
@@ -134,6 +156,38 @@ namespace CircuitResistanceCalculatorUI
 			}
 
 			CircuitTreeView.ExpandAll();
+		}
+
+		private void CalculateButton_Click(object sender, EventArgs e)
+		{
+			if (!double.TryParse(EnterFrequencyTextBox.Text, 
+				out double frequency))
+			{
+				MessageBox.Show(EnterFrequencyTextBox.Text + "isn't a " +
+					"real number!");
+				return;
+			}
+
+			_frequencies.Add(frequency);
+			EnterFrequencyTextBox.Text = "";
+			RecalculateCircuit();
+		}
+
+		private void CircuitTreeView_NodeMouseDoubleClick(object sender, 
+			TreeNodeMouseClickEventArgs e)
+		{
+			if(CircuitTreeView.SelectedNode.Tag is ConnectionBase)
+			{
+
+			}
+			else if(CircuitTreeView.SelectedNode.Tag is ElementBase)
+			{
+
+			}
+			else
+			{
+				return;
+			}
 		}
 	}
 }
