@@ -1,7 +1,7 @@
 ﻿
 namespace CircuitResistanceCalculatorUI
 {
-	partial class AddElementForm
+	partial class EditElementForm
 	{
 		/// <summary>
 		/// Required designer variable.

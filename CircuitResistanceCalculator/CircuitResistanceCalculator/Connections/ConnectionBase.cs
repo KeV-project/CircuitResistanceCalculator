@@ -92,13 +92,13 @@ namespace CircuitResistanceCalculator.Connections
 		/// в дереве электрической цепи
 		/// </summary>
 		/// <param name="newConnection">Новый узел</param>
-		public void ChangeConnection(ConnectionBase newConnection)
+		public override void ReplaceNode(Node.NodeBase newConnection)
 		{
 			if (newConnection.GetType() != this.GetType())
 			{
 				for (int i = 0; i < Nodes.Count; i++)
 				{
-					newConnection.AddNode(this[i]);
+					((ConnectionBase)newConnection).AddNode(this[i]);
 				}
 				this.NodeChanged?.Invoke(this, new Node.AddedNodeArgs(newConnection));
 			}

@@ -12,26 +12,43 @@ using CircuitResistanceCalculator.Node;
 
 namespace CircuitResistanceCalculatorUI
 { 
-	public partial class AddConnectionsForm : Form
+	public partial class EditConnectionsForm : Form
 	{
-		public event EventHandler<AddedNodeArgs> AddedNode;
-		public AddConnectionsForm()
+		private ConnectionBase _editableConnection;
+
+		public event EventHandler<AddedNodeArgs> CreatedNewConnection;
+
+		public EditConnectionsForm(ConnectionBase connection)
 		{
 			InitializeComponent();
+
+			if(connection != null)
+			{
+				_editableConnection = connection;
+				if(_editableConnection is ParallelConnection)
+				{
+					ParallelRadioButton.Checked = true;
+				}
+				else
+				{
+					SerialRadioButton.Checked = true;
+				}
+			}
 		}
 
 		private void OkButton_Click(object sender, EventArgs e)
 		{
 			if(ParallelRadioButton.Checked)
 			{
-				AddedNode?.Invoke(this, new AddedNodeArgs(new ParallelConnection()));
+				CreatedNewConnection?.Invoke(this, 
+					new AddedNodeArgs(new ParallelConnection()));
 			}
 			else
 			{
-				AddedNode?.Invoke(this, new AddedNodeArgs(new SerialConnection()));
+				CreatedNewConnection?.Invoke(this, 
+					new AddedNodeArgs(new SerialConnection()));
 			}
 
-			DialogResult = DialogResult.OK;
 			Close();
 		}
 

@@ -12,15 +12,41 @@ using CircuitResistanceCalculator.Elements;
 
 namespace CircuitResistanceCalculatorUI
 {
-	public partial class AddElementForm : Form
+	public partial class EditElementForm : Form
 	{
-		public event EventHandler<AddedNodeArgs> AddedNode;
-		public AddElementForm()
+		private ElementBase _editableElement;
+
+		public event EventHandler<AddedNodeArgs> CreatedNewElement;
+		public EditElementForm(ElementBase element)
 		{
 			InitializeComponent();
 
-			ElementsDomainUpDown.SelectedIndex = 2;
-			ElementsUnitsLabel.Text = "Ω";
+			if(element == null)
+			{
+				ElementsDomainUpDown.SelectedIndex = 2;
+				ElementsUnitsLabel.Text = "Ω";
+			}
+			else
+			{
+				if(element is Resistor)
+				{
+					ElementsDomainUpDown.SelectedIndex = 2;
+					ElementsUnitsLabel.Text = "Ω";
+				}
+				else if(element is Inductor)
+				{
+					ElementsDomainUpDown.SelectedIndex = 0;
+					ElementsUnitsLabel.Text = "H";
+				}
+				else
+				{
+					ElementsDomainUpDown.SelectedIndex = 1;
+					ElementsUnitsLabel.Text = "F";
+				}
+
+				IndexTextBox.Text = Convert.ToString(element.Index);
+				ValueTextBox.Text = Convert.ToString(element.Value);
+			}
 		}
 
 		private void ElementsDomainUpDown_SelectedItemChanged(object sender,
@@ -60,15 +86,18 @@ namespace CircuitResistanceCalculatorUI
 			{
 				if (ElementsDomainUpDown.SelectedIndex == 0)
 				{
-					AddedNode?.Invoke(this, new AddedNodeArgs(new Inductor(value, index)));
+					CreatedNewElement?.Invoke(this, 
+						new AddedNodeArgs(new Inductor(value, index)));
 				}
 				else if (ElementsDomainUpDown.SelectedIndex == 1)
 				{
-					AddedNode?.Invoke(this, new AddedNodeArgs(new Capacitor(value, index)));
+					CreatedNewElement?.Invoke(this, 
+						new AddedNodeArgs(new Capacitor(value, index)));
 				}
 				else
 				{
-					AddedNode?.Invoke(this, new AddedNodeArgs(new Resistor(value, index)));
+					CreatedNewElement?.Invoke(this, 
+						new AddedNodeArgs(new Resistor(value, index)));
 				}
 			}
 			catch(ArgumentException ex)
@@ -77,7 +106,6 @@ namespace CircuitResistanceCalculatorUI
 				return;
 			}
 			
-			DialogResult = DialogResult.OK;
 			Close();
 		}
 	}

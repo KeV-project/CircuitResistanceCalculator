@@ -92,7 +92,7 @@ namespace CircuitResistanceCalculator.Elements
 		/// Вызывает цепочку событий для замены текущего элемента
 		/// </summary>
 		/// <param name="newElement">Новый элемент</param>
-		public void ChangeElement(ElementBase newElement)
+		public override void ReplaceNode(Node.NodeBase newElement)
 		{
 			if(newElement.GetType() != this.GetType())
 			{
@@ -100,7 +100,7 @@ namespace CircuitResistanceCalculator.Elements
 			}
 			else
 			{
-				Value = newElement.Value;
+				Value = ((ElementBase)newElement).Value;
 			}
 		}
 

@@ -22,6 +22,12 @@ namespace CircuitResistanceCalculator.Node
 		/// </summary>
 		public abstract event EventHandler<EventArgs> ValueChanged;
 
+		/// <summary>
+		/// Обпределяет сигнатуру метода ChangeNode 
+		/// и обязует наследников реализовать данный метод
+		/// </summary>
+		public abstract void ReplaceNode(NodeBase node);
+
 		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
 		/// Определяет сигнатуру события <see cref="NodeChanged"/>

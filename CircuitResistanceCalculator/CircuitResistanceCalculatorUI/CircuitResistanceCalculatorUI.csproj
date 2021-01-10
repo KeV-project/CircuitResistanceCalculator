@@ -47,17 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddConnectionsForm.cs">
+    <Compile Include="EditConnectionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddConnectionsForm.Designer.cs">
-      <DependentUpon>AddConnectionsForm.cs</DependentUpon>
+    <Compile Include="EditConnectionsForm.Designer.cs">
+      <DependentUpon>EditConnectionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddElementForm.cs">
+    <Compile Include="EditElementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddElementForm.Designer.cs">
-      <DependentUpon>AddElementForm.cs</DependentUpon>
+    <Compile Include="EditElementForm.Designer.cs">
+      <DependentUpon>EditElementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -72,11 +72,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddConnectionsForm.resx">
-      <DependentUpon>AddConnectionsForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditConnectionsForm.resx">
+      <DependentUpon>EditConnectionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddElementForm.resx">
-      <DependentUpon>AddElementForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditElementForm.resx">
+      <DependentUpon>EditElementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -1,7 +1,7 @@
 ﻿
 namespace CircuitResistanceCalculatorUI
 {
-	partial class AddConnectionsForm
+	partial class EditConnectionsForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -81,7 +81,7 @@ namespace CircuitResistanceCalculatorUI
 			this.CancelButton.UseVisualStyleBackColor = true;
 			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
 			// 
-			// AddConnectionsForm
+			// EditConnectionsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -94,7 +94,7 @@ namespace CircuitResistanceCalculatorUI
 			this.MaximumSize = new System.Drawing.Size(252, 186);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(252, 186);
-			this.Name = "AddConnectionsForm";
+			this.Name = "EditConnectionsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Add connection type";
 			this.ResumeLayout(false);

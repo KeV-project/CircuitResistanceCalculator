@@ -17,7 +17,6 @@ namespace CircuitResistanceCalculatorUI
 	public partial class MainForm : Form
 	{
 		private ConnectionBase _circuit;
-		private NodeBase _newNode;
 
 		private List<double> _frequencies;
 		private List<Complex> _resistance;
@@ -29,11 +28,77 @@ namespace CircuitResistanceCalculatorUI
 			_frequencies = new List<double>();
 		}
 
-		public void AddedNode(object obj, AddedNodeArgs e)
+		// Создание новой цепи
+		private void NewElectricalCircuitToolStripMenuItem_Click(object sender,
+			EventArgs e)
 		{
-			_newNode = e.Node;
+			_circuit = new SerialConnection();
+
+			TreeNode root = new TreeNode("Root");
+			root.Tag = _circuit;
+			CircuitTreeView.Nodes.Add(root);
 		}
 
+		// Добавление нового узла в цепь
+		private void AddNode(object obj, AddedNodeArgs e)
+		{
+			((ConnectionBase)CircuitTreeView.SelectedNode.Tag).AddNode(e.Node);
+			
+			TreeNode newNode = new TreeNode();
+			newNode.Tag = e.Node;
+			if (e.Node is ParallelConnection)
+			{
+				newNode.Text = "Parallel";
+			}
+			else if(e.Node is SerialConnection)
+			{
+				newNode.Text = "Serial";
+			}
+			else if(e.Node is Resistor)
+			{
+				newNode.Text = "R" + ((ElementBase)e.Node).Index;
+			}
+			else if (e.Node is Inductor)
+			{
+				newNode.Text = "L" + ((ElementBase)e.Node).Index;
+			}
+			else 
+			{
+				newNode.Text = "C" + ((ElementBase)e.Node).Index;
+			}
+			CircuitTreeView.SelectedNode.Nodes.Add(newNode);
+			RecalculateCircuit();
+		}
+
+		// Замена выбранного узла цепи
+		private void ReplaceNode(object obj, AddedNodeArgs e)
+		{
+			((NodeBase)CircuitTreeView.SelectedNode.Tag).ReplaceNode(e.Node);
+			CircuitTreeView.SelectedNode.Tag = e.Node;
+			if(e.Node is ParallelConnection)
+			{
+				CircuitTreeView.SelectedNode.Text = "Parallel";
+			}
+			else if(e.Node is SerialConnection)
+			{
+				CircuitTreeView.SelectedNode.Text = "Serial";
+			}
+			else if (e.Node is Resistor)
+			{
+				CircuitTreeView.SelectedNode.Text = "R" + ((ElementBase)e.Node).Index;
+			}
+			else if (e.Node is Inductor)
+			{
+				CircuitTreeView.SelectedNode.Text = "L" + ((ElementBase)e.Node).Index;
+			}
+			else
+			{
+				CircuitTreeView.SelectedNode.Text = "C" + ((ElementBase)e.Node).Index;
+			}
+			RecalculateCircuit();
+		}
+
+		// Перерасчет цепи и выведение актуальных данных пользователю
 		private void RecalculateCircuit()
 		{
 			CircuitResistanceGridView.Rows.Clear();
@@ -49,17 +114,8 @@ namespace CircuitResistanceCalculatorUI
 			}
 		}
 
-		private void NewElectricalCircuitToolStripMenuItem_Click(object sender,
-			EventArgs e)
-		{
-			_circuit = new SerialConnection();
-
-			TreeNode root = new TreeNode("Root");
-			root.Tag = _circuit;
-			CircuitTreeView.Nodes.Add(root);
-		}
-
-		private void ConnectionButton_Click(object sender, EventArgs e)
+		// Добавление в цепь нового узла типа соединение
+		private void AddConnectionButton_Click(object sender, EventArgs e)
 		{
 			if(CircuitTreeView.SelectedNode == null)
 			{
@@ -82,32 +138,14 @@ namespace CircuitResistanceCalculatorUI
 				return;
 			}
 
-			AddConnectionsForm addConnectionsForm = new AddConnectionsForm();
-			addConnectionsForm.AddedNode += AddedNode;
+			EditConnectionsForm addConnectionsForm = new EditConnectionsForm(null);
+			addConnectionsForm.CreatedNewConnection += AddNode;
 			addConnectionsForm.ShowDialog();
-
-			if(addConnectionsForm.DialogResult == DialogResult.OK)
-			{
-				((ConnectionBase)CircuitTreeView.SelectedNode.Tag).
-					AddNode(_newNode);
-				TreeNode newConnection = new TreeNode();
-
-				if (_newNode is ParallelConnection)
-				{
-					newConnection.Text = "Parallel";
-				}
-				else
-				{
-					newConnection.Text = "Serial";
-				}
-
-				newConnection.Tag = _newNode;
-				CircuitTreeView.SelectedNode.Nodes.Add(newConnection);
-			}
 
 			CircuitTreeView.ExpandAll();
 		}
 
+		// Добавление в цепь нового узла типа элемент
 		private void ElementButton_Click(object sender, EventArgs e)
 		{
 			if (CircuitTreeView.SelectedNode == null)
@@ -128,36 +166,14 @@ namespace CircuitResistanceCalculatorUI
 				return;
 			}
 
-			AddElementForm addElementForm = new AddElementForm();
-			addElementForm.AddedNode += AddedNode;
+			EditElementForm addElementForm = new EditElementForm(null);
+			addElementForm.CreatedNewElement += AddNode;
 			addElementForm.ShowDialog();
-
-			if(addElementForm.DialogResult == DialogResult.OK)
-			{
-				((ConnectionBase)CircuitTreeView.SelectedNode.Tag).
-					AddNode(_newNode);
-				TreeNode newElement = new TreeNode();
-
-				if(_newNode is Resistor)
-				{
-					newElement.Text = "R" + ((ElementBase)_newNode).Index;
-				}
-				else if(_newNode is Inductor)
-				{
-					newElement.Text = "L" + ((ElementBase)_newNode).Index;
-				}
-				else
-				{
-					newElement.Text = "C" + ((ElementBase)_newNode).Index;
-				}
-
-				newElement.Tag = _newNode;
-				CircuitTreeView.SelectedNode.Nodes.Add(newElement);
-			}
 
 			CircuitTreeView.ExpandAll();
 		}
 
+		// Добавление новой частоты сигнала и перерасчет цепи
 		private void CalculateButton_Click(object sender, EventArgs e)
 		{
 			if (!double.TryParse(EnterFrequencyTextBox.Text, 
@@ -173,21 +189,31 @@ namespace CircuitResistanceCalculatorUI
 			RecalculateCircuit();
 		}
 
+		// Редактирование выбранного узла
 		private void CircuitTreeView_NodeMouseDoubleClick(object sender, 
 			TreeNodeMouseClickEventArgs e)
 		{
-			if(CircuitTreeView.SelectedNode.Tag is ConnectionBase)
-			{
-
-			}
-			else if(CircuitTreeView.SelectedNode.Tag is ElementBase)
-			{
-
-			}
-			else
+			if(CircuitTreeView.SelectedNode.Tag == _circuit)
 			{
 				return;
 			}
+
+			if(CircuitTreeView.SelectedNode.Tag is ConnectionBase)
+			{
+				EditConnectionsForm editConnectionsForm = new EditConnectionsForm(
+					(ConnectionBase)CircuitTreeView.SelectedNode.Tag);
+				editConnectionsForm.CreatedNewConnection += ReplaceNode;
+				editConnectionsForm.ShowDialog();
+			}
+			else
+			{
+				EditElementForm editElementForm = new EditElementForm(
+					(ElementBase)CircuitTreeView.SelectedNode.Tag);
+				editElementForm.CreatedNewElement += ReplaceNode;
+				editElementForm.ShowDialog();
+			}
+
+			CircuitTreeView.ExpandAll();
 		}
 	}
 }

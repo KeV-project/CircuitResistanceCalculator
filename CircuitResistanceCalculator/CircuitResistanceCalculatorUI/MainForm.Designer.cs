@@ -75,7 +75,7 @@ namespace CircuitResistanceCalculatorUI
 			this.EnterFrequencyTextBox = new System.Windows.Forms.TextBox();
 			this.EnterFreguencyLabel = new System.Windows.Forms.Label();
 			this.ClearTreeButton = new System.Windows.Forms.Button();
-			this.ConnectionButton = new System.Windows.Forms.Button();
+			this.AddConnectionButton = new System.Windows.Forms.Button();
 			this.ElementButton = new System.Windows.Forms.Button();
 			this.menuStrip.SuspendLayout();
 			this.MainTableLayoutPanel.SuspendLayout();
@@ -492,15 +492,15 @@ namespace CircuitResistanceCalculatorUI
 			this.ClearTreeButton.TabIndex = 5;
 			this.ClearTreeButton.UseVisualStyleBackColor = true;
 			// 
-			// ConnectionButton
+			// AddConnectionButton
 			// 
-			this.ConnectionButton.Image = ((System.Drawing.Image)(resources.GetObject("ConnectionButton.Image")));
-			this.ConnectionButton.Location = new System.Drawing.Point(10, 31);
-			this.ConnectionButton.Name = "ConnectionButton";
-			this.ConnectionButton.Size = new System.Drawing.Size(32, 27);
-			this.ConnectionButton.TabIndex = 6;
-			this.ConnectionButton.UseVisualStyleBackColor = true;
-			this.ConnectionButton.Click += new System.EventHandler(this.ConnectionButton_Click);
+			this.AddConnectionButton.Image = ((System.Drawing.Image)(resources.GetObject("AddConnectionButton.Image")));
+			this.AddConnectionButton.Location = new System.Drawing.Point(10, 31);
+			this.AddConnectionButton.Name = "AddConnectionButton";
+			this.AddConnectionButton.Size = new System.Drawing.Size(32, 27);
+			this.AddConnectionButton.TabIndex = 6;
+			this.AddConnectionButton.UseVisualStyleBackColor = true;
+			this.AddConnectionButton.Click += new System.EventHandler(this.AddConnectionButton_Click);
 			// 
 			// ElementButton
 			// 
@@ -518,7 +518,7 @@ namespace CircuitResistanceCalculatorUI
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1026, 627);
 			this.Controls.Add(this.ElementButton);
-			this.Controls.Add(this.ConnectionButton);
+			this.Controls.Add(this.AddConnectionButton);
 			this.Controls.Add(this.ClearTreeButton);
 			this.Controls.Add(this.MainTableLayoutPanel);
 			this.Controls.Add(this.menuStrip);
@@ -580,7 +580,7 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
 		private System.Windows.Forms.Button ClearTreeButton;
 		private System.Windows.Forms.ToolStripMenuItem editNodeToolStripMenuItem;
-		private System.Windows.Forms.Button ConnectionButton;
+		private System.Windows.Forms.Button AddConnectionButton;
 		private System.Windows.Forms.Button ElementButton;
 		private System.Windows.Forms.Button CalculateButton;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
