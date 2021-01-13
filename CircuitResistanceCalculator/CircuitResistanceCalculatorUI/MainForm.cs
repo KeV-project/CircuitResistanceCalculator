@@ -266,5 +266,12 @@ namespace CircuitResistanceCalculatorUI
 				CircuitResistanceGridView.SelectedRows[0].Index);
 			RecalculateCircuit();
 		}
+
+		// Очистить расчетную таблицу
+		private void ClearButton_Click(object sender, EventArgs e)
+		{
+			_frequencies.Clear();
+			RecalculateCircuit();
+		}
 	}
 }
