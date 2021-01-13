@@ -215,5 +215,13 @@ namespace CircuitResistanceCalculatorUI
 
 			CircuitTreeView.ExpandAll();
 		}
+
+		// Удаление узла из цепи
+		private void RemoveNodeButton_Click(object sender, EventArgs e)
+		{
+			((NodeBase)CircuitTreeView.SelectedNode.Tag).RemoveNode();
+			CircuitTreeView.Nodes.Remove(CircuitTreeView.SelectedNode);
+			RecalculateCircuit();
+		}
 	}
 }

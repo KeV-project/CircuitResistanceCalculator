@@ -1865,6 +1865,19 @@
         APgCQQ8AeiFDI78AAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="RemoveNodeButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAGYktHRAD/AP8A/6C9p5MAAAF9SURBVDhPtZSxS8NAFIejVkF00ElwEBwUHHQJSSl2aJu4OGiX
+        gtgOQqGLOjiI0MnJQRCKSwc3wb9ABFFwcxLRQbRo0UGcRCg1SXFon79XT4w2adKCH3zkeHf3491xRPpv
+        tuC1zShsmwNINuOwbTzDaFPqFENPHMMoFOo1NCVnaOobLBu6ul8Khwd5rhlDUIbncAz2QeldV/NWeoHM
+        xTky4xpV1lcIgUc858UAPP0aoqtIJIBuLCuTpGrxnqqFW6pk1wg1Mmemh8UyVzjsCV6w/YHOy3JMqZnz
+        GlUfClR7eSYzGa+HlTV1nDc041dnDO7rhLupbKySlUnRx+42GbHgHS61QyxxpSGsossjJU254m7qHcWU
+        oqEFp8R0UxrCGEokugw9NGlGgzLJcrcoe+IYBrLwVZjngh84rAg50O4j/H5//B59wWFn4mt3B7YV5nTM
+        URgRTnDBD25hszAnTHHBDxx2A5f+eAhbPmYPXHbwGLYc5gb/QfaEaS78IEmfK9ifAg4CTI4AAAAASUVO
+        RK5CYII=
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>
