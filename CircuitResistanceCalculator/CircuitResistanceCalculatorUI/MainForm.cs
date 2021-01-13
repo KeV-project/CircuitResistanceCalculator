@@ -146,7 +146,7 @@ namespace CircuitResistanceCalculatorUI
 		}
 
 		// Добавление в цепь нового узла типа элемент
-		private void ElementButton_Click(object sender, EventArgs e)
+		private void AddElementButton_Click(object sender, EventArgs e)
 		{
 			if (CircuitTreeView.SelectedNode == null)
 			{
@@ -176,6 +176,12 @@ namespace CircuitResistanceCalculatorUI
 		// Добавление новой частоты сигнала и перерасчет цепи
 		private void CalculateButton_Click(object sender, EventArgs e)
 		{
+			if(_circuit == null)
+			{
+				MessageBox.Show("Please, create a circuit!");
+				return;
+			}
+
 			if (!double.TryParse(EnterFrequencyTextBox.Text, 
 				out double frequency))
 			{
@@ -219,8 +225,45 @@ namespace CircuitResistanceCalculatorUI
 		// Удаление узла из цепи
 		private void RemoveNodeButton_Click(object sender, EventArgs e)
 		{
-			((NodeBase)CircuitTreeView.SelectedNode.Tag).RemoveNode();
+			if (CircuitTreeView.SelectedNode == null)
+			{
+				MessageBox.Show("Please, select a node to remove!");
+				return;
+			}
+
+			if (CircuitTreeView.SelectedNode.Tag == _circuit)
+			{
+				_circuit = null;
+			}
+			else
+			{
+				((NodeBase)CircuitTreeView.SelectedNode.Tag).RemoveNode();
+			}
+			
 			CircuitTreeView.Nodes.Remove(CircuitTreeView.SelectedNode);
+			RecalculateCircuit();
+		}
+
+		// Очистить дерево
+		private void ClearTreeButton_Click(object sender, EventArgs e)
+		{
+			_circuit = null;
+			CircuitTreeView.Nodes.Clear();
+			RecalculateCircuit();
+		}
+
+		// Удаление строки из рассчетной таблицы
+		private void DeleteFrequencyButton_Click(object sender, EventArgs e)
+		{
+			if(CircuitResistanceGridView.SelectedRows == null)
+			{
+				MessageBox.Show("Please, select a row!");
+				return;
+			}
+
+			_frequencies.RemoveAt(CircuitResistanceGridView.SelectedRows[0].Index);
+			CircuitResistanceGridView.Rows.RemoveAt(
+				CircuitResistanceGridView.SelectedRows[0].Index);
 			RecalculateCircuit();
 		}
 	}

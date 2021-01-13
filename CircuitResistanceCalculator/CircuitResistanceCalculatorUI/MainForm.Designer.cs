@@ -70,13 +70,12 @@ namespace CircuitResistanceCalculatorUI
 			this.Frequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Resistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ClearButton = new System.Windows.Forms.Button();
-			this.EditFrequencyButton = new System.Windows.Forms.Button();
 			this.DeleteFrequencyButton = new System.Windows.Forms.Button();
 			this.EnterFrequencyTextBox = new System.Windows.Forms.TextBox();
 			this.EnterFreguencyLabel = new System.Windows.Forms.Label();
 			this.ClearTreeButton = new System.Windows.Forms.Button();
 			this.AddConnectionButton = new System.Windows.Forms.Button();
-			this.ElementButton = new System.Windows.Forms.Button();
+			this.AddElementButton = new System.Windows.Forms.Button();
 			this.RemoveNodeButton = new System.Windows.Forms.Button();
 			this.menuStrip.SuspendLayout();
 			this.MainTableLayoutPanel.SuspendLayout();
@@ -118,7 +117,7 @@ namespace CircuitResistanceCalculatorUI
 			this.CreateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewElectricalCircuitToolStripMenuItem});
 			this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.CreateToolStripMenuItem.Text = "Create";
 			// 
 			// NewElectricalCircuitToolStripMenuItem
@@ -134,7 +133,7 @@ namespace CircuitResistanceCalculatorUI
             this.ElectricalCircuitToolStripMenuItem,
             this.ElectricalCircuitTemplateToolStripMenuItem});
 			this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.OpenToolStripMenuItem.Text = "Open...";
 			// 
 			// ElectricalCircuitToolStripMenuItem
@@ -152,19 +151,19 @@ namespace CircuitResistanceCalculatorUI
 			// SaveToolStripMenuItem
 			// 
 			this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.SaveToolStripMenuItem.Text = "Save";
 			// 
 			// SaveAsToolStripMenuItem
 			// 
 			this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
-			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.SaveAsToolStripMenuItem.Text = "Save As";
 			// 
 			// ExitToolStripMenuItem
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.ExitToolStripMenuItem.Text = "Exit (Alt + F4)";
 			// 
 			// addToolStripMenuItem
@@ -182,31 +181,31 @@ namespace CircuitResistanceCalculatorUI
 			// rootToolStripMenuItem
 			// 
 			this.rootToolStripMenuItem.Name = "rootToolStripMenuItem";
-			this.rootToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+			this.rootToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.rootToolStripMenuItem.Text = "Add root";
 			// 
 			// branchToolStripMenuItem
 			// 
 			this.branchToolStripMenuItem.Name = "branchToolStripMenuItem";
-			this.branchToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+			this.branchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.branchToolStripMenuItem.Text = "Add branch";
 			// 
 			// editNodeToolStripMenuItem
 			// 
 			this.editNodeToolStripMenuItem.Name = "editNodeToolStripMenuItem";
-			this.editNodeToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+			this.editNodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.editNodeToolStripMenuItem.Text = "Edit node";
 			// 
 			// deleteToolStripMenuItem
 			// 
 			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.deleteToolStripMenuItem.Text = "Delete node";
 			// 
 			// clearToolStripMenuItem
 			// 
 			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-			this.clearToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+			this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.clearToolStripMenuItem.Text = "Clear tree";
 			// 
 			// templatesToolStripMenuItem
@@ -224,31 +223,31 @@ namespace CircuitResistanceCalculatorUI
 			// circuit1ToolStripMenuItem
 			// 
 			this.circuit1ToolStripMenuItem.Name = "circuit1ToolStripMenuItem";
-			this.circuit1ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.circuit1ToolStripMenuItem.Text = "Circuit №1";
 			// 
 			// circuit2ToolStripMenuItem
 			// 
 			this.circuit2ToolStripMenuItem.Name = "circuit2ToolStripMenuItem";
-			this.circuit2ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.circuit2ToolStripMenuItem.Text = "Circuit №2";
 			// 
 			// circuit3ToolStripMenuItem
 			// 
 			this.circuit3ToolStripMenuItem.Name = "circuit3ToolStripMenuItem";
-			this.circuit3ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.circuit3ToolStripMenuItem.Text = "Circuit №3";
 			// 
 			// circuit4ToolStripMenuItem
 			// 
 			this.circuit4ToolStripMenuItem.Name = "circuit4ToolStripMenuItem";
-			this.circuit4ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.circuit4ToolStripMenuItem.Text = "Circuit №4";
 			// 
 			// circuit5ToolStripMenuItem
 			// 
 			this.circuit5ToolStripMenuItem.Name = "circuit5ToolStripMenuItem";
-			this.circuit5ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.circuit5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.circuit5ToolStripMenuItem.Text = "Circuit №5";
 			// 
 			// HelpToolStripMenuItem
@@ -263,7 +262,7 @@ namespace CircuitResistanceCalculatorUI
 			// AboutToolStripMenuItem
 			// 
 			this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.AboutToolStripMenuItem.Text = "About (F1)";
 			// 
 			// MainTableLayoutPanel
@@ -339,7 +338,6 @@ namespace CircuitResistanceCalculatorUI
 			this.CalculateCircuitResistanceGroupBox.Controls.Add(this.CalculateButton);
 			this.CalculateCircuitResistanceGroupBox.Controls.Add(this.CircuitResistanceGridView);
 			this.CalculateCircuitResistanceGroupBox.Controls.Add(this.ClearButton);
-			this.CalculateCircuitResistanceGroupBox.Controls.Add(this.EditFrequencyButton);
 			this.CalculateCircuitResistanceGroupBox.Controls.Add(this.DeleteFrequencyButton);
 			this.CalculateCircuitResistanceGroupBox.Controls.Add(this.EnterFrequencyTextBox);
 			this.CalculateCircuitResistanceGroupBox.Controls.Add(this.EnterFreguencyLabel);
@@ -362,6 +360,7 @@ namespace CircuitResistanceCalculatorUI
 			// 
 			// CircuitResistanceGridView
 			// 
+			this.CircuitResistanceGridView.AllowUserToAddRows = false;
 			dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
 			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.CircuitResistanceGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -435,34 +434,24 @@ namespace CircuitResistanceCalculatorUI
 			// 
 			this.ClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.ClearButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ClearButton.Location = new System.Drawing.Point(274, 215);
+			this.ClearButton.Location = new System.Drawing.Point(365, 215);
 			this.ClearButton.Name = "ClearButton";
 			this.ClearButton.Size = new System.Drawing.Size(85, 25);
 			this.ClearButton.TabIndex = 5;
 			this.ClearButton.Text = "Clear";
 			this.ClearButton.UseVisualStyleBackColor = true;
 			// 
-			// EditFrequencyButton
-			// 
-			this.EditFrequencyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.EditFrequencyButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.EditFrequencyButton.Location = new System.Drawing.Point(456, 215);
-			this.EditFrequencyButton.Name = "EditFrequencyButton";
-			this.EditFrequencyButton.Size = new System.Drawing.Size(85, 25);
-			this.EditFrequencyButton.TabIndex = 4;
-			this.EditFrequencyButton.Text = "Edit";
-			this.EditFrequencyButton.UseVisualStyleBackColor = true;
-			// 
 			// DeleteFrequencyButton
 			// 
 			this.DeleteFrequencyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.DeleteFrequencyButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.DeleteFrequencyButton.Location = new System.Drawing.Point(365, 215);
+			this.DeleteFrequencyButton.Location = new System.Drawing.Point(456, 215);
 			this.DeleteFrequencyButton.Name = "DeleteFrequencyButton";
 			this.DeleteFrequencyButton.Size = new System.Drawing.Size(85, 25);
 			this.DeleteFrequencyButton.TabIndex = 3;
 			this.DeleteFrequencyButton.Text = "Delete";
 			this.DeleteFrequencyButton.UseVisualStyleBackColor = true;
+			this.DeleteFrequencyButton.Click += new System.EventHandler(this.DeleteFrequencyButton_Click);
 			// 
 			// EnterFrequencyTextBox
 			// 
@@ -492,6 +481,7 @@ namespace CircuitResistanceCalculatorUI
 			this.ClearTreeButton.Size = new System.Drawing.Size(32, 28);
 			this.ClearTreeButton.TabIndex = 5;
 			this.ClearTreeButton.UseVisualStyleBackColor = true;
+			this.ClearTreeButton.Click += new System.EventHandler(this.ClearTreeButton_Click);
 			// 
 			// AddConnectionButton
 			// 
@@ -503,15 +493,15 @@ namespace CircuitResistanceCalculatorUI
 			this.AddConnectionButton.UseVisualStyleBackColor = true;
 			this.AddConnectionButton.Click += new System.EventHandler(this.AddConnectionButton_Click);
 			// 
-			// ElementButton
+			// AddElementButton
 			// 
-			this.ElementButton.Image = ((System.Drawing.Image)(resources.GetObject("ElementButton.Image")));
-			this.ElementButton.Location = new System.Drawing.Point(10, 64);
-			this.ElementButton.Name = "ElementButton";
-			this.ElementButton.Size = new System.Drawing.Size(32, 27);
-			this.ElementButton.TabIndex = 7;
-			this.ElementButton.UseVisualStyleBackColor = true;
-			this.ElementButton.Click += new System.EventHandler(this.ElementButton_Click);
+			this.AddElementButton.Image = ((System.Drawing.Image)(resources.GetObject("AddElementButton.Image")));
+			this.AddElementButton.Location = new System.Drawing.Point(10, 64);
+			this.AddElementButton.Name = "AddElementButton";
+			this.AddElementButton.Size = new System.Drawing.Size(32, 27);
+			this.AddElementButton.TabIndex = 7;
+			this.AddElementButton.UseVisualStyleBackColor = true;
+			this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
 			// 
 			// RemoveNodeButton
 			// 
@@ -529,7 +519,7 @@ namespace CircuitResistanceCalculatorUI
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1026, 627);
 			this.Controls.Add(this.RemoveNodeButton);
-			this.Controls.Add(this.ElementButton);
+			this.Controls.Add(this.AddElementButton);
 			this.Controls.Add(this.AddConnectionButton);
 			this.Controls.Add(this.ClearTreeButton);
 			this.Controls.Add(this.MainTableLayoutPanel);
@@ -575,7 +565,6 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.GroupBox CalculateCircuitResistanceGroupBox;
 		private System.Windows.Forms.TextBox EnterFrequencyTextBox;
 		private System.Windows.Forms.Label EnterFreguencyLabel;
-		private System.Windows.Forms.Button EditFrequencyButton;
 		private System.Windows.Forms.Button DeleteFrequencyButton;
 		private System.Windows.Forms.Button ClearButton;
 		private System.Windows.Forms.DataGridView CircuitResistanceGridView;
@@ -593,7 +582,7 @@ namespace CircuitResistanceCalculatorUI
 		private System.Windows.Forms.Button ClearTreeButton;
 		private System.Windows.Forms.ToolStripMenuItem editNodeToolStripMenuItem;
 		private System.Windows.Forms.Button AddConnectionButton;
-		private System.Windows.Forms.Button ElementButton;
+		private System.Windows.Forms.Button AddElementButton;
 		private System.Windows.Forms.Button CalculateButton;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Frequency;
