@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 // Почему не наоборот CircuitResistanceCalculator.Connections?
 
@@ -15,6 +16,7 @@ namespace CircuitResistanceCalculator.Connections
 	/// Класс <see cref="ConnectionBase"/> предоставляет общий 
 	/// функционал узелов дерева, определяющих тип соединения элементов
 	/// </summary>
+	[DataContract]
 	public abstract class ConnectionBase : Node.NodeBase
 	{
 		//TODO: set можно убрать, т.к. используется только внутри +
@@ -22,6 +24,7 @@ namespace CircuitResistanceCalculator.Connections
 		/// Сожержит список узлов подцепи, представляющих 
 		/// элементы или тип их соединения
 		/// </summary>
+		[DataMember]
 		private List<Node.NodeBase> Nodes { get; }
 
 		/// <summary>
@@ -38,6 +41,7 @@ namespace CircuitResistanceCalculator.Connections
 		/// Возвращает количество узлов в списке соединения
 		/// </summary>
 		/// <returns>Количество узлов в списке соединения</returns>
+		[DataMember]
 		public int NodesCount 
 		{
 			get

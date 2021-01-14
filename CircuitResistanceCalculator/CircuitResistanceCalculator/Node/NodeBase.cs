@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using Newtonsoft.Json;
+using System.Data;
+using System.Xml;
+using System.IO;
 
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Node

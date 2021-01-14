@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Elements
@@ -13,11 +14,13 @@ namespace CircuitResistanceCalculator.Elements
 	/// функционал для пассивных элементов
 	/// электрической цепи
 	/// </summary>
+	[DataContract]
 	public abstract class ElementBase : Node.NodeBase
 	{
 		/// <summary>
 		/// Содержит индекс элемента цепи
 		/// </summary>
+		[DataMember]
 		private int _index;
 
 		/// <summary>
@@ -42,6 +45,7 @@ namespace CircuitResistanceCalculator.Elements
 		/// <summary>
 		/// Содержит номинал элемента
 		/// </summary>
+		[DataMember]
 		private double _value;
 
 		/// <summary>
