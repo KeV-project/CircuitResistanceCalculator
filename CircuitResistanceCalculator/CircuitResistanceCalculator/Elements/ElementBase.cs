@@ -59,7 +59,7 @@ namespace CircuitResistanceCalculator.Elements
 			}
 			set
 			{
-				const double minValue = 0.000000000001;
+				const double minValue = 0;
 				const double maxValue = 1000000000.0;
 				Validators.ValueValidator.AssertValueInRange(value, minValue, 
 					maxValue, "номинал элемента");

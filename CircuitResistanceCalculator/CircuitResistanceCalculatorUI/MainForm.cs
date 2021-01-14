@@ -32,7 +32,7 @@ namespace CircuitResistanceCalculatorUI
 			_frequencies = new List<double>();
 			_path = new FileInfo(Environment.GetFolderPath(
 				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit1.notes");
+				"\\CircuitResistanceCalculator\\" + "Circuit.notes");
 		}
 
 		// Создание новой цепи
@@ -47,17 +47,41 @@ namespace CircuitResistanceCalculatorUI
 		}
 
 		// Создание новой цепи
-		private void CreateNewCircuit(ConnectionBase parentNode, 
+		private void CreateNewCircuit(TreeNode parentNode, 
 			NodeBase newNode)
 		{
-			CircuitTreeView.SelectedNode = CircuitTreeView.Nodes.OfType<TreeNode>()
-							.FirstOrDefault(node => node.Tag.Equals(parentNode));
-			AddNode(null, new AddedNodeArgs(newNode));
-			if(newNode is ConnectionBase)
+			((ConnectionBase)parentNode.Tag).AddNode(newNode);
+
+			TreeNode newTreeNode = new TreeNode();
+			newTreeNode.Tag = newNode;
+			if (newNode is ParallelConnection)
 			{
-				for (int i = 0; i < ((ConnectionBase)newNode).NodesCount; i++)
+				newTreeNode.Text = "Parallel";
+			}
+			else if (newNode is SerialConnection)
+			{
+				newTreeNode.Text = "Serial";
+			}
+			else if (newNode is Resistor)
+			{
+				newTreeNode.Text = "R" + ((ElementBase)newNode).Index;
+			}
+			else if (newNode is Inductor)
+			{
+				newTreeNode.Text = "L" + ((ElementBase)newNode).Index;
+			}
+			else
+			{
+				newTreeNode.Text = "C" + ((ElementBase)newNode).Index;
+			}
+			parentNode.Nodes.Add(newTreeNode);
+
+			if (newNode is ConnectionBase)
+			{
+				int nodesCount = ((ConnectionBase)newNode).NodesCount;
+				for (int i = 0; i < nodesCount; i++)
 				{
-					CreateNewCircuit((ConnectionBase)newNode, ((ConnectionBase)newNode)[i]);
+					CreateNewCircuit(newTreeNode, ((ConnectionBase)newNode)[i]);
 				}
 			}
 		}
@@ -306,15 +330,21 @@ namespace CircuitResistanceCalculatorUI
 		// Десериализация первой цепи
 		private void Circuit1ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_circuit = new SerialConnection();
 			CircuitTreeView.Nodes.Clear();
-			NewElectricalCircuitToolStripMenuItem_Click(
-				NewElectricalCircuitToolStripMenuItem, EventArgs.Empty);
+
+			_circuit = new SerialConnection();
+
+			TreeNode root = new TreeNode("Root");
+			root.Tag = _circuit;
+			CircuitTreeView.Nodes.Add(root);
+
 			_path = new FileInfo(Environment.GetFolderPath(
 				Environment.SpecialFolder.ApplicationData) +
 				"\\CircuitResistanceCalculator\\" + "Circuit1.notes");
-			ConnectionBase newCircuit = Serializer.ReadCircuit(_path);
-			CreateNewCircuit(newCircuit, (ConnectionBase)newCircuit[0]);
+			ConnectionBase circuit1 = Serializer.ReadCircuit(_path);
+
+			CreateNewCircuit(root, (ConnectionBase)circuit1[0]);
+			CircuitTreeView.ExpandAll();
 		}
 	}
 }
