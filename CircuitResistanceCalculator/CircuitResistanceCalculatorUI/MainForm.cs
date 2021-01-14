@@ -46,13 +46,12 @@ namespace CircuitResistanceCalculatorUI
 			CircuitTreeView.Nodes.Add(root);
 		}
 
-		// Создание новой цепи
-		private void CreateNewCircuit(TreeNode parentNode, 
+		// Добавление нового узла в цепь
+		private void AddNode(TreeNode parentNode, TreeNode newTreeNode,
 			NodeBase newNode)
 		{
 			((ConnectionBase)parentNode.Tag).AddNode(newNode);
 
-			TreeNode newTreeNode = new TreeNode();
 			newTreeNode.Tag = newNode;
 			if (newNode is ParallelConnection)
 			{
@@ -75,7 +74,23 @@ namespace CircuitResistanceCalculatorUI
 				newTreeNode.Text = "C" + ((ElementBase)newNode).Index;
 			}
 			parentNode.Nodes.Add(newTreeNode);
+		}
 
+		// Добавление нового узла в цепь и 
+		// перезаполнение рассчетной таблицы
+		private void AddNode(object obj, AddedNodeArgs e)
+		{
+			AddNode(CircuitTreeView.SelectedNode, new TreeNode(), e.Node);
+			RecalculateCircuit();
+		}
+
+		// Создание дерева по готовой цепи
+		private void CreateNewCircuit(TreeNode parentNode, NodeBase newNode)
+		{
+			TreeNode newTreeNode = new TreeNode();
+
+			AddNode(parentNode, newTreeNode, newNode);
+		
 			if (newNode is ConnectionBase)
 			{
 				int nodesCount = ((ConnectionBase)newNode).NodesCount;
@@ -84,37 +99,6 @@ namespace CircuitResistanceCalculatorUI
 					CreateNewCircuit(newTreeNode, ((ConnectionBase)newNode)[i]);
 				}
 			}
-		}
-
-		// Добавление нового узла в цепь
-		private void AddNode(object obj, AddedNodeArgs e)
-		{
-			((ConnectionBase)CircuitTreeView.SelectedNode.Tag).AddNode(e.Node);
-			
-			TreeNode newNode = new TreeNode();
-			newNode.Tag = e.Node;
-			if (e.Node is ParallelConnection)
-			{
-				newNode.Text = "Parallel";
-			}
-			else if(e.Node is SerialConnection)
-			{
-				newNode.Text = "Serial";
-			}
-			else if(e.Node is Resistor)
-			{
-				newNode.Text = "R" + ((ElementBase)e.Node).Index;
-			}
-			else if (e.Node is Inductor)
-			{
-				newNode.Text = "L" + ((ElementBase)e.Node).Index;
-			}
-			else 
-			{
-				newNode.Text = "C" + ((ElementBase)e.Node).Index;
-			}
-			CircuitTreeView.SelectedNode.Nodes.Add(newNode);
-			RecalculateCircuit();
 		}
 
 		// Замена выбранного узла цепи
