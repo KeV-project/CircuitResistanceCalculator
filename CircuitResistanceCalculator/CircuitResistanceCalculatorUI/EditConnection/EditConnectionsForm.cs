@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Node;
 
-namespace CircuitResistanceCalculatorUI
+namespace CircuitResistanceCalculatorUI.EditConnection
 { 
 	public partial class EditConnectionsForm : Form
 	{

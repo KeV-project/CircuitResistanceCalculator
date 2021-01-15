@@ -1,5 +1,5 @@
 ﻿
-namespace CircuitResistanceCalculatorUI
+namespace CircuitResistanceCalculatorUI.EditElement
 {
 	partial class EditElementForm
 	{

@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Elements;
 
-namespace CircuitResistanceCalculatorUI
+namespace CircuitResistanceCalculatorUI.EditElement
 {
 	public partial class EditElementForm : Form
 	{

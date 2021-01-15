@@ -1,20 +1,17 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Numerics;
 using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
 using CircuitResistanceCalculator.Serializer;
+using CircuitResistanceCalculatorUI.EditElement;
+using CircuitResistanceCalculatorUI.EditConnection;
 
-namespace CircuitResistanceCalculatorUI
+namespace CircuitResistanceCalculatorUI.MainForm
 {
 	public partial class MainForm : Form
 	{
@@ -23,16 +20,19 @@ namespace CircuitResistanceCalculatorUI
 		private List<double> _frequencies;
 		private List<Complex> _resistance;
 
-		private FileInfo _path;
+		private readonly FileInfo _defaultPath = new FileInfo(
+			Environment.GetFolderPath(
+			Environment.SpecialFolder.ApplicationData) +
+			"\\CircuitResistanceCalculator\\" + "Circuit.notes");
+
+		private FileInfo _currentPath;
 
 		public MainForm()
 		{
 			InitializeComponent();
 
 			_frequencies = new List<double>();
-			_path = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit.notes");
+			_currentPath = _defaultPath;
 		}
 
 		// Создание новой цепи
@@ -77,7 +77,7 @@ namespace CircuitResistanceCalculatorUI
 		}
 
 		// Добавление нового узла в цепь и 
-		// перезаполнение рассчетной таблицы
+		// перезаполнение расчетной таблицы
 		private void AddNode(object obj, AddedNodeArgs e)
 		{
 			AddNode(CircuitTreeView.SelectedNode, new TreeNode(), e.Node);
@@ -305,14 +305,26 @@ namespace CircuitResistanceCalculatorUI
 			RecalculateCircuit();
 		}
 
-		// Сериализация цепи
+		// Сериализация цепи в файл по умолчанию 
 		private void SaveCircuitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Serializer.SaveCircuit(_circuit, _path);
+			Serializer.SaveCircuit(_circuit, _defaultPath);
 		}
 
-		// Десериализация первой цепи
-		private void Circuit1ToolStripMenuItem_Click(object sender, EventArgs e)
+		// Выбор пути к файлу для сериализации
+		private void SaveCircuitAsToolStripMenuItem_Click(object sender,
+			EventArgs e)
+		{
+			SaveCircuitDialog.Filter = "NOTES (*.notes)| *.notes";
+			if (SaveCircuitDialog.ShowDialog() == DialogResult.OK)
+			{
+				_currentPath = new FileInfo(SaveCircuitDialog.FileName);
+				Serializer.SaveCircuit(_circuit, _currentPath);
+			}
+		}
+
+		// Десериализация цепи
+		private void DeserializingCircuit(FileInfo path)
 		{
 			CircuitTreeView.Nodes.Clear();
 
@@ -322,13 +334,28 @@ namespace CircuitResistanceCalculatorUI
 			root.Tag = _circuit;
 			CircuitTreeView.Nodes.Add(root);
 
-			_path = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit1.notes");
-			ConnectionBase circuit1 = Serializer.ReadCircuit(_path);
+			ConnectionBase circuit1 = Serializer.ReadCircuit(path);
 
 			CreateNewCircuit(root, (ConnectionBase)circuit1[0]);
 			CircuitTreeView.ExpandAll();
+		}
+
+		// Десериализация первой цепи
+		private void Circuit1ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
+				Environment.SpecialFolder.ApplicationData) +
+				"\\CircuitResistanceCalculator\\" + "Circuit1.notes");
+			DeserializingCircuit(currentPath);
+		}
+
+		// Десериализация второй цепи
+		private void Сircuit2ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
+				Environment.SpecialFolder.ApplicationData) +
+				"\\CircuitResistanceCalculator\\" + "Circuit2.notes");
+			DeserializingCircuit(currentPath);
 		}
 	}
 }
