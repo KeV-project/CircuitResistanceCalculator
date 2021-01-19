@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Numerics;
+using CircuitResistanceCalculator.Elements;
 
 namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 {
@@ -19,8 +16,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
             double expectedValue = 0.00022116;
 
             // act
-            Elements.Capacitor capacitor = 
-                new Elements.Capacitor(expectedValue, expectedIndex);
+            Capacitor capacitor = new Capacitor(expectedValue, expectedIndex);
             int actualIndex = capacitor.Index;
             double actualValue = capacitor.Value;
 
@@ -35,8 +31,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
         public void TestCalculateZ_CorrectValue()
         {
             // setup
-            Elements.Capacitor capacitor = 
-                new Elements.Capacitor(0.00022116, 1) ;
+            Capacitor capacitor = new Capacitor(0.00022116, 1) ;
             Complex expectedZ = new Complex(0, -14.4);
 
             // act

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Numerics;
+using CircuitResistanceCalculator.Connections;
+using CircuitResistanceCalculator.Elements;
 
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
@@ -16,12 +18,11 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 		public void TestCalculateZ_CorrectValue()
 		{
 			// setup
-			Connections.ParallelConnection parallelConnection = 
-				new Connections.ParallelConnection();
+			ParallelConnection parallelConnection = new ParallelConnection();
 
-			Elements.Resistor resistor = new Elements.Resistor(1000.0, 1);
-			Elements.Inductor inductor = new Elements.Inductor(0.016, 1);
-			Elements.Capacitor capacitor = new Elements.Capacitor(0.00022116, 1);
+			Resistor resistor = new Resistor(1000.0, 1);
+			Inductor inductor = new Inductor(0.016, 1);
+			Capacitor capacitor = new Capacitor(0.00022116, 1);
 
 			parallelConnection.AddNode(resistor);
 			parallelConnection.AddNode(inductor);
