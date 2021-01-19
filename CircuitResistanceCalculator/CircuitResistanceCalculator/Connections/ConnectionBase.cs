@@ -159,23 +159,17 @@ namespace CircuitResistanceCalculator.Connections
 		/// Возвращает 0, если объекты не равны<returns>
 		public override int CompareTo(NodeBase node)
 		{
-			if (node is ConnectionBase)
+			if (node is ConnectionBase && 
+				this.GetType() == node.GetType() &&
+				((ConnectionBase)this).NodesCount ==
+				((ConnectionBase)this).NodesCount)
 			{
-				if (this.GetType() == node.GetType() &&
-					((ConnectionBase)this).NodesCount ==
-					((ConnectionBase)this).NodesCount)
+				for (int i = 0; i < this.NodesCount; i++)
 				{
-					for (int i = 0; i < this.NodesCount; i++)
+					if (this[i].CompareTo(((ConnectionBase)node)[i]) == 0)
 					{
-						if (this[i].CompareTo(((ConnectionBase)node)[i]) == 0)
-						{
-							return 0;
-						}
+						return 0;
 					}
-				}
-				else
-				{
-					return 0;
 				}
 			}
 			else
