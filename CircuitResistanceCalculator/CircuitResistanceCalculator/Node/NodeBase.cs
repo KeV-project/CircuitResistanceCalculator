@@ -19,13 +19,6 @@ namespace CircuitResistanceCalculator.Node
 	/// </summary>
 	public abstract class NodeBase
 	{
-        //TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
-		/// <summary>
-		/// Определяет сигнатуру события <see cref="ValueChanged"/>
-		/// и обязует наследников реализовать данное событие
-		/// </summary>
-		public abstract event EventHandler<EventArgs> ValueChanged;
-
 		/// <summary>
 		/// Обпределяет сигнатуру метода ChangeNode 
 		/// и обязует наследников реализовать данный метод

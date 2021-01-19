@@ -66,30 +66,11 @@ namespace CircuitResistanceCalculator.Connections
 		/// <param name="node">Новый узел</param>
 		public void AddNode(Node.NodeBase node)
 		{ 
-			node.ValueChanged += ChangeValue;
 			node.NodeChanged += ReplaceNode;
 			node.NodeRemoved += RemoveNode;
 
 			Nodes.Add(node);
 		}
-
-		/// <summary>
-		/// Вызывавает событие перерасчета цепи при изменении
-		/// какого-либо элемента списка
-		/// </summary>
-		/// <param name="obj">Узел, вызвавший метод</param>
-		/// <param name="e">Прочие данные</param>
-		private void ChangeValue(object obj, EventArgs e)
-		{
-			ValueChanged?.Invoke(this, EventArgs.Empty);
-		}
-
-		//TODO: Т.к. тут нет такого свойства - тегу не к чему привязаться +
-		/// <summary>
-		/// Событие, возникающее при изменении свойства 
-		/// value какого-либо элемента списка
-		/// </summary>
-		public override event EventHandler<EventArgs> ValueChanged;
 
 		/// <summary>
 		/// Вызывает цепочку события для замены текущего объкта
@@ -132,12 +113,10 @@ namespace CircuitResistanceCalculator.Connections
 				index = i + 1;
 			}
 
-			((Node.NodeBase)obj).ValueChanged -= ChangeValue;
 			((Node.NodeBase)obj).NodeChanged -= ReplaceNode;
 			((Node.NodeBase)obj).NodeRemoved -= RemoveNode;
 			Nodes.Remove((Node.NodeBase)obj);
 
-			e.Node.ValueChanged += ChangeValue;
 			e.Node.NodeChanged += ReplaceNode;
 			e.Node.NodeRemoved += RemoveNode;
 			Nodes.Insert(index, e.Node);
@@ -162,7 +141,6 @@ namespace CircuitResistanceCalculator.Connections
 		/// <param name="e">Прочие данные</param>
 		private void RemoveNode(object obj, EventArgs e)
 		{
-			((Node.NodeBase)obj).ValueChanged -= ChangeValue;
 			((Node.NodeBase)obj).NodeChanged -= ReplaceNode;
 			((Node.NodeBase)obj).NodeRemoved -= RemoveNode;
 			Nodes.Remove((Node.NodeBase)obj);

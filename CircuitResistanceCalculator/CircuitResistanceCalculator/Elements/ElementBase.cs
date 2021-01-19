@@ -63,12 +63,7 @@ namespace CircuitResistanceCalculator.Elements
 				const double maxValue = 1000000000.0;
 				Validators.ValueValidator.AssertValueInRange(value, minValue, 
 					maxValue, "номинал элемента");
-
-				if (_value != value)
-				{
-					_value = value;
-					ValueChanged?.Invoke(this, EventArgs.Empty);
-				}
+				_value = value;
 			}
 		}
 
@@ -85,12 +80,6 @@ namespace CircuitResistanceCalculator.Elements
 			Value = value;
 			Index = index;
 		}
-
-		/// <summary>
-		/// Событие, возникающее при изменении значения свойства 
-		/// value, предназныченное для вызова перерасчета цепи
-		/// </summary>
-		public override event EventHandler<EventArgs> ValueChanged;
 
 		/// <summary>
 		/// Вызывает цепочку событий для замены текущего элемента
