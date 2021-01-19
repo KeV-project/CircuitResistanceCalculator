@@ -71,14 +71,12 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 				actualConnectionNodesCount, "Метод некорректно " +
 				"добавляет узел в список соединения");
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement,
-				nameof(Elements.ElementBase.ValueChanged));
-			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement,
 				nameof(Elements.ElementBase.NodeChanged));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement,
 				nameof(Elements.ElementBase.NodeRemoved));
 		}
 
-		[Test(Description = "Позитивный тест метода ChangeConnection")]
+		[Test(Description = "Позитивный тест метода ReplaceNode")]
 		public void ChangeConnection()
 		{
 			// setup
@@ -103,21 +101,14 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 				new Connections.ParallelConnection();
 
 			// act
-			currentConnection.ChangeConnection(newConnection);
+			currentConnection.ReplaceNode(newConnection);
 
 			// assert
-			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newConnection,
-				nameof(Elements.ElementBase.ValueChanged));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newConnection,
 				nameof(Elements.ElementBase.NodeChanged));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newConnection,
 				nameof(Elements.ElementBase.NodeRemoved));
 
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(currentConnection,
-					nameof(Elements.ElementBase.ValueChanged));
-			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(currentConnection,
@@ -130,7 +121,7 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 		}
 
-		[Test(Description = "Негативный тест метода ChangeConnection")]
+		[Test(Description = "Негативный тест метода ReplaceNode")]
 		public void TestChangedConnection_IncorrectValue()
 		{
 			// setup
@@ -143,7 +134,7 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 				new Connections.ParallelConnection();
 
 			// act
-			currentConnection.ChangeConnection(newConnection);
+			currentConnection.ReplaceNode(newConnection);
 
 			// assert
 			Assert.AreEqual(serialConnection[0], currentConnection, 
@@ -170,11 +161,6 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 			Assert.AreEqual(expectedSerialConnectionNodesCount, 
 				actualSerialConnectionNodesCount, "Метод некорректно выполняет " +
 				"удаление соединения из списка родительского узла");
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(removedConnection,
-					nameof(Elements.ElementBase.ValueChanged));
-			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(removedConnection,

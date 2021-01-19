@@ -58,7 +58,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 				"возвращает некорректное значение");
 		}
 
-		[Test(Description = "Позитивный тест метода ChangeElement")]
+		[Test(Description = "Позитивный тест метода ReplaceNode")]
 		public void TestChangeElement_CorrectValue()
 		{
 			// setup
@@ -71,21 +71,14 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 				new Elements.Inductor(0.005, 1);
 
 			// act
-			currentElement.ChangeElement(newElement);
+			currentElement.ReplaceNode(newElement);
 
 			// assert
-			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement, 
-				nameof(Elements.ElementBase.ValueChanged));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement, 
 				nameof(Elements.ElementBase.NodeChanged));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement, 
 				nameof(Elements.ElementBase.NodeRemoved));
 
-			Assert.Throws<ArgumentNullException>(()=>
-			{
-				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(currentElement, 
-					nameof(Elements.ElementBase.ValueChanged));
-			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(currentElement, 
@@ -99,7 +92,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 
 		}
 
-		[Test(Description = "Негативный тест метода ChangeElement")]
+		[Test(Description = "Негативный тест метода ReplaceNode")]
 		public void TestChangeElement_IncorrectValue()
 		{
 			// setup
@@ -114,7 +107,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 			double expectedValue = 2000.0;
 
 			// act
-			currentElement.ChangeElement(newElement);
+			currentElement.ReplaceNode(newElement);
 			double actualValue = currentElement.Value;
 
 			// assert
@@ -143,11 +136,6 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 			Assert.AreEqual(expectedSerialConnectionNodesCount, 
 				actualSerialConnectionNodesCount, "Метод не удаляет элемент " +
 				"из списка родительского узла");
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(removedElement,
-					nameof(Elements.ElementBase.ValueChanged));
-			}, "Событие ValueChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(removedElement,
