@@ -5,11 +5,23 @@ using CircuitResistanceCalculator.Elements;
 
 namespace CircuitResistanceCalculatorUI.EditElement
 {
+	/// <summary>
+	/// Класс <see cref="EditElementForm"/> предназначен 
+	/// для редактирования и создания элемента цепи
+	/// типа <see cref="ElementBase"/>
+	/// </summary>
 	public partial class EditElementForm : Form
 	{
-		private ElementBase _editableElement;
-
+		/// <summary>
+		/// Событие, возникающее при попытке добавить в цепь новый элемент
+		/// </summary>
 		public event EventHandler<AddedNodeArgs> CreatedNewElement;
+
+		/// <summary>
+		/// Выполняет инициализацию и настройку компонентов 
+		/// окна для редактирования элемента цепи
+		/// </summary>
+		/// <param name="connection">Редактируемый элемент</param>
 		public EditElementForm(ElementBase element)
 		{
 			InitializeComponent();
@@ -42,6 +54,12 @@ namespace CircuitResistanceCalculatorUI.EditElement
 			}
 		}
 
+		/// <summary>
+		/// Устанавливает единицы измерения
+		/// соответствующие текущему элементу
+		/// </summary>
+		/// <param name="sender">Элемент управления типа DomainUpDown</param>
+		/// <param name="e">Вспомогательные данные</param>
 		private void ElementsDomainUpDown_SelectedItemChanged(object sender,
 			EventArgs e)
 		{
@@ -59,6 +77,11 @@ namespace CircuitResistanceCalculatorUI.EditElement
 			}
 		}
 
+		/// <summary>
+		/// Запускает процесс добавления нового соединения в цепь
+		/// </summary>
+		/// <param name="sender">Элемент управления типа Button</param>
+		/// <param name="e">Вспомогательные данные</param>
 		private void OkButton_Click(object sender, EventArgs e)
 		{
 			if(!Int32.TryParse(IndexTextBox.Text, out int index))

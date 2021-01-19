@@ -18,7 +18,8 @@ namespace CircuitResistanceCalculatorUI.EditConnection
 		private ConnectionBase _editableConnection;
 
 		/// <summary>
-		/// Событие, возникающее при добавлении нового элемента в цепь
+		/// Событие, возникающее при попытке добавить в цепь 
+		/// новое соединение
 		/// </summary>
 		public event EventHandler<AddedNodeArgs> CreatedNewConnection;
 
@@ -26,7 +27,7 @@ namespace CircuitResistanceCalculatorUI.EditConnection
 		/// Выполняет инициализацию и настройку компонентов 
 		/// окна для редактирования элемента цепи
 		/// </summary>
-		/// <param name="connection"></param>
+		/// <param name="connection">Редактируемое соединение</param>
 		public EditConnectionsForm(ConnectionBase connection)
 		{
 			InitializeComponent();
