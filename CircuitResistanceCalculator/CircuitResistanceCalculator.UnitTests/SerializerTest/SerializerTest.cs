@@ -19,13 +19,13 @@ namespace CircuitResistanceCalculator.UnitTests.SerializerTest
 					{
 						new FileInfo(Environment.GetFolderPath(
 							Environment.SpecialFolder.ApplicationData) +
-							"\\CircuitResistanceCalculator\\" + "TestCircuit1.notes"),
+							"\\CircuitResistanceCalculator1\\" + "TestCircuit1.notes"),
 						new FileInfo(Environment.GetFolderPath(
 							Environment.SpecialFolder.ApplicationData) +
-							"\\CircuitResistanceCalculator\\" + "TestCircuit2.notes"),
+							"\\CircuitResistanceCalculator2\\" + "TestCircuit2.notes"),
 						new FileInfo(Environment.GetFolderPath(
 							Environment.SpecialFolder.ApplicationData) +
-							"\\CircuitResistanceCalculator\\" + "TestCircuit3.notes")
+							"\\CircuitResistanceCalculator3\\" + "TestCircuit3.notes")
 					};
 
 				path[0].Directory.Create();
