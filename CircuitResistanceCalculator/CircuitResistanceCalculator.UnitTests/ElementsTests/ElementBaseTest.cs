@@ -120,7 +120,8 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 		public void TestRemoveNode_CorrectValue()
 		{
 			// setup
-			Connections.SerialConnection serialConnection = new Connections.SerialConnection();
+			Connections.SerialConnection serialConnection = 
+				new Connections.SerialConnection();
 			Elements.ElementBase removedElement = 
 				new Elements.Resistor(1000.0, 1);
 			serialConnection.AddNode(removedElement);
@@ -146,6 +147,40 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(removedElement,
 					nameof(Elements.ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
+		}
+
+		[Test(Description = "Позитивный тест метода CompareTo")]
+		public void TestCompareTo_CorrectValue()
+		{
+			// setup
+			Elements.Resistor resistor1 = new Elements.Resistor(1000, 1);
+			Elements.Resistor resistor2 = new Elements.Resistor(1000, 1);
+
+			int expectedCompareResult = 1;
+
+			// act
+			int actualCompareResult = resistor1.CompareTo(resistor2);
+
+			// assert
+			Assert.AreEqual(expectedCompareResult, actualCompareResult, 
+				"Метод неверно сравнивает идентичные элементы");
+		}
+
+		[Test(Description = "Негативный тест метода CompareTo")]
+		public void TestCompareTo_IncorrectValue()
+		{
+			// setup
+			Elements.Resistor resistor = new Elements.Resistor(1000, 1);
+			Elements.Inductor inductor = new Elements.Inductor(0.016, 1);
+
+			int expectedCompareResult = 0;
+
+			// act
+			int actualCompareResult = resistor.CompareTo(inductor);
+
+			// assert
+			Assert.AreEqual(expectedCompareResult, actualCompareResult,
+				"Метод неверно сравнивает идентичные элементы");
 		}
 	}
 }

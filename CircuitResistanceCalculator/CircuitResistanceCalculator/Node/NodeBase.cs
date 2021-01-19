@@ -52,5 +52,13 @@ namespace CircuitResistanceCalculator.Node
 		/// <param name="frequency">Частота сигнала</param>
 		/// <returns></returns>
 		public abstract Complex CalculateZ(double frequency);
+
+		/// <summary>
+		/// Устанавливает идентичность двух узлов
+		/// </summary>
+		/// <param name="node">Узел для сравнения</param>
+		/// <returns>Возвращает 1, если объекты равны.
+		/// Возвращает 0, если объекты не равны<returns>
+		public abstract int CompareTo(NodeBase node);
 	}
 }

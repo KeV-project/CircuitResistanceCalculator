@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using CircuitResistanceCalculator.Node;
 
 // Почему не наоборот CircuitResistanceCalculator.Connections?
 
@@ -17,7 +15,8 @@ namespace CircuitResistanceCalculator.Connections
 	/// функционал узелов дерева, определяющих тип соединения элементов
 	/// </summary>
 	[DataContract]
-	public abstract class ConnectionBase : Node.NodeBase
+	public abstract class ConnectionBase : Node.NodeBase,
+		IComparable<Node.NodeBase>
 	{
 		//TODO: set можно убрать, т.к. используется только внутри +
 		/// <summary>
@@ -150,5 +149,41 @@ namespace CircuitResistanceCalculator.Connections
 		/// Событие, возникающее при попытке удалить узел из цепи
 		/// </summary>
 		public override event EventHandler<EventArgs> NodeRemoved;
+
+		
+		/// <summary>
+		/// Устанавливает идентичность цепей
+		/// </summary>
+		/// <param name="circuit">Объект для сравнения</param>
+		/// <returns>Возвращает 1, если объекты равны.
+		/// Возвращает 0, если объекты не равны<returns>
+		public override int CompareTo(NodeBase node)
+		{
+			if (node is ConnectionBase)
+			{
+				if (this.GetType() == node.GetType() &&
+					((ConnectionBase)this).NodesCount ==
+					((ConnectionBase)this).NodesCount)
+				{
+					for (int i = 0; i < this.NodesCount; i++)
+					{
+						if (this[i].CompareTo(((ConnectionBase)node)[i]) == 0)
+						{
+							return 0;
+						}
+					}
+				}
+				else
+				{
+					return 0;
+				}
+			}
+			else
+			{
+				return 0;
+			}
+
+			return 1;
+		}
 	}
 }

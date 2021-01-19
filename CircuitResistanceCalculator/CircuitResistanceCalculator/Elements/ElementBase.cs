@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using CircuitResistanceCalculator.Node;
 
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Elements
@@ -15,7 +16,8 @@ namespace CircuitResistanceCalculator.Elements
 	/// электрической цепи
 	/// </summary>
 	[DataContract]
-	public abstract class ElementBase : Node.NodeBase
+	public abstract class ElementBase : Node.NodeBase,
+		IComparable<Node.NodeBase>
 	{
 		/// <summary>
 		/// Содержит индекс элемента цепи
@@ -118,5 +120,22 @@ namespace CircuitResistanceCalculator.Elements
 		/// перерасчета цепи.
 		/// </summary>
 		public override event EventHandler<EventArgs> NodeRemoved;
+
+		/// <summary>
+		/// Устанавливает идентичность элементов цепи
+		/// </summary>
+		/// <param name="node">Объект для сравнения</param>
+		/// <returns>Возвращает 1, если объекты равны.
+		/// Возвращает 0, если объекты не равны<returns>
+		public override int CompareTo(NodeBase node)
+		{
+			if(this.GetType() == node.GetType() &&
+				((ElementBase)this).Index == ((ElementBase)node).Index &&
+				((ElementBase)this).Value == ((ElementBase)this).Value)
+			{
+				return 1;
+			}
+			return 0;
+		}
 	}
 }
