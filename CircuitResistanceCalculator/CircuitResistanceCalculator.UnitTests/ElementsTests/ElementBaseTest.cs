@@ -53,7 +53,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 		}
 
 		[Test(Description = "Позитивный тест метода ReplaceNode")]
-		public void TestChangeElement_CorrectValue()
+		public void TestReplaceNode_CorrectValue()
 		{
 			// setup
 			SerialConnection serialConnection = new SerialConnection();
@@ -81,27 +81,6 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 					nameof(ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 
-		}
-
-		[Test(Description = "Негативный тест метода ReplaceNode")]
-		public void TestChangeElement_IncorrectValue()
-		{
-			// setup
-			SerialConnection serialConnection = new SerialConnection();
-			ElementBase currentElement = new Resistor(1000.0, 1);
-			serialConnection.AddNode(currentElement);
-			ElementBase newElement = new Resistor(2000.0, 1);
-
-			double expectedValue = 2000.0;
-
-			// act
-			currentElement.ReplaceNode(newElement);
-			double actualValue = currentElement.Value;
-
-			// assert
-			Assert.AreEqual(expectedValue, actualValue, "Метод " +
-				"ChangeElement неверно обрабатывает попытку " +
-				"заменить текущий элемент объектом того же типа");
 		}
 
 		[Test(Description = "Позитивный тест метода RemoveNode")]

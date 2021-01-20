@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using NUnit.Framework;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
@@ -153,6 +154,38 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
 					removedConnection, nameof(ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
+		}
+
+		[Test(Description = "Позитивный тест метода SubscribeNodesToEvents")]
+		public void TestSubscribeNodesToEvents_CorrectValue()
+		{
+			// setup
+			FileInfo path = new FileInfo(Environment.GetFolderPath(
+				Environment.SpecialFolder.ApplicationData) +
+				"\\CircuitResistanceCalculator\\" + "Circuit.notes");
+			ConnectionBase circut = Serializer.Serializer.ReadCircuit(path);
+
+			// act
+			circut.SubscribeNodesToEvents();
+
+			// assert
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(circut[0],
+				nameof(ElementBase.NodeChanged));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(circut[0],
+				nameof(ElementBase.NodeRemoved));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
+				((ConnectionBase)circut[0])[0], nameof(ElementBase.NodeChanged));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
+				((ConnectionBase)circut[0])[0], nameof(ElementBase.NodeRemoved));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
+				((ConnectionBase)circut[0])[1], nameof(ElementBase.NodeChanged));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
+				((ConnectionBase)circut[0])[1], nameof(ElementBase.NodeRemoved));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
+				((ConnectionBase)circut[0])[2], nameof(ElementBase.NodeChanged));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
+				((ConnectionBase)circut[0])[2], nameof(ElementBase.NodeRemoved));
+
 		}
 
 		[Test(Description = "Позитивный тест метода CompareTo")]
