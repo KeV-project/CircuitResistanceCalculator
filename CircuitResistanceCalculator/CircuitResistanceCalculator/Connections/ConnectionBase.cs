@@ -15,8 +15,8 @@ namespace CircuitResistanceCalculator.Connections
 	/// функционал узелов дерева, определяющих тип соединения элементов
 	/// </summary>
 	[DataContract]
-	public abstract class ConnectionBase : Node.NodeBase,
-		IComparable<Node.NodeBase>
+	public abstract class ConnectionBase : NodeBase,
+		IComparable<NodeBase>
 	{
 		//TODO: set можно убрать, т.к. используется только внутри +
 		/// <summary>
@@ -24,7 +24,7 @@ namespace CircuitResistanceCalculator.Connections
 		/// элементы или тип их соединения
 		/// </summary>
 		[DataMember]
-		private List<Node.NodeBase> Nodes { get; }
+		private List<NodeBase> Nodes { get; }
 
 		/// <summary>
 		/// Позволяет получить или добавить узел в список 
@@ -33,7 +33,7 @@ namespace CircuitResistanceCalculator.Connections
 		/// <param name="index">Индекс возвращаемого узла
 		/// или позиция для добавления узла в список</param>
 		/// <returns>Возвращает узел по указанному индексу</returns>
-		public Node.NodeBase this[int index] => Nodes[index];
+		public NodeBase this[int index] => Nodes[index];
 
 		//TODO: В свойство вместо метода +
 		/// <summary>
@@ -56,14 +56,14 @@ namespace CircuitResistanceCalculator.Connections
 		/// </summary>
 		protected ConnectionBase()
 		{
-			Nodes = new List<Node.NodeBase>();
+			Nodes = new List<NodeBase>();
 		}
 
 		/// <summary>
 		/// Добавляет узел в подцепь
 		/// </summary>
 		/// <param name="node">Новый узел</param>
-		public void AddNode(Node.NodeBase node)
+		public void AddNode(NodeBase node)
 		{ 
 			node.NodeChanged += ReplaceNode;
 			node.NodeRemoved += RemoveNode;
@@ -76,7 +76,7 @@ namespace CircuitResistanceCalculator.Connections
 		/// в дереве электрической цепи
 		/// </summary>
 		/// <param name="newConnection">Новый узел</param>
-		public override void ReplaceNode(Node.NodeBase newConnection)
+		public override void ReplaceNode(NodeBase newConnection)
 		{
 			if (newConnection.GetType() != this.GetType())
 			{
@@ -84,7 +84,7 @@ namespace CircuitResistanceCalculator.Connections
 				{
 					((ConnectionBase)newConnection).AddNode(this[i]);
 				}
-				this.NodeChanged?.Invoke(this, new Node.AddedNodeArgs(newConnection));
+				this.NodeChanged?.Invoke(this, new AddedNodeArgs(newConnection));
 			}
 		}
 
@@ -93,14 +93,14 @@ namespace CircuitResistanceCalculator.Connections
 		/// <summary>
 		/// Событие, возникающее при попытке заменить текущий узел в цепи
 		/// </summary>
-		public override event EventHandler<Node.AddedNodeArgs> NodeChanged;
+		public override event EventHandler<AddedNodeArgs> NodeChanged;
 
 		/// <summary>
 		/// Заменяет выбранный узел на новый в скиске дочерних узлов
 		/// </summary>
 		/// <param name="obj">Заменяемый узел</param>
 		/// <param name="e">Хранит новый объект списка</param>
-		private void ReplaceNode(object obj, Node.AddedNodeArgs e)
+		private void ReplaceNode(object obj, AddedNodeArgs e)
 		{
 			int index = 0;
 			for (int i = 0; i < Nodes.Count; i++)
@@ -112,9 +112,9 @@ namespace CircuitResistanceCalculator.Connections
 				index = i + 1;
 			}
 
-			((Node.NodeBase)obj).NodeChanged -= ReplaceNode;
-			((Node.NodeBase)obj).NodeRemoved -= RemoveNode;
-			Nodes.Remove((Node.NodeBase)obj);
+			((NodeBase)obj).NodeChanged -= ReplaceNode;
+			((NodeBase)obj).NodeRemoved -= RemoveNode;
+			Nodes.Remove((NodeBase)obj);
 
 			e.Node.NodeChanged += ReplaceNode;
 			e.Node.NodeRemoved += RemoveNode;
@@ -140,9 +140,9 @@ namespace CircuitResistanceCalculator.Connections
 		/// <param name="e">Прочие данные</param>
 		private void RemoveNode(object obj, EventArgs e)
 		{
-			((Node.NodeBase)obj).NodeChanged -= ReplaceNode;
-			((Node.NodeBase)obj).NodeRemoved -= RemoveNode;
-			Nodes.Remove((Node.NodeBase)obj);
+			((NodeBase)obj).NodeChanged -= ReplaceNode;
+			((NodeBase)obj).NodeRemoved -= RemoveNode;
+			Nodes.Remove((NodeBase)obj);
 		}
 
 		/// <summary>
@@ -160,9 +160,8 @@ namespace CircuitResistanceCalculator.Connections
 		public override int CompareTo(NodeBase node)
 		{
 			if (node is ConnectionBase && 
-				this.GetType() == node.GetType() &&
-				((ConnectionBase)this).NodesCount ==
-				((ConnectionBase)this).NodesCount)
+				GetType() == node.GetType() &&
+				(NodesCount == ((ConnectionBase)node).NodesCount))
 			{
 				for (int i = 0; i < this.NodesCount; i++)
 				{

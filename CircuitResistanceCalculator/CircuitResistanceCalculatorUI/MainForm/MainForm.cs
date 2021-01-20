@@ -327,6 +327,11 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		private void CircuitTreeView_NodeMouseDoubleClick(object sender, 
 			TreeNodeMouseClickEventArgs e)
 		{
+			if(CircuitTreeView.SelectedNode == null)
+			{
+				return;
+			}
+
 			if(CircuitTreeView.SelectedNode.Tag == _circuit)
 			{
 				return;
