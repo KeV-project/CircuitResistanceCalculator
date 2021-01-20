@@ -90,12 +90,14 @@ namespace CircuitResistanceCalculator.UnitTests.SerializerTest
 				var deserializationMessage =
 					"Искажение данных при десериализации объекта";
 
-				yield return new TestCaseData(initFunc1, arrangeAction, serializationMessage)
-					.SetName("Позитивнынй тест SaveCircuit");
-				yield return new TestCaseData(initFunc2, arrangeEmpty, deserializationMessage)
-					.SetName("Позитивный тест ReadCircuit (чтение пустого файла)");
-				yield return new TestCaseData(initFunc1, arrangeAction, deserializationMessage)
-					.SetName("Позитивный тест ReadCircuit (чтение проекта из файла)");
+				yield return new TestCaseData(initFunc1, arrangeAction, 
+					serializationMessage).SetName("Позитивнынй тест SaveCircuit");
+				yield return new TestCaseData(initFunc2, arrangeEmpty, 
+					deserializationMessage).SetName("Позитивный тест ReadCircuit " +
+					"(чтение пустого файла)");
+				yield return new TestCaseData(initFunc1, arrangeAction, 
+					deserializationMessage).SetName("Позитивный тест ReadCircuit " +
+					"(чтение проекта из файла)");
 			}
 		}
 	}

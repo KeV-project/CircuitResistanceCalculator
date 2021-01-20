@@ -1,11 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Connections;
 
 namespace CircuitResistanceCalculator.Serializer
@@ -44,9 +40,9 @@ namespace CircuitResistanceCalculator.Serializer
 				}
 		
 				circuit = JsonConvert.DeserializeObject<SerialConnection>(
-					projectContent, new Newtonsoft.Json.JsonSerializerSettings 
+					projectContent, new JsonSerializerSettings 
 					{ 
-						TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto 
+						TypeNameHandling = TypeNameHandling.Auto 
 					});
 			}
 

@@ -20,10 +20,10 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
             double actualValue = inductor.Value;
 
             // assert
-            Assert.AreEqual(expectedIndex, actualIndex, "Конструктор неверно " +
-                "инициализирует свойство Index");
-            Assert.AreEqual(expectedValue, actualValue, "Конструктор неверно " +
-                "инициализирует свойство Value");
+            Assert.AreEqual(expectedIndex, actualIndex, "Конструктор " +
+                "неверно инициализирует свойство Index");
+            Assert.AreEqual(expectedValue, actualValue, "Конструктор " +
+                "неверно инициализирует свойство Value");
         }
 
         [Test(Description = "Позитивный тест метода CalculateZ")]

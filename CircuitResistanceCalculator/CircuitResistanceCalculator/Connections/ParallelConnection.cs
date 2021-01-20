@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 
 //TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Connections
@@ -32,7 +27,8 @@ namespace CircuitResistanceCalculator.Connections
 
 			circuitResistance = 1 / circuitResistance;
             //TODO: Округление на нижнем уровне - плохая практика, т.к. это приведёт к потери точности. +
-			return new Complex(circuitResistance.Real, circuitResistance.Imaginary);
+			return new Complex(circuitResistance.Real, 
+				circuitResistance.Imaginary);
 		}
 	}
 }

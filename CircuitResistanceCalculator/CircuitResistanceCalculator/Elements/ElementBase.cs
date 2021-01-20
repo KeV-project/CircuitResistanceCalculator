@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using CircuitResistanceCalculator.Node;
 
@@ -16,8 +12,8 @@ namespace CircuitResistanceCalculator.Elements
 	/// электрической цепи
 	/// </summary>
 	[DataContract]
-	public abstract class ElementBase : Node.NodeBase,
-		IComparable<Node.NodeBase>
+	public abstract class ElementBase : NodeBase,
+		IComparable<NodeBase>
 	{
 		/// <summary>
 		/// Содержит индекс элемента цепи
@@ -63,8 +59,8 @@ namespace CircuitResistanceCalculator.Elements
 			{
 				const double minValue = 0;
 				const double maxValue = 1000000000.0;
-				Validators.ValueValidator.AssertValueInRange(value, minValue, 
-					maxValue, "номинал элемента");
+				Validators.ValueValidator.AssertValueInRange(value, 
+					minValue, maxValue, "номинал элемента");
 				_value = value;
 			}
 		}
@@ -87,11 +83,11 @@ namespace CircuitResistanceCalculator.Elements
 		/// Вызывает цепочку событий для замены текущего элемента
 		/// </summary>
 		/// <param name="newElement">Новый элемент</param>
-		public override void ReplaceNode(Node.NodeBase newElement)
+		public override void ReplaceNode(NodeBase newElement)
 		{
-			if(newElement.GetType() != this.GetType())
+			if(newElement.GetType() != GetType())
 			{
-				NodeChanged?.Invoke(this, new Node.AddedNodeArgs(newElement));
+				NodeChanged?.Invoke(this, new AddedNodeArgs(newElement));
 			}
 			else
 			{
@@ -104,7 +100,7 @@ namespace CircuitResistanceCalculator.Elements
 		/// элемент цепи. Предназначено для замены текущего 
 		/// элемента и вызова перерасчета цепи
 		/// </summary>
-		public override event EventHandler<Node.AddedNodeArgs> NodeChanged;
+		public override event EventHandler<AddedNodeArgs> NodeChanged;
 
 		/// <summary>
 		/// Вызывает цепочку событий для удаления текущего элемента цепи
@@ -129,9 +125,9 @@ namespace CircuitResistanceCalculator.Elements
 		/// Возвращает 0, если объекты не равны<returns>
 		public override int CompareTo(NodeBase node)
 		{
-			if(this.GetType() == node.GetType() &&
-				((ElementBase)this).Index == ((ElementBase)node).Index &&
-				((ElementBase)this).Value == ((ElementBase)this).Value)
+			if(GetType() == node.GetType() &&
+				Index == ((ElementBase)node).Index &&
+				Value == ((ElementBase)node).Value)
 			{
 				return 1;
 			}
