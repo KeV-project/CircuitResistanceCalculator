@@ -485,9 +485,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			SaveCircuit();
 
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit1.notes");
+			FileInfo currentPath = new FileInfo(
+				"../../../../Templates/Circuit1.notes");
 			DeserializingCircuit(currentPath);
 		}
 
@@ -500,9 +499,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			SaveCircuit();
 
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit2.notes");
+			FileInfo currentPath = new FileInfo(
+				"../../../../Templates/Circuit2.notes");
 			DeserializingCircuit(currentPath);
 		}
 
@@ -515,9 +513,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			SaveCircuit();
 
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit3.notes");
+			FileInfo currentPath = new FileInfo(
+				"../../../../Templates/Circuit3.notes");
 			DeserializingCircuit(currentPath);
 		}
 
@@ -530,9 +527,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			SaveCircuit();
 
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit4.notes");
+			FileInfo currentPath = new FileInfo(
+				"../../../../Templates/Circuit4.notes");
 			DeserializingCircuit(currentPath);
 		}
 
@@ -545,9 +541,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			SaveCircuit();
 
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit5.notes");
+			FileInfo currentPath = new FileInfo(
+				"../../../../Templates/Circuit5.notes");
 			DeserializingCircuit(currentPath);
 		}
 
