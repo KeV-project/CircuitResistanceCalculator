@@ -85,14 +85,7 @@ namespace CircuitResistanceCalculator.Elements
 		/// <param name="newElement">Новый элемент</param>
 		public override void ReplaceNode(NodeBase newElement)
 		{
-			if(newElement.GetType() != GetType())
-			{
-				NodeChanged?.Invoke(this, new AddedNodeArgs(newElement));
-			}
-			else
-			{
-				Value = ((ElementBase)newElement).Value;
-			}
+			NodeChanged?.Invoke(this, new AddedNodeArgs(newElement));
 		}
 
 		/// <summary>

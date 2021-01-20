@@ -327,7 +327,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		private void CircuitTreeView_NodeMouseDoubleClick(object sender, 
 			TreeNodeMouseClickEventArgs e)
 		{
-			if(CircuitTreeView.SelectedNode == null)
+			ConnectionBase circuit = _circuit;
+			if (CircuitTreeView.SelectedNode == null)
 			{
 				return;
 			}
@@ -351,7 +352,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 				editElementForm.CreatedNewElement += ReplaceNode;
 				editElementForm.ShowDialog();
 			}
-
+			ConnectionBase circuit1 = _circuit;
 			CircuitTreeView.ExpandAll();
 		}
 

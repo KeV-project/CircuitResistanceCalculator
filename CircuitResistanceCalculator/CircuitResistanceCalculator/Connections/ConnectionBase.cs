@@ -78,13 +78,9 @@ namespace CircuitResistanceCalculator.Connections
 		/// <param name="newConnection">Новый узел</param>
 		public override void ReplaceNode(NodeBase newConnection)
 		{
-			if (newConnection.GetType() != this.GetType())
+			if (newConnection.GetType() != GetType())
 			{
-				for (int i = 0; i < Nodes.Count; i++)
-				{
-					((ConnectionBase)newConnection).AddNode(this[i]);
-				}
-				this.NodeChanged?.Invoke(this, new AddedNodeArgs(newConnection));
+				NodeChanged?.Invoke(this, new AddedNodeArgs(newConnection));
 			}
 		}
 
@@ -100,21 +96,21 @@ namespace CircuitResistanceCalculator.Connections
 		/// </summary>
 		/// <param name="obj">Заменяемый узел</param>
 		/// <param name="e">Хранит новый объект списка</param>
-		private void ReplaceNode(object obj, AddedNodeArgs e)
+		private void ReplaceNode(object currentNode, AddedNodeArgs e)
 		{
 			int index = 0;
 			for (int i = 0; i < Nodes.Count; i++)
 			{
-				if(this[i] == obj)
+				if(this[i] == currentNode)
 				{
 					break;
 				}
 				index = i + 1;
 			}
 
-			((NodeBase)obj).NodeChanged -= ReplaceNode;
-			((NodeBase)obj).NodeRemoved -= RemoveNode;
-			Nodes.Remove((NodeBase)obj);
+			((NodeBase)currentNode).NodeChanged -= ReplaceNode;
+			((NodeBase)currentNode).NodeRemoved -= RemoveNode;
+			Nodes.Remove((NodeBase)currentNode);
 
 			e.Node.NodeChanged += ReplaceNode;
 			e.Node.NodeRemoved += RemoveNode;
