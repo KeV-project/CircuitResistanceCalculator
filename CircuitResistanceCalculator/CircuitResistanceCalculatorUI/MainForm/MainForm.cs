@@ -449,6 +449,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		private void DeserializingCircuit(FileInfo path)
 		{
 			_circuit = Serializer.ReadCircuit(path);
+			_circuit.SubscribeNodesToEvents();
 
 			TreeNode root = new TreeNode("Root");
 			root.Tag = _circuit;

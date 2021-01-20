@@ -146,7 +146,22 @@ namespace CircuitResistanceCalculator.Connections
 		/// </summary>
 		public override event EventHandler<EventArgs> NodeRemoved;
 
-		
+		/// <summary>
+		/// Подписывает события дочерних узлов на обработчики
+		/// </summary>
+		public void SubscribeNodesToEvents()
+		{
+			for(int i = 0; i < NodesCount; i++)
+			{
+				this[i].NodeChanged += ReplaceNode;
+				this[i].NodeRemoved += RemoveNode;
+				if (this[i] is ConnectionBase)
+				{
+					((ConnectionBase)this[i]).SubscribeNodesToEvents();
+				}
+			}
+		}
+
 		/// <summary>
 		/// Устанавливает идентичность цепей
 		/// </summary>
