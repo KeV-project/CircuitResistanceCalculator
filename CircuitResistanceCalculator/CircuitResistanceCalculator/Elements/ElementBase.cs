@@ -2,10 +2,8 @@
 using System.Runtime.Serialization;
 using CircuitResistanceCalculator.Node;
 
-//TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Elements
 {
-	//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 	/// <summary>
 	/// Класс <see cref="ElementBase"/> представляет базовый 
 	/// функционал для пассивных элементов
@@ -65,12 +63,10 @@ namespace CircuitResistanceCalculator.Elements
 			}
 		}
 
-		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
 		/// класса <see cref="ElementBase"/>
 		/// </summary>
-		/// //TODO: XML комментарии стоят не для всех аргументов +
 		/// <param name="value">Номинал элемета</param>
 		/// <param name="index">Индекс элемента</param>
 		protected ElementBase(double value, int index) : base()
@@ -115,7 +111,7 @@ namespace CircuitResistanceCalculator.Elements
 		/// </summary>
 		/// <param name="node">Объект для сравнения</param>
 		/// <returns>Возвращает 1, если объекты равны.
-		/// Возвращает 0, если объекты не равны<returns>
+		/// Возвращает 0, если объекты не равны</returns>
 		public override int CompareTo(NodeBase node)
 		{
 			if(GetType() == node.GetType() &&

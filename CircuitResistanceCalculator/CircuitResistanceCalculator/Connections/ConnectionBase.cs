@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CircuitResistanceCalculator.Node;
 
-// Почему не наоборот CircuitResistanceCalculator.Connections?
-
-//TODO: Правильнее тогда Connection.CircuitResistanceCalculator в качестве namespace +
-//TODO: Проблема есть практически в каждом классе, который вложен в папку. +
-//TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Connections
 {
 	/// <summary>
@@ -18,7 +13,6 @@ namespace CircuitResistanceCalculator.Connections
 	public abstract class ConnectionBase : NodeBase,
 		IComparable<NodeBase>
 	{
-		//TODO: set можно убрать, т.к. используется только внутри +
 		/// <summary>
 		/// Сожержит список узлов подцепи, представляющих 
 		/// элементы или тип их соединения
@@ -35,21 +29,13 @@ namespace CircuitResistanceCalculator.Connections
 		/// <returns>Возвращает узел по указанному индексу</returns>
 		public NodeBase this[int index] => Nodes[index];
 
-		//TODO: В свойство вместо метода +
 		/// <summary>
 		/// Возвращает количество узлов в списке соединения
 		/// </summary>
 		/// <returns>Количество узлов в списке соединения</returns>
 		[DataMember]
-		public int NodesCount 
-		{
-			get
-			{
-				return Nodes.Count;
-			}
-		}
+		public int NodesCount => Nodes.Count;
 
-		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
 		/// Инициализирует общие свойства наследников 
 		/// класса <see cref="ConnectionBase"/>
@@ -84,8 +70,6 @@ namespace CircuitResistanceCalculator.Connections
 			}
 		}
 
-		//TODO: В комментарии неверная информация, т.к. это просто событие, обработчик в котором может вызвать всё что угодно т.к. +
-		//TODO: событие публичное
 		/// <summary>
 		/// Событие, возникающее при попытке заменить текущий узел в цепи
 		/// </summary>
@@ -94,6 +78,7 @@ namespace CircuitResistanceCalculator.Connections
 		/// <summary>
 		/// Заменяет выбранный узел на новый в скиске дочерних узлов
 		/// </summary>
+		/// //TODO: XML комментарии?
 		/// <param name="obj">Заменяемый узел</param>
 		/// <param name="e">Хранит новый объект списка</param>
 		private void ReplaceNode(object currentNode, AddedNodeArgs e)
@@ -165,9 +150,10 @@ namespace CircuitResistanceCalculator.Connections
 		/// <summary>
 		/// Устанавливает идентичность цепей
 		/// </summary>
+		/// //TODO: XML комментарии?
 		/// <param name="circuit">Объект для сравнения</param>
 		/// <returns>Возвращает 1, если объекты равны.
-		/// Возвращает 0, если объекты не равны<returns>
+		/// Возвращает 0, если объекты не равны</returns>
 		public override int CompareTo(NodeBase node)
 		{
 			if (node is ConnectionBase && 

@@ -62,6 +62,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			CircuitResistanceGridView.Rows.Clear();
 			_resistance = new List<Complex>();
+			//TODO Почему сразу не сделать через for?
 			int i = 1;
 			foreach (double frequency in _frequencies)
 			{
@@ -164,6 +165,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			NodeBase newNode)
 		{
 			newTreeNode.Tag = newNode;
+			//TODO: лучше в switch-case с pattern matching
 			if (newNode is ParallelConnection)
 			{
 				newTreeNode.Text = "Parallel";
@@ -294,6 +296,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="e">Содержит новый узел цепи</param>
 		private void ReplaceNode(object obj, AddedNodeArgs e)
 		{
+			//TODO: Ощущение, что дублируется с AddNode
 			((NodeBase)CircuitTreeView.SelectedNode.Tag).ReplaceNode(e.Node);
 			CircuitTreeView.SelectedNode.Tag = e.Node;
 			if (e.Node is ParallelConnection)
@@ -475,6 +478,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 				DeserializingCircuit(currentPath);
 			}
 		}
+
+		//TODO: Обработчики дублируются, я бы сделал словарь (кнопка, путь) и в одном обработчике клика всё это обработал
 
 		/// <summary>
 		/// Выполняет десериализацию первой шаблонной цепи

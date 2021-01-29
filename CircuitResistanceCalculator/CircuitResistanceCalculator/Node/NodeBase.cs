@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Numerics;
 
-//TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Node
 {
-	//TODO: Тут и много где ещё не закрываете тег <see... должно быть <see cref=".."/> +
 	/// <summary>
 	/// Класс <see cref="NodeBase"/> представляет общий 
 	/// функционал для узлов дерева электрической цепи
@@ -17,7 +15,6 @@ namespace CircuitResistanceCalculator.Node
 		/// </summary>
 		public abstract void ReplaceNode(NodeBase node);
 
-		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
 		/// Определяет сигнатуру события <see cref="NodeChanged"/>
 		/// и обязует наследников реализовать данное событие
@@ -30,7 +27,6 @@ namespace CircuitResistanceCalculator.Node
 		/// </summary>
 		public abstract void RemoveNode();
 
-		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
 		/// Определяет сигнатуру события <see cref="NodeRemoved"/>
 		/// и обязует наследников реализовать данное событие
@@ -50,7 +46,7 @@ namespace CircuitResistanceCalculator.Node
 		/// </summary>
 		/// <param name="node">Узел для сравнения</param>
 		/// <returns>Возвращает 1, если объекты равны.
-		/// Возвращает 0, если объекты не равны<returns>
+		/// Возвращает 0, если объекты не равны</returns>
 		public abstract int CompareTo(NodeBase node);
 	}
 }
