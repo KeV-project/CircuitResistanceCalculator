@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Numerics;
 
-//TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Elements
 {
-	//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 	/// <summary>
 	/// Класс <see cref="Capacitor"/> предназначен для 
 	/// представления емкостного элемента 
@@ -12,11 +10,9 @@ namespace CircuitResistanceCalculator.Elements
 	/// </summary>
 	public class Capacitor : ElementBase
 	{
-		//TODO: Не закрыт тег <see... должно быть <see cref=".."/> +
 		/// <summary>
 		/// Инициализирует объект класса <see cref="Capacitor"/>
 		/// </summary>
-		/// TODO: XML комментарии стоят не для всех аргументов +
 		/// <param name="value">Номинал элемента</param>
 		/// <param name="index">Индекс элемента</param>
 		public Capacitor(double value, int index) : base(value, index)
@@ -31,9 +27,10 @@ namespace CircuitResistanceCalculator.Elements
 		/// <returns></returns>
 		public override Complex CalculateZ(double frequency)
 		{
+			//TODO: Зачем вы округляете Пи? о_О
 			Complex capacitorZ = new Complex(0, -1) * 1 / 
 				(2 * Math.Round(Math.PI, 2) * frequency * Value);
-            //TODO: Округление на нижнем уровне - плохая практика, т.к. это приведёт к потери точности. +
+
 			return new Complex(capacitorZ.Real, capacitorZ.Imaginary);
 		}
 	}

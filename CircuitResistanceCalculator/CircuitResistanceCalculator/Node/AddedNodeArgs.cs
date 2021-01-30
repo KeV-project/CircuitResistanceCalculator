@@ -1,9 +1,7 @@
 ﻿using System;
 
-//TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Node
 {
-	//TODO: XML комментарии? +
 	/// <summary>
 	/// Класс <see cref="AddedNodeArgs"/> предназначен для
 	/// хранения нового узла электрической цепи

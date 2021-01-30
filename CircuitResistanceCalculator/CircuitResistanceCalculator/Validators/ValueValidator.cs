@@ -1,6 +1,5 @@
 ﻿using System;
 
-//TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.Validators
 {
     /// <summary>
