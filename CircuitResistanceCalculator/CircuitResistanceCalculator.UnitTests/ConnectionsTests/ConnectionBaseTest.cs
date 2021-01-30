@@ -162,7 +162,7 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 			// setup
 			FileInfo path = new FileInfo(Environment.GetFolderPath(
 				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit.notes");
+				"\\CircuitResistanceCalculator\\" + "Circuit1.notes");
 			ConnectionBase circut = Serializer.Serializer.ReadCircuit(path);
 
 			// act
