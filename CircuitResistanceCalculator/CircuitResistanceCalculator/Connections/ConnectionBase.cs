@@ -78,7 +78,6 @@ namespace CircuitResistanceCalculator.Connections
 		/// <summary>
 		/// Заменяет выбранный узел на новый в скиске дочерних узлов
 		/// </summary>
-		/// //TODO: XML комментарии?
 		/// <param name="obj">Заменяемый узел</param>
 		/// <param name="e">Хранит новый объект списка</param>
 		private void ReplaceNode(object currentNode, AddedNodeArgs e)
@@ -150,7 +149,6 @@ namespace CircuitResistanceCalculator.Connections
 		/// <summary>
 		/// Устанавливает идентичность цепей
 		/// </summary>
-		/// //TODO: XML комментарии?
 		/// <param name="circuit">Объект для сравнения</param>
 		/// <returns>Возвращает 1, если объекты равны.
 		/// Возвращает 0, если объекты не равны</returns>
@@ -172,7 +170,6 @@ namespace CircuitResistanceCalculator.Connections
 			{
 				return 0;
 			}
-
 			return 1;
 		}
 	}

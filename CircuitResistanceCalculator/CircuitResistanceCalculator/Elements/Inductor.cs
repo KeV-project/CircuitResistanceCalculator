@@ -28,8 +28,8 @@ namespace CircuitResistanceCalculator.Elements
 		/// <returns></returns>
 		public override Complex CalculateZ(double frequency)
 		{
-			//TODO: Зачем вы округляете Пи? о_О
-			Complex inductorZ = new Complex(0, 1) * 2 * Math.Round(Math.PI, 2) 
+			//TODO: Зачем вы округляете Пи? о_О +
+			Complex inductorZ = new Complex(0, 1) * 2 * Math.PI
 				* frequency * Value;
 
 			return new Complex(inductorZ.Real, inductorZ.Imaginary);

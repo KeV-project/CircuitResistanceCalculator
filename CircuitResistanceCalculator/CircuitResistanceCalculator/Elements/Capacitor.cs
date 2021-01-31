@@ -27,9 +27,9 @@ namespace CircuitResistanceCalculator.Elements
 		/// <returns></returns>
 		public override Complex CalculateZ(double frequency)
 		{
-			//TODO: Зачем вы округляете Пи? о_О
+			//TODO: Зачем вы округляете Пи? о_О +
 			Complex capacitorZ = new Complex(0, -1) * 1 / 
-				(2 * Math.Round(Math.PI, 2) * frequency * Value);
+				(2 * Math.PI * frequency * Value);
 
 			return new Complex(capacitorZ.Real, capacitorZ.Imaginary);
 		}

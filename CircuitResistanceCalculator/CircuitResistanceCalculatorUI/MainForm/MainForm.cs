@@ -45,6 +45,14 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			"\\CircuitResistanceCalculator\\" + "Circuit.notes");
 
 		/// <summary>
+		/// Содержит имена элементов управления, отвечающих за
+		/// десериализацию шаблонов цепей и пути к файлам,
+		/// содержащим соответствующие цепи
+		/// </summary>
+		private readonly Dictionary<ToolStripMenuItem, FileInfo> _templates = new
+			Dictionary<ToolStripMenuItem, FileInfo>();
+
+		/// <summary>
 		/// Выполняет инициализацию и настройку 
 		/// компонентов стартового окна приложения
 		/// </summary>
@@ -53,8 +61,37 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			InitializeComponent();
 
 			_frequencies = new List<double>();
+		}
 
+		/// <summary>
+		/// Создает шаблоны цепей и словарь путей к соответствующим шаблонам
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void MainForm_Load(object sender, EventArgs e)
+		{
 			CreateTemplates();
+
+			_templates.Add(Template1ToolStripMenuItem, new FileInfo(
+				Environment.GetFolderPath(
+				Environment.SpecialFolder.ApplicationData) +
+				"\\CircuitResistanceCalculator\\" + "Circuit1.notes"));
+			_templates.Add(Template2ToolStripMenuItem, new FileInfo(
+				Environment.GetFolderPath(
+				Environment.SpecialFolder.ApplicationData) +
+				"\\CircuitResistanceCalculator\\" + "Circuit2.notes"));
+			_templates.Add(Template3ToolStripMenuItem, new FileInfo(
+				Environment.GetFolderPath(
+				Environment.SpecialFolder.ApplicationData) +
+				"\\CircuitResistanceCalculator\\" + "Circuit3.notes"));
+			_templates.Add(Template4ToolStripMenuItem, new FileInfo(
+				Environment.GetFolderPath(
+				Environment.SpecialFolder.ApplicationData) +
+				"\\CircuitResistanceCalculator\\" + "Circuit4.notes"));
+			_templates.Add(Template5ToolStripMenuItem, new FileInfo(
+				Environment.GetFolderPath(
+				Environment.SpecialFolder.ApplicationData) +
+				"\\CircuitResistanceCalculator\\" + "Circuit5.notes"));
 		}
 
 		/// <summary>
@@ -209,15 +246,14 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			CircuitResistanceGridView.Rows.Clear();
 			_resistance = new List<Complex>();
-			//TODO Почему сразу не сделать через for?
-			int i = 1;
-			foreach (double frequency in _frequencies)
+			//TODO Почему сразу не сделать через for? +
+			for(int i = 0; i < _frequencies.Count; i++)
 			{
-				Complex z = _circuit.CalculateZ(frequency);
+				Complex z = _circuit.CalculateZ(_frequencies[i]);
 				z = new Complex(Math.Round(z.Real, 3), Math.Round(z.Imaginary, 3));
 				_resistance.Add(z);
-				CircuitResistanceGridView.Rows.Add(i, frequency, _resistance.Last());
-				i++;
+				CircuitResistanceGridView.Rows.Add(i + 1, _frequencies[i], 
+					_resistance.Last());
 			}
 		}
 
@@ -304,6 +340,38 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		}
 
 		/// <summary>
+		/// Возвращает имя для нового узла дерева цепи
+		/// </summary>
+		/// <param name="node">Новый узел цепи</param>
+		/// <returns>Имя нового узла дерева цепи</returns>
+		private string GetTreeNodeName(NodeBase node)
+		{
+			switch (node)
+			{
+				case Resistor resistor:
+				{
+					return "R" + resistor.Index;
+				}
+				case Inductor inductor:
+				{
+					return "L" + inductor.Index;
+				}
+				case Capacitor capacitor:
+				{
+					return "C" + capacitor.Index;
+				}
+				case ParallelConnection parallelConnection:
+				{
+					return "Parallel";
+				}
+				default:
+				{
+					return "Serial";
+				}
+			}
+		}
+
+		/// <summary>
 		/// Добавляет новый узел в дерево цепи
 		/// </summary>
 		/// <param name="parentNode">Родительский элемент</param>
@@ -313,27 +381,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			NodeBase newNode)
 		{
 			newTreeNode.Tag = newNode;
-			//TODO: лучше в switch-case с pattern matching
-			if (newNode is ParallelConnection)
-			{
-				newTreeNode.Text = "Parallel";
-			}
-			else if (newNode is SerialConnection)
-			{
-				newTreeNode.Text = "Serial";
-			}
-			else if (newNode is Resistor)
-			{
-				newTreeNode.Text = "R" + ((ElementBase)newNode).Index;
-			}
-			else if (newNode is Inductor)
-			{
-				newTreeNode.Text = "L" + ((ElementBase)newNode).Index;
-			}
-			else
-			{
-				newTreeNode.Text = "C" + ((ElementBase)newNode).Index;
-			}
+			//TODO: лучше в switch-case с pattern matching +
+			newTreeNode.Text = GetTreeNodeName(newNode);
 			parentNode.Nodes.Add(newTreeNode);
 		}
 
@@ -444,29 +493,10 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="e">Содержит новый узел цепи</param>
 		private void ReplaceNode(object obj, AddedNodeArgs e)
 		{
-			//TODO: Ощущение, что дублируется с AddNode
+			//TODO: Ощущение, что дублируется с AddNode +
 			((NodeBase)CircuitTreeView.SelectedNode.Tag).ReplaceNode(e.Node);
 			CircuitTreeView.SelectedNode.Tag = e.Node;
-			if (e.Node is ParallelConnection)
-			{
-				CircuitTreeView.SelectedNode.Text = "Parallel";
-			}
-			else if (e.Node is SerialConnection)
-			{
-				CircuitTreeView.SelectedNode.Text = "Serial";
-			}
-			else if (e.Node is Resistor)
-			{
-				CircuitTreeView.SelectedNode.Text = "R" + ((ElementBase)e.Node).Index;
-			}
-			else if (e.Node is Inductor)
-			{
-				CircuitTreeView.SelectedNode.Text = "L" + ((ElementBase)e.Node).Index;
-			}
-			else
-			{
-				CircuitTreeView.SelectedNode.Text = "C" + ((ElementBase)e.Node).Index;
-			}
+			CircuitTreeView.SelectedNode.Text = GetTreeNodeName(e.Node);
 			RecalculateCircuit();
 		}
 
@@ -628,83 +658,20 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			}
 		}
 
-		//TODO: Обработчики дублируются, я бы сделал словарь (кнопка, путь) и в одном обработчике клика всё это обработал
-
+		//TODO: Обработчики дублируются, я бы сделал словарь (кнопка, путь) и в одном обработчике клика всё это обработал +
 		/// <summary>
-		/// Выполняет десериализацию первой шаблонной цепи
+		/// Выполняет десериализацию выбранного шаблона цепи
 		/// </summary>
-		/// <param name="sender">Элемент управления типа ToolStripMenuItem</param>
+		/// <param name="sender">Этемент управления типа ToolStripMenuItem</param>
 		/// <param name="e">Вспомогательные данные</param>
-		private void Circuit1ToolStripMenuItem_Click(object sender, EventArgs e)
+		private void TemplateToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SaveCircuit();
 
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit1.notes");
+			FileInfo currentPath = _templates[(ToolStripMenuItem)sender];
 			DeserializingCircuit(currentPath);
 		}
-
-		/// <summary>
-		/// Выполняет десериализацию второй шаблонной цепи
-		/// </summary>
-		/// <param name="sender">Элемент управления типа ToolStripMenuItem</param>
-		/// <param name="e">Вспомогательные данные</param>
-		private void Сircuit2ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			SaveCircuit();
-
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit2.notes");
-			DeserializingCircuit(currentPath);
-		}
-
-		/// <summary>
-		/// Выполняет десериализацию третьей шаблонной цепи
-		/// </summary>
-		/// <param name="sender">Элемент управления типа ToolStripMenuItem</param>
-		/// <param name="e">Вспомогательные данные</param>
-		private void Сircuit3ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			SaveCircuit();
-
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit3.notes");
-			DeserializingCircuit(currentPath);
-		}
-
-		/// <summary>
-		/// Выполняет десериализацию четвертой шаблонной цепи
-		/// </summary>
-		/// <param name="sender">Элемент управления типа ToolStripMenuItem</param>
-		/// <param name="e">Вспомогательные данные</param>
-		private void Сircuit4ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			SaveCircuit();
-
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit4.notes");
-			DeserializingCircuit(currentPath);
-		}
-
-		/// <summary>
-		/// Выполняет десериализацию пятой шаблонной цепи
-		/// </summary>
-		/// <param name="sender">Элемент управления типа ToolStripMenuItem</param>
-		/// <param name="e">Вспомогательные данные</param>
-		private void Сircuit5ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			SaveCircuit();
-
-			FileInfo currentPath = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit5.notes");
-			DeserializingCircuit(currentPath);
-		}
-
+		
 		/// <summary>
 		/// Удаляет цепь и очищает дерево цепи
 		/// </summary>
@@ -718,7 +685,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			RecalculateCircuit();
 		}
 
-		// Выход
 		/// <summary>
 		/// Осуществляет безопасный выход из приложения
 		/// </summary>

@@ -4,7 +4,6 @@ using System.Numerics;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
 
-//TODO: Если класс вложен в папку, namespace долен быть составным +
 namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 {
 	[TestFixture]

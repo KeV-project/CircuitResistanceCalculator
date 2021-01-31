@@ -10,7 +10,6 @@ namespace CircuitResistanceCalculator.UnitTests.HelperMethods
 	/// </summary>
 	public static class HelperMethods
 	{
-		//TODO: XML комментарии? +
 		/// <summary>
 		/// Метод предназначен для выявления подписки события на обработчик(и)
 		/// </summary>
@@ -32,7 +31,6 @@ namespace CircuitResistanceCalculator.UnitTests.HelperMethods
 			if (handler == null)
 			{
 				throw new ArgumentNullException("Событие " + eventName +
-				//TODO: Опечатка +
 					" должно быть подписано на обработчик");
 			}
 		}
