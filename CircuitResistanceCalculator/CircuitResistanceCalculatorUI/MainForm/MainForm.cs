@@ -227,6 +227,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			Serializer.SaveCircuit(circuit, path);
 		}
 
+		//TODO: Всё создание темплейтов убрал бы из главной формы в отдельный класс, дабы не засорять логику GUI
 		/// <summary>
 		/// Создание шаблонов для тестирования приложения
 		/// </summary>
@@ -244,12 +245,14 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// </summary>
 		private void RecalculateCircuit()
 		{
+			//TODO: Раньше не обратил внимание - с gridView правильнее работать с помощью списков, которые оповещают о своём изменении, смотрите тут
+			//TODO: https://stackoverflow.com/questions/16695885/binding-listt-to-datagridview-in-winform
 			CircuitResistanceGridView.Rows.Clear();
 			_resistance = new List<Complex>();
-			//TODO Почему сразу не сделать через for? +
 			for(int i = 0; i < _frequencies.Count; i++)
 			{
 				Complex z = _circuit.CalculateZ(_frequencies[i]);
+				//TODO: Не совсем удачная история - использовать одну и туже переменную для разных по логике значений, я бы просто new Complex прям в Add записал
 				z = new Complex(Math.Round(z.Real, 3), Math.Round(z.Imaginary, 3));
 				_resistance.Add(z);
 				CircuitResistanceGridView.Rows.Add(i + 1, _frequencies[i], 
@@ -348,6 +351,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			switch (node)
 			{
+				//TODO: Вот эту штуку можно опустить на уровень элементов, чтобы они по какому-нибудь GetInfo у NodeBase возвращали информацию о себе
 				case Resistor resistor:
 				{
 					return "R" + resistor.Index;
@@ -381,7 +385,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			NodeBase newNode)
 		{
 			newTreeNode.Tag = newNode;
-			//TODO: лучше в switch-case с pattern matching +
 			newTreeNode.Text = GetTreeNodeName(newNode);
 			parentNode.Nodes.Add(newTreeNode);
 		}
@@ -389,6 +392,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <summary>
 		/// Создает дерево по модели электрической цепи
 		/// </summary>
+		/// //TODO: XML комментарии?
 		/// <param name="parentNode">Родительский узел дерева цепи</param>
 		/// <param name="newNode">Узел для добавления в дерево цепи</param>
 		private void CreateNewCircuitTree(TreeNode parentTreeNode, NodeBase node)
@@ -493,7 +497,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="e">Содержит новый узел цепи</param>
 		private void ReplaceNode(object obj, AddedNodeArgs e)
 		{
-			//TODO: Ощущение, что дублируется с AddNode +
 			((NodeBase)CircuitTreeView.SelectedNode.Tag).ReplaceNode(e.Node);
 			CircuitTreeView.SelectedNode.Tag = e.Node;
 			CircuitTreeView.SelectedNode.Text = GetTreeNodeName(e.Node);
@@ -658,7 +661,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			}
 		}
 
-		//TODO: Обработчики дублируются, я бы сделал словарь (кнопка, путь) и в одном обработчике клика всё это обработал +
 		/// <summary>
 		/// Выполняет десериализацию выбранного шаблона цепи
 		/// </summary>
