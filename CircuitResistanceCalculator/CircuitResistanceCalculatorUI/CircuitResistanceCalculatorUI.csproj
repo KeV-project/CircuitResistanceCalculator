@@ -72,6 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="CreateTemplates\Templates.cs" />
     <EmbeddedResource Include="EditConnection\EditConnectionsForm.resx">
       <DependentUpon>EditConnectionsForm.cs</DependentUpon>
     </EmbeddedResource>

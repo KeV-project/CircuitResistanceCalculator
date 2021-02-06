@@ -10,6 +10,7 @@ using CircuitResistanceCalculator.Elements;
 using CircuitResistanceCalculator.Serializer;
 using CircuitResistanceCalculatorUI.EditElement;
 using CircuitResistanceCalculatorUI.EditConnection;
+using CircuitResistanceCalculatorUI.CreateTemplates;
 
 namespace CircuitResistanceCalculatorUI.MainForm
 {
@@ -46,11 +47,11 @@ namespace CircuitResistanceCalculatorUI.MainForm
 
 		/// <summary>
 		/// Содержит имена элементов управления, отвечающих за
-		/// десериализацию шаблонов цепей и пути к файлам,
+		/// десериализацию шаблонов цепей и путей к файлам,
 		/// содержащим соответствующие цепи
 		/// </summary>
-		private readonly Dictionary<ToolStripMenuItem, FileInfo> _templates = new
-			Dictionary<ToolStripMenuItem, FileInfo>();
+		private readonly Dictionary<ToolStripMenuItem, FileInfo> _templates =
+			new Dictionary<ToolStripMenuItem, FileInfo>();
 
 		/// <summary>
 		/// Выполняет инициализацию и настройку 
@@ -61,6 +62,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			InitializeComponent();
 
 			_frequencies = new List<double>();
+			Templates.CreateTemplates();
 		}
 
 		/// <summary>
@@ -70,174 +72,13 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="e"></param>
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			CreateTemplates();
+			Templates.CreateTemplates();
 
-			_templates.Add(Template1ToolStripMenuItem, new FileInfo(
-				Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit1.notes"));
-			_templates.Add(Template2ToolStripMenuItem, new FileInfo(
-				Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit2.notes"));
-			_templates.Add(Template3ToolStripMenuItem, new FileInfo(
-				Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit3.notes"));
-			_templates.Add(Template4ToolStripMenuItem, new FileInfo(
-				Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit4.notes"));
-			_templates.Add(Template5ToolStripMenuItem, new FileInfo(
-				Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit5.notes"));
-		}
-
-		/// <summary>
-		/// Создание первого шаблона
-		/// </summary>
-		private void CreateTemplates1()
-		{
-			SerialConnection circuit = new SerialConnection();
-			SerialConnection serialConnection = new SerialConnection();
-			Resistor resistor = new Resistor(1000.0, 1);
-			Inductor inductor = new Inductor(0.016, 1);
-			Capacitor capacitor = new Capacitor(0.00022116, 1);
-
-			circuit.AddNode(serialConnection);
-			serialConnection.AddNode(resistor);
-			serialConnection.AddNode(inductor);
-			serialConnection.AddNode(capacitor);
-
-			FileInfo path = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit1.notes");
-
-			Serializer.SaveCircuit(circuit, path);
-		}
-
-		/// <summary>
-		/// Создание второго шаблона
-		/// </summary>
-		private void CreateTemplates2()
-		{
-			SerialConnection circuit = new SerialConnection();
-			ParallelConnection parallelConnection = new ParallelConnection();
-			Resistor resistor = new Resistor(1000.0, 1);
-			Inductor inductor = new Inductor(0.016, 1);
-			Capacitor capacitor = new Capacitor(0.00022116, 1);
-
-			circuit.AddNode(parallelConnection);
-			parallelConnection.AddNode(resistor);
-			parallelConnection.AddNode(inductor);
-			parallelConnection.AddNode(capacitor);
-
-			FileInfo path = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit2.notes");
-
-			Serializer.SaveCircuit(circuit, path);
-		}
-
-		/// <summary>
-		/// Создание третьего шаблона
-		/// </summary>
-		private void CreateTemplates3()
-		{
-			SerialConnection circuit = new SerialConnection();
-			ParallelConnection parallelConnection = new ParallelConnection();
-			Resistor resistor1 = new Resistor(1000.0, 1);
-			Resistor resistor2 = new Resistor(2000.0, 2);
-			Resistor resistor3 = new Resistor(3000.0, 3);
-
-			circuit.AddNode(parallelConnection);
-			parallelConnection.AddNode(resistor1);
-			parallelConnection.AddNode(resistor2);
-			parallelConnection.AddNode(resistor3);
-
-			FileInfo path = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit3.notes");
-
-			Serializer.SaveCircuit(circuit, path);
-		}
-
-		/// <summary>
-		/// Создание четвертого шаблона
-		/// </summary>
-		private void CreateTemplates4()
-		{
-			SerialConnection circuit = new SerialConnection();
-			ParallelConnection parallelConnection = new ParallelConnection();
-			SerialConnection serialConnection1 = new SerialConnection();
-			SerialConnection serialConnection2 = new SerialConnection();
-			SerialConnection serialConnection3 = new SerialConnection();
-			Resistor resistor1 = new Resistor(1000.0, 1);
-			Inductor inductor1 = new Inductor(0.02, 1);
-			Resistor resistor2 = new Resistor(2000.0, 2);
-			Capacitor capacitor2 = new Capacitor(0.0002, 2);
-			Inductor inductor3 = new Inductor(0.03, 3);
-			Capacitor capacitor3 = new Capacitor(0.0003, 3);
-
-			circuit.AddNode(parallelConnection);
-			parallelConnection.AddNode(serialConnection1);
-			parallelConnection.AddNode(serialConnection2);
-			parallelConnection.AddNode(serialConnection3);
-			serialConnection1.AddNode(resistor1);
-			serialConnection1.AddNode(inductor1);
-			serialConnection2.AddNode(resistor2);
-			serialConnection2.AddNode(capacitor2);
-			serialConnection3.AddNode(inductor3);
-			serialConnection3.AddNode(capacitor3);
-
-			FileInfo path = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit4.notes");
-
-			Serializer.SaveCircuit(circuit, path);
-		}
-
-		/// <summary>
-		/// Создание пятого шаблона
-		/// </summary>
-		private void CreateTemplates5()
-		{
-			SerialConnection circuit = new SerialConnection();
-			SerialConnection serialConnection = new SerialConnection();
-			ParallelConnection parallelConnection1 = new ParallelConnection();
-			ParallelConnection parallelConnection2 = new ParallelConnection();
-			Resistor resistor1 = new Resistor(1000.0, 1);
-			Inductor inductor1 = new Inductor(0.016, 1);
-			Inductor inductor2 = new Inductor(0.035, 2);
-			Capacitor capacitor2 = new Capacitor(0.00022116, 2);
-
-			circuit.AddNode(serialConnection);
-			serialConnection.AddNode(parallelConnection1);
-			serialConnection.AddNode(parallelConnection2);
-			parallelConnection1.AddNode(resistor1);
-			parallelConnection1.AddNode(inductor1);
-			parallelConnection2.AddNode(inductor2);
-			parallelConnection2.AddNode(capacitor2);
-
-			FileInfo path = new FileInfo(Environment.GetFolderPath(
-				Environment.SpecialFolder.ApplicationData) +
-				"\\CircuitResistanceCalculator\\" + "Circuit5.notes");
-
-			Serializer.SaveCircuit(circuit, path);
-		}
-
-		//TODO: Всё создание темплейтов убрал бы из главной формы в отдельный класс, дабы не засорять логику GUI
-		/// <summary>
-		/// Создание шаблонов для тестирования приложения
-		/// </summary>
-		private void CreateTemplates()
-		{
-			CreateTemplates1();
-			CreateTemplates2();
-			CreateTemplates3();
-			CreateTemplates4();
-			CreateTemplates5();
+			_templates.Add(Template1ToolStripMenuItem, Templates.TemplatesPath[0]);
+			_templates.Add(Template2ToolStripMenuItem, Templates.TemplatesPath[1]);
+			_templates.Add(Template3ToolStripMenuItem, Templates.TemplatesPath[2]);
+			_templates.Add(Template4ToolStripMenuItem, Templates.TemplatesPath[3]);
+			_templates.Add(Template5ToolStripMenuItem, Templates.TemplatesPath[4]);
 		}
 
 		/// <summary>
