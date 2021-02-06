@@ -10,13 +10,19 @@ namespace CircuitResistanceCalculator.Elements
 	public class Resistor : ElementBase
 	{
 		/// <summary>
+		/// Возвращает имя элемента, состоящее из
+		/// обозначения и назначенного индекса
+		/// </summary>
+		public override string Name { get; }
+
+		/// <summary>
 		/// Инициализирует объект класса <see cref="Resistor"/>
 		/// </summary>
 		/// <param name="value">Номинал элемента</param>
 		/// <param name="index">Индекс элемента</param>
 		public Resistor(double value, int index) : base(value, index)
 		{
-
+			Name = "R" + index;
 		}
 
 		/// <summary>

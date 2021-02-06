@@ -9,6 +9,19 @@ namespace CircuitResistanceCalculator.Connections
 	public class ParallelConnection : ConnectionBase
 	{
 		/// <summary>
+		/// Возвращает имя узла
+		/// </summary>
+		public override string Name { get; }
+
+		/// <summary>
+		/// Инициализирует объект класса <see cref="ParallelConnection"/>
+		/// </summary>
+		public ParallelConnection()
+		{
+			Name = "Parallel";
+		}
+
+		/// <summary>
 		/// Расчитывает общее сопротивление параллельной цепи
 		/// </summary>
 		/// <param name="frequency">Частота сигнала</param>

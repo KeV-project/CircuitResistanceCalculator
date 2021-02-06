@@ -62,7 +62,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			InitializeComponent();
 
 			_frequencies = new List<double>();
-			Templates.CreateTemplates();
 		}
 
 		/// <summary>
@@ -86,16 +85,18 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// </summary>
 		private void RecalculateCircuit()
 		{
-			//TODO: Раньше не обратил внимание - с gridView правильнее работать с помощью списков, которые оповещают о своём изменении, смотрите тут
+			//TODO: Раньше не обратил внимание - с gridView правильнее работать с помощью списков, 
+			//TODO: которые оповещают о своём изменении, смотрите тут
 			//TODO: https://stackoverflow.com/questions/16695885/binding-listt-to-datagridview-in-winform
 			CircuitResistanceGridView.Rows.Clear();
 			_resistance = new List<Complex>();
 			for(int i = 0; i < _frequencies.Count; i++)
 			{
 				Complex z = _circuit.CalculateZ(_frequencies[i]);
-				//TODO: Не совсем удачная история - использовать одну и туже переменную для разных по логике значений, я бы просто new Complex прям в Add записал
-				z = new Complex(Math.Round(z.Real, 3), Math.Round(z.Imaginary, 3));
-				_resistance.Add(z);
+				//TODO: Не совсем удачная история - использовать одну и туже переменную 
+				//TODO: для разных по логике значений, я бы просто new Complex прям в Add записал +
+				_resistance.Add(new Complex(Math.Round(z.Real, 3), 
+					Math.Round(z.Imaginary, 3)));
 				CircuitResistanceGridView.Rows.Add(i + 1, _frequencies[i], 
 					_resistance.Last());
 			}
@@ -184,39 +185,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		}
 
 		/// <summary>
-		/// Возвращает имя для нового узла дерева цепи
-		/// </summary>
-		/// <param name="node">Новый узел цепи</param>
-		/// <returns>Имя нового узла дерева цепи</returns>
-		private string GetTreeNodeName(NodeBase node)
-		{
-			switch (node)
-			{
-				//TODO: Вот эту штуку можно опустить на уровень элементов, чтобы они по какому-нибудь GetInfo у NodeBase возвращали информацию о себе
-				case Resistor resistor:
-				{
-					return "R" + resistor.Index;
-				}
-				case Inductor inductor:
-				{
-					return "L" + inductor.Index;
-				}
-				case Capacitor capacitor:
-				{
-					return "C" + capacitor.Index;
-				}
-				case ParallelConnection parallelConnection:
-				{
-					return "Parallel";
-				}
-				default:
-				{
-					return "Serial";
-				}
-			}
-		}
-
-		/// <summary>
 		/// Добавляет новый узел в дерево цепи
 		/// </summary>
 		/// <param name="parentNode">Родительский элемент</param>
@@ -226,7 +194,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			NodeBase newNode)
 		{
 			newTreeNode.Tag = newNode;
-			newTreeNode.Text = GetTreeNodeName(newNode);
+			newTreeNode.Text = newNode.Name;
 			parentNode.Nodes.Add(newTreeNode);
 		}
 
@@ -340,8 +308,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			((NodeBase)CircuitTreeView.SelectedNode.Tag).ReplaceNode(e.Node);
 			CircuitTreeView.SelectedNode.Tag = e.Node;
-			CircuitTreeView.SelectedNode.Text = GetTreeNodeName(e.Node);
-			RecalculateCircuit();
+			CircuitTreeView.SelectedNode.Text = e.Node.Name;
 		}
 
 		/// <summary>

@@ -11,13 +11,19 @@ namespace CircuitResistanceCalculator.Elements
 	public class Capacitor : ElementBase
 	{
 		/// <summary>
+		/// Возвращает имя элемента, состоящее из
+		/// обозначения и назначенного индекса
+		/// </summary>
+		public override string Name { get; }
+
+		/// <summary>
 		/// Инициализирует объект класса <see cref="Capacitor"/>
 		/// </summary>
 		/// <param name="value">Номинал элемента</param>
 		/// <param name="index">Индекс элемента</param>
 		public Capacitor(double value, int index) : base(value, index)
 		{
-
+			Name = "C" + index;
 		}
 
 		/// <summary>

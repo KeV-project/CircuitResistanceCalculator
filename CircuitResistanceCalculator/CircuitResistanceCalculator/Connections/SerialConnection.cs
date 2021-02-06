@@ -9,6 +9,19 @@ namespace CircuitResistanceCalculator.Connections
 	public class SerialConnection : ConnectionBase
 	{
 		/// <summary>
+		/// Возвращает имя узла
+		/// </summary>
+		public override string Name { get; }
+
+		/// <summary>
+		/// Инициализирует объект класса <see cref="SerialConnection"/>
+		/// </summary>
+		public SerialConnection()
+		{
+			Name = "Serial";
+		}
+
+		/// <summary>
 		/// Расчитывает общее сопротивление последовательной цепи
 		/// </summary>
 		/// <param name="frequency">Частота сигнала</param>

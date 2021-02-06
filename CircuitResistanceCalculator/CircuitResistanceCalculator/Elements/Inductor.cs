@@ -11,13 +11,19 @@ namespace CircuitResistanceCalculator.Elements
 	public class Inductor : ElementBase
 	{
 		/// <summary>
+		/// Возвращает имя элемента, состоящее из
+		/// обозначения и назначенного индекса
+		/// </summary>
+		public override string Name { get; }
+
+		/// <summary>
 		/// Инициализирует объект класса <see cref="Inductor"/>
 		/// </summary>
 		/// <param name="value">Номинал элемента</param>
 		/// <param name="index">Индекс элемента</param>
 		public Inductor(double value, int index) : base(value, index)
 		{
-
+			Name = "L" + index;
 		}
 
 		/// <summary>
