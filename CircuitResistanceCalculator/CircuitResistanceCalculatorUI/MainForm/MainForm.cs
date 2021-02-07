@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Numerics;
+using System.ComponentModel;
 using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
@@ -11,6 +12,7 @@ using CircuitResistanceCalculator.Serializer;
 using CircuitResistanceCalculatorUI.EditElement;
 using CircuitResistanceCalculatorUI.EditConnection;
 using CircuitResistanceCalculatorUI.CreateTemplates;
+using CircuitResistanceCalculatorUI.CalculatedData;
 
 namespace CircuitResistanceCalculatorUI.MainForm
 {
@@ -25,17 +27,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// </summary>
 		private ConnectionBase _circuit = null;
 
-		/// <summary>
-		/// Содержит список частот для расчета импеданса
-		/// текущей электрической цепи
-		/// </summary>
-		private List<double> _frequencies;
-
-		/// <summary>
-		/// Содержит список расчитанных для указанных частот
-		/// импедансов текущей электрической цепи
-		/// </summary>
-		private List<Complex> _resistance;
+		private BindingList<CircuitResistance> _resistance;
 
 		/// <summary>
 		/// Содержит путь к файлу для сохранения цепи по умолчанию
@@ -61,7 +53,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			InitializeComponent();
 
-			_frequencies = new List<double>();
+			_resistance = new BindingList<CircuitResistance>();
+			CircuitResistanceGridView.DataSource = _resistance;
 		}
 
 		/// <summary>
@@ -83,22 +76,16 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <summary>
 		/// Заполняет расчетную таблице актуальными данными
 		/// </summary>
-		private void RecalculateCircuit()
+		private void RecalculateCircuit(object obj, EventArgs e)
 		{
 			//TODO: Раньше не обратил внимание - с gridView правильнее работать с помощью списков, 
 			//TODO: которые оповещают о своём изменении, смотрите тут
 			//TODO: https://stackoverflow.com/questions/16695885/binding-listt-to-datagridview-in-winform
-			CircuitResistanceGridView.Rows.Clear();
-			_resistance = new List<Complex>();
-			for(int i = 0; i < _frequencies.Count; i++)
+			for(int i = 0; i < _resistance.Count; i++)
 			{
-				Complex z = _circuit.CalculateZ(_frequencies[i]);
-				//TODO: Не совсем удачная история - использовать одну и туже переменную 
-				//TODO: для разных по логике значений, я бы просто new Complex прям в Add записал +
-				_resistance.Add(new Complex(Math.Round(z.Real, 3), 
-					Math.Round(z.Imaginary, 3)));
-				CircuitResistanceGridView.Rows.Add(i + 1, _frequencies[i], 
-					_resistance.Last());
+				Complex z = _circuit.CalculateZ(_resistance[i].Frequency);
+				_resistance[i].Resistance = new Complex(Math.Round(z.Real, 3), 
+					Math.Round(z.Imaginary, 3));
 			}
 		}
 
@@ -123,9 +110,10 @@ namespace CircuitResistanceCalculatorUI.MainForm
 				return;
 			}
 
-			_frequencies.Add(frequency);
+			Complex z = _circuit.CalculateZ(frequency);
+			_resistance.Add(new CircuitResistance(frequency, new Complex(
+				Math.Round(z.Real, 3), Math.Round(z.Imaginary, 3))));
 			EnterFrequencyTextBox.Text = "";
-			RecalculateCircuit();
 		}
 
 		/// <summary>
@@ -141,10 +129,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 				return;
 			}
 
-			_frequencies.RemoveAt(CircuitResistanceGridView.SelectedRows[0].Index);
-			CircuitResistanceGridView.Rows.RemoveAt(
-				CircuitResistanceGridView.SelectedRows[0].Index);
-			RecalculateCircuit();
+			_resistance.RemoveAt(CircuitResistanceGridView.SelectedRows[0].Index);
 		}
 
 		/// <summary>
@@ -154,8 +139,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="e">Вспомогательные данные</param>
 		private void ClearButton_Click(object sender, EventArgs e)
 		{
-			_frequencies.Clear();
-			RecalculateCircuit();
+			_resistance.Clear();
 		}
 
 		/// <summary>
@@ -169,15 +153,22 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			if (_circuit == null)
 			{
 				_circuit = new SerialConnection();
+				_circuit.NodeAdded += RecalculateCircuit;
+				_circuit.NodeChanged += RecalculateCircuit;
+				_circuit.NodeRemoved += RecalculateCircuit;
+
 
 				TreeNode root = new TreeNode("Root");
 				root.Tag = _circuit;
 				CircuitTreeView.Nodes.Add(root);
-				RecalculateCircuit();
+				RecalculateCircuit(null, EventArgs.Empty);
 			}
 			else
 			{
 				SaveCircuit();
+				_circuit.NodeAdded -= RecalculateCircuit;
+				_circuit.NodeChanged -= RecalculateCircuit;
+				_circuit.NodeRemoved -= RecalculateCircuit;
 				_circuit = null;
 				NewElectricalCircuitToolStripMenuItem_Click(
 				NewElectricalCircuitToolStripMenuItem, EventArgs.Empty);
@@ -229,7 +220,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			((ConnectionBase)CircuitTreeView.SelectedNode.Tag).AddNode(e.Node);
 			AddCircuitTreeNode(CircuitTreeView.SelectedNode, new TreeNode(), e.Node);
-			RecalculateCircuit();
 		}
 
 		/// <summary>
@@ -364,6 +354,9 @@ namespace CircuitResistanceCalculatorUI.MainForm
 
 			if (CircuitTreeView.SelectedNode.Tag == _circuit)
 			{
+				_circuit.NodeAdded -= RecalculateCircuit;
+				_circuit.NodeChanged -= RecalculateCircuit;
+				_circuit.NodeRemoved -= RecalculateCircuit;
 				_circuit = null;
 			}
 			else
@@ -372,7 +365,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			}
 			
 			CircuitTreeView.Nodes.Remove(CircuitTreeView.SelectedNode);
-			RecalculateCircuit();
 		}
 
 		/// <summary>
@@ -440,7 +432,14 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="path">Путь к файлу</param>
 		private void DeserializingCircuit(FileInfo path)
 		{
+			_circuit.NodeAdded -= RecalculateCircuit;
+			_circuit.NodeChanged -= RecalculateCircuit;
+			_circuit.NodeRemoved -= RecalculateCircuit;
+
 			_circuit = Serializer.ReadCircuit(path);
+			_circuit.NodeAdded += RecalculateCircuit;
+			_circuit.NodeChanged += RecalculateCircuit;
+			_circuit.NodeRemoved += RecalculateCircuit;
 			_circuit.SubscribeNodesToEvents();
 
 			TreeNode root = new TreeNode("Root");
@@ -448,7 +447,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			CircuitTreeView.Nodes.Add(root);
 
 			CreateNewCircuitTree(root, _circuit[0]);
-			RecalculateCircuit();
+			RecalculateCircuit(null, EventArgs.Empty);
 			CircuitTreeView.ExpandAll();
 		}
 
@@ -490,9 +489,12 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		private void ClearTreeButton_Click(object sender, EventArgs e)
 		{
 			SaveCircuit();
+			_circuit.NodeAdded -= RecalculateCircuit;
+			_circuit.NodeChanged -= RecalculateCircuit;
+			_circuit.NodeRemoved -= RecalculateCircuit;
 			_circuit = null;
 			CircuitTreeView.Nodes.Clear();
-			RecalculateCircuit();
+			RecalculateCircuit(null, EventArgs.Empty);
 		}
 
 		/// <summary>

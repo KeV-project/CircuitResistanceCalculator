@@ -51,11 +51,33 @@ namespace CircuitResistanceCalculator.Connections
 		/// <param name="node">Новый узел</param>
 		public void AddNode(NodeBase node)
 		{ 
+			if(node is ConnectionBase)
+			{
+				((ConnectionBase)node).NodeAdded += RecalculateCircuit;
+			}
 			node.NodeChanged += ReplaceNode;
 			node.NodeRemoved += RemoveNode;
 
 			Nodes.Add(node);
+
+			NodeAdded?.Invoke(this, EventArgs.Empty);
 		}
+
+		/// <summary>
+		/// Вызывает событие родительского узла 
+		/// для перерасчета цепи 
+		/// </summary>
+		/// <param name="connection">Дочерний узел</param>
+		/// <param name="e">Дополнительная информация</param>
+		private void RecalculateCircuit(object connection, EventArgs e)
+		{
+			NodeAdded?.Invoke(this, EventArgs.Empty);
+		}
+
+		/// <summary>
+		/// Событие, возникающее после добавления нового узла в цепь
+		/// </summary>
+		public event EventHandler<EventArgs> NodeAdded;
 
 		/// <summary>
 		/// Вызывает цепочку события для замены текущего объкта
@@ -82,23 +104,38 @@ namespace CircuitResistanceCalculator.Connections
 		/// <param name="e">Хранит новый объект списка</param>
 		private void ReplaceNode(object currentNode, AddedNodeArgs e)
 		{
-			int index = 0;
-			for (int i = 0; i < Nodes.Count; i++)
+			if(e != EventArgs.Empty)
 			{
-				if(this[i] == currentNode)
+				int index = 0;
+				for (int i = 0; i < Nodes.Count; i++)
 				{
-					break;
+					if (this[i] == currentNode)
+					{
+						break;
+					}
+					index = i + 1;
 				}
-				index = i + 1;
+				if(currentNode is ConnectionBase)
+				{
+					((ConnectionBase)currentNode).NodeAdded -= RecalculateCircuit;
+				}
+				((NodeBase)currentNode).NodeChanged -= ReplaceNode;
+				((NodeBase)currentNode).NodeRemoved -= RemoveNode;
+				Nodes.Remove((NodeBase)currentNode);
+
+				if (currentNode is ConnectionBase)
+				{
+					((ConnectionBase)e.Node).NodeAdded += RecalculateCircuit;
+				}
+				e.Node.NodeChanged += ReplaceNode;
+				e.Node.NodeRemoved += RemoveNode;
+				Nodes.Insert(index, e.Node);
+				NodeChanged?.Invoke(this, (AddedNodeArgs)EventArgs.Empty);
 			}
-
-			((NodeBase)currentNode).NodeChanged -= ReplaceNode;
-			((NodeBase)currentNode).NodeRemoved -= RemoveNode;
-			Nodes.Remove((NodeBase)currentNode);
-
-			e.Node.NodeChanged += ReplaceNode;
-			e.Node.NodeRemoved += RemoveNode;
-			Nodes.Insert(index, e.Node);
+			else
+			{
+				NodeChanged?.Invoke(this, (AddedNodeArgs)EventArgs.Empty);
+			}
 		}
 
 		/// <summary>
@@ -116,13 +153,21 @@ namespace CircuitResistanceCalculator.Connections
 		/// <summary>
 		/// Удаляет узел из цепи
 		/// </summary>
-		/// <param name="obj">Удаляемый узел</param>
+		/// <param name="node">Удаляемый узел</param>
 		/// <param name="e">Прочие данные</param>
-		private void RemoveNode(object obj, EventArgs e)
+		private void RemoveNode(object node, EventArgs e)
 		{
-			((NodeBase)obj).NodeChanged -= ReplaceNode;
-			((NodeBase)obj).NodeRemoved -= RemoveNode;
-			Nodes.Remove((NodeBase)obj);
+			if(node != null)
+			{
+				((NodeBase)node).NodeChanged -= ReplaceNode;
+				((NodeBase)node).NodeRemoved -= RemoveNode;
+				Nodes.Remove((NodeBase)node);
+				RemoveNode(null, EventArgs.Empty);
+			}
+			else
+			{
+				NodeRemoved?.Invoke(null, EventArgs.Empty);
+			}
 		}
 
 		/// <summary>
