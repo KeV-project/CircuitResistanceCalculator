@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using System.Numerics;
 using CircuitResistanceCalculator.Elements;
 
@@ -31,11 +32,13 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
         {
             // setup
             Inductor inductor = new Inductor(0.016, 1);
-            Complex expectedZ = new Complex(0, 5.024);
+            Complex expectedZ = new Complex(0, 5.027);
 
             // act
             double frequency = 50;
             Complex actualZ = inductor.CalculateZ(frequency);
+            actualZ = new Complex(actualZ.Real,
+                Math.Round(actualZ.Imaginary, 3));
 
             // assert
             Assert.AreEqual(expectedZ, actualZ, "Метод неверно " +

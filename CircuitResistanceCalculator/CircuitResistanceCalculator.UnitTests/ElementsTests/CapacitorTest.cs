@@ -33,7 +33,7 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
         {
             // setup
             Capacitor capacitor = new Capacitor(0.00022116, 1) ;
-            Complex expectedZ = new Complex(0, -14.4);
+            Complex expectedZ = new Complex(0, 14.4);
 
             // act
             double frequency = 50;

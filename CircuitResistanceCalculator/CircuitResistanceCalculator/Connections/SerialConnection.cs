@@ -29,14 +29,13 @@ namespace CircuitResistanceCalculator.Connections
 		/// в комплексной форме</returns>
 		public override Complex CalculateZ(double frequency)
 		{
-			Complex circuitResistance = new Complex(0, 0);
+			Complex z = new Complex(0, 0);
 
 			for (int i = 0; i < NodesCount; i++)
 			{
-				circuitResistance += this[i].CalculateZ(frequency);
+				z += this[i].CalculateZ(frequency);
 			}
-			return new Complex(circuitResistance.Real, 
-				circuitResistance.Imaginary);
+			return z;
 		}
 	}
 }

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using System.Numerics;
 using System.ComponentModel;
 using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Connections;
@@ -55,6 +53,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 
 			_resistance = new BindingList<CircuitResistance>();
 			CircuitResistanceGridView.DataSource = _resistance;
+			CircuitResistanceGridView.Columns[0].HeaderCell.Value = "Frequency";
+			CircuitResistanceGridView.Columns[1].HeaderCell.Value = "Resistance";
 		}
 
 		/// <summary>
@@ -83,9 +83,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			//TODO: https://stackoverflow.com/questions/16695885/binding-listt-to-datagridview-in-winform
 			for(int i = 0; i < _resistance.Count; i++)
 			{
-				Complex z = _circuit.CalculateZ(_resistance[i].Frequency);
-				_resistance[i].Resistance = new Complex(Math.Round(z.Real, 3), 
-					Math.Round(z.Imaginary, 3));
+				_resistance[i].Resistance = _circuit.CalculateZ(
+					_resistance[i].Frequency);
 			}
 		}
 
@@ -99,6 +98,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			if (_circuit == null)
 			{
 				MessageBox.Show("Please, create a circuit!");
+				EnterFrequencyTextBox.Text = "";
 				return;
 			}
 
@@ -110,9 +110,8 @@ namespace CircuitResistanceCalculatorUI.MainForm
 				return;
 			}
 
-			Complex z = _circuit.CalculateZ(frequency);
-			_resistance.Add(new CircuitResistance(frequency, new Complex(
-				Math.Round(z.Real, 3), Math.Round(z.Imaginary, 3))));
+			_resistance.Add(new CircuitResistance(frequency, 
+				_circuit.CalculateZ(frequency)));
 			EnterFrequencyTextBox.Text = "";
 		}
 
@@ -150,28 +149,47 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		private void NewElectricalCircuitToolStripMenuItem_Click(object sender,
 			EventArgs e)
 		{
-			if (_circuit == null)
+			if(_circuit != null)
 			{
-				_circuit = new SerialConnection();
-				_circuit.NodeAdded += RecalculateCircuit;
-				_circuit.NodeChanged += RecalculateCircuit;
-				_circuit.NodeRemoved += RecalculateCircuit;
-
-
-				TreeNode root = new TreeNode("Root");
-				root.Tag = _circuit;
-				CircuitTreeView.Nodes.Add(root);
-				RecalculateCircuit(null, EventArgs.Empty);
+				if (SaveCircuit() != DialogResult.Cancel)
+				{
+					RemoveCircuit();
+				}
+				else
+				{
+					return;
+				}
 			}
-			else
+
+			_circuit = new SerialConnection();
+			_circuit.NodeAdded += RecalculateCircuit;
+			_circuit.NodeChanged += RecalculateCircuit;
+			_circuit.NodeRemoved += RecalculateCircuit;
+
+
+			TreeNode root = new TreeNode("Root");
+			root.Tag = _circuit;
+			CircuitTreeView.Nodes.Add(root);
+			RecalculateCircuit(null, EventArgs.Empty);
+		}
+
+		/// <summary>
+		/// Удаляет цепи
+		/// </summary>
+		private void RemoveCircuit()
+		{
+			if(_circuit != null)
 			{
-				SaveCircuit();
+				if(_circuit.NodesCount != 0)
+				{
+					_circuit[0].RemoveNode();
+				}
+				
 				_circuit.NodeAdded -= RecalculateCircuit;
 				_circuit.NodeChanged -= RecalculateCircuit;
 				_circuit.NodeRemoved -= RecalculateCircuit;
 				_circuit = null;
-				NewElectricalCircuitToolStripMenuItem_Click(
-				NewElectricalCircuitToolStripMenuItem, EventArgs.Empty);
+				CircuitTreeView.Nodes.Clear();
 			}
 		}
 
@@ -309,7 +327,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		private void CircuitTreeView_NodeMouseDoubleClick(object sender, 
 			TreeNodeMouseClickEventArgs e)
 		{
-			ConnectionBase circuit = _circuit;
 			if (CircuitTreeView.SelectedNode == null)
 			{
 				return;
@@ -354,17 +371,13 @@ namespace CircuitResistanceCalculatorUI.MainForm
 
 			if (CircuitTreeView.SelectedNode.Tag == _circuit)
 			{
-				_circuit.NodeAdded -= RecalculateCircuit;
-				_circuit.NodeChanged -= RecalculateCircuit;
-				_circuit.NodeRemoved -= RecalculateCircuit;
-				_circuit = null;
+				RemoveCircuit();
 			}
 			else
 			{
 				((NodeBase)CircuitTreeView.SelectedNode.Tag).RemoveNode();
+				CircuitTreeView.Nodes.Remove(CircuitTreeView.SelectedNode);
 			}
-			
-			CircuitTreeView.Nodes.Remove(CircuitTreeView.SelectedNode);
 		}
 
 		/// <summary>
@@ -395,7 +408,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <summary>
 		/// Выполняет сохранение цепи в файл перед закрытием
 		/// </summary>
-		private void SaveCircuit()
+		private DialogResult SaveCircuit()
 		{
 			if (_circuit != null)
 			{
@@ -405,7 +418,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 
 				if (dialogResult == DialogResult.Cancel)
 				{
-					return;
+					return DialogResult.Cancel;
 				}
 				else if (dialogResult == DialogResult.Yes)
 				{
@@ -414,16 +427,16 @@ namespace CircuitResistanceCalculatorUI.MainForm
 					{
 						FileInfo currentPath = new FileInfo(SaveCircuitDialog.FileName);
 						Serializer.SaveCircuit(_circuit, currentPath);
+						return DialogResult.OK;
 					}
 					else
 					{
-						return;
+						return DialogResult.Cancel;
 					}
 				}
 			}
 
-			CircuitTreeView.Nodes.Clear();
-			OpenCircuitDialog.FileName = "";
+			return DialogResult.OK;
 		}
 
 		/// <summary>
@@ -432,10 +445,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="path">Путь к файлу</param>
 		private void DeserializingCircuit(FileInfo path)
 		{
-			_circuit.NodeAdded -= RecalculateCircuit;
-			_circuit.NodeChanged -= RecalculateCircuit;
-			_circuit.NodeRemoved -= RecalculateCircuit;
-
 			_circuit = Serializer.ReadCircuit(path);
 			_circuit.NodeAdded += RecalculateCircuit;
 			_circuit.NodeChanged += RecalculateCircuit;
@@ -458,13 +467,15 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="e">Вспомогательные данные</param>
 		private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SaveCircuit();
-
-			OpenCircuitDialog.Filter = "NOTES (*.notes)| *.notes";
-			if (OpenCircuitDialog.ShowDialog() == DialogResult.OK)
+			if(SaveCircuit() != DialogResult.Cancel)
 			{
-				FileInfo currentPath = new FileInfo(OpenCircuitDialog.FileName);
-				DeserializingCircuit(currentPath);
+				OpenCircuitDialog.Filter = "NOTES (*.notes)| *.notes";
+				if (OpenCircuitDialog.ShowDialog() == DialogResult.OK)
+				{
+					RemoveCircuit();
+					FileInfo currentPath = new FileInfo(OpenCircuitDialog.FileName);
+					DeserializingCircuit(currentPath);
+				}
 			}
 		}
 
@@ -475,10 +486,12 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="e">Вспомогательные данные</param>
 		private void TemplateToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SaveCircuit();
-
-			FileInfo currentPath = _templates[(ToolStripMenuItem)sender];
-			DeserializingCircuit(currentPath);
+			if(SaveCircuit() != DialogResult.Cancel)
+			{
+				RemoveCircuit();
+				FileInfo currentPath = _templates[(ToolStripMenuItem)sender];
+				DeserializingCircuit(currentPath);
+			}
 		}
 		
 		/// <summary>
@@ -488,13 +501,12 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="e">Вспомогательные данные</param>
 		private void ClearTreeButton_Click(object sender, EventArgs e)
 		{
-			SaveCircuit();
-			_circuit.NodeAdded -= RecalculateCircuit;
-			_circuit.NodeChanged -= RecalculateCircuit;
-			_circuit.NodeRemoved -= RecalculateCircuit;
-			_circuit = null;
-			CircuitTreeView.Nodes.Clear();
-			RecalculateCircuit(null, EventArgs.Empty);
+			if(SaveCircuit() != DialogResult.Cancel)
+			{
+				RemoveCircuit();
+				CircuitTreeView.Nodes.Clear();
+				_resistance.Clear();
+			}
 		}
 
 		/// <summary>
@@ -504,8 +516,11 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <param name="e">Вспомогательные данные</param>
 		private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SaveCircuit();
-			this.Close();
+			if (SaveCircuit() != DialogResult.Cancel)
+			{
+				RemoveCircuit();
+				this.Close();
+			}
 		}
 	}
 }

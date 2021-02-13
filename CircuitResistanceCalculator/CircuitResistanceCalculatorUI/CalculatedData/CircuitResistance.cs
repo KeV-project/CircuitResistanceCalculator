@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using System.ComponentModel;
 
 namespace CircuitResistanceCalculatorUI.CalculatedData
@@ -9,8 +10,10 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 
 		private Complex _resistance;
 
-		public double Frequency 
-		{ 
+		private string _displayedResistance;
+
+		public double Frequency
+		{
 			get
 			{
 				return _frequency;
@@ -22,8 +25,9 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			}
 		}
 
-		public Complex Resistance 
-		{ 
+		[Browsable(false)]
+		public Complex Resistance
+		{
 			get
 			{
 				return _resistance;
@@ -31,7 +35,21 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			set
 			{
 				_resistance = value;
-				NotifyPropertyChanged("Resistance");
+				DisplayedResistance = Math.Round(_resistance.Real, 3) + 
+					" + " + Math.Round(_resistance.Imaginary, 3) + "i";
+			}
+		}
+
+		public string DisplayedResistance
+		{
+			get
+			{
+				return _displayedResistance;
+			}
+			private set
+			{
+				_displayedResistance = value;
+				NotifyPropertyChanged("DisplayedResistance");
 			}
 		}
 
@@ -45,11 +63,13 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			}
 		}
 
-		public CircuitResistance(double frequency, 
+		public CircuitResistance(double frequency,
 			Complex resistance)
 		{
 			Frequency = frequency;
 			Resistance = resistance;
+			DisplayedResistance = Math.Round(resistance.Real, 3) + " + " +
+				Math.Round(resistance.Imaginary, 3) + "i";
 		}
 	}
 }

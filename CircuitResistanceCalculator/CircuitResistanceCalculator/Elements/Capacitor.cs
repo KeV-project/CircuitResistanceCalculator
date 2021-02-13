@@ -14,7 +14,13 @@ namespace CircuitResistanceCalculator.Elements
 		/// Возвращает имя элемента, состоящее из
 		/// обозначения и назначенного индекса
 		/// </summary>
-		public override string Name { get; }
+		public override string Name
+		{
+			get
+			{
+				return "C" + Index;
+			}
+		}
 
 		/// <summary>
 		/// Инициализирует объект класса <see cref="Capacitor"/>
@@ -23,7 +29,7 @@ namespace CircuitResistanceCalculator.Elements
 		/// <param name="index">Индекс элемента</param>
 		public Capacitor(double value, int index) : base(value, index)
 		{
-			Name = "C" + index;
+			
 		}
 
 		/// <summary>
@@ -33,10 +39,9 @@ namespace CircuitResistanceCalculator.Elements
 		/// <returns></returns>
 		public override Complex CalculateZ(double frequency)
 		{
-			Complex capacitorZ = new Complex(0, -1) * 1 / 
-				(2 * Math.PI * frequency * Value);
+			Complex z = -1 / (2 * Math.PI * frequency * Value * new Complex(0, 1));
 
-			return new Complex(capacitorZ.Real, capacitorZ.Imaginary);
+			return z;
 		}
 	}
 }

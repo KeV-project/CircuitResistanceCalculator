@@ -104,7 +104,7 @@ namespace CircuitResistanceCalculator.Connections
 		/// <param name="e">Хранит новый объект списка</param>
 		private void ReplaceNode(object currentNode, AddedNodeArgs e)
 		{
-			if(e != EventArgs.Empty)
+			if(e.Node != null)
 			{
 				int index = 0;
 				for (int i = 0; i < Nodes.Count; i++)
@@ -130,11 +130,11 @@ namespace CircuitResistanceCalculator.Connections
 				e.Node.NodeChanged += ReplaceNode;
 				e.Node.NodeRemoved += RemoveNode;
 				Nodes.Insert(index, e.Node);
-				NodeChanged?.Invoke(this, (AddedNodeArgs)EventArgs.Empty);
+				NodeChanged?.Invoke(this, new AddedNodeArgs(null));
 			}
 			else
 			{
-				NodeChanged?.Invoke(this, (AddedNodeArgs)EventArgs.Empty);
+				NodeChanged?.Invoke(this, new AddedNodeArgs(null));
 			}
 		}
 
@@ -159,6 +159,10 @@ namespace CircuitResistanceCalculator.Connections
 		{
 			if(node != null)
 			{
+				if(node is ConnectionBase)
+				{
+					((ConnectionBase)node).NodeAdded -= RecalculateCircuit;
+				}
 				((NodeBase)node).NodeChanged -= ReplaceNode;
 				((NodeBase)node).NodeRemoved -= RemoveNode;
 				Nodes.Remove((NodeBase)node);
@@ -186,6 +190,7 @@ namespace CircuitResistanceCalculator.Connections
 				this[i].NodeRemoved += RemoveNode;
 				if (this[i] is ConnectionBase)
 				{
+					((ConnectionBase)this[i]).NodeAdded += RecalculateCircuit;
 					((ConnectionBase)this[i]).SubscribeNodesToEvents();
 				}
 			}

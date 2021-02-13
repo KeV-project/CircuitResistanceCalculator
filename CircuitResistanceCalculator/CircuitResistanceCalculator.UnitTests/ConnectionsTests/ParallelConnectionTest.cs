@@ -24,7 +24,7 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 			parallelConnection.AddNode(capacitor);
 
 			double frequency = 50.0;
-			Complex expectedZ = new Complex(0.06, 7.716);
+			Complex expectedZ = new Complex(0.01, 3.725);
 
 			// act
 			Complex actualZ = parallelConnection.CalculateZ(frequency);

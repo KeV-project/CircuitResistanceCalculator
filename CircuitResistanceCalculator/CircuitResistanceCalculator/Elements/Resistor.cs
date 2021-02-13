@@ -13,7 +13,13 @@ namespace CircuitResistanceCalculator.Elements
 		/// Возвращает имя элемента, состоящее из
 		/// обозначения и назначенного индекса
 		/// </summary>
-		public override string Name { get; }
+		public override string Name 
+		{ 
+			get
+			{
+				return "R" + Index;
+			}
+		}
 
 		/// <summary>
 		/// Инициализирует объект класса <see cref="Resistor"/>
@@ -22,7 +28,7 @@ namespace CircuitResistanceCalculator.Elements
 		/// <param name="index">Индекс элемента</param>
 		public Resistor(double value, int index) : base(value, index)
 		{
-			Name = "R" + index;
+		
 		}
 
 		/// <summary>
