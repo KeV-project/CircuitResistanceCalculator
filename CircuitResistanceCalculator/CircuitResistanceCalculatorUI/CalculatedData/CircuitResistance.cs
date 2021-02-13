@@ -4,14 +4,32 @@ using System.ComponentModel;
 
 namespace CircuitResistanceCalculatorUI.CalculatedData
 {
+	/// <summary>
+	/// Класс <see cref="CircuitResistance"/> предназначен 
+	/// для хранения частоты входного сигнала и соответствующего 
+	/// ему расчитанного сопротивления цепи
+	/// </summary>
 	public class CircuitResistance : INotifyPropertyChanged
 	{
+		/// <summary>
+		/// Частота сигнала
+		/// </summary>
 		private double _frequency;
 
+		/// <summary>
+		/// Комплексное сопротивление цепи
+		/// </summary>
 		private Complex _resistance;
 
+		/// <summary>
+		/// Комплексное сопротивление цепи в 
+		/// алгебраической форме
+		/// </summary>
 		private string _displayedResistance;
 
+		/// <summary>
+		/// Возвращает и задает частоту входного сигнала
+		/// </summary>
 		public double Frequency
 		{
 			get
@@ -25,6 +43,9 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			}
 		}
 
+		/// <summary>
+		/// Возвращает и задает расчитанное сопротивление цепи
+		/// </summary>
 		[Browsable(false)]
 		public Complex Resistance
 		{
@@ -40,6 +61,10 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			}
 		}
 
+		/// <summary>
+		/// Возвращает и задает алгебраическую форму
+		/// комплексного сопротивления цепи
+		/// </summary>
 		public string DisplayedResistance
 		{
 			get
@@ -53,8 +78,17 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			}
 		}
 
+		/// <summary>
+		/// Событие, созникающее при изменении объекта 
+		/// класса <see cref="CircuitResistance"/>
+		/// </summary>
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		/// <summary>
+		/// Сообщает CircuitResistanceGridView об изменении 
+		/// отображаемых данных
+		/// </summary>
+		/// <param name="p">Измененное свойство</param>
 		private void NotifyPropertyChanged(string p)
 		{
 			if (PropertyChanged != null)
@@ -63,6 +97,11 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			}
 		}
 
+		/// <summary>
+		/// Инициализирует объект класса <see cref="CircuitResistance"/>
+		/// </summary>
+		/// <param name="frequency"></param>
+		/// <param name="resistance"></param>
 		public CircuitResistance(double frequency,
 			Complex resistance)
 		{
