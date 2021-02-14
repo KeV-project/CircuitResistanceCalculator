@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Node;
 
-namespace CircuitResistanceCalculatorUI.EditConnection
+namespace CircuitResistanceCalculatorUI.EditingConnection
 { 
 	/// <summary>
 	/// Класс <see cref="EditConnectionsForm"/> предназначен 

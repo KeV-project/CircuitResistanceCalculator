@@ -48,16 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculatedData\CircuitResistance.cs" />
-    <Compile Include="EditConnection\EditConnectionsForm.cs">
+    <Compile Include="DrawingCircuit\MatrixOperations.cs" />
+    <Compile Include="DrawingCircuit\Painter.cs" />
+    <Compile Include="EditingConnection\EditConnectionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditConnection\EditConnectionsForm.Designer.cs">
+    <Compile Include="EditingConnection\EditConnectionsForm.Designer.cs">
       <DependentUpon>EditConnectionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditElement\EditElementForm.cs">
+    <Compile Include="EditingElement\EditElementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditElement\EditElementForm.Designer.cs">
+    <Compile Include="EditingElement\EditElementForm.Designer.cs">
       <DependentUpon>EditElementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm\MainForm.cs">
@@ -73,11 +75,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="CreateTemplates\Templates.cs" />
-    <EmbeddedResource Include="EditConnection\EditConnectionsForm.resx">
+    <Compile Include="CreatingTemplates\Templates.cs" />
+    <EmbeddedResource Include="EditingConnection\EditConnectionsForm.resx">
       <DependentUpon>EditConnectionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditElement\EditElementForm.resx">
+    <EmbeddedResource Include="EditingElement\EditElementForm.resx">
       <DependentUpon>EditElementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm\MainForm.resx">

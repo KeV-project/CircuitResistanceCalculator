@@ -5,7 +5,7 @@ using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
 using CircuitResistanceCalculator.Serializer;
 
-namespace CircuitResistanceCalculatorUI.CreateTemplates
+namespace CircuitResistanceCalculatorUI.CreatingTemplates
 {
 	/// <summary>
 	/// Класс <see cref="Templates"/> предназначен для создания 

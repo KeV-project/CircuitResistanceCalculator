@@ -3,14 +3,16 @@ using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Drawing;
 using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
 using CircuitResistanceCalculator.Serializer;
-using CircuitResistanceCalculatorUI.EditElement;
-using CircuitResistanceCalculatorUI.EditConnection;
-using CircuitResistanceCalculatorUI.CreateTemplates;
+using CircuitResistanceCalculatorUI.EditingElement;
+using CircuitResistanceCalculatorUI.EditingConnection;
+using CircuitResistanceCalculatorUI.CreatingTemplates;
 using CircuitResistanceCalculatorUI.CalculatedData;
+using CircuitResistanceCalculatorUI.DrawingCircuit;
 
 namespace CircuitResistanceCalculatorUI.MainForm
 {
@@ -76,7 +78,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <summary>
 		/// Заполняет расчетную таблице актуальными данными
 		/// </summary>
-		private void RecalculateCircuit(object obj, EventArgs e)
+		private void RefreshCircuit(object obj, EventArgs e)
 		{
 			//TODO: Раньше не обратил внимание - с gridView правильнее работать с помощью списков, 
 			//TODO: которые оповещают о своём изменении, смотрите тут
@@ -86,6 +88,12 @@ namespace CircuitResistanceCalculatorUI.MainForm
 				_resistance[i].Resistance = _circuit.CalculateZ(
 					_resistance[i].Frequency);
 			}
+
+			Bitmap bitmap = new Bitmap(CircuitPictureBox.Width, 
+				CircuitPictureBox.Height);
+			Painter.DrawCircuit(_circuit, bitmap);
+			CircuitPictureBox.Image = bitmap;
+			CircuitPictureBox.Refresh();
 		}
 
 		/// <summary>
@@ -162,15 +170,15 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			}
 
 			_circuit = new SerialConnection();
-			_circuit.NodeAdded += RecalculateCircuit;
-			_circuit.NodeChanged += RecalculateCircuit;
-			_circuit.NodeRemoved += RecalculateCircuit;
+			_circuit.NodeAdded += RefreshCircuit;
+			_circuit.NodeChanged += RefreshCircuit;
+			_circuit.NodeRemoved += RefreshCircuit;
 
 
 			TreeNode root = new TreeNode("Root");
 			root.Tag = _circuit;
 			CircuitTreeView.Nodes.Add(root);
-			RecalculateCircuit(null, EventArgs.Empty);
+			RefreshCircuit(null, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -185,9 +193,9 @@ namespace CircuitResistanceCalculatorUI.MainForm
 					_circuit[0].RemoveNode();
 				}
 				
-				_circuit.NodeAdded -= RecalculateCircuit;
-				_circuit.NodeChanged -= RecalculateCircuit;
-				_circuit.NodeRemoved -= RecalculateCircuit;
+				_circuit.NodeAdded -= RefreshCircuit;
+				_circuit.NodeChanged -= RefreshCircuit;
+				_circuit.NodeRemoved -= RefreshCircuit;
 				_circuit = null;
 				CircuitTreeView.Nodes.Clear();
 			}
@@ -446,9 +454,9 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		private void DeserializingCircuit(FileInfo path)
 		{
 			_circuit = Serializer.ReadCircuit(path);
-			_circuit.NodeAdded += RecalculateCircuit;
-			_circuit.NodeChanged += RecalculateCircuit;
-			_circuit.NodeRemoved += RecalculateCircuit;
+			_circuit.NodeAdded += RefreshCircuit;
+			_circuit.NodeChanged += RefreshCircuit;
+			_circuit.NodeRemoved += RefreshCircuit;
 			_circuit.SubscribeNodesToEvents();
 
 			TreeNode root = new TreeNode("Root");
@@ -456,7 +464,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			CircuitTreeView.Nodes.Add(root);
 
 			CreateNewCircuitTree(root, _circuit[0]);
-			RecalculateCircuit(null, EventArgs.Empty);
+			RefreshCircuit(null, EventArgs.Empty);
 			CircuitTreeView.ExpandAll();
 		}
 
