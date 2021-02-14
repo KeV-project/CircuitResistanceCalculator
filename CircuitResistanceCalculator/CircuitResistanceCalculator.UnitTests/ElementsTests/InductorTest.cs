@@ -8,6 +8,21 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
     [TestFixture]
     class InductorTest
 	{
+        [Test(Description = "Позитивный тест геттера Name")]
+        public void TestGetName_CorrectValue()
+        {
+            // setup
+            Inductor inductor = new Inductor(0.016, 1);
+            string expectedName = "L1";
+
+            // act
+            string actulaName = inductor.Name;
+
+            // assert
+            Assert.AreEqual(expectedName, actulaName, "Геттер Name " +
+                "возвращает некорректное значение");
+        }
+
         [Test(Description = "Позитивный тест конструктора Indector")]
         public void TestConstructor_CorrectValue()
         {

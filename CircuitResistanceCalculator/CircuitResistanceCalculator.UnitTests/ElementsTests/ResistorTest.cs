@@ -7,6 +7,21 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
     [TestFixture]
     public class ResistorTest
     {
+        [Test(Description = "Позитивный тест геттера Name")]
+        public void TestGetName_CorrectValue()
+		{
+            // setup
+            Resistor resistor = new Resistor(1000, 1);
+            string expectedName = "R1";
+
+            // act
+            string actulaName = resistor.Name;
+
+            // assert
+            Assert.AreEqual(expectedName, actulaName, "Геттер Name " +
+                "возвращает некорректное значение"); 
+		}
+
         [Test(Description = "Позитивный тест конструктора Resistor")]
         public void TestConstructor_CorrectValue()
         {

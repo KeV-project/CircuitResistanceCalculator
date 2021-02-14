@@ -9,6 +9,21 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 	[TestFixture]
 	class ParallelConnectionTest
 	{
+		[Test(Description = "Позитивный тест геттера Name")]
+		public void TestGetName_CorrectValue()
+		{
+			// setup
+			ParallelConnection parallelConnection = new ParallelConnection();
+			string expectedName = "Parallel";
+
+			// act
+			string actulaName = parallelConnection.Name;
+
+			// assert
+			Assert.AreEqual(expectedName, actulaName, "Геттер Name " +
+				"возвращает некорректное значение");
+		}
+
 		[Test(Description = "Позитивный тест метода CalculateZ")]
 		public void TestCalculateZ_CorrectValue()
 		{

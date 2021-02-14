@@ -79,9 +79,17 @@ namespace CircuitResistanceCalculator.Elements
 		/// Вызывает цепочку событий для замены текущего элемента
 		/// </summary>
 		/// <param name="newElement">Новый элемент</param>
-		public override void ReplaceNode(NodeBase newElement)
+		public override void ReplaceNode(NodeBase newNode)
 		{
-			NodeChanged?.Invoke(this, new AddedNodeArgs(newElement));
+			if(newNode is ElementBase)
+			{
+				NodeChanged?.Invoke(this, new AddedNodeArgs(newNode));
+			}
+			else
+			{
+				throw new ArgumentException("Объект типа " + this.GetType() +
+					"не может быть заменен объектом типа " + newNode.GetType());
+			}
 		}
 
 		/// <summary>

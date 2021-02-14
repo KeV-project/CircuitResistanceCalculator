@@ -80,7 +80,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		{
 			//TODO: Раньше не обратил внимание - с gridView правильнее работать с помощью списков, 
 			//TODO: которые оповещают о своём изменении, смотрите тут
-			//TODO: https://stackoverflow.com/questions/16695885/binding-listt-to-datagridview-in-winform
+			//TODO: https://stackoverflow.com/questions/16695885/binding-listt-to-datagridview-in-winform +
 			for(int i = 0; i < _resistance.Count; i++)
 			{
 				_resistance[i].Resistance = _circuit.CalculateZ(
@@ -210,7 +210,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// <summary>
 		/// Создает дерево по модели электрической цепи
 		/// </summary>
-		/// //TODO: XML комментарии?
+		/// //TODO: XML комментарии? +
 		/// <param name="parentNode">Родительский узел дерева цепи</param>
 		/// <param name="newNode">Узел для добавления в дерево цепи</param>
 		private void CreateNewCircuitTree(TreeNode parentTreeNode, NodeBase node)

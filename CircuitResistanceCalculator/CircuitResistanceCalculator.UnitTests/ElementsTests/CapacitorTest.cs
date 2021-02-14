@@ -7,7 +7,22 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 {
 	[TestFixture]
 	class CapacitorTest
-    { 
+    {
+        [Test(Description = "Позитивный тест геттера Name")]
+        public void TestGetName_CorrectValue()
+        {
+            // setup
+            Capacitor capacitor = new Capacitor(0.00022116, 1);
+            string expectedName = "C1";
+
+            // act
+            string actulaName = capacitor.Name;
+
+            // assert
+            Assert.AreEqual(expectedName, actulaName, "Геттер Name " +
+                "возвращает некорректное значение");
+        }
+
         [Test(Description = "Позитивный тест конструктора Capacitor")]
         public void TestConstructor_CorrectValue()
         {

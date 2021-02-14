@@ -84,11 +84,19 @@ namespace CircuitResistanceCalculator.Connections
 		/// в дереве электрической цепи
 		/// </summary>
 		/// <param name="newConnection">Новый узел</param>
-		public override void ReplaceNode(NodeBase newConnection)
+		public override void ReplaceNode(NodeBase newNode)
 		{
-			if (newConnection.GetType() != GetType())
+			if(newNode is ConnectionBase)
 			{
-				NodeChanged?.Invoke(this, new AddedNodeArgs(newConnection));
+				if (newNode.GetType() != GetType())
+				{
+					NodeChanged?.Invoke(this, new AddedNodeArgs(newNode));
+				}
+			}
+			else
+			{
+				throw new ArgumentException("Объект типа " + this.GetType() +
+					"не может быть заменен объектом типа " + newNode.GetType());
 			}
 		}
 
@@ -102,34 +110,36 @@ namespace CircuitResistanceCalculator.Connections
 		/// </summary>
 		/// <param name="obj">Заменяемый узел</param>
 		/// <param name="e">Хранит новый объект списка</param>
-		private void ReplaceNode(object currentNode, AddedNodeArgs e)
+		private void ReplaceNode(object replacedNode, AddedNodeArgs e)
 		{
 			if(e.Node != null)
 			{
-				int index = 0;
-				for (int i = 0; i < Nodes.Count; i++)
+				if(replacedNode is ConnectionBase)
 				{
-					if (this[i] == currentNode)
+					((ConnectionBase)replacedNode).UnSubscribeNodesFromEvents();
+					for(int i = 0; i < ((ConnectionBase)replacedNode).NodesCount; i++)
 					{
-						break;
+						((ConnectionBase)e.Node).AddNode(((ConnectionBase)replacedNode)[i]);
 					}
-					index = i + 1;
 				}
-				if(currentNode is ConnectionBase)
-				{
-					((ConnectionBase)currentNode).NodeAdded -= RecalculateCircuit;
-				}
-				((NodeBase)currentNode).NodeChanged -= ReplaceNode;
-				((NodeBase)currentNode).NodeRemoved -= RemoveNode;
-				Nodes.Remove((NodeBase)currentNode);
 
-				if (currentNode is ConnectionBase)
+				if (replacedNode is ConnectionBase)
+				{
+					((ConnectionBase)replacedNode).NodeAdded -= RecalculateCircuit;
+				}
+				((NodeBase)replacedNode).NodeChanged -= ReplaceNode;
+				((NodeBase)replacedNode).NodeRemoved -= RemoveNode;
+
+				if (e.Node is ConnectionBase)
 				{
 					((ConnectionBase)e.Node).NodeAdded += RecalculateCircuit;
+
 				}
 				e.Node.NodeChanged += ReplaceNode;
 				e.Node.NodeRemoved += RemoveNode;
-				Nodes.Insert(index, e.Node);
+
+				Nodes[Nodes.IndexOf((NodeBase)replacedNode)] = e.Node;
+
 				NodeChanged?.Invoke(this, new AddedNodeArgs(null));
 			}
 			else
@@ -195,6 +205,20 @@ namespace CircuitResistanceCalculator.Connections
 				}
 			}
 		}
+
+		public void UnSubscribeNodesFromEvents()
+		{
+			for(int i = 0; i < NodesCount; i++)
+			{
+				if(this[i] is ConnectionBase)
+				{
+					((ConnectionBase)this[i]).NodeAdded -= RecalculateCircuit;
+				}
+				this[i].NodeChanged -= ReplaceNode;
+				this[i].NodeRemoved -= RemoveNode;
+			}
+		}
+
 
 		/// <summary>
 		/// Устанавливает идентичность цепей

@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
 
@@ -80,7 +81,25 @@ namespace CircuitResistanceCalculator.UnitTests.ElementsTests
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(currentElement, 
 					nameof(ElementBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
+		}
 
+		[Test(Description = "Негативный тест метода ReplaceNode")]
+		public void TestReplaceNode_IncorrectValue()
+		{
+			// setup
+			ConnectionBase circuit = new SerialConnection();
+			NodeBase replacedNode = new Resistor(1000, 1);
+
+			circuit.AddNode(replacedNode);
+
+			NodeBase newNode = new SerialConnection();
+
+			// assert
+			Assert.Throws<ArgumentException>(() =>
+			{
+				replacedNode.ReplaceNode(newNode);
+			}, "Должно возникать исключение, при попытке заменить элемент " +
+			"типа ElementBase элементом типа ConnectionBase");
 		}
 
 		[Test(Description = "Позитивный тест метода RemoveNode")]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
+using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
 
@@ -43,65 +44,76 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 		}
 
 		[Test(Description = "Позитивный тест метода AddNode")]
-		public void TestAddNode_AddElement()
+		public void TestAddNode_CorrectValue()
 		{
 			// setup
-			ConnectionBase connection = new SerialConnection();
-			ElementBase newElement = new Resistor(2000.0, 1);
+			ConnectionBase circuit = new SerialConnection();
+			SerialConnection serialConnection = new SerialConnection();
 			int expectedConnectionNodesCount = 1;
 
 			// act
-			connection.AddNode(newElement);
-			int actualConnectionNodesCount = connection.NodesCount;
+			circuit.AddNode(serialConnection);
+			int actualConnectionNodesCount = circuit.NodesCount;
 
 			// assert
 			Assert.AreEqual(expectedConnectionNodesCount,
 				actualConnectionNodesCount, "Метод некорректно " +
 				"добавляет узел в список соединения");
-			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement,
-				nameof(ElementBase.NodeChanged));
-			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newElement,
-				nameof(ElementBase.NodeRemoved));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(serialConnection,
+				nameof(ConnectionBase.NodeAdded));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(serialConnection,
+				nameof(ConnectionBase.NodeChanged));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(serialConnection,
+				nameof(ConnectionBase.NodeRemoved));
 		}
 
 		[Test(Description = "Позитивный тест метода ReplaceNode")]
-		public void ChangeConnection()
+		public void ReplaceNode_CorrectValue()
 		{
 			// setup
+			ConnectionBase circuit = new SerialConnection();
 			SerialConnection serialConnection = new SerialConnection();
 
 			Capacitor capacitor = new Capacitor(0.000004, 1);
-			ConnectionBase currentConnection = new SerialConnection();
+			ConnectionBase replacedConnection = new SerialConnection();
 			Resistor resistor = new Resistor(1000.0, 1);
 			ParallelConnection parallelConnection = new ParallelConnection();
 			Inductor inductor = new Inductor(0.004, 1);
 
+			circuit.AddNode(serialConnection);
 			serialConnection.AddNode(capacitor);
-			serialConnection.AddNode(currentConnection);
-			currentConnection.AddNode(parallelConnection);
-			currentConnection.AddNode(resistor);
+			serialConnection.AddNode(replacedConnection);
+			replacedConnection.AddNode(parallelConnection);
 			parallelConnection.AddNode(inductor);
+			replacedConnection.AddNode(resistor);
 
 			ConnectionBase newConnection = new ParallelConnection();
 
 			// act
-			currentConnection.ReplaceNode(newConnection);
+			replacedConnection.ReplaceNode(newConnection);
 
 			// assert
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newConnection,
-				nameof(ElementBase.NodeChanged));
+				nameof(ConnectionBase.NodeAdded));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newConnection,
-				nameof(ElementBase.NodeRemoved));
+				nameof(ConnectionBase.NodeChanged));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(newConnection,
+				nameof(ConnectionBase.NodeRemoved));
 
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
-					currentConnection, nameof(ElementBase.NodeChanged));
+					replacedConnection, nameof(ConnectionBase.NodeAdded));
+			}, "Событие NodeAdded должно быть отписано от обработчика");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
+					replacedConnection, nameof(ConnectionBase.NodeChanged));
 			}, "Событие NodeChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
-					currentConnection, nameof(ElementBase.NodeRemoved));
+					replacedConnection, nameof(ConnectionBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 		}
 
@@ -109,18 +121,17 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 		public void TestChangedConnection_IncorrectValue()
 		{
 			// setup
-			SerialConnection serialConnection = new SerialConnection();
-			ConnectionBase currentConnection = new ParallelConnection();
-			serialConnection.AddNode(currentConnection);
-			ConnectionBase newConnection = new ParallelConnection();
-
-			// act
-			currentConnection.ReplaceNode(newConnection);
+			SerialConnection circuit = new SerialConnection();
+			NodeBase replacedNode = new ParallelConnection();
+			circuit.AddNode(replacedNode);
+			NodeBase newNode = new Resistor(1000, 1);
 
 			// assert
-			Assert.AreEqual(serialConnection[0], currentConnection, 
-				"Метод неверно обрабатывает попытку заменить " +
-				"текущее соединение на объект того же типа");
+			Assert.Throws<ArgumentException>(() =>
+			{
+				replacedNode.ReplaceNode(newNode);
+			}, "Метод неверно реагирует на попытку заменить объект типа " +
+			"ConnectionBase на объект типа ElementBase");
 		}
 
 		[Test(Description = "Позитивный тест метода RemoveNode")]
@@ -143,12 +154,17 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
-					removedConnection, nameof(ElementBase.NodeChanged));
+					removedConnection, nameof(ConnectionBase.NodeAdded));
+			}, "Событие NodeAdded должно быть отписано от обработчика");
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
+					removedConnection, nameof(ConnectionBase.NodeChanged));
 			}, "Событие NodeChanged должно быть отписано от обработчика");
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
-					removedConnection, nameof(ElementBase.NodeRemoved));
+					removedConnection, nameof(ConnectionBase.NodeRemoved));
 			}, "Событие NodeRemoved должно быть отписано от обработчика");
 		}
 
@@ -166,17 +182,25 @@ namespace CircuitResistanceCalculator.UnitTests.ConnectionsTests
 
 			// assert
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(circut[0],
-				nameof(ElementBase.NodeChanged));
+				nameof(ConnectionBase.NodeAdded));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(circut[0],
-				nameof(ElementBase.NodeRemoved));
+				nameof(ConnectionBase.NodeChanged));
+			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(circut[0],
+				nameof(ConnectionBase.NodeRemoved));
+
+			
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
 				((ConnectionBase)circut[0])[0], nameof(ElementBase.NodeChanged));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
 				((ConnectionBase)circut[0])[0], nameof(ElementBase.NodeRemoved));
+
+			
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
 				((ConnectionBase)circut[0])[1], nameof(ElementBase.NodeChanged));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
 				((ConnectionBase)circut[0])[1], nameof(ElementBase.NodeRemoved));
+
+			
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
 				((ConnectionBase)circut[0])[2], nameof(ElementBase.NodeChanged));
 			HelperMethods.HelperMethods.VerifyDelegateAttachedTo(
