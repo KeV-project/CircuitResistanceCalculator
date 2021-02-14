@@ -23,17 +23,6 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 		private static int _capacitorHeight = 40;
 		private static int _capacitorWidth = 20;
 
-		private static int[,] GetShiftMatrix(int dx, int dy)
-		{
-			int[,] shiftMatrix = new int[3, 3];
-
-			shiftMatrix[0, 0] = 1; shiftMatrix[0, 1] = 0; shiftMatrix[0, 2] = 0;
-			shiftMatrix[1, 0] = 0; shiftMatrix[1, 1] = 1; shiftMatrix[1, 2] = 0;
-			shiftMatrix[2, 0] = dx; shiftMatrix[2, 1] = dy; shiftMatrix[2, 2] = 1;
-
-			return shiftMatrix;
-		}
-
 		private static void DrawLine(Bitmap bitmap, int x1, int y1,
 			int x2, int y2, Color lineColor, int lineWidth)
 		{
@@ -90,7 +79,8 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 						- Math.Pow(j + 1, 2)));
 					lineMatrix[1, 2] = 1;
 
-					lineMatrix = Multiplication(lineMatrix, GetShiftMatrix(x + 10, y), 2, 3);
+					lineMatrix = MatrixOperations.Multiplication(lineMatrix, 
+						GetShiftMatrix(x + 10, y), 2, 3);
 
 					DrawLine(bitmap, lineMatrix[0, 0], lineMatrix[0, 1], 
 						lineMatrix[1, 0], lineMatrix[1, 1], _lineColor, _lineWidth);

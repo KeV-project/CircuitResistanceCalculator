@@ -20,7 +20,7 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 		/// <param name="rowsCount">Количество строк множимой матрицы</param>
 		/// <param name="columnsCount">Количество столбцов множимой матрицы</param>
 		/// <returns></returns>
-		private static int[,] Multiplication(int[,] firstMatrix,
+		public static int[,] Multiplication(int[,] firstMatrix,
 			int[,] secondMatrix, int rowsCount, int columnsCount)
 		{
 			int[,] resultMatrix = new int[rowsCount, columnsCount];

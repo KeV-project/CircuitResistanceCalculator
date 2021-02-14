@@ -50,6 +50,7 @@
     <Compile Include="CalculatedData\CircuitResistance.cs" />
     <Compile Include="DrawingCircuit\MatrixOperations.cs" />
     <Compile Include="DrawingCircuit\Painter.cs" />
+    <Compile Include="DrawingCircuit\TransformationMatrices.cs" />
     <Compile Include="EditingConnection\EditConnectionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
