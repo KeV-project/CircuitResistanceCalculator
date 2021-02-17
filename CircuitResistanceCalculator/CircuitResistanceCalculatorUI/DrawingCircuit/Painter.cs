@@ -26,10 +26,6 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 		private static int _lineWidth = 2;
 
 		/// <summary>
-		/// Длина корня цепи
-		/// </summary>
-		private static int _rootLenght = 35;
-		/// <summary>
 		/// Длина последовательного соединения элементов
 		/// </summary>
 		private static int _horizontalLinesLength = 35;
@@ -64,7 +60,7 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 		/// <param name="y2">Ордината коонечной точки линии</param>
 		/// <param name="lineColor">Цвет линии</param>
 		/// <param name="lineWidth">Ширина линии</param>
-		private static void DrawLine(int x1, int y1, int x2, int y2, 
+		private static void DrawLine(int x1, int y1, int x2, int y2,
 			Color lineColor, int lineWidth)
 		{
 			Pen myPen = new Pen(lineColor, lineWidth);
@@ -74,19 +70,6 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 
 			g.Dispose();
 			myPen.Dispose();
-		}
-
-		/// <summary>
-		/// Рисует корень цепи
-		/// </summary>
-		private static void DrawRoot()
-		{
-			int x1 = 0;
-			int y1 = _bitmap.Height / 2;
-			int x2 = _rootLenght;
-			int y2 = _bitmap.Height / 2;
-
-			DrawLine(x1, y1, x2, y2, _lineColor, _lineWidth);
 		}
 
 		/// <summary>
@@ -172,6 +155,7 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 		{
 			int verticalLineLength = (branchCount - 1) * _verticalLinesLength;
 
+			DrawLine(x, y, x += 35, y, _lineColor, _lineWidth);
 			DrawLine(x, y - verticalLineLength / 2, x, 
 				y + verticalLineLength / 2, _lineColor, _lineWidth);
 			int currentY = y - verticalLineLength / 2;
@@ -179,7 +163,10 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 			{
 				DrawLine(x, currentY, x + _horizontalLinesLength, 
 					currentY, _lineColor, _lineWidth);
-				currentY += verticalLineLength / (branchCount - 1);
+				if(branchCount != 1)
+				{
+					currentY += verticalLineLength / (branchCount - 1);
+				}
 			}
 		}
 
@@ -193,6 +180,30 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 		{
 			switch(node)
 			{
+				case ParallelConnection parallelConnection:
+				{
+					DrawParalleConnection(x, y, parallelConnection.NodesCount);
+					x += 35;
+					int currentY = y - ((parallelConnection.NodesCount - 1) *
+							_verticalLinesLength) / 2;
+					for (int i = 0; i < parallelConnection.NodesCount; i++)
+					{
+						DrawNode(parallelConnection[i], x + _horizontalLinesLength,
+							currentY);
+						currentY += _verticalLinesLength;
+					}
+					break;
+				}
+				case SerialConnection serialConnection:
+				{
+					DrawLine(x, y, x += 35, y, _lineColor, _lineWidth);
+					for (int i = 0; i < serialConnection.NodesCount; i++)
+					{
+						DrawNode(serialConnection[i], x, y);
+						x += 115;
+					}
+					break;
+				}
 				case Resistor resistor:
 				{
 					DrawResistor(x, y);
@@ -203,26 +214,9 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 					DrawInductor(x, y);
 					break;
 				}
-				case Capacitor capacitor:
-				{
-					DrawCapacitor(x, y);
-					break;
-				}
-				case ParallelConnection parallelConnection:
-				{
-					DrawParalleConnection(x, y, parallelConnection.NodesCount);
-					int currentY = y - ((parallelConnection.NodesCount - 1) * 
-							_verticalLinesLength) / 2;
-					for(int i = 0; i < parallelConnection.NodesCount; i++)
-					{
-						DrawNode(parallelConnection[i], x + _horizontalLinesLength, 
-							currentY);
-						currentY += _verticalLinesLength;
-					}
-					break;
-				}
 				default:
 				{
+					DrawCapacitor(x, y);
 					break;
 				}
 			}
@@ -236,8 +230,10 @@ namespace CircuitResistanceCalculatorUI.DrawingCircuit
 		public static void DrawCircuit(ConnectionBase circuit, Bitmap bitmap)
 		{
 			_bitmap = bitmap;
-			DrawRoot();
-			DrawNode(circuit[0], _rootLenght, bitmap.Height / 2);
+			if(circuit.NodesCount != 0)
+			{
+				DrawNode(circuit[0], 0, bitmap.Height / 2);
+			}
 		}
 	}
 }
