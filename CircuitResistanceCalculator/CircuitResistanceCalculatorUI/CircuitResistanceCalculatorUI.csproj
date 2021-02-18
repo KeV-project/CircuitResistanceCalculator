@@ -105,6 +105,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CircuitDrawer\CircuitDrawer.csproj">
+      <Project>{87368b3d-8ff8-4f81-bb63-5b81a290b3e1}</Project>
+      <Name>CircuitDrawer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CircuitResistanceCalculator\CircuitResistanceCalculator.csproj">
       <Project>{8d1268eb-5e51-4fbd-ac3e-137e8e35abf9}</Project>
       <Name>CircuitResistanceCalculator</Name>

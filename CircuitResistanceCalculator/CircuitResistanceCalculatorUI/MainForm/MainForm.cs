@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing;
+using CircuitDrawer.CircuitVisualization;
 using CircuitResistanceCalculator.Node;
 using CircuitResistanceCalculator.Connections;
 using CircuitResistanceCalculator.Elements;
@@ -12,7 +13,6 @@ using CircuitResistanceCalculatorUI.EditingElement;
 using CircuitResistanceCalculatorUI.EditingConnection;
 using CircuitResistanceCalculatorUI.CreatingTemplates;
 using CircuitResistanceCalculatorUI.CalculatedData;
-using CircuitResistanceCalculatorUI.DrawingCircuit;
 
 namespace CircuitResistanceCalculatorUI.MainForm
 {
@@ -89,10 +89,13 @@ namespace CircuitResistanceCalculatorUI.MainForm
 					_resistance[i].Frequency);
 			}
 
-			Bitmap bitmap = new Bitmap(CircuitPictureBox.Width, 
+			if(_circuit.NodesCount != 0)
+			{
+				Bitmap bitmap = new Bitmap(CircuitPictureBox.Width,
 				CircuitPictureBox.Height);
-			Painter.DrawCircuit(_circuit, bitmap);
-			CircuitPictureBox.Image = bitmap;
+				CircuitDrawer.CircuitVisualization.CircuitDrawer.Draw(_circuit, bitmap);
+				CircuitPictureBox.Image = bitmap;
+			}
 			CircuitPictureBox.Refresh();
 		}
 
