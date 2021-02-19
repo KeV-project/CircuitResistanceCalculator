@@ -14,6 +14,10 @@ namespace CircuitDrawer.ConnectionDrawer
 {
 	public abstract class ConnectionDrawerBase : NodeDrawerBase
 	{
+		private List<NodeDrawerBase> Nodes { get; }
+
+		public NodeDrawerBase this[int index] => Nodes[index];
+
 		public override Color LineColor
 		{
 			get
@@ -30,15 +34,7 @@ namespace CircuitDrawer.ConnectionDrawer
 			}
 		}
 
-		public int ElementsDistanceHeight
-		{
-			get
-			{
-				return 10;
-			}
-		}
-
-		public int ElementsDistanceWidth
+		public int RootWidth
 		{
 			get
 			{
@@ -46,10 +42,13 @@ namespace CircuitDrawer.ConnectionDrawer
 			}
 		}
 
-
-		private List<NodeDrawerBase> Nodes { get; }
-
-		public NodeDrawerBase this[int index] => Nodes[index];
+		public int ElementsDistanceHeight
+		{
+			get
+			{
+				return 10;
+			}
+		}
 
 		protected ConnectionDrawerBase()
 		{

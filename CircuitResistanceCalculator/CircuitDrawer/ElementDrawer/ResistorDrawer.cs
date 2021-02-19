@@ -16,7 +16,8 @@ namespace CircuitDrawer.ElementDrawer
 
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
-			Drawer.DrawLine(bitmap, x, y, x += 40, y, LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x, y, x += (Width - WIDTH) / 2, 
+				y, LineColor, LineWidth);
 
 			Drawer.DrawLine(bitmap, x, y - HEIGHT / 2, x, y + HEIGHT / 2,
 				LineColor, LineWidth);
@@ -27,7 +28,7 @@ namespace CircuitDrawer.ElementDrawer
 			Drawer.DrawLine(bitmap, x + WIDTH, y - HEIGHT / 2,
 				x + WIDTH, y + HEIGHT / 2, LineColor, LineWidth);
 
-			Drawer.DrawLine(bitmap, x + WIDTH, y, x + WIDTH + 40,
+			Drawer.DrawLine(bitmap, x + WIDTH, y, x + (Width - WIDTH) / 2,
 				y, LineColor, LineWidth);
 		}
 	}

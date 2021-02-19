@@ -25,7 +25,8 @@ namespace CircuitDrawer.ConnectionDrawer
 				{
 					heigth += this[i].Height;
 				}
-				return heigth + (NodesCount - 1) * ElementsDistanceHeight;
+				return heigth + (NodesCount - 1) * 
+					ElementsDistanceHeight;
 			}
 		}
 
@@ -41,15 +42,16 @@ namespace CircuitDrawer.ConnectionDrawer
 						width = this[i].Width;
 					}
 				}
-				return width + ElementsDistanceWidth * 2;
+				return width + RootWidth * 2;
 			}
 		}
 
 
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
-			Drawer.DrawLine(bitmap, x, y, x + ElementsDistanceWidth, y, 
+			Drawer.DrawLine(bitmap, x, y, x + RootWidth, y, 
 				LineColor, LineWidth);
+
 			int connectonWidth = 0;
 			for(int i = 0; i < NodesCount; i++)
 			{
@@ -64,25 +66,26 @@ namespace CircuitDrawer.ConnectionDrawer
 			}
 			int verticalLine = connectonWidth + (NodesCount - 1) 
 				* ElementsDistanceHeight;
-			Drawer.DrawLine(bitmap, x + ElementsDistanceWidth, 
-				y - verticalLine / 2, x + ElementsDistanceWidth, 
+			Drawer.DrawLine(bitmap, x + RootWidth, 
+				y - verticalLine / 2, x + RootWidth, 
 				y + verticalLine / 2, LineColor, LineWidth);
+
 			int currentY = y - verticalLine / 2;
 			for (int i = 0; i < NodesCount; i++)
 			{
-				this[i].Draw(bitmap, x + ElementsDistanceWidth, currentY);
+				this[i].Draw(bitmap, x + RootWidth, currentY);
 
 				if (this[i] is ParallelConnectionDrawer)
 				{
-					Drawer.DrawLine(bitmap, x + this[i].Width, currentY,
-						x + Width - ElementsDistanceWidth, currentY, 
-						LineColor, LineWidth);
+					Drawer.DrawLine(bitmap, x + this[i].Width, 
+						currentY, x + Width - RootWidth, 
+						currentY, LineColor, LineWidth);
 				}
 				else
 				{
-					Drawer.DrawLine(bitmap, x + this[i].Width, currentY,
-						x + Width - ElementsDistanceWidth, currentY,
-						LineColor, LineWidth);
+					Drawer.DrawLine(bitmap, x + this[i].Width, 
+						currentY, x + Width - RootWidth, 
+						currentY, LineColor, LineWidth);
 				}
 
 				if (i != NodesCount - 1)
@@ -91,10 +94,11 @@ namespace CircuitDrawer.ConnectionDrawer
 						this[i + 1].Height / 2;
 				}
 			}
-			Drawer.DrawLine(bitmap, x + Width - ElementsDistanceWidth, 
-				y - verticalLine / 2, x + Width - ElementsDistanceWidth, 
+
+			Drawer.DrawLine(bitmap, x + Width - RootWidth, 
+				y - verticalLine / 2, x + Width - RootWidth, 
 				y + verticalLine / 2, LineColor, LineWidth);
-			Drawer.DrawLine(bitmap, x + Width - ElementsDistanceWidth, 
+			Drawer.DrawLine(bitmap, x + Width - RootWidth, 
 				y, x + Width, y, LineColor, LineWidth);
 		}
 	}
