@@ -13,14 +13,6 @@ namespace CircuitDrawer.ElementDrawer
 		private const int WIDTH = 80;
 		private const int HEIGHT = 10;
 
-		public override int ConnectionWidth
-		{
-			get
-			{
-				return 1;
-			}
-		}
-
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
 

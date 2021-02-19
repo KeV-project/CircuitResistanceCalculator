@@ -14,7 +14,7 @@ namespace CircuitDrawer.ConnectionDrawer
 {
 	public abstract class ConnectionDrawerBase : NodeDrawerBase
 	{
-		public Color LineColor
+		public override Color LineColor
 		{
 			get
 			{
@@ -22,7 +22,7 @@ namespace CircuitDrawer.ConnectionDrawer
 			}
 		}
 
-		public int LineWidth
+		public override int LineWidth
 		{
 			get
 			{

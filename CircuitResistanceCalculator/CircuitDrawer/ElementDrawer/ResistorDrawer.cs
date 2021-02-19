@@ -11,32 +11,8 @@ namespace CircuitDrawer.ElementDrawer
 {
 	public class ResistorDrawer : ElementDrawerBase
 	{
-		public Color LineColor
-		{
-			get
-			{
-				return Color.Black;
-			}
-		}
-
-		public int LineWidth
-		{
-			get
-			{
-				return 2;
-			}
-		}
-
 		private const int WIDTH = 40;
 		private const int HEIGHT = 20;
-
-		public override int ConnectionWidth
-		{
-			get
-			{
-				return 1;
-			}
-		}
 
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
