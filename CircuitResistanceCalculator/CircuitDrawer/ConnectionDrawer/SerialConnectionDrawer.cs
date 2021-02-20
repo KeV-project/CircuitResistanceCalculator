@@ -1,11 +1,17 @@
 ﻿using System.Drawing;
 
-using CircuitVisualization.ElementDrawer;
-
 namespace CircuitVisualization.ConnectionDrawer
 {
+	/// <summary>
+	/// Класс <see cref="SerialConnectionDrawer"/> предназначен 
+	/// для отрисовки последовательного соединения элементов
+	/// на макете электрической цепи
+	/// </summary>
 	public class SerialConnectionDrawer : ConnectionDrawerBase
 	{
+		/// <summary>
+		/// Возвращает высоту последовательного соединения в пикселях
+		/// </summary>
 		public override int Height
 		{
 			get
@@ -22,6 +28,9 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает ширину последовательного соединения в пикселях
+		/// </summary>
 		public override int Width
 		{
 			get
@@ -35,6 +44,10 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает количество элементов в последовательном 
+		/// соединении и во всех его вложенных цепях
+		/// </summary>
 		public override int ElementsCount
 		{
 			get
@@ -55,6 +68,13 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Отрисовывает последовательное соединение на
+		/// макете электрической цепи
+		/// </summary>
+		/// <param name="bitmap">Изображение электрической цепи</param>
+		/// <param name="x">Абцисса точки включения соединения в цепь</param>
+		/// <param name="y">Ордината точки включения соединения в цепь</param>
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
 			for(int i = 0; i < NodesCount; i++)

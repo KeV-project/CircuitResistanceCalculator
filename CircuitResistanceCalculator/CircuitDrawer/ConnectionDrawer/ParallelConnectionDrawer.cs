@@ -1,12 +1,18 @@
 ﻿using System.Drawing;
 using CircuitVisualization.Drawers;
-using CircuitVisualization.ConnectionDrawer;
-using CircuitVisualization.ElementDrawer;
 
 namespace CircuitVisualization.ConnectionDrawer
 {
+	/// <summary>
+	/// Класс <see cref="ParallelConnectionDrawer"/> предназначен 
+	/// для отрисовки параллельного соединения элементов 
+	/// на макете электрической цепи
+	/// </summary>
 	public class ParallelConnectionDrawer : ConnectionDrawerBase
 	{ 
+		/// <summary>
+		/// Возвращает высоту параллельного соединения в пикселях
+		/// </summary>
 		public override int Height
 		{
 			get
@@ -21,6 +27,9 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает ширину параллельного соединения в пикселях
+		/// </summary>
 		public override int Width
 		{
 			get
@@ -37,6 +46,10 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает количество элементов в параллельном соединении
+		/// и во всех его вложенных цепях
+		/// </summary>
 		public override int ElementsCount
 		{
 			get
@@ -57,6 +70,13 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Рисует паралелльное соединения элементов
+		/// на макете электрической цепи
+		/// </summary>
+		/// <param name="bitmap">Изображение электрической цепи</param>
+		/// <param name="x">Абцисса точки включения соединения в цепь</param>
+		/// <param name="y">Ордината точки включения соединения в цепь</param>
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
 			if(ElementsCount == 0)
