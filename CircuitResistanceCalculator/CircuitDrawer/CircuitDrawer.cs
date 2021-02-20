@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using CircuitDrawer.ConnectionDrawer;
-using CircuitResistanceCalculator.Node;
-using CircuitResistanceCalculator.Connections;
-using CircuitResistanceCalculator.Elements;
+﻿using System.Drawing;
+using CircuitVisualization.ConnectionDrawer;
+using CircuitResistanceCalculator.Connection;
 
-namespace CircuitDrawer.CircuitVisualization
+namespace CircuitVisualization
 {
     public static class CircuitDrawer
     {

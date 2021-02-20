@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
-using CircuitResistanceCalculator.Connections;
+using CircuitResistanceCalculator.Connection;
 
 namespace CircuitResistanceCalculator.Serializer
 {

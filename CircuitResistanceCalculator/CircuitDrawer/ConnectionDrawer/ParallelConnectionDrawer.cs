@@ -1,21 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using CircuitDrawer.NodeDrawer;
-using CircuitDrawer.ConnectionDrawer;
-using CircuitDrawer.ElementDrawer;
-using CircuitResistanceCalculator.Node;
-using CircuitResistanceCalculator.Connections;
-using CircuitResistanceCalculator.Elements;
-using CircuitDrawer.Drawers;
+﻿using System.Drawing;
+using CircuitVisualization.Drawers;
+using CircuitVisualization.ConnectionDrawer;
+using CircuitVisualization.ElementDrawer;
 
-namespace CircuitDrawer.ConnectionDrawer
+namespace CircuitVisualization.ConnectionDrawer
 {
 	public class ParallelConnectionDrawer : ConnectionDrawerBase
 	{
+		public override int ElementsCount
+		{
+			get
+			{
+				int elementsCount = 0;
+				for(int i = 0; i < NodesCount; i++)
+				{
+					if(this[i] is ConnectionDrawerBase connection)
+					{
+						elementsCount += connection.ElementsCount;
+					}
+					else
+					{
+						elementsCount++;
+					}
+				}
+				return elementsCount;
+			}
+		}
+		
 		public override int Height
 		{
 			get
@@ -49,6 +60,11 @@ namespace CircuitDrawer.ConnectionDrawer
 
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
+			if(ElementsCount == 0)
+			{
+				return;
+			}
+
 			Drawer.DrawLine(bitmap, x, y, x + RootWidth, y, 
 				LineColor, LineWidth);
 
@@ -77,13 +93,16 @@ namespace CircuitDrawer.ConnectionDrawer
 
 				if (this[i] is ParallelConnectionDrawer)
 				{
-					Drawer.DrawLine(bitmap, x + this[i].Width, 
-						currentY, x + Width - RootWidth, 
+					if(((ParallelConnectionDrawer)this[i]).ElementsCount != 0)
+					{
+						Drawer.DrawLine(bitmap, x + this[i].Width,
+						currentY, x + Width - RootWidth,
 						currentY, LineColor, LineWidth);
+					}
 				}
 				else
 				{
-					Drawer.DrawLine(bitmap, x + this[i].Width, 
+					Drawer.DrawLine(bitmap, x + RootWidth + this[i].Width, 
 						currentY, x + Width - RootWidth, 
 						currentY, LineColor, LineWidth);
 				}
@@ -95,10 +114,10 @@ namespace CircuitDrawer.ConnectionDrawer
 				}
 			}
 
-			Drawer.DrawLine(bitmap, x + Width - RootWidth, 
-				y - verticalLine / 2, x + Width - RootWidth, 
+			Drawer.DrawLine(bitmap, x + Width - RootWidth,
+				y - verticalLine / 2, x + Width - RootWidth,
 				y + verticalLine / 2, LineColor, LineWidth);
-			Drawer.DrawLine(bitmap, x + Width - RootWidth, 
+			Drawer.DrawLine(bitmap, x + Width - RootWidth,
 				y, x + Width, y, LineColor, LineWidth);
 		}
 	}

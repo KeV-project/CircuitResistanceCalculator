@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CircuitResistanceCalculator.Node;
-using CircuitResistanceCalculator.Elements;
+using CircuitResistanceCalculator.Element;
 
 namespace CircuitResistanceCalculatorUI.EditingElement
 {

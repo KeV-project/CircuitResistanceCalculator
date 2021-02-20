@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace CircuitResistanceCalculator.Connections
+namespace CircuitResistanceCalculator.Connection
 {
 	/// <summary>
 	/// Класс <see cref="ParallelConnection"/> представляет узел цепи,

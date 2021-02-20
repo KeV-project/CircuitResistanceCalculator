@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using CircuitResistanceCalculator.Connections;
+using CircuitResistanceCalculator.Connection;
 using CircuitResistanceCalculator.Node;
 
 namespace CircuitResistanceCalculatorUI.EditingConnection

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CircuitResistanceCalculator.Validators
+namespace CircuitResistanceCalculator.Validator
 {
     /// <summary>
     /// Класс <see cref="ValueValidator"/> предназначен для 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace CircuitResistanceCalculator.Elements
+namespace CircuitResistanceCalculator.Element
 {
 	/// <summary>
 	/// Класс <see cref="Capacitor"/> предназначен для 

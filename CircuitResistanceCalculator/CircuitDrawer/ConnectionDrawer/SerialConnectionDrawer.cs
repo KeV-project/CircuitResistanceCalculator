@@ -1,20 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using CircuitDrawer.NodeDrawer;
-using CircuitDrawer.ConnectionDrawer;
-using CircuitDrawer.ElementDrawer;
-using CircuitResistanceCalculator.Node;
-using CircuitResistanceCalculator.Connections;
-using CircuitResistanceCalculator.Elements;
+﻿using System.Drawing;
 
-namespace CircuitDrawer.ConnectionDrawer
+using CircuitVisualization.ElementDrawer;
+
+namespace CircuitVisualization.ConnectionDrawer
 {
 	public class SerialConnectionDrawer : ConnectionDrawerBase
 	{
+		public override int ElementsCount
+		{
+			get
+			{
+				int elementsCount = 0;
+				for (int i = 0; i < NodesCount; i++)
+				{
+					if (this[i] is ConnectionDrawerBase connection)
+					{
+						elementsCount += connection.ElementsCount;
+					}
+					else
+					{
+						elementsCount++;
+					}
+				}
+				return elementsCount;
+			}
+		}
+
 		public override int Height
 		{
 			get

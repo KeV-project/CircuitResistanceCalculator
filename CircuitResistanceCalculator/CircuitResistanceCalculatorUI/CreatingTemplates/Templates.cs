@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using CircuitResistanceCalculator.Connections;
-using CircuitResistanceCalculator.Elements;
+using CircuitResistanceCalculator.Connection;
+using CircuitResistanceCalculator.Element;
 using CircuitResistanceCalculator.Serializer;
 
 namespace CircuitResistanceCalculatorUI.CreatingTemplates

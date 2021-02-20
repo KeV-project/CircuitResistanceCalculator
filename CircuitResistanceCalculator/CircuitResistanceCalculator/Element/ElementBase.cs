@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using CircuitResistanceCalculator.Node;
 
-namespace CircuitResistanceCalculator.Elements
+namespace CircuitResistanceCalculator.Element
 {
 	/// <summary>
 	/// Класс <see cref="ElementBase"/> представляет базовый 
@@ -32,7 +32,7 @@ namespace CircuitResistanceCalculator.Elements
 			{
 				const int minIndex = 0;
 				const int maxIndex = Int32.MaxValue;
-				Validators.ValueValidator.AssertValueInRange(value, minIndex, 
+				Validator.ValueValidator.AssertValueInRange(value, minIndex, 
 					maxIndex, "индекс элемента");
 				_index = value;
 			}
@@ -57,7 +57,7 @@ namespace CircuitResistanceCalculator.Elements
 			{
 				const double minValue = 0;
 				const double maxValue = 1000000000.0;
-				Validators.ValueValidator.AssertValueInRange(value, 
+				Validator.ValueValidator.AssertValueInRange(value, 
 					minValue, maxValue, "номинал элемента");
 				_value = value;
 			}

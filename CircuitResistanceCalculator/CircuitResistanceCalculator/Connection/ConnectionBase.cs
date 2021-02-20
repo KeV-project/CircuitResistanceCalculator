@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CircuitResistanceCalculator.Node;
 
-namespace CircuitResistanceCalculator.Connections
+namespace CircuitResistanceCalculator.Connection
 {
 	/// <summary>
 	/// Класс <see cref="ConnectionBase"/> предоставляет общий 

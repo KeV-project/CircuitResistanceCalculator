@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using CircuitDrawer.NodeDrawer;
+﻿using System.Drawing;
+using CircuitVisualization.NodeDrawer;
 
-namespace CircuitDrawer.ElementDrawer
+namespace CircuitVisualization.ElementDrawer
 {
 	public abstract class ElementDrawerBase : NodeDrawerBase
 	{

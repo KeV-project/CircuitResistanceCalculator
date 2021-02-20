@@ -7,8 +7,8 @@
     <ProjectGuid>{87368B3D-8FF8-4F81-BB63-5B81A290B3E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CircuitDrawer</RootNamespace>
-    <AssemblyName>CircuitDrawer</AssemblyName>
+    <RootNamespace>CircuitVisualization</RootNamespace>
+    <AssemblyName>CircuitVisualization</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircuitVisualization\CircuitDrawer.cs" />
+    <Compile Include="CircuitDrawer.cs" />
     <Compile Include="ConnectionDrawer\ConnectionDrawerBase.cs" />
     <Compile Include="ConnectionDrawer\ParallelConnectionDrawer.cs" />
     <Compile Include="ConnectionDrawer\SerialConnectionDrawer.cs" />

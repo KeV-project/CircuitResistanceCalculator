@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using CircuitDrawer.NodeDrawer;
-using CircuitDrawer.ElementDrawer;
+using CircuitVisualization.NodeDrawer;
+using CircuitVisualization.ElementDrawer;
 using CircuitResistanceCalculator.Node;
-using CircuitResistanceCalculator.Connections;
-using CircuitResistanceCalculator.Elements;
+using CircuitResistanceCalculator.Connection;
+using CircuitResistanceCalculator.Element;
 
-namespace CircuitDrawer.ConnectionDrawer
+namespace CircuitVisualization.ConnectionDrawer
 {
 	public abstract class ConnectionDrawerBase : NodeDrawerBase
 	{
@@ -62,6 +58,8 @@ namespace CircuitDrawer.ConnectionDrawer
 				return Nodes.Count;
 			}
 		}
+
+		public abstract int ElementsCount { get; }
 
 		public void AddNode(NodeBase node)
 		{

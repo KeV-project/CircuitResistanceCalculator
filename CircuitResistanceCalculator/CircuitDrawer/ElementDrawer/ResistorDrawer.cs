@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using CircuitDrawer.Drawers;
-using CircuitDrawer.ElementDrawer;
+﻿using System.Drawing;
+using CircuitVisualization.Drawers;
 
-namespace CircuitDrawer.ElementDrawer
+namespace CircuitVisualization.ElementDrawer
 {
 	public class ResistorDrawer : ElementDrawerBase
 	{
@@ -28,8 +22,8 @@ namespace CircuitDrawer.ElementDrawer
 			Drawer.DrawLine(bitmap, x + WIDTH, y - HEIGHT / 2,
 				x + WIDTH, y + HEIGHT / 2, LineColor, LineWidth);
 
-			Drawer.DrawLine(bitmap, x + WIDTH, y, x + (Width - WIDTH) / 2,
-				y, LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x + WIDTH, y, x += WIDTH + (Width - 
+				WIDTH) / 2, y, LineColor, LineWidth);
 		}
 	}
 }

@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing;
-using CircuitDrawer.CircuitVisualization;
+using CircuitVisualization;
 using CircuitResistanceCalculator.Node;
-using CircuitResistanceCalculator.Connections;
-using CircuitResistanceCalculator.Elements;
+using CircuitResistanceCalculator.Connection;
+using CircuitResistanceCalculator.Element;
 using CircuitResistanceCalculator.Serializer;
 using CircuitResistanceCalculatorUI.EditingElement;
 using CircuitResistanceCalculatorUI.EditingConnection;
@@ -93,7 +93,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			{
 				Bitmap bitmap = new Bitmap(CircuitPictureBox.Width,
 				CircuitPictureBox.Height);
-				CircuitDrawer.CircuitVisualization.CircuitDrawer.Draw(_circuit, bitmap);
+				CircuitDrawer.Draw(_circuit, bitmap);
 				CircuitPictureBox.Image = bitmap;
 			}
 			CircuitPictureBox.Refresh();

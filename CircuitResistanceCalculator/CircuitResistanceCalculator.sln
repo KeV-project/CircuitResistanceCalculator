@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitResistanceCalculator
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitResistanceCalculator.UnitTests", "CircuitResistanceCalculator.UnitTests\CircuitResistanceCalculator.UnitTests.csproj", "{B74367B6-AE06-4936-AF07-DDC164A94F07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitDrawer", "CircuitDrawer\CircuitDrawer.csproj", "{87368B3D-8FF8-4F81-BB63-5B81A290B3E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitVisualization", "CircuitDrawer\CircuitVisualization.csproj", "{87368B3D-8FF8-4F81-BB63-5B81A290B3E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
