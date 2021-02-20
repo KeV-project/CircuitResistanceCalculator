@@ -6,26 +6,6 @@ namespace CircuitVisualization.ConnectionDrawer
 {
 	public class SerialConnectionDrawer : ConnectionDrawerBase
 	{
-		public override int ElementsCount
-		{
-			get
-			{
-				int elementsCount = 0;
-				for (int i = 0; i < NodesCount; i++)
-				{
-					if (this[i] is ConnectionDrawerBase connection)
-					{
-						elementsCount += connection.ElementsCount;
-					}
-					else
-					{
-						elementsCount++;
-					}
-				}
-				return elementsCount;
-			}
-		}
-
 		public override int Height
 		{
 			get
@@ -52,6 +32,26 @@ namespace CircuitVisualization.ConnectionDrawer
 					width += this[i].Width;
 				}
 				return width;
+			}
+		}
+
+		public override int ElementsCount
+		{
+			get
+			{
+				int elementsCount = 0;
+				for (int i = 0; i < NodesCount; i++)
+				{
+					if (this[i] is ConnectionDrawerBase connection)
+					{
+						elementsCount += connection.ElementsCount;
+					}
+					else
+					{
+						elementsCount++;
+					}
+				}
+				return elementsCount;
 			}
 		}
 

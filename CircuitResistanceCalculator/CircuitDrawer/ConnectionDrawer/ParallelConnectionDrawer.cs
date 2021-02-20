@@ -6,27 +6,7 @@ using CircuitVisualization.ElementDrawer;
 namespace CircuitVisualization.ConnectionDrawer
 {
 	public class ParallelConnectionDrawer : ConnectionDrawerBase
-	{
-		public override int ElementsCount
-		{
-			get
-			{
-				int elementsCount = 0;
-				for(int i = 0; i < NodesCount; i++)
-				{
-					if(this[i] is ConnectionDrawerBase connection)
-					{
-						elementsCount += connection.ElementsCount;
-					}
-					else
-					{
-						elementsCount++;
-					}
-				}
-				return elementsCount;
-			}
-		}
-		
+	{ 
 		public override int Height
 		{
 			get
@@ -57,6 +37,25 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		public override int ElementsCount
+		{
+			get
+			{
+				int elementsCount = 0;
+				for (int i = 0; i < NodesCount; i++)
+				{
+					if (this[i] is ConnectionDrawerBase connection)
+					{
+						elementsCount += connection.ElementsCount;
+					}
+					else
+					{
+						elementsCount++;
+					}
+				}
+				return elementsCount;
+			}
+		}
 
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
