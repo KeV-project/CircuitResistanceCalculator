@@ -26,7 +26,14 @@ namespace CircuitVisualization.ConnectionDrawer
 		/// <param name="index">Индекс возвращаемого элемента</param>
 		/// <returns>Дочерний элемент соединения 
 		/// по указанному индексу</returns>
-		public NodeDrawerBase this[int index] => Nodes[index];
+		//public NodeDrawerBase this[int index] => Nodes[index];
+		public NodeDrawerBase this[int index]
+		{
+			get
+			{
+				return Nodes[index];
+			}
+		}
 
 		/// <summary>
 		/// Возвращает цвет линии соединения
