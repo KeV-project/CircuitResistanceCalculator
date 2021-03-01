@@ -74,6 +74,64 @@ namespace CircuitVisualization.ConnectionDrawer
 		}
 
 		/// <summary>
+		/// Рассчитывает высоту вертикальной линии 
+		/// параллельного соединения в пикселях
+		/// </summary>
+		/// <returns>Высота вертикальной линии 
+		/// параллельного соединения в пикселях</returns>
+		private int GetVerticaleLineHight()
+		{
+			int connectonWidth = 0;
+			for (int i = 0; i < NodesCount; i++)
+			{
+				if (i == 0 || i == NodesCount - 1)
+				{
+					connectonWidth += this[i].Height / 2;
+				}
+				else
+				{
+					connectonWidth += this[i].Height;
+				}
+			}
+			return connectonWidth + (NodesCount - 1)
+				* ELEMENTS_DISTANCE_HEIGHT;
+		}
+
+		/// <summary>
+		/// Выполняет отрисовку дочерних узлов параллельного соединения
+		/// </summary>
+		/// <param name="bitmap">Изображение макета электрической цепи</param>
+		/// <param name="x">Абцисса точки включения нулевого узла</param>
+		/// <param name="y">Ордината точки включения нулевого узла</param>
+		private void DrawNodes(Bitmap bitmap, int x, int y)
+		{
+			for (int i = 0; i < NodesCount; i++)
+			{
+				this[i].Draw(bitmap, x + ROOT_WIDTH, y);
+
+				if (this[i] is ParallelConnectionDrawer)
+				{
+					if (((ParallelConnectionDrawer)this[i]).ElementsCount != 0)
+					{
+						Drawer.DrawLine(bitmap, x + this[i].Width,
+						y, x + Width - ROOT_WIDTH, y, LINE_COLOR, LINE_WIDTH);
+					}
+				}
+				else
+				{
+					Drawer.DrawLine(bitmap, x + ROOT_WIDTH + this[i].Width,
+						y, x + Width - ROOT_WIDTH, y, LINE_COLOR, LINE_WIDTH);
+				}
+
+				if (i != NodesCount - 1)
+				{
+					y += this[i].Height / 2 + ELEMENTS_DISTANCE_HEIGHT +
+						this[i + 1].Height / 2;
+				}
+			}
+		}
+
+		/// <summary>
 		/// Рисует паралелльное соединения элементов
 		/// на макете электрической цепи
 		/// </summary>
@@ -90,52 +148,14 @@ namespace CircuitVisualization.ConnectionDrawer
 			Drawer.DrawLine(bitmap, x, y, x + ROOT_WIDTH, y, 
 				LINE_COLOR, LINE_WIDTH);
 
-			int connectonWidth = 0;
-			for(int i = 0; i < NodesCount; i++)
-			{
-				if (i == 0 || i == NodesCount - 1)
-				{
-					connectonWidth += this[i].Height / 2;
-				}
-				else
-				{
-					connectonWidth += this[i].Height;
-				}
-			}
-			int verticalLine = connectonWidth + (NodesCount - 1) 
-				* ELEMENTS_DISTANCE_HEIGHT;
+			int verticalLine = GetVerticaleLineHight();
+			DrawNodes(bitmap, x, y - verticalLine / 2);
+			
 			Drawer.DrawLine(bitmap, x + ROOT_WIDTH, 
 				y - verticalLine / 2, x + ROOT_WIDTH, 
 				y + verticalLine / 2, LINE_COLOR, LINE_WIDTH);
 
-			int currentY = y - verticalLine / 2;
-			for (int i = 0; i < NodesCount; i++)
-			{
-				this[i].Draw(bitmap, x + ROOT_WIDTH, currentY);
-
-				if (this[i] is ParallelConnectionDrawer)
-				{
-					if(((ParallelConnectionDrawer)this[i]).ElementsCount != 0)
-					{
-						Drawer.DrawLine(bitmap, x + this[i].Width,
-						currentY, x + Width - ROOT_WIDTH,
-						currentY, LINE_COLOR, LINE_WIDTH);
-					}
-				}
-				else 
-				{
-					Drawer.DrawLine(bitmap, x + ROOT_WIDTH + this[i].Width, 
-						currentY, x + Width - ROOT_WIDTH, 
-						currentY, LINE_COLOR, LINE_WIDTH);
-				}
-
-				if (i != NodesCount - 1)
-				{
-					currentY += this[i].Height / 2 + ELEMENTS_DISTANCE_HEIGHT +
-						this[i + 1].Height / 2;
-				}
-			}
-
+			
 			Drawer.DrawLine(bitmap, x + Width - ROOT_WIDTH,
 				y - verticalLine / 2, x + Width - ROOT_WIDTH,
 				y + verticalLine / 2, LINE_COLOR, LINE_WIDTH);
