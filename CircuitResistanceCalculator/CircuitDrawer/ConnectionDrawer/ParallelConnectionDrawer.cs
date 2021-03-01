@@ -9,7 +9,10 @@ namespace CircuitVisualization.ConnectionDrawer
 	/// на макете электрической цепи
 	/// </summary>
 	public class ParallelConnectionDrawer : ConnectionDrawerBase
-	{ 
+	{
+		private const int ROOT_WIDTH = 40;
+		private const int ELEMENTS_DISTANCE_HEIGHT = 10;
+
 		/// <summary>
 		/// Возвращает высоту параллельного соединения в пикселях
 		/// </summary>
@@ -23,7 +26,7 @@ namespace CircuitVisualization.ConnectionDrawer
 					heigth += this[i].Height;
 				}
 				return heigth + (NodesCount - 1) * 
-					ElementsDistanceHeight;
+					ELEMENTS_DISTANCE_HEIGHT;
 			}
 		}
 
@@ -42,7 +45,7 @@ namespace CircuitVisualization.ConnectionDrawer
 						width = this[i].Width;
 					}
 				}
-				return width + RootWidth * 2;
+				return width + ROOT_WIDTH * 2;
 			}
 		}
 
@@ -84,8 +87,8 @@ namespace CircuitVisualization.ConnectionDrawer
 				return;
 			}
 
-			Drawer.DrawLine(bitmap, x, y, x + RootWidth, y, 
-				LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x, y, x + ROOT_WIDTH, y, 
+				LINE_COLOR, LINE_WIDTH);
 
 			int connectonWidth = 0;
 			for(int i = 0; i < NodesCount; i++)
@@ -100,44 +103,44 @@ namespace CircuitVisualization.ConnectionDrawer
 				}
 			}
 			int verticalLine = connectonWidth + (NodesCount - 1) 
-				* ElementsDistanceHeight;
-			Drawer.DrawLine(bitmap, x + RootWidth, 
-				y - verticalLine / 2, x + RootWidth, 
-				y + verticalLine / 2, LineColor, LineWidth);
+				* ELEMENTS_DISTANCE_HEIGHT;
+			Drawer.DrawLine(bitmap, x + ROOT_WIDTH, 
+				y - verticalLine / 2, x + ROOT_WIDTH, 
+				y + verticalLine / 2, LINE_COLOR, LINE_WIDTH);
 
 			int currentY = y - verticalLine / 2;
 			for (int i = 0; i < NodesCount; i++)
 			{
-				this[i].Draw(bitmap, x + RootWidth, currentY);
+				this[i].Draw(bitmap, x + ROOT_WIDTH, currentY);
 
 				if (this[i] is ParallelConnectionDrawer)
 				{
 					if(((ParallelConnectionDrawer)this[i]).ElementsCount != 0)
 					{
 						Drawer.DrawLine(bitmap, x + this[i].Width,
-						currentY, x + Width - RootWidth,
-						currentY, LineColor, LineWidth);
+						currentY, x + Width - ROOT_WIDTH,
+						currentY, LINE_COLOR, LINE_WIDTH);
 					}
 				}
-				else
+				else 
 				{
-					Drawer.DrawLine(bitmap, x + RootWidth + this[i].Width, 
-						currentY, x + Width - RootWidth, 
-						currentY, LineColor, LineWidth);
+					Drawer.DrawLine(bitmap, x + ROOT_WIDTH + this[i].Width, 
+						currentY, x + Width - ROOT_WIDTH, 
+						currentY, LINE_COLOR, LINE_WIDTH);
 				}
 
 				if (i != NodesCount - 1)
 				{
-					currentY += this[i].Height / 2 + ElementsDistanceHeight +
+					currentY += this[i].Height / 2 + ELEMENTS_DISTANCE_HEIGHT +
 						this[i + 1].Height / 2;
 				}
 			}
 
-			Drawer.DrawLine(bitmap, x + Width - RootWidth,
-				y - verticalLine / 2, x + Width - RootWidth,
-				y + verticalLine / 2, LineColor, LineWidth);
-			Drawer.DrawLine(bitmap, x + Width - RootWidth,
-				y, x + Width, y, LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x + Width - ROOT_WIDTH,
+				y - verticalLine / 2, x + Width - ROOT_WIDTH,
+				y + verticalLine / 2, LINE_COLOR, LINE_WIDTH);
+			Drawer.DrawLine(bitmap, x + Width - ROOT_WIDTH,
+				y, x + Width, y, LINE_COLOR, LINE_WIDTH);
 		}
 	}
 }

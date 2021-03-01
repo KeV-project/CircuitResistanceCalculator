@@ -8,18 +8,8 @@ namespace CircuitVisualization.NodeDrawer
 	/// </summary>
 	public abstract class NodeDrawerBase
 	{
-		/// <summary>
-		/// Возвращает цвет линии для отрисовки узла
-		/// электрической цепи
-		/// </summary>
-		public abstract Color LineColor { get; }
-
-		/// <summary>
-		/// Возвращает ширину линии в пикселях для 
-		/// отрисовки узла электрической цепи
-		/// </summary>
-		public abstract int LineWidth { get; }
-
+		public readonly Color LINE_COLOR = Color.Black;
+		public const int LINE_WIDTH = 2;
 		/// <summary>
 		/// Возвращает высоту узла электрической цепи в пикселях
 		/// </summary>

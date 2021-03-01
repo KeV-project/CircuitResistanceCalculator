@@ -39,7 +39,7 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			private set
 			{
 				_frequency = value;
-				NotifyPropertyChanged("Frequency");
+				NotifyPropertyChanged(nameof(Frequency));
 			}
 		}
 
@@ -56,6 +56,7 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			set
 			{
 				_resistance = value;
+				//TODO: Дубль
 				DisplayedResistance = Math.Round(_resistance.Real, 3) + 
 					" + " + Math.Round(_resistance.Imaginary, 3) + "i";
 			}
@@ -74,7 +75,7 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			private set
 			{
 				_displayedResistance = value;
-				NotifyPropertyChanged("DisplayedResistance");
+				NotifyPropertyChanged(nameof(DisplayedResistance));
 			}
 		}
 
@@ -91,10 +92,7 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 		/// <param name="p">Измененное свойство</param>
 		private void NotifyPropertyChanged(string p)
 		{
-			if (PropertyChanged != null)
-			{
-				PropertyChanged(this, new PropertyChangedEventArgs(p));
-			}
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
 		}
 
 		/// <summary>
@@ -107,6 +105,7 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 		{
 			Frequency = frequency;
 			Resistance = resistance;
+			//TODO: Дубль
 			DisplayedResistance = Math.Round(resistance.Real, 3) + " + " +
 				Math.Round(resistance.Imaginary, 3) + "i";
 		}

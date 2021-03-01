@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using CircuitVisualization.Drawers;
+using CircuitVisualization.NodeDrawer;
 
 namespace CircuitVisualization.ElementDrawer
 {
@@ -7,17 +8,54 @@ namespace CircuitVisualization.ElementDrawer
 	/// Класс <see cref="ResistorDrawer"/> предназначен для
 	/// отрисовки резистора на макете электрической цепи
 	/// </summary>
-	public class ResistorDrawer : ElementDrawerBase
+	public class ResistorDrawer : NodeDrawerBase
 	{
 		/// <summary>
 		/// Ширина резистора в пикселях
 		/// </summary>
-		private const int WIDTH = 40;
+		private const int RESISTOR_WIDTH = 40;
+
+		/// <summary>
+		/// Ширина соединения резистора с предшествующим и 
+		/// последующим элементами в пикселях
+		/// </summary>
+		private const int CONNECTION_WIDTH = 40;
 
 		/// <summary>
 		/// Высота резистора в пикселях
 		/// </summary>
-		private const int HEIGHT = 20;
+		private const int RESISTOR_HEIGHT = 20;
+
+		/// <summary>
+		/// Высота отступа от резисотора сверху и снизу в пикселях
+		/// </summary>
+		private const int VERTICAL_INDENT = 10;
+
+		/// <summary>
+		/// Возвращает полную ширину элемента в пикселях, 
+		/// включающую ширину резистора и ширину его соединения с 
+		/// предшествующим и последующим элементами
+		/// </summary>
+		public override int Width
+		{
+			get
+			{
+				return RESISTOR_WIDTH + CONNECTION_WIDTH * 2;
+			}
+		}
+
+		/// <summary>
+		/// Возвращает полную высоту элемента в пикселях, 
+		/// включающую высоту резистора и отступы от него сверху 
+		/// и снизу
+		/// </summary>
+		public override int Height
+		{
+			get
+			{
+				return RESISTOR_HEIGHT + VERTICAL_INDENT * 2;
+			}
+		}
 
 		/// <summary>
 		/// Рисует резистор на макете электрической цепи
@@ -27,20 +65,20 @@ namespace CircuitVisualization.ElementDrawer
 		/// <param name="y">Ордината точки включения резистора в цепь</param>
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
-			Drawer.DrawLine(bitmap, x, y, x += (Width - WIDTH) / 2, 
-				y, LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x, y, x += CONNECTION_WIDTH, 
+				y, LINE_COLOR, LINE_WIDTH);
 
-			Drawer.DrawLine(bitmap, x, y - HEIGHT / 2, x, y + HEIGHT / 2,
-				LineColor, LineWidth);
-			Drawer.DrawLine(bitmap, x, y - HEIGHT / 2, x + WIDTH,
-				y - HEIGHT / 2, LineColor, LineWidth);
-			Drawer.DrawLine(bitmap, x, y + HEIGHT / 2, x + WIDTH,
-				y + HEIGHT / 2, LineColor, LineWidth);
-			Drawer.DrawLine(bitmap, x + WIDTH, y - HEIGHT / 2,
-				x + WIDTH, y + HEIGHT / 2, LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x, y - RESISTOR_HEIGHT / 2, x, 
+				y + RESISTOR_HEIGHT / 2, LINE_COLOR, LINE_WIDTH);
+			Drawer.DrawLine(bitmap, x, y - RESISTOR_HEIGHT / 2, x + RESISTOR_WIDTH, 
+				y - RESISTOR_HEIGHT / 2, LINE_COLOR, LINE_WIDTH);
+			Drawer.DrawLine(bitmap, x, y + RESISTOR_HEIGHT / 2, x + RESISTOR_WIDTH, 
+				y + RESISTOR_HEIGHT / 2, LINE_COLOR, LINE_WIDTH);
+			Drawer.DrawLine(bitmap, x + RESISTOR_WIDTH, y - RESISTOR_HEIGHT / 2, 
+				x + RESISTOR_WIDTH, y + RESISTOR_HEIGHT / 2, LINE_COLOR, LINE_WIDTH);
 
-			Drawer.DrawLine(bitmap, x + WIDTH, y, x += WIDTH + (Width - 
-				WIDTH) / 2, y, LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x + RESISTOR_WIDTH, y, 
+				x += RESISTOR_WIDTH + CONNECTION_WIDTH, y, LINE_COLOR, LINE_WIDTH);
 		}
 	}
 }

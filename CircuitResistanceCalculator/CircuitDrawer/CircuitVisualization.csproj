@@ -48,7 +48,6 @@
     <Compile Include="ConnectionDrawer\SerialConnectionDrawer.cs" />
     <Compile Include="Drawers\Drawer.cs" />
     <Compile Include="ElementDrawer\CapacitorDrawer.cs" />
-    <Compile Include="ElementDrawer\ElementDrawerBase.cs" />
     <Compile Include="ElementDrawer\InductorDrawer.cs" />
     <Compile Include="ElementDrawer\ResistorDrawer.cs" />
     <Compile Include="NodeDrawer\NodeDrawerBase.cs" />

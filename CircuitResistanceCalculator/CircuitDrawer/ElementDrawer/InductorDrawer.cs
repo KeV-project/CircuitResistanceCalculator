@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using CircuitVisualization.Drawers;
+using CircuitVisualization.NodeDrawer;
 
 namespace CircuitVisualization.ElementDrawer
 {
@@ -8,17 +9,54 @@ namespace CircuitVisualization.ElementDrawer
 	/// Класс <see cref="InductorDrawer"/> предназначен для
 	/// отрисовки индуктора на макете электрической цепи
 	/// </summary>
-	public class InductorDrawer : ElementDrawerBase
+	public class InductorDrawer : NodeDrawerBase
 	{
 		/// <summary>
 		/// Ширина индуктора в пикселях
 		/// </summary>
-		private const int WIDTH = 80;
+		private const int INDUCTOR_WIDTH = 80;
+
+		/// <summary>
+		/// Ширина соединения индуктора с предшествующим и 
+		/// последующим элементами в пикселях
+		/// </summary>
+		private const int CONNECTION_WIDTH = 20;
 
 		/// <summary>
 		/// Высота индуктора в пикселях
 		/// </summary>
-		private const int HEIGHT = 10;
+		private const int INDUCTOR_HEIGHT = 10;
+
+		/// <summary>
+		/// Высота отступа от индуктора сверху и снизу в пикселях
+		/// </summary>
+		private const int VERTICAL_INDENT = 15;
+
+		/// <summary>
+		/// Возвращает полную ширину элемента, включающую 
+		/// ширину индуктора и ширину его соединения 
+		/// с предшествующим и последующим элементами
+		/// </summary>
+		public override int Width
+		{
+			get
+			{
+				return INDUCTOR_WIDTH + CONNECTION_WIDTH * 2;
+			}
+		}
+
+		/// <summary>
+		/// Возвращает полную высоту элемента в пикселях, 
+		/// включающую высоту индуктора и отступы от него сверху 
+		/// и снизу
+		/// </summary>
+		public override int Height
+		{
+			get
+			{
+				return INDUCTOR_HEIGHT + VERTICAL_INDENT * 2;
+			}
+		}
 
 		/// <summary>
 		/// Рисует индуктор на макете электрической цепи
@@ -28,10 +66,10 @@ namespace CircuitVisualization.ElementDrawer
 		/// <param name="y">Ордината точки вклюцения индуктора в цепь</param>
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
-			Drawer.DrawLine(bitmap, x, y, x += (Width - WIDTH) / 2, y, 
-				LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x, y, x += CONNECTION_WIDTH, y, 
+				LINE_COLOR, LINE_WIDTH);
 			const int semicircleCount = 4;
-			const int semicircleDiameter = HEIGHT * 2;
+			const int semicircleDiameter = INDUCTOR_HEIGHT * 2;
 			for (int i = 0; i < semicircleCount; i++)
 			{
 				for (int j = x; j < x + semicircleDiameter; j++)
@@ -46,12 +84,12 @@ namespace CircuitVisualization.ElementDrawer
 						semicircleDiameter / 2, 2) - Math.Pow(
 						j + 1 - (x + semicircleDiameter / 2), 2)) + y);
 
-					Drawer.DrawLine(bitmap, x1, y1, x2, y2, LineColor, LineWidth);
+					Drawer.DrawLine(bitmap, x1, y1, x2, y2, LINE_COLOR, LINE_WIDTH);
 				}
 				x += semicircleDiameter;
 			}
-			Drawer.DrawLine(bitmap, x, y, x += (Width - WIDTH) / 2, y, 
-				LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x, y, x += CONNECTION_WIDTH, 
+				y, LINE_COLOR, LINE_WIDTH);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using CircuitVisualization.Drawers;
+using CircuitVisualization.NodeDrawer;
 
 namespace CircuitVisualization.ElementDrawer
 {
@@ -7,17 +8,54 @@ namespace CircuitVisualization.ElementDrawer
 	/// Класс <see cref="CapacitorDrawer"/> предназначен для
 	/// отрисовки конденсатора на макете электрической цепи
 	/// </summary>
-	public class CapacitorDrawer : ElementDrawerBase
+	public class CapacitorDrawer : NodeDrawerBase
 	{
 		/// <summary>
 		/// Ширина конденсатора в пикселях
 		/// </summary>
-		private const int WIDTH = 20;
+		private const int CAPACITOR_WIDTH = 20;
+
+		/// <summary>
+		/// Ширина соединения конденсатора с предшествующим и 
+		/// последующим элементами в пикселях
+		/// </summary>
+		private const int CONNECTION_WIDTH = 50;
 
 		/// <summary>
 		/// Высота конденсатора в пикселях
 		/// </summary>
-		private const int HEIGHT = 40;
+		private const int CAPACITOR_HEIGHT = 40;
+
+		/// <summary>
+		/// Высота отступа от конденсатора сверху и снизу в пикселях
+		/// </summary>
+		private const int VERTICAL_INDENT = 0;
+
+		/// <summary>
+		/// Возвращает полную ширину элемента, включающую 
+		/// ширину конденсатора и ширину его соединения 
+		/// с предшествующим и последующим элементами
+		/// </summary>
+		public override int Width
+		{
+			get
+			{
+				return CAPACITOR_WIDTH + CONNECTION_WIDTH * 2;
+			}
+		}
+
+		/// <summary>
+		/// Возвращает полную высоту элемента в пикселях, 
+		/// включающую высоту конденсатора и отступы 
+		/// от него сверху и снизу
+		/// </summary>
+		public override int Height
+		{
+			get
+			{
+				return CAPACITOR_HEIGHT + VERTICAL_INDENT * 2;
+			}
+		}
 
 		/// <summary>
 		/// Рисует конденсатор на макете электрической цепи
@@ -27,16 +65,16 @@ namespace CircuitVisualization.ElementDrawer
 		/// <param name="y">Ордината точки включения конденсатора в цепь</param>
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
-			Drawer.DrawLine(bitmap, x, y, x += (Width - WIDTH) / 2, y,
-				LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x, y, x += CONNECTION_WIDTH, y,
+				LINE_COLOR, LINE_WIDTH);
 
-			Drawer.DrawLine(bitmap, x, y - HEIGHT / 2, x, y + HEIGHT / 2,
-				LineColor, LineWidth);
-			Drawer.DrawLine(bitmap, x + WIDTH, y - HEIGHT / 2,
-				x + WIDTH, y + HEIGHT / 2, LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x, y - CAPACITOR_HEIGHT / 2, x, 
+				y + CAPACITOR_HEIGHT / 2, LINE_COLOR, LINE_WIDTH);
+			Drawer.DrawLine(bitmap, x + CAPACITOR_WIDTH, y - CAPACITOR_HEIGHT / 2,
+				x + CAPACITOR_WIDTH, y + CAPACITOR_HEIGHT / 2, LINE_COLOR, LINE_WIDTH);
 
-			Drawer.DrawLine(bitmap, x + WIDTH, y, x += WIDTH + (Width - 
-				WIDTH) / 2, y, LineColor, LineWidth);
+			Drawer.DrawLine(bitmap, x + CAPACITOR_WIDTH, y, x += CAPACITOR_WIDTH + 
+				CONNECTION_WIDTH, y, LINE_COLOR, LINE_WIDTH);
 		}
 	}
 }

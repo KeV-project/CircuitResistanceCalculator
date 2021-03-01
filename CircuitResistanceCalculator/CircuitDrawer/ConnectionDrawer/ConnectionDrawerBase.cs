@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using CircuitVisualization.NodeDrawer;
 using CircuitVisualization.ElementDrawer;
 using CircuitResistanceCalculator.Node;
@@ -26,57 +25,11 @@ namespace CircuitVisualization.ConnectionDrawer
 		/// <param name="index">Индекс возвращаемого элемента</param>
 		/// <returns>Дочерний элемент соединения 
 		/// по указанному индексу</returns>
-		//public NodeDrawerBase this[int index] => Nodes[index];
 		public NodeDrawerBase this[int index]
 		{
 			get
 			{
 				return Nodes[index];
-			}
-		}
-
-		/// <summary>
-		/// Возвращает цвет линии соединения
-		/// </summary>
-		public override Color LineColor
-		{
-			get
-			{
-				return Color.Black;
-			}
-		}
-
-		/// <summary>
-		/// Возвращает ширину линии соединения в пикселях
-		/// </summary>
-		public override int LineWidth
-		{
-			get
-			{
-				return 2;
-			}
-		}
-
-		/// <summary>
-		/// Возвращает ширину корня соединения
-		/// </summary>
-		public int RootWidth
-		{
-			get
-			{
-				return 40;
-			}
-		}
-
-		/// <summary>
-		/// Возвращает расстояние между соседними элементами
-		/// по координате Y в пикселях
-		/// </summary>
-		public int ElementsDistanceHeight
-		{
-			get
-			{
-				return 10;
 			}
 		}
 
