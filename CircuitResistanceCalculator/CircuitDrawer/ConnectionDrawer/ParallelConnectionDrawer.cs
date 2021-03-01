@@ -10,7 +10,17 @@ namespace CircuitVisualization.ConnectionDrawer
 	/// </summary>
 	public class ParallelConnectionDrawer : ConnectionDrawerBase
 	{
+		/// <summary>
+		/// Ширина соединения узла класса 
+		/// <see cref="ParallelConnectionDrawer"/> 
+		/// с предшествующим и последующим 
+		/// узлом электрической цепи в пикселях
+		/// </summary>
 		private const int ROOT_WIDTH = 40;
+
+		/// <summary>
+		/// Расстояние между параллельными ветвями в пикселях
+		/// </summary>
 		private const int ELEMENTS_DISTANCE_HEIGHT = 10;
 
 		/// <summary>

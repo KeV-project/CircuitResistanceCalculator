@@ -19,6 +19,14 @@ namespace CircuitVisualization.ConnectionDrawer
 		private List<NodeDrawerBase> Nodes { get; }
 
 		/// <summary>
+		/// Инициализирует свойста объекта класса <see cref="ConnectionDrawerBase"/>
+		/// </summary>
+		protected ConnectionDrawerBase()
+		{
+			Nodes = new List<NodeDrawerBase>();
+		}
+
+		/// <summary>
 		/// Возвращает дочерний элемент соединения по
 		/// указанному индексу
 		/// </summary>
@@ -31,14 +39,6 @@ namespace CircuitVisualization.ConnectionDrawer
 			{
 				return Nodes[index];
 			}
-		}
-
-		/// <summary>
-		/// Инициализирует свойста объекта класса <see cref="ConnectionDrawerBase"/>
-		/// </summary>
-		protected ConnectionDrawerBase()
-		{
-			Nodes = new List<NodeDrawerBase>();
 		}
 
 		/// <summary>

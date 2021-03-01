@@ -8,8 +8,17 @@ namespace CircuitVisualization.NodeDrawer
 	/// </summary>
 	public abstract class NodeDrawerBase
 	{
+		/// <summary>
+		/// Цвет макета электрической цепи
+		/// </summary>
 		public readonly Color LINE_COLOR = Color.Black;
+
+		/// <summary>
+		/// Ширина линии в пикселях для отрисовки 
+		/// макета электрической цепи
+		/// </summary>
 		public const int LINE_WIDTH = 2;
+
 		/// <summary>
 		/// Возвращает высоту узла электрической цепи в пикселях
 		/// </summary>
