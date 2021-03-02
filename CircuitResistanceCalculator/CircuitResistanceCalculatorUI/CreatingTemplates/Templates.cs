@@ -149,7 +149,6 @@ namespace CircuitResistanceCalculatorUI.CreatingTemplates
 			Serializer.SaveCircuit(circuit, TemplatesPath[4]);
 		}
 
-		//TODO: Всё создание темплейтов убрал бы из главной формы в отдельный класс, дабы не засорять логику GUI +
 		/// <summary>
 		/// Создание шаблонов для тестирования приложения
 		/// </summary>

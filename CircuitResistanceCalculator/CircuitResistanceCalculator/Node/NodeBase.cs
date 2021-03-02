@@ -9,8 +9,6 @@ namespace CircuitResistanceCalculator.Node
 	/// </summary>
 	public abstract class NodeBase
 	{
-		//TODO: Вот эту штуку можно опустить на уровень элементов, чтобы они 
-		//TODO: по какому-нибудь GetInfo у NodeBase возвращали информацию о себе +
 		/// <summary>
 		/// Возвращает имя узла
 		/// </summary>

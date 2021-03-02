@@ -56,7 +56,6 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 			set
 			{
 				_resistance = value;
-				//TODO: Дубль
 				DisplayedResistance = Math.Round(_resistance.Real, 3) + 
 					" + " + Math.Round(_resistance.Imaginary, 3) + "i";
 			}
@@ -105,7 +104,6 @@ namespace CircuitResistanceCalculatorUI.CalculatedData
 		{
 			Frequency = frequency;
 			Resistance = resistance;
-			//TODO: Дубль
 			DisplayedResistance = Math.Round(resistance.Real, 3) + " + " +
 				Math.Round(resistance.Imaginary, 3) + "i";
 		}
