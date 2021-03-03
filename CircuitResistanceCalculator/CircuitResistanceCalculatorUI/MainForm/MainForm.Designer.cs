@@ -109,7 +109,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			this.CreateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewElectricalCircuitToolStripMenuItem});
 			this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.CreateToolStripMenuItem.Text = "Create";
 			// 
 			// NewElectricalCircuitToolStripMenuItem
@@ -122,28 +122,28 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// OpenToolStripMenuItem
 			// 
 			this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.OpenToolStripMenuItem.Text = "Open...";
 			this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
 			// 
 			// SaveToolStripMenuItem
 			// 
 			this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.SaveToolStripMenuItem.Text = "Save";
 			this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
 			// 
 			// SaveAsToolStripMenuItem
 			// 
 			this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
-			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.SaveAsToolStripMenuItem.Text = "Save As...";
 			this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
 			// 
 			// ExitToolStripMenuItem
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.ExitToolStripMenuItem.Text = "Exit (Alt + F4)";
 			this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
 			// 
@@ -162,35 +162,35 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// Template1ToolStripMenuItem
 			// 
 			this.Template1ToolStripMenuItem.Name = "Template1ToolStripMenuItem";
-			this.Template1ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.Template1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.Template1ToolStripMenuItem.Text = "Circuit №1";
 			this.Template1ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 
 			// Template2ToolStripMenuItem
 			// 
 			this.Template2ToolStripMenuItem.Name = "Template2ToolStripMenuItem";
-			this.Template2ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.Template2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.Template2ToolStripMenuItem.Text = "Circuit №2";
 			this.Template2ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 
 			// Template3ToolStripMenuItem
 			// 
 			this.Template3ToolStripMenuItem.Name = "Template3ToolStripMenuItem";
-			this.Template3ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.Template3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.Template3ToolStripMenuItem.Text = "Circuit №3";
 			this.Template3ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 
 			// Template4ToolStripMenuItem
 			// 
 			this.Template4ToolStripMenuItem.Name = "Template4ToolStripMenuItem";
-			this.Template4ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.Template4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.Template4ToolStripMenuItem.Text = "Circuit №4";
 			this.Template4ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 
 			// Template5ToolStripMenuItem
 			// 
 			this.Template5ToolStripMenuItem.Name = "Template5ToolStripMenuItem";
-			this.Template5ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.Template5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.Template5ToolStripMenuItem.Text = "Circuit №5";
 			this.Template5ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 

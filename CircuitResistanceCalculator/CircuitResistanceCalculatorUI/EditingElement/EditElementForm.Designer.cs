@@ -111,6 +111,7 @@ namespace CircuitResistanceCalculatorUI.EditingElement
 			this.CancelButton.TabIndex = 6;
 			this.CancelButton.Text = "Cancel";
 			this.CancelButton.UseVisualStyleBackColor = true;
+			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
 			// 
 			// OkButton
 			// 
@@ -141,7 +142,7 @@ namespace CircuitResistanceCalculatorUI.EditingElement
 			this.IndexTextBox.Size = new System.Drawing.Size(62, 24);
 			this.IndexTextBox.TabIndex = 9;
 			// 
-			// AddElementForm
+			// EditElementForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -160,7 +161,7 @@ namespace CircuitResistanceCalculatorUI.EditingElement
 			this.MaximumSize = new System.Drawing.Size(360, 205);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(360, 205);
-			this.Name = "AddElementForm";
+			this.Name = "EditElementForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.ResumeLayout(false);
 			this.PerformLayout();

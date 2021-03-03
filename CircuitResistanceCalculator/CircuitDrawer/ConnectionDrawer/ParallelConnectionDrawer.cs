@@ -223,11 +223,11 @@ namespace CircuitVisualization.ConnectionDrawer
 				return;
 			}
 
-			Drawer.DrawLine(bitmap, x, y, x + ROOT_WIDTH, y,
-				LINE_COLOR, LINE_WIDTH);
-
 			if (NodesCount != 1)
 			{
+				Drawer.DrawLine(bitmap, x, y, x + ROOT_WIDTH, y,
+					LINE_COLOR, LINE_WIDTH);
+
 				DrawVerticalLine(bitmap, x + ROOT_WIDTH, y);
 
 				DrawNodes(bitmap, x, y - TopHeight + this[0].TopHeight);
