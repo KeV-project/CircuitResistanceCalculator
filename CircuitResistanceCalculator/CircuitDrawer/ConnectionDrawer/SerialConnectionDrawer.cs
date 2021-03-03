@@ -10,73 +10,6 @@ namespace CircuitVisualization.ConnectionDrawer
 	public class SerialConnectionDrawer : ConnectionDrawerBase
 	{
 		/// <summary>
-		/// Возвращает высоту последовательного соединения в пикселях
-		/// </summary>
-		public override int Height
-		{
-			get
-			{
-				int heigth = 0;
-				for(int i = 0; i < NodesCount; i++)
-				{
-					if(this[i].Height > heigth)
-					{
-						heigth = this[i].Height;
-					}
-				}
-				return heigth;
-			}
-		}
-
-		public override int TopHeight
-		{
-			get
-			{
-				int height = 0;
-				for(int i = 0; i < NodesCount; i++)
-				{
-					if(this[i].TopHeight > height)
-					{
-						height = this[i].TopHeight;
-					}
-				}
-				return height;
-			}
-		}
-
-		public override int BottomHeight
-		{
-			get
-			{
-				int height = 0;
-				for (int i = 0; i < NodesCount; i++)
-				{
-					if (this[i].BottomHeight > height)
-					{
-						height = this[i].BottomHeight;
-					}
-				}
-				return height;
-			}
-		}
-
-		/// <summary>
-		/// Возвращает ширину последовательного соединения в пикселях
-		/// </summary>
-		public override int Width
-		{
-			get
-			{
-				int width = 0;
-				for (int i = 0; i < NodesCount; i++)
-				{
-					width += this[i].Width;
-				}
-				return width;
-			}
-		}
-
-		/// <summary>
 		/// Возвращает количество элементов в последовательном 
 		/// соединении и во всех его вложенных цепях
 		/// </summary>
@@ -97,6 +30,81 @@ namespace CircuitVisualization.ConnectionDrawer
 					}
 				}
 				return elementsCount;
+			}
+		}
+
+		/// <summary>
+		/// Возвращает ширину последовательного соединения в пикселях
+		/// </summary>
+		public override int Width
+		{
+			get
+			{
+				int width = 0;
+				for (int i = 0; i < NodesCount; i++)
+				{
+					width += this[i].Width;
+				}
+				return width;
+			}
+		}
+
+		/// <summary>
+		/// Возвращает высоту последовательного соединения в пикселях
+		/// </summary>
+		public override int Height
+		{
+			get
+			{
+				int heigth = 0;
+				for (int i = 0; i < NodesCount; i++)
+				{
+					if (this[i].Height > heigth)
+					{
+						heigth = this[i].Height;
+					}
+				}
+				return heigth;
+			}
+		}
+
+		/// <summary>
+		/// Возвращает высоту последовательного соединения
+		/// выше точки включения
+		/// </summary>
+		public override int TopHeight
+		{
+			get
+			{
+				int height = 0;
+				for(int i = 0; i < NodesCount; i++)
+				{
+					if(this[i].TopHeight > height)
+					{
+						height = this[i].TopHeight;
+					}
+				}
+				return height;
+			}
+		}
+
+		/// <summary>
+		/// Возвращает высоту последовательного соединения
+		/// ниже точки включения
+		/// </summary>
+		public override int BottomHeight
+		{
+			get
+			{
+				int height = 0;
+				for (int i = 0; i < NodesCount; i++)
+				{
+					if (this[i].BottomHeight > height)
+					{
+						height = this[i].BottomHeight;
+					}
+				}
+				return height;
 			}
 		}
 

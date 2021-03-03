@@ -14,7 +14,8 @@ namespace CircuitVisualization
         /// Отрисовывает электрическую цепь на изображении
         /// </summary>
         /// <param name="circuit">Макет электрической цепи</param>
-        /// <param name="bitmap">Изображения</param>
+        /// <param name="bitmap">Фоновое изображения для 
+        /// отисовки электрической цепи</param>
         public static void Draw(ConnectionBase circuit, 
             Bitmap bitmap)
 		{

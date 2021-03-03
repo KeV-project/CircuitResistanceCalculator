@@ -57,6 +57,9 @@ namespace CircuitVisualization.ElementDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает высоту конденсатора выше точки включения в цепь
+		/// </summary>
 		public override int TopHeight
 		{
 			get
@@ -65,6 +68,9 @@ namespace CircuitVisualization.ElementDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает высоту конденсатора ниже точки включения в цепь
+		/// </summary>
 		public override int BottomHeight
 		{
 			get

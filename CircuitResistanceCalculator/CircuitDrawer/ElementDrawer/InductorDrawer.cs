@@ -58,6 +58,9 @@ namespace CircuitVisualization.ElementDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает высоту индуктора выше точки включения в цепь
+		/// </summary>
 		public override int TopHeight
 		{
 			get
@@ -66,6 +69,9 @@ namespace CircuitVisualization.ElementDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает высоту резистора ниже точки включения в цепь
+		/// </summary>
 		public override int BottomHeight
 		{
 			get

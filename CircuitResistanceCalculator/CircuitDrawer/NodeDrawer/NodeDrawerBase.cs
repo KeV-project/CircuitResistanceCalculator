@@ -20,18 +20,24 @@ namespace CircuitVisualization.NodeDrawer
 		public const int LINE_WIDTH = 2;
 
 		/// <summary>
+		/// Возвращает ширину узла электрической цепи в пикселях
+		/// </summary>
+		public abstract int Width { get; }
+
+		/// <summary>
 		/// Возвращает высоту узла электрической цепи в пикселях
 		/// </summary>
 		public abstract int Height { get; }
 
+		/// <summary>
+		/// Возвращает высоту узла выше точки включения в цепь
+		/// </summary>
 		public abstract int TopHeight { get; }
 
-		public abstract int BottomHeight { get; }
-
 		/// <summary>
-		/// Возвращает ширину узла электрической цепи в пикселях
+		/// Возвращает высоту узла ниже точки включения в цепь
 		/// </summary>
-		public abstract int Width { get; }
+		public abstract int BottomHeight { get; }
 
 		/// <summary>
 		/// Рисует узел на макете электрической цепи

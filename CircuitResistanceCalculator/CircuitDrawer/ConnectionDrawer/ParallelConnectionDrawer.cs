@@ -50,6 +50,30 @@ namespace CircuitVisualization.ConnectionDrawer
 		}
 
 		/// <summary>
+		/// Возвращает ширину параллельного соединения в пикселях
+		/// </summary>
+		public override int Width
+		{
+			get
+			{
+				if (ElementsCount == 0)
+				{
+					return 0;
+				}
+
+				int width = 0;
+				for (int i = 0; i < NodesCount; i++)
+				{
+					if (this[i].Width > width)
+					{
+						width = this[i].Width;
+					}
+				}
+				return width + ROOT_WIDTH * 2;
+			}
+		}
+
+		/// <summary>
 		/// Возвращает высоту параллельного соединения в пикселях
 		/// </summary>
 		public override int Height
@@ -70,28 +94,23 @@ namespace CircuitVisualization.ConnectionDrawer
 		}
 
 		/// <summary>
-		/// Возвращает ширину параллельного соединения в пикселях
+		/// Возвращает высоту параллельного соединения выше
+		/// точки включения в цепь
 		/// </summary>
-		public override int Width
-		{
-			get
-			{
-				int width = 0;
-				for (int i = 0; i < NodesCount; i++)
-				{
-					if (this[i].Width > width)
-					{
-						width = this[i].Width;
-					}
-				}
-				return width + ROOT_WIDTH * 2;
-			}
-		}
-
 		public override int TopHeight
 		{
 			get
 			{
+				if(NodesCount == 0)
+				{
+					return 0;
+				}
+
+				if(NodesCount == 1)
+				{
+					return this[0].TopHeight;
+				}
+
 				int nodesCount = Convert.ToInt32(Math.Round(NodesCount / 2.0));
 
 				if(nodesCount == 1)
@@ -102,7 +121,7 @@ namespace CircuitVisualization.ConnectionDrawer
 				int height = 0;
 				for (int i = 0; i < nodesCount; i++)
 				{
-					if(i == nodesCount - 1)
+					if(NodesCount % 2 != 0 && i == nodesCount - 1)
 					{
 						height += this[i].TopHeight;
 					}
@@ -125,10 +144,24 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает высоту параллельного соединения 
+		/// ниже точки включения в цепь
+		/// </summary>
 		public override int BottomHeight
 		{
 			get
 			{
+				if (NodesCount == 0)
+				{
+					return 0;
+				}
+
+				if (NodesCount == 1)
+				{
+					return this[0].BottomHeight;
+				}
+
 				int nodesCount = Convert.ToInt32(Math.Round(NodesCount / 2.0));
 
 				if (nodesCount == 1)
@@ -162,6 +195,13 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Рисует вертикальную линию параллельного соединения
+		/// </summary>
+		/// <param name="bitmap">Графическая модель электрической цепи</param>
+		/// <param name="x">Абцисса точки включения узла в цепь, 
+		/// смещенная на ширину корня соединения</param>
+		/// <param name="y">Ордината точки включения узла в цепь</param>
 		private void DrawVerticalLine(Bitmap bitmap, int x, int y)
 		{
 			int topHeight = TopHeight - this[0].TopHeight;
@@ -186,11 +226,8 @@ namespace CircuitVisualization.ConnectionDrawer
 
 				if (this[i] is ParallelConnectionDrawer)
 				{
-					if (((ParallelConnectionDrawer)this[i]).ElementsCount != 0)
-					{
-						Drawer.DrawLine(bitmap, x + this[i].Width,
+					Drawer.DrawLine(bitmap, x + ROOT_WIDTH + this[i].Width,
 						y, x + Width - ROOT_WIDTH, y, LINE_COLOR, LINE_WIDTH);
-					}
 				}
 				else
 				{
@@ -200,11 +237,8 @@ namespace CircuitVisualization.ConnectionDrawer
 
 				if (i != NodesCount - 1)
 				{
-					y += this[i].BottomHeight + this[i + 1].TopHeight;
-					if (this[i].Height != 0)
-					{
-						y += ELEMENTS_DISTANCE_HEIGHT;
-					}
+					y += this[i].BottomHeight + this[i + 1].TopHeight +
+						ELEMENTS_DISTANCE_HEIGHT;
 				}
 			}
 		}
@@ -223,26 +257,19 @@ namespace CircuitVisualization.ConnectionDrawer
 				return;
 			}
 
-			if (NodesCount != 1)
-			{
-				Drawer.DrawLine(bitmap, x, y, x + ROOT_WIDTH, y,
-					LINE_COLOR, LINE_WIDTH);
+			Drawer.DrawLine(bitmap, x, y, x + ROOT_WIDTH, y,
+				LINE_COLOR, LINE_WIDTH);
 
-				DrawVerticalLine(bitmap, x + ROOT_WIDTH, y);
+			DrawVerticalLine(bitmap, x + ROOT_WIDTH, y);
 
-				DrawNodes(bitmap, x, y - TopHeight + this[0].TopHeight);
+			DrawNodes(bitmap, x, y - TopHeight + this[0].TopHeight);
 
-				Drawer.DrawLine(bitmap, x + Width - ROOT_WIDTH,
-					y - TopHeight + this[0].TopHeight, x + Width - ROOT_WIDTH,
-					y + BottomHeight - this[NodesCount - 1].BottomHeight, 
-					LINE_COLOR, LINE_WIDTH);
-				Drawer.DrawLine(bitmap, x + Width - ROOT_WIDTH,
-					y, x + Width, y, LINE_COLOR, LINE_WIDTH);
-			}
-			else
-			{
-				DrawNodes(bitmap, x, y);
-			}
+			Drawer.DrawLine(bitmap, x + Width - ROOT_WIDTH,
+				y - TopHeight + this[0].TopHeight, x + Width - ROOT_WIDTH,
+				y + BottomHeight - this[NodesCount - 1].BottomHeight,
+				LINE_COLOR, LINE_WIDTH);
+			Drawer.DrawLine(bitmap, x + Width - ROOT_WIDTH,
+				y, x + Width, y, LINE_COLOR, LINE_WIDTH);
 		}
 	}
 }
