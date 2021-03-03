@@ -57,6 +57,22 @@ namespace CircuitVisualization.ElementDrawer
 			}
 		}
 
+		public override int TopHeight
+		{
+			get
+			{
+				return Height / 2;
+			}
+		}
+
+		public override int BottomHeight
+		{
+			get
+			{
+				return Height / 2;
+			}
+		}
+
 		/// <summary>
 		/// Рисует конденсатор на макете электрической цепи
 		/// </summary>

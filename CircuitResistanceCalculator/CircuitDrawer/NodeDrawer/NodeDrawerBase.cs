@@ -24,6 +24,10 @@ namespace CircuitVisualization.NodeDrawer
 		/// </summary>
 		public abstract int Height { get; }
 
+		public abstract int TopHeight { get; }
+
+		public abstract int BottomHeight { get; }
+
 		/// <summary>
 		/// Возвращает ширину узла электрической цепи в пикселях
 		/// </summary>

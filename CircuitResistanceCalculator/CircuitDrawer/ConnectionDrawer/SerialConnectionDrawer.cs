@@ -28,6 +28,38 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		public override int TopHeight
+		{
+			get
+			{
+				int height = 0;
+				for(int i = 0; i < NodesCount; i++)
+				{
+					if(this[i].TopHeight > height)
+					{
+						height = this[i].TopHeight;
+					}
+				}
+				return height;
+			}
+		}
+
+		public override int BottomHeight
+		{
+			get
+			{
+				int height = 0;
+				for (int i = 0; i < NodesCount; i++)
+				{
+					if (this[i].BottomHeight > height)
+					{
+						height = this[i].BottomHeight;
+					}
+				}
+				return height;
+			}
+		}
+
 		/// <summary>
 		/// Возвращает ширину последовательного соединения в пикселях
 		/// </summary>
