@@ -29,12 +29,12 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.CreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,8 +51,12 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			this.Template5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-			this.CircuitTreeView = new System.Windows.Forms.TreeView();
+			this.ClearTreeButton = new System.Windows.Forms.Button();
+			this.AddConnectionButton = new System.Windows.Forms.Button();
+			this.AddElementButton = new System.Windows.Forms.Button();
+			this.RemoveNodeButton = new System.Windows.Forms.Button();
+			this.SaveCircuitDialog = new System.Windows.Forms.SaveFileDialog();
+			this.OpenCircuitDialog = new System.Windows.Forms.OpenFileDialog();
 			this.ResultTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.CalculateCircuitResistanceGroupBox = new System.Windows.Forms.GroupBox();
 			this.CalculateButton = new System.Windows.Forms.Button();
@@ -63,19 +67,15 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			this.EnterFreguencyLabel = new System.Windows.Forms.Label();
 			this.CircuitPanel = new System.Windows.Forms.Panel();
 			this.CircuitPictureBox = new System.Windows.Forms.PictureBox();
-			this.ClearTreeButton = new System.Windows.Forms.Button();
-			this.AddConnectionButton = new System.Windows.Forms.Button();
-			this.AddElementButton = new System.Windows.Forms.Button();
-			this.RemoveNodeButton = new System.Windows.Forms.Button();
-			this.SaveCircuitDialog = new System.Windows.Forms.SaveFileDialog();
-			this.OpenCircuitDialog = new System.Windows.Forms.OpenFileDialog();
+			this.CircuitTreeView = new System.Windows.Forms.TreeView();
+			this.MainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.menuStrip.SuspendLayout();
-			this.MainTableLayoutPanel.SuspendLayout();
 			this.ResultTableLayoutPanel.SuspendLayout();
 			this.CalculateCircuitResistanceGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.CircuitResistanceGridView)).BeginInit();
 			this.CircuitPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).BeginInit();
+			this.MainTableLayoutPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -109,7 +109,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			this.CreateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewElectricalCircuitToolStripMenuItem});
 			this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.CreateToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.CreateToolStripMenuItem.Text = "Create";
 			// 
 			// NewElectricalCircuitToolStripMenuItem
@@ -122,28 +122,28 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// OpenToolStripMenuItem
 			// 
 			this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.OpenToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.OpenToolStripMenuItem.Text = "Open...";
 			this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
 			// 
 			// SaveToolStripMenuItem
 			// 
 			this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.SaveToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.SaveToolStripMenuItem.Text = "Save";
 			this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
 			// 
 			// SaveAsToolStripMenuItem
 			// 
 			this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
-			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.SaveAsToolStripMenuItem.Text = "Save As...";
 			this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
 			// 
 			// ExitToolStripMenuItem
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.ExitToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.ExitToolStripMenuItem.Text = "Exit (Alt + F4)";
 			this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
 			// 
@@ -162,35 +162,35 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// Template1ToolStripMenuItem
 			// 
 			this.Template1ToolStripMenuItem.Name = "Template1ToolStripMenuItem";
-			this.Template1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.Template1ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
 			this.Template1ToolStripMenuItem.Text = "Circuit №1";
 			this.Template1ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 
 			// Template2ToolStripMenuItem
 			// 
 			this.Template2ToolStripMenuItem.Name = "Template2ToolStripMenuItem";
-			this.Template2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.Template2ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
 			this.Template2ToolStripMenuItem.Text = "Circuit №2";
 			this.Template2ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 
 			// Template3ToolStripMenuItem
 			// 
 			this.Template3ToolStripMenuItem.Name = "Template3ToolStripMenuItem";
-			this.Template3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.Template3ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
 			this.Template3ToolStripMenuItem.Text = "Circuit №3";
 			this.Template3ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 
 			// Template4ToolStripMenuItem
 			// 
 			this.Template4ToolStripMenuItem.Name = "Template4ToolStripMenuItem";
-			this.Template4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.Template4ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
 			this.Template4ToolStripMenuItem.Text = "Circuit №4";
 			this.Template4ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 
 			// Template5ToolStripMenuItem
 			// 
 			this.Template5ToolStripMenuItem.Name = "Template5ToolStripMenuItem";
-			this.Template5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.Template5ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
 			this.Template5ToolStripMenuItem.Text = "Circuit №5";
 			this.Template5ToolStripMenuItem.Click += new System.EventHandler(this.TemplateToolStripMenuItem_Click);
 			// 
@@ -209,44 +209,52 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			this.AboutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
 			this.AboutToolStripMenuItem.Text = "About (F1)";
 			// 
-			// MainTableLayoutPanel
+			// ClearTreeButton
 			// 
-			this.MainTableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.MainTableLayoutPanel.ColumnCount = 2;
-			this.MainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.23602F));
-			this.MainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.76398F));
-			this.MainTableLayoutPanel.Controls.Add(this.CircuitTreeView, 0, 0);
-			this.MainTableLayoutPanel.Controls.Add(this.ResultTableLayoutPanel, 1, 0);
-			this.MainTableLayoutPanel.Location = new System.Drawing.Point(48, 28);
-			this.MainTableLayoutPanel.Name = "MainTableLayoutPanel";
-			this.MainTableLayoutPanel.RowCount = 1;
-			this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.MainTableLayoutPanel.Size = new System.Drawing.Size(966, 585);
-			this.MainTableLayoutPanel.TabIndex = 1;
+			this.ClearTreeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.ClearTreeButton.Image = ((System.Drawing.Image)(resources.GetObject("ClearTreeButton.Image")));
+			this.ClearTreeButton.Location = new System.Drawing.Point(10, 585);
+			this.ClearTreeButton.Name = "ClearTreeButton";
+			this.ClearTreeButton.Size = new System.Drawing.Size(32, 28);
+			this.ClearTreeButton.TabIndex = 5;
+			this.ClearTreeButton.UseVisualStyleBackColor = true;
+			this.ClearTreeButton.Click += new System.EventHandler(this.ClearTreeButton_Click);
 			// 
-			// CircuitTreeView
+			// AddConnectionButton
 			// 
-			this.CircuitTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.CircuitTreeView.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.CircuitTreeView.ForeColor = System.Drawing.SystemColors.WindowText;
-			this.CircuitTreeView.HideSelection = false;
-			this.CircuitTreeView.Location = new System.Drawing.Point(3, 3);
-			this.CircuitTreeView.Name = "CircuitTreeView";
-			this.CircuitTreeView.ShowPlusMinus = false;
-			this.CircuitTreeView.Size = new System.Drawing.Size(401, 579);
-			this.CircuitTreeView.TabIndex = 0;
-			this.CircuitTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.CircuitTreeView_NodeMouseDoubleClick);
+			this.AddConnectionButton.Image = ((System.Drawing.Image)(resources.GetObject("AddConnectionButton.Image")));
+			this.AddConnectionButton.Location = new System.Drawing.Point(10, 31);
+			this.AddConnectionButton.Name = "AddConnectionButton";
+			this.AddConnectionButton.Size = new System.Drawing.Size(32, 27);
+			this.AddConnectionButton.TabIndex = 6;
+			this.AddConnectionButton.UseVisualStyleBackColor = true;
+			this.AddConnectionButton.Click += new System.EventHandler(this.AddConnectionButton_Click);
+			// 
+			// AddElementButton
+			// 
+			this.AddElementButton.Image = ((System.Drawing.Image)(resources.GetObject("AddElementButton.Image")));
+			this.AddElementButton.Location = new System.Drawing.Point(10, 64);
+			this.AddElementButton.Name = "AddElementButton";
+			this.AddElementButton.Size = new System.Drawing.Size(32, 27);
+			this.AddElementButton.TabIndex = 7;
+			this.AddElementButton.UseVisualStyleBackColor = true;
+			this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
+			// 
+			// RemoveNodeButton
+			// 
+			this.RemoveNodeButton.Image = ((System.Drawing.Image)(resources.GetObject("RemoveNodeButton.Image")));
+			this.RemoveNodeButton.Location = new System.Drawing.Point(10, 97);
+			this.RemoveNodeButton.Name = "RemoveNodeButton";
+			this.RemoveNodeButton.Size = new System.Drawing.Size(32, 27);
+			this.RemoveNodeButton.TabIndex = 8;
+			this.RemoveNodeButton.UseVisualStyleBackColor = true;
+			this.RemoveNodeButton.Click += new System.EventHandler(this.RemoveNodeButton_Click);
 			// 
 			// ResultTableLayoutPanel
 			// 
 			this.ResultTableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.ResultTableLayoutPanel.AutoScroll = true;
 			this.ResultTableLayoutPanel.ColumnCount = 1;
 			this.ResultTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.ResultTableLayoutPanel.Controls.Add(this.CalculateCircuitResistanceGroupBox, 0, 1);
@@ -282,7 +290,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// 
 			this.CalculateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.CalculateButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.CalculateButton.Location = new System.Drawing.Point(456, 20);
+			this.CalculateButton.Location = new System.Drawing.Point(686, 20);
 			this.CalculateButton.Name = "CalculateButton";
 			this.CalculateButton.Size = new System.Drawing.Size(85, 25);
 			this.CalculateButton.TabIndex = 7;
@@ -337,14 +345,14 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
 			this.CircuitResistanceGridView.RowsDefaultCellStyle = dataGridViewCellStyle5;
 			this.CircuitResistanceGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.CircuitResistanceGridView.Size = new System.Drawing.Size(535, 161);
+			this.CircuitResistanceGridView.Size = new System.Drawing.Size(765, 279);
 			this.CircuitResistanceGridView.TabIndex = 6;
 			// 
 			// ClearButton
 			// 
 			this.ClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.ClearButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ClearButton.Location = new System.Drawing.Point(365, 215);
+			this.ClearButton.Location = new System.Drawing.Point(595, 333);
 			this.ClearButton.Name = "ClearButton";
 			this.ClearButton.Size = new System.Drawing.Size(85, 25);
 			this.ClearButton.TabIndex = 5;
@@ -356,7 +364,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// 
 			this.DeleteFrequencyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.DeleteFrequencyButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.DeleteFrequencyButton.Location = new System.Drawing.Point(456, 215);
+			this.DeleteFrequencyButton.Location = new System.Drawing.Point(686, 333);
 			this.DeleteFrequencyButton.Name = "DeleteFrequencyButton";
 			this.DeleteFrequencyButton.Size = new System.Drawing.Size(85, 25);
 			this.DeleteFrequencyButton.TabIndex = 3;
@@ -370,7 +378,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.EnterFrequencyTextBox.Location = new System.Drawing.Point(125, 21);
 			this.EnterFrequencyTextBox.Name = "EnterFrequencyTextBox";
-			this.EnterFrequencyTextBox.Size = new System.Drawing.Size(325, 21);
+			this.EnterFrequencyTextBox.Size = new System.Drawing.Size(555, 21);
 			this.EnterFrequencyTextBox.TabIndex = 2;
 			// 
 			// EnterFreguencyLabel
@@ -386,9 +394,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// 
 			// CircuitPanel
 			// 
-			this.CircuitPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.CircuitPanel.AutoScroll = true;
 			this.CircuitPanel.Controls.Add(this.CircuitPictureBox);
 			this.CircuitPanel.Location = new System.Drawing.Point(3, 3);
@@ -398,56 +403,45 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// 
 			// CircuitPictureBox
 			// 
-			this.CircuitPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.CircuitPictureBox.BackColor = System.Drawing.SystemColors.Window;
 			this.CircuitPictureBox.Location = new System.Drawing.Point(0, 0);
 			this.CircuitPictureBox.Name = "CircuitPictureBox";
-			this.CircuitPictureBox.Size = new System.Drawing.Size(544, 318);
+			this.CircuitPictureBox.Size = new System.Drawing.Size(547, 321);
+			this.CircuitPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 			this.CircuitPictureBox.TabIndex = 0;
 			this.CircuitPictureBox.TabStop = false;
 			// 
-			// ClearTreeButton
+			// CircuitTreeView
 			// 
-			this.ClearTreeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.ClearTreeButton.Image = ((System.Drawing.Image)(resources.GetObject("ClearTreeButton.Image")));
-			this.ClearTreeButton.Location = new System.Drawing.Point(10, 585);
-			this.ClearTreeButton.Name = "ClearTreeButton";
-			this.ClearTreeButton.Size = new System.Drawing.Size(32, 28);
-			this.ClearTreeButton.TabIndex = 5;
-			this.ClearTreeButton.UseVisualStyleBackColor = true;
-			this.ClearTreeButton.Click += new System.EventHandler(this.ClearTreeButton_Click);
+			this.CircuitTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.CircuitTreeView.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.CircuitTreeView.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.CircuitTreeView.HideSelection = false;
+			this.CircuitTreeView.Location = new System.Drawing.Point(3, 3);
+			this.CircuitTreeView.Name = "CircuitTreeView";
+			this.CircuitTreeView.ShowPlusMinus = false;
+			this.CircuitTreeView.Size = new System.Drawing.Size(401, 579);
+			this.CircuitTreeView.TabIndex = 0;
+			this.CircuitTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.CircuitTreeView_NodeMouseDoubleClick);
 			// 
-			// AddConnectionButton
+			// MainTableLayoutPanel
 			// 
-			this.AddConnectionButton.Image = ((System.Drawing.Image)(resources.GetObject("AddConnectionButton.Image")));
-			this.AddConnectionButton.Location = new System.Drawing.Point(10, 31);
-			this.AddConnectionButton.Name = "AddConnectionButton";
-			this.AddConnectionButton.Size = new System.Drawing.Size(32, 27);
-			this.AddConnectionButton.TabIndex = 6;
-			this.AddConnectionButton.UseVisualStyleBackColor = true;
-			this.AddConnectionButton.Click += new System.EventHandler(this.AddConnectionButton_Click);
-			// 
-			// AddElementButton
-			// 
-			this.AddElementButton.Image = ((System.Drawing.Image)(resources.GetObject("AddElementButton.Image")));
-			this.AddElementButton.Location = new System.Drawing.Point(10, 64);
-			this.AddElementButton.Name = "AddElementButton";
-			this.AddElementButton.Size = new System.Drawing.Size(32, 27);
-			this.AddElementButton.TabIndex = 7;
-			this.AddElementButton.UseVisualStyleBackColor = true;
-			this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
-			// 
-			// RemoveNodeButton
-			// 
-			this.RemoveNodeButton.Image = ((System.Drawing.Image)(resources.GetObject("RemoveNodeButton.Image")));
-			this.RemoveNodeButton.Location = new System.Drawing.Point(10, 97);
-			this.RemoveNodeButton.Name = "RemoveNodeButton";
-			this.RemoveNodeButton.Size = new System.Drawing.Size(32, 27);
-			this.RemoveNodeButton.TabIndex = 8;
-			this.RemoveNodeButton.UseVisualStyleBackColor = true;
-			this.RemoveNodeButton.Click += new System.EventHandler(this.RemoveNodeButton_Click);
+			this.MainTableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.MainTableLayoutPanel.ColumnCount = 2;
+			this.MainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.23602F));
+			this.MainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.76398F));
+			this.MainTableLayoutPanel.Controls.Add(this.CircuitTreeView, 0, 0);
+			this.MainTableLayoutPanel.Controls.Add(this.ResultTableLayoutPanel, 1, 0);
+			this.MainTableLayoutPanel.Location = new System.Drawing.Point(48, 28);
+			this.MainTableLayoutPanel.Name = "MainTableLayoutPanel";
+			this.MainTableLayoutPanel.RowCount = 1;
+			this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.MainTableLayoutPanel.Size = new System.Drawing.Size(966, 585);
+			this.MainTableLayoutPanel.TabIndex = 1;
 			// 
 			// MainForm
 			// 
@@ -470,13 +464,14 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
-			this.MainTableLayoutPanel.ResumeLayout(false);
 			this.ResultTableLayoutPanel.ResumeLayout(false);
 			this.CalculateCircuitResistanceGroupBox.ResumeLayout(false);
 			this.CalculateCircuitResistanceGroupBox.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.CircuitResistanceGridView)).EndInit();
 			this.CircuitPanel.ResumeLayout(false);
+			this.CircuitPanel.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.CircuitPictureBox)).EndInit();
+			this.MainTableLayoutPanel.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -494,15 +489,6 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
-		private System.Windows.Forms.TableLayoutPanel MainTableLayoutPanel;
-		private System.Windows.Forms.TreeView CircuitTreeView;
-		private System.Windows.Forms.TableLayoutPanel ResultTableLayoutPanel;
-		private System.Windows.Forms.GroupBox CalculateCircuitResistanceGroupBox;
-		private System.Windows.Forms.TextBox EnterFrequencyTextBox;
-		private System.Windows.Forms.Label EnterFreguencyLabel;
-		private System.Windows.Forms.Button DeleteFrequencyButton;
-		private System.Windows.Forms.Button ClearButton;
-		private System.Windows.Forms.DataGridView CircuitResistanceGridView;
 		private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem Template1ToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem Template2ToolStripMenuItem;
@@ -512,12 +498,21 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		private System.Windows.Forms.Button ClearTreeButton;
 		private System.Windows.Forms.Button AddConnectionButton;
 		private System.Windows.Forms.Button AddElementButton;
-		private System.Windows.Forms.Button CalculateButton;
 		private System.Windows.Forms.Button RemoveNodeButton;
 		private System.Windows.Forms.SaveFileDialog SaveCircuitDialog;
 		private System.Windows.Forms.OpenFileDialog OpenCircuitDialog;
+		private System.Windows.Forms.TableLayoutPanel ResultTableLayoutPanel;
+		private System.Windows.Forms.GroupBox CalculateCircuitResistanceGroupBox;
+		private System.Windows.Forms.Button CalculateButton;
+		private System.Windows.Forms.DataGridView CircuitResistanceGridView;
+		private System.Windows.Forms.Button ClearButton;
+		private System.Windows.Forms.Button DeleteFrequencyButton;
+		private System.Windows.Forms.TextBox EnterFrequencyTextBox;
+		private System.Windows.Forms.Label EnterFreguencyLabel;
 		private System.Windows.Forms.Panel CircuitPanel;
 		private System.Windows.Forms.PictureBox CircuitPictureBox;
+		private System.Windows.Forms.TreeView CircuitTreeView;
+		private System.Windows.Forms.TableLayoutPanel MainTableLayoutPanel;
 	}
 }
 

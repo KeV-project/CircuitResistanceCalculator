@@ -88,15 +88,12 @@ namespace CircuitResistanceCalculatorUI.MainForm
 
 			if(_circuit.NodesCount != 0)
 			{
-				Bitmap bitmap = new Bitmap(CircuitPictureBox.Width,
-					CircuitPictureBox.Height);
-				CircuitDrawer.Draw(_circuit, bitmap);
+				Bitmap bitmap = CircuitDrawer.Draw(_circuit);
 				CircuitPictureBox.Image = bitmap;
 			}
 			else
 			{
-				Bitmap bitmap = new Bitmap(CircuitPictureBox.Width,
-					CircuitPictureBox.Height);
+				Bitmap bitmap = new Bitmap(1000, 1000);
 				CircuitPictureBox.Image = bitmap;
 			}
 			CircuitPictureBox.Refresh();

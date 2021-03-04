@@ -16,17 +16,20 @@ namespace CircuitVisualization
         /// <param name="circuit">Макет электрической цепи</param>
         /// <param name="bitmap">Фоновое изображения для 
         /// отисовки электрической цепи</param>
-        public static void Draw(ConnectionBase circuit, 
-            Bitmap bitmap)
+        public static Bitmap Draw(ConnectionBase circuit)
 		{
             ConnectionDrawerBase circuitDrawer = 
                 new SerialConnectionDrawer();
             circuitDrawer.AddNode(circuit[0]);
-            int x = (bitmap.Width - circuitDrawer[0].Width) / 2;
+            var initialCircuitDrawer = circuitDrawer[0];
+            var bitmap = new Bitmap(initialCircuitDrawer.Width, initialCircuitDrawer.Height);
+            int x = (bitmap.Width - initialCircuitDrawer.Width) / 2;
             int y = bitmap.Height / 2;
-            y = (bitmap.Height - circuitDrawer[0].Height) / 2 + 
-                circuitDrawer[0].TopHeight;
-            circuitDrawer[0].Draw(bitmap, x, y);
+            y = (bitmap.Height - initialCircuitDrawer.Height) / 2 
+                + initialCircuitDrawer.TopHeight;
+            initialCircuitDrawer.Draw(bitmap, x, y);
+
+            return bitmap;
 		}
     }
 }

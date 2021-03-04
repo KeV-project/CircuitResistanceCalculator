@@ -224,16 +224,9 @@ namespace CircuitVisualization.ConnectionDrawer
 			{
 				this[i].Draw(bitmap, x + ROOT_WIDTH, y);
 
-				if (this[i] is ParallelConnectionDrawer)
-				{
-					Drawer.DrawLine(bitmap, x + ROOT_WIDTH + this[i].Width,
+				Drawer.DrawLine(bitmap, x + ROOT_WIDTH + this[i].Width,
 						y, x + Width - ROOT_WIDTH, y, LINE_COLOR, LINE_WIDTH);
-				}
-				else
-				{
-					Drawer.DrawLine(bitmap, x + ROOT_WIDTH + this[i].Width,
-						y, x + Width - ROOT_WIDTH, y, LINE_COLOR, LINE_WIDTH);
-				}
+				
 
 				if (i != NodesCount - 1)
 				{
