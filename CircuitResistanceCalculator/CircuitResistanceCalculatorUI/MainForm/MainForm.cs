@@ -90,10 +90,14 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			{
 				Bitmap bitmap = CircuitDrawer.Draw(_circuit);
 				CircuitPictureBox.Image = bitmap;
+				CircuitPictureBox.Location = new Point(
+					(CircuitPanel.Width - bitmap.Width) / 2, 
+					(CircuitPanel.Height - bitmap.Height) / 2);
 			}
 			else
 			{
-				Bitmap bitmap = new Bitmap(1000, 1000);
+				Bitmap bitmap = new Bitmap(CircuitPanel.Width, 
+					CircuitPanel.Height);
 				CircuitPictureBox.Image = bitmap;
 			}
 			CircuitPictureBox.Refresh();
