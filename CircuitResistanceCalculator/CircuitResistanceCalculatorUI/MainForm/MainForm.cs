@@ -63,7 +63,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 		/// Создает шаблоны цепей и словарь путей к соответствующим шаблонам
 		/// </summary>
 		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="e">Вспомогательные данные</param>
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			Templates.CreateTemplates();
@@ -73,6 +73,16 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			_templates.Add(Template3ToolStripMenuItem, Templates.TemplatesPath[2]);
 			_templates.Add(Template4ToolStripMenuItem, Templates.TemplatesPath[3]);
 			_templates.Add(Template5ToolStripMenuItem, Templates.TemplatesPath[4]);
+		}
+
+		/// <summary>
+		/// Обновляет цепь после изменения размеров CircuitPanel
+		/// </summary>
+		/// <param name="sender">Элемемент класса Panel</param>
+		/// <param name="e">Вспомогательные данные</param>
+		private void CircuitPanel_SizeChanged(object sender, EventArgs e)
+		{
+			RefreshCircuit(null, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -91,13 +101,23 @@ namespace CircuitResistanceCalculatorUI.MainForm
 				Bitmap bitmap = CircuitDrawer.Draw(_circuit);
 				CircuitPictureBox.Image = bitmap;
 				CircuitPictureBox.Location = new Point(
-					(CircuitPanel.Width - bitmap.Width) / 2, 
+					(CircuitPanel.Width - bitmap.Width) / 2,
 					(CircuitPanel.Height - bitmap.Height) / 2);
+				if (CircuitPanel.Width > bitmap.Width &&
+					CircuitPanel.Height > bitmap.Height)
+				{
+					CircuitPictureBox.Location = new Point(
+					(CircuitPanel.Width - bitmap.Width) / 2,
+					(CircuitPanel.Height - bitmap.Height) / 2);
+				}
+				else
+				{
+					CircuitPictureBox.Location = CircuitPanel.Location;
+				}
 			}
 			else
 			{
-				Bitmap bitmap = new Bitmap(CircuitPanel.Width, 
-					CircuitPanel.Height);
+				Bitmap bitmap = new Bitmap(10, 10);
 				CircuitPictureBox.Image = bitmap;
 			}
 			CircuitPictureBox.Refresh();
