@@ -290,7 +290,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// 
 			this.CalculateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.CalculateButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.CalculateButton.Location = new System.Drawing.Point(686, 20);
+			this.CalculateButton.Location = new System.Drawing.Point(456, 17);
 			this.CalculateButton.Name = "CalculateButton";
 			this.CalculateButton.Size = new System.Drawing.Size(85, 25);
 			this.CalculateButton.TabIndex = 7;
@@ -328,7 +328,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.CircuitResistanceGridView.DefaultCellStyle = dataGridViewCellStyle3;
 			this.CircuitResistanceGridView.EnableHeadersVisualStyles = false;
-			this.CircuitResistanceGridView.Location = new System.Drawing.Point(6, 48);
+			this.CircuitResistanceGridView.Location = new System.Drawing.Point(6, 45);
 			this.CircuitResistanceGridView.Name = "CircuitResistanceGridView";
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -345,14 +345,14 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
 			this.CircuitResistanceGridView.RowsDefaultCellStyle = dataGridViewCellStyle5;
 			this.CircuitResistanceGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.CircuitResistanceGridView.Size = new System.Drawing.Size(765, 279);
+			this.CircuitResistanceGridView.Size = new System.Drawing.Size(535, 161);
 			this.CircuitResistanceGridView.TabIndex = 6;
 			// 
 			// ClearButton
 			// 
 			this.ClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.ClearButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ClearButton.Location = new System.Drawing.Point(595, 333);
+			this.ClearButton.Location = new System.Drawing.Point(456, 212);
 			this.ClearButton.Name = "ClearButton";
 			this.ClearButton.Size = new System.Drawing.Size(85, 25);
 			this.ClearButton.TabIndex = 5;
@@ -364,9 +364,9 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// 
 			this.DeleteFrequencyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.DeleteFrequencyButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.DeleteFrequencyButton.Location = new System.Drawing.Point(686, 333);
+			this.DeleteFrequencyButton.Location = new System.Drawing.Point(365, 213);
 			this.DeleteFrequencyButton.Name = "DeleteFrequencyButton";
-			this.DeleteFrequencyButton.Size = new System.Drawing.Size(85, 25);
+			this.DeleteFrequencyButton.Size = new System.Drawing.Size(85, 24);
 			this.DeleteFrequencyButton.TabIndex = 3;
 			this.DeleteFrequencyButton.Text = "Delete";
 			this.DeleteFrequencyButton.UseVisualStyleBackColor = true;
@@ -376,16 +376,16 @@ namespace CircuitResistanceCalculatorUI.MainForm
 			// 
 			this.EnterFrequencyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.EnterFrequencyTextBox.Location = new System.Drawing.Point(125, 21);
+			this.EnterFrequencyTextBox.Location = new System.Drawing.Point(121, 18);
 			this.EnterFrequencyTextBox.Name = "EnterFrequencyTextBox";
-			this.EnterFrequencyTextBox.Size = new System.Drawing.Size(555, 21);
+			this.EnterFrequencyTextBox.Size = new System.Drawing.Size(329, 21);
 			this.EnterFrequencyTextBox.TabIndex = 2;
 			// 
 			// EnterFreguencyLabel
 			// 
 			this.EnterFreguencyLabel.AutoSize = true;
 			this.EnterFreguencyLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.EnterFreguencyLabel.Location = new System.Drawing.Point(3, 21);
+			this.EnterFreguencyLabel.Location = new System.Drawing.Point(6, 21);
 			this.EnterFreguencyLabel.Name = "EnterFreguencyLabel";
 			this.EnterFreguencyLabel.Size = new System.Drawing.Size(109, 17);
 			this.EnterFreguencyLabel.TabIndex = 1;
