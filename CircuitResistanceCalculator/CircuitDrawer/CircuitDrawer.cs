@@ -22,10 +22,10 @@ namespace CircuitVisualization
                 new SerialConnectionDrawer();
             circuitDrawer.AddNode(circuit[0]);
             var initialCircuitDrawer = circuitDrawer[0];
-            var bitmap = new Bitmap(initialCircuitDrawer.Width, initialCircuitDrawer.Height);
+            var bitmap = new Bitmap(initialCircuitDrawer.Width + 1, 
+                initialCircuitDrawer.Height + 1);
             int x = (bitmap.Width - initialCircuitDrawer.Width) / 2;
-            int y = bitmap.Height / 2;
-            y = (bitmap.Height - initialCircuitDrawer.Height) / 2 
+            int y = (bitmap.Height - initialCircuitDrawer.Height) / 2 
                 + initialCircuitDrawer.TopHeight;
             initialCircuitDrawer.Draw(bitmap, x, y);
 

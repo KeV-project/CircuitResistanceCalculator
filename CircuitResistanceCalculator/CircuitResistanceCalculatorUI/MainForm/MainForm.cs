@@ -96,7 +96,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 					_resistance[i].Frequency);
 			}
 
-			if(_circuit.NodesCount != 0)
+			if(_circuit != null && _circuit.NodesCount != 0)
 			{
 				Bitmap bitmap = CircuitDrawer.Draw(_circuit);
 				CircuitPictureBox.Image = bitmap;

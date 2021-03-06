@@ -195,21 +195,13 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
-		/// <summary>
-		/// Рисует вертикальную линию параллельного соединения
-		/// </summary>
-		/// <param name="bitmap">Графическая модель электрической цепи</param>
-		/// <param name="x">Абцисса точки включения узла в цепь, 
-		/// смещенная на ширину корня соединения</param>
-		/// <param name="y">Ордината точки включения узла в цепь</param>
-		private void DrawVerticalLine(Bitmap bitmap, int x, int y)
+		private void DrawConnection(Bitmap bitmap, int x, int y, int rootWidth)
 		{
 			int topHeight = TopHeight - this[0].TopHeight;
-			Drawer.DrawLine(bitmap, x, y - topHeight, x, y, 
-				LINE_COLOR, LINE_WIDTH);
 			int bottomHeight = BottomHeight - this[NodesCount - 1].BottomHeight;
-			Drawer.DrawLine(bitmap, x, y, x, y + bottomHeight, 
+			Drawer.DrawLine(bitmap, x, y - topHeight, x, y + bottomHeight, 
 				LINE_COLOR, LINE_WIDTH);
+			Drawer.DrawLine(bitmap, x, y, x + rootWidth, y, LINE_COLOR, LINE_WIDTH);
 		}
 
 		/// <summary>
@@ -222,10 +214,11 @@ namespace CircuitVisualization.ConnectionDrawer
 		{
 			for (int i = 0; i < NodesCount; i++)
 			{
-				this[i].Draw(bitmap, x + ROOT_WIDTH, y);
+				this[i].Draw(bitmap, x, y);
 
-				Drawer.DrawLine(bitmap, x + ROOT_WIDTH + this[i].Width,
-						y, x + Width - ROOT_WIDTH, y, LINE_COLOR, LINE_WIDTH);
+				Drawer.DrawLine(bitmap, x + this[i].Width,
+						y, x + Width - ROOT_WIDTH * 2, y, 
+						LINE_COLOR, LINE_WIDTH);
 				
 
 				if (i != NodesCount - 1)
@@ -250,19 +243,11 @@ namespace CircuitVisualization.ConnectionDrawer
 				return;
 			}
 
-			Drawer.DrawLine(bitmap, x, y, x + ROOT_WIDTH, y,
-				LINE_COLOR, LINE_WIDTH);
-
-			DrawVerticalLine(bitmap, x + ROOT_WIDTH, y);
-
+			DrawConnection(bitmap, x+= ROOT_WIDTH, y, -ROOT_WIDTH);
+			
 			DrawNodes(bitmap, x, y - TopHeight + this[0].TopHeight);
 
-			Drawer.DrawLine(bitmap, x + Width - ROOT_WIDTH,
-				y - TopHeight + this[0].TopHeight, x + Width - ROOT_WIDTH,
-				y + BottomHeight - this[NodesCount - 1].BottomHeight,
-				LINE_COLOR, LINE_WIDTH);
-			Drawer.DrawLine(bitmap, x + Width - ROOT_WIDTH,
-				y, x + Width, y, LINE_COLOR, LINE_WIDTH);
+			DrawConnection(bitmap, x + Width - ROOT_WIDTH * 2, y, ROOT_WIDTH);
 		}
 	}
 }
