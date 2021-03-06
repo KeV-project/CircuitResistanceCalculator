@@ -19,6 +19,8 @@ namespace CircuitVisualization.NodeDrawer
 		/// </summary>
 		public const int LINE_WIDTH = 2;
 
+		public abstract bool IsEmpty { get; }
+
 		/// <summary>
 		/// Возвращает ширину узла электрической цепи в пикселях
 		/// </summary>

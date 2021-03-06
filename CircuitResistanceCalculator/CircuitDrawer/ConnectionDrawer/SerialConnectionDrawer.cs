@@ -33,6 +33,18 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		public override bool IsEmpty
+		{
+			get
+			{
+				if(ElementsCount != 0)
+				{
+					return false;
+				}
+				return true;
+			}
+		}
+
 		/// <summary>
 		/// Возвращает ширину последовательного соединения в пикселях
 		/// </summary>

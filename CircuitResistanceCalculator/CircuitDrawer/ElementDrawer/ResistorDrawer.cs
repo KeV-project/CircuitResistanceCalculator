@@ -31,6 +31,14 @@ namespace CircuitVisualization.ElementDrawer
 		/// </summary>
 		private const int VERTICAL_INDENT = 10;
 
+		public override bool IsEmpty
+		{
+			get
+			{
+				return false;
+			}
+		}
+
 		/// <summary>
 		/// Возвращает полную ширину элемента в пикселях, 
 		/// включающую ширину резистора и ширину его соединения с 

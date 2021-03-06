@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using CircuitVisualization.Drawers;
+using CircuitVisualization.NodeDrawer;
 
 namespace CircuitVisualization.ConnectionDrawer
 {
@@ -46,6 +47,64 @@ namespace CircuitVisualization.ConnectionDrawer
 					}
 				}
 				return elementsCount;
+			}
+		}
+
+		public override bool IsEmpty
+		{
+			get
+			{
+				if(ElementsCount != 0)
+				{
+					return false;
+				}
+				return true;
+			}
+		}
+
+		private int NotEmptyNodesCount
+		{
+			get
+			{
+				int notEmptyNodesCount = 0;
+				for(int i = 0; i < NodesCount; i++)
+				{
+					if(!this[i].IsEmpty)
+					{
+						notEmptyNodesCount++;
+					}
+				}
+				return notEmptyNodesCount;
+			}
+		}
+
+		private NodeDrawerBase TopNode
+		{
+			get
+			{
+				for(int i = 0; i < NodesCount; i++)
+				{
+					if(!this[i].IsEmpty)
+					{
+						return this[i];
+					}
+				}
+				return null;
+			}
+		}
+
+		private NodeDrawerBase BottomNode
+		{
+			get
+			{
+				for(int i = NodesCount - 1; i >= 0; i--)
+				{
+					if(!this[i].IsEmpty)
+					{
+						return this[i];
+					}
+				}
+				return null;
 			}
 		}
 
@@ -101,45 +160,49 @@ namespace CircuitVisualization.ConnectionDrawer
 		{
 			get
 			{
-				if(NodesCount == 0)
-				{
-					return 0;
-				}
-
-				if(NodesCount == 1)
-				{
-					return this[0].TopHeight;
-				}
-
-				int nodesCount = Convert.ToInt32(Math.Round(NodesCount / 2.0));
-
-				if(nodesCount == 1)
-				{
-					return this[0].Height + ELEMENTS_DISTANCE_HEIGHT / 2;
-				}
-
 				int height = 0;
-				for (int i = 0; i < nodesCount; i++)
+
+				if (NotEmptyNodesCount != 0)
 				{
-					if(NodesCount % 2 != 0 && i == nodesCount - 1)
+					int nodesCount = Convert.ToInt32(Math.Ceiling(
+						NodesCount / 2.0));
+					int notEmptyNodesCount = Convert.ToInt32(Math.Ceiling(
+						NotEmptyNodesCount / 2.0));
+					for (int i = 0; i < nodesCount; i++)
 					{
-						height += this[i].TopHeight;
+						if(!this[i].IsEmpty)
+						{
+							if (NotEmptyNodesCount % 2 != 0 && notEmptyNodesCount == 1)
+							{
+								height += this[i].TopHeight;
+							}
+							else
+							{
+								height += this[i].Height;
+							}
+							notEmptyNodesCount--;
+						}
+					}
+
+					
+					if (NotEmptyNodesCount % 2 != 0)
+					{
+						if (NotEmptyNodesCount != 1)
+						{
+							height += (Convert.ToInt32(Math.Ceiling(
+								NotEmptyNodesCount / 2.0)) - 1) 
+								* ELEMENTS_DISTANCE_HEIGHT;
+						}
 					}
 					else
 					{
-						height += this[i].Height;
+						height += (Convert.ToInt32(Math.Ceiling(
+							NotEmptyNodesCount / 2.0)) - 1) 
+							* ELEMENTS_DISTANCE_HEIGHT
+							+ ELEMENTS_DISTANCE_HEIGHT / 2;
 					}
 				}
-				
-				if(NodesCount % 2 != 0)
-				{
-					height += (nodesCount - 1) * ELEMENTS_DISTANCE_HEIGHT;
-				}
-				else
-				{
-					height += (nodesCount - 1) * ELEMENTS_DISTANCE_HEIGHT +
-						ELEMENTS_DISTANCE_HEIGHT / 2;
-				}
+
 				return height;
 			}
 		}
@@ -152,56 +215,66 @@ namespace CircuitVisualization.ConnectionDrawer
 		{
 			get
 			{
-				if (NodesCount == 0)
-				{
-					return 0;
-				}
-
-				if (NodesCount == 1)
-				{
-					return this[0].BottomHeight;
-				}
-
-				int nodesCount = Convert.ToInt32(Math.Round(NodesCount / 2.0));
-
-				if (nodesCount == 1)
-				{
-					return this[1].Height + ELEMENTS_DISTANCE_HEIGHT / 2;
-				}
-
 				int height = 0;
-				for(int i = NodesCount / 2; i < NodesCount; i++)
+
+				if (NotEmptyNodesCount != 0)
 				{
-					if(NodesCount % 2 != 0 && i == NodesCount / 2)
+					int notEmptyNodesCount = 0;
+					for (int i = 0; i < NodesCount; i++)
 					{
-						height += this[i].BottomHeight;
+						if (!this[i].IsEmpty)
+						{
+							if (notEmptyNodesCount >= Convert.ToInt32(
+								Math.Ceiling(NotEmptyNodesCount / 2.0)))
+							{
+								if (NotEmptyNodesCount % 2 != 0 &&
+									notEmptyNodesCount == Convert.ToInt32(
+									Math.Ceiling(NotEmptyNodesCount / 2.0)))
+								{
+									height += this[i].BottomHeight;
+								}
+								else
+								{
+									height += this[i].Height;
+								}
+							}
+						}
+						notEmptyNodesCount++;
+					}
+
+
+					if (NotEmptyNodesCount % 2 != 0)
+					{
+						if (NotEmptyNodesCount != 1)
+						{
+							height += (Convert.ToInt32(Math.Ceiling(
+								NotEmptyNodesCount / 2.0)) - 1)
+								* ELEMENTS_DISTANCE_HEIGHT;
+						}
 					}
 					else
 					{
-						height += this[i].Height;
+						height += (Convert.ToInt32(Math.Ceiling(
+							NotEmptyNodesCount / 2.0)) - 1)
+							* ELEMENTS_DISTANCE_HEIGHT
+							+ ELEMENTS_DISTANCE_HEIGHT / 2;
 					}
 				}
 
-				if (NodesCount % 2 != 0)
-				{
-					height += (nodesCount - 1) * ELEMENTS_DISTANCE_HEIGHT;
-				}
-				else
-				{
-					height += (nodesCount - 1) * ELEMENTS_DISTANCE_HEIGHT +
-						ELEMENTS_DISTANCE_HEIGHT / 2;
-				}
 				return height;
 			}
 		}
 
 		private void DrawConnection(Bitmap bitmap, int x, int y, int rootWidth)
 		{
-			int topHeight = TopHeight - this[0].TopHeight;
-			int bottomHeight = BottomHeight - this[NodesCount - 1].BottomHeight;
-			Drawer.DrawLine(bitmap, x, y - topHeight, x, y + bottomHeight, 
-				LINE_COLOR, LINE_WIDTH);
-			Drawer.DrawLine(bitmap, x, y, x + rootWidth, y, LINE_COLOR, LINE_WIDTH);
+			if(ElementsCount != 0)
+			{
+				int topHeight = TopHeight - TopNode.TopHeight;
+				int bottomHeight = BottomHeight - BottomNode.BottomHeight;
+				Drawer.DrawLine(bitmap, x, y - topHeight, x, y + bottomHeight,
+					LINE_COLOR, LINE_WIDTH);
+				Drawer.DrawLine(bitmap, x, y, x + rootWidth, y, LINE_COLOR, LINE_WIDTH);
+			}
 		}
 
 		/// <summary>
@@ -216,11 +289,14 @@ namespace CircuitVisualization.ConnectionDrawer
 			{
 				this[i].Draw(bitmap, x, y);
 
-				Drawer.DrawLine(bitmap, x + this[i].Width,
-						y, x + Width - ROOT_WIDTH * 2, y, 
+				if(!(this[i] is ConnectionDrawerBase connectionDrawer 
+					&& connectionDrawer.ElementsCount == 0))
+				{
+					Drawer.DrawLine(bitmap, x + this[i].Width,
+						y, x + Width - ROOT_WIDTH * 2, y,
 						LINE_COLOR, LINE_WIDTH);
+				}
 				
-
 				if (i != NodesCount - 1)
 				{
 					y += this[i].BottomHeight + this[i + 1].TopHeight +
@@ -238,16 +314,14 @@ namespace CircuitVisualization.ConnectionDrawer
 		/// <param name="y">Ордината точки включения соединения в цепь</param>
 		public override void Draw(Bitmap bitmap, int x, int y)
 		{
-			if(ElementsCount == 0)
+			if(ElementsCount != 0)
 			{
-				return;
+				DrawConnection(bitmap, x += ROOT_WIDTH, y, -ROOT_WIDTH);
+
+				DrawNodes(bitmap, x, y - TopHeight + TopNode.TopHeight);
+
+				DrawConnection(bitmap, x + Width - ROOT_WIDTH * 2, y, ROOT_WIDTH);
 			}
-
-			DrawConnection(bitmap, x+= ROOT_WIDTH, y, -ROOT_WIDTH);
-			
-			DrawNodes(bitmap, x, y - TopHeight + this[0].TopHeight);
-
-			DrawConnection(bitmap, x + Width - ROOT_WIDTH * 2, y, ROOT_WIDTH);
 		}
 	}
 }

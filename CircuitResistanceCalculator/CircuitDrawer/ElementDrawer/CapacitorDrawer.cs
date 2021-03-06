@@ -31,6 +31,14 @@ namespace CircuitVisualization.ElementDrawer
 		/// </summary>
 		private const int VERTICAL_INDENT = 0;
 
+		public override bool IsEmpty
+		{
+			get
+			{
+				return false;
+			}
+		}
+
 		/// <summary>
 		/// Возвращает полную ширину элемента, включающую 
 		/// ширину конденсатора и ширину его соединения 
