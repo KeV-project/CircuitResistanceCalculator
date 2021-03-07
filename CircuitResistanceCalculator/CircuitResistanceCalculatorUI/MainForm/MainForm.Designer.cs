@@ -398,7 +398,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.CircuitPanel.AutoScroll = true;
-			this.CircuitPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+			this.CircuitPanel.BackColor = System.Drawing.SystemColors.Window;
 			this.CircuitPanel.Controls.Add(this.CircuitPictureBox);
 			this.CircuitPanel.Location = new System.Drawing.Point(3, 3);
 			this.CircuitPanel.Name = "CircuitPanel";
