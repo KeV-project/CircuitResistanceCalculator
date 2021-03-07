@@ -164,40 +164,40 @@ namespace CircuitVisualization.ConnectionDrawer
 
 				if (NotEmptyNodesCount != 0)
 				{
-					int nodesCount = Convert.ToInt32(Math.Ceiling(
-						NodesCount / 2.0));
 					int notEmptyNodesCount = Convert.ToInt32(Math.Ceiling(
 						NotEmptyNodesCount / 2.0));
-					for (int i = 0; i < nodesCount; i++)
+					int notEmptyNodeNumber = 0;
+					for (int i = 0; i < NodesCount; i++)
 					{
 						if(!this[i].IsEmpty)
 						{
-							if (NotEmptyNodesCount % 2 != 0 && notEmptyNodesCount == 1)
+							notEmptyNodeNumber++;
+							if (notEmptyNodeNumber <= notEmptyNodesCount)
 							{
-								height += this[i].TopHeight;
+								if (NotEmptyNodesCount % 2 != 0 && 
+									notEmptyNodeNumber == notEmptyNodesCount)
+								{
+									height += this[i].TopHeight;
+								}
+								else
+								{
+									height += this[i].Height;
+								}
 							}
-							else
-							{
-								height += this[i].Height;
-							}
-							notEmptyNodesCount--;
 						}
 					}
-
 					
 					if (NotEmptyNodesCount % 2 != 0)
 					{
 						if (NotEmptyNodesCount != 1)
 						{
-							height += (Convert.ToInt32(Math.Ceiling(
-								NotEmptyNodesCount / 2.0)) - 1) 
+							height += (notEmptyNodesCount - 1) 
 								* ELEMENTS_DISTANCE_HEIGHT;
 						}
 					}
 					else
 					{
-						height += (Convert.ToInt32(Math.Ceiling(
-							NotEmptyNodesCount / 2.0)) - 1) 
+						height += (notEmptyNodesCount - 1) 
 							* ELEMENTS_DISTANCE_HEIGHT
 							+ ELEMENTS_DISTANCE_HEIGHT / 2;
 					}
@@ -219,16 +219,21 @@ namespace CircuitVisualization.ConnectionDrawer
 
 				if (NotEmptyNodesCount != 0)
 				{
-					int notEmptyNodesCount = 0;
+					int notEmptyNodesCount = Convert.ToInt32(Math.Ceiling(
+						NotEmptyNodesCount / 2.0));
+					int notEmptyNodeNumber = 0;
 					for (int i = 0; i < NodesCount; i++)
 					{
 						if (!this[i].IsEmpty)
 						{
-							if (notEmptyNodesCount >= Convert.ToInt32(
-								Math.Ceiling(NotEmptyNodesCount / 2.0)))
+							notEmptyNodeNumber++;
+							if (NotEmptyNodesCount % 2 != 0 && 
+								notEmptyNodeNumber >= notEmptyNodesCount || 
+								NotEmptyNodesCount % 2 == 0 && 
+								notEmptyNodeNumber > notEmptyNodesCount)
 							{
 								if (NotEmptyNodesCount % 2 != 0 &&
-									notEmptyNodesCount == Convert.ToInt32(
+									notEmptyNodeNumber == Convert.ToInt32(
 									Math.Ceiling(NotEmptyNodesCount / 2.0)))
 								{
 									height += this[i].BottomHeight;
@@ -239,23 +244,19 @@ namespace CircuitVisualization.ConnectionDrawer
 								}
 							}
 						}
-						notEmptyNodesCount++;
 					}
-
 
 					if (NotEmptyNodesCount % 2 != 0)
 					{
 						if (NotEmptyNodesCount != 1)
 						{
-							height += (Convert.ToInt32(Math.Ceiling(
-								NotEmptyNodesCount / 2.0)) - 1)
+							height += (notEmptyNodesCount - 1)
 								* ELEMENTS_DISTANCE_HEIGHT;
 						}
 					}
 					else
 					{
-						height += (Convert.ToInt32(Math.Ceiling(
-							NotEmptyNodesCount / 2.0)) - 1)
+						height += (notEmptyNodesCount - 1)
 							* ELEMENTS_DISTANCE_HEIGHT
 							+ ELEMENTS_DISTANCE_HEIGHT / 2;
 					}
@@ -299,8 +300,11 @@ namespace CircuitVisualization.ConnectionDrawer
 				
 				if (i != NodesCount - 1)
 				{
-					y += this[i].BottomHeight + this[i + 1].TopHeight +
-						ELEMENTS_DISTANCE_HEIGHT;
+					if(this[i].BottomHeight != 0)
+					{
+						y += this[i].BottomHeight + this[i + 1].TopHeight +
+							ELEMENTS_DISTANCE_HEIGHT;
+					}
 				}
 			}
 		}
