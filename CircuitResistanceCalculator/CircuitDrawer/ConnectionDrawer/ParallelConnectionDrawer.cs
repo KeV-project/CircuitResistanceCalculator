@@ -128,7 +128,13 @@ namespace CircuitVisualization.ConnectionDrawer
 						width = this[i].Width;
 					}
 				}
-				return width + ROOT_WIDTH * 2;
+
+				if(NotEmptyNodesCount > 1)
+				{
+					width += ROOT_WIDTH * 2;
+				}
+
+				return width;
 			}
 		}
 
@@ -274,7 +280,10 @@ namespace CircuitVisualization.ConnectionDrawer
 				int bottomHeight = BottomHeight - BottomNode.BottomHeight;
 				Drawer.DrawLine(bitmap, x, y - topHeight, x, y + bottomHeight,
 					LINE_COLOR, LINE_WIDTH);
-				Drawer.DrawLine(bitmap, x, y, x + rootWidth, y, LINE_COLOR, LINE_WIDTH);
+				if(NotEmptyNodesCount > 1)
+				{
+					Drawer.DrawLine(bitmap, x, y, x + rootWidth, y, LINE_COLOR, LINE_WIDTH);
+				}
 			}
 		}
 
@@ -293,9 +302,16 @@ namespace CircuitVisualization.ConnectionDrawer
 				if(!(this[i] is ConnectionDrawerBase connectionDrawer 
 					&& connectionDrawer.ElementsCount == 0))
 				{
-					Drawer.DrawLine(bitmap, x + this[i].Width,
-						y, x + Width - ROOT_WIDTH * 2, y,
-						LINE_COLOR, LINE_WIDTH);
+					if(NotEmptyNodesCount > 1)
+					{
+						Drawer.DrawLine(bitmap, x + this[i].Width, y,
+						x + Width - ROOT_WIDTH * 2, y, LINE_COLOR, LINE_WIDTH);
+					}
+					else
+					{
+						Drawer.DrawLine(bitmap, x + this[i].Width, y,
+							x + Width, y, LINE_COLOR, LINE_WIDTH);
+					}
 				}
 				
 				if (i != NodesCount - 1)
@@ -320,11 +336,19 @@ namespace CircuitVisualization.ConnectionDrawer
 		{
 			if(ElementsCount != 0)
 			{
-				DrawConnection(bitmap, x += ROOT_WIDTH, y, -ROOT_WIDTH);
+				if(NotEmptyNodesCount > 1)
+				{
+					x += ROOT_WIDTH;
+				}
+				DrawConnection(bitmap, x, y, -ROOT_WIDTH);
 
 				DrawNodes(bitmap, x, y - TopHeight + TopNode.TopHeight);
 
-				DrawConnection(bitmap, x + Width - ROOT_WIDTH * 2, y, ROOT_WIDTH);
+				if (NotEmptyNodesCount > 1)
+				{
+					x -= ROOT_WIDTH * 2;
+				}
+				DrawConnection(bitmap, x + Width, y, ROOT_WIDTH);
 			}
 		}
 	}
