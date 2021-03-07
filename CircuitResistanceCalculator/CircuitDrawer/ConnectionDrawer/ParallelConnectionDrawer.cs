@@ -50,6 +50,10 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает true, если паралелльное соединение не содержит
+		/// ни одного элемента. В противном случае возвращает false
+		/// </summary>
 		public override bool IsEmpty
 		{
 			get
@@ -62,6 +66,9 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает количество непустых узлов паралелльного соединения
+		/// </summary>
 		private int NotEmptyNodesCount
 		{
 			get
@@ -78,7 +85,10 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
-		private NodeDrawerBase TopNode
+		/// <summary>
+		/// Возвращает верхний непустой узел паралелльного соединения
+		/// </summary>
+		public NodeDrawerBase TopNode
 		{
 			get
 			{
@@ -93,7 +103,10 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
-		private NodeDrawerBase BottomNode
+		/// <summary>
+		/// Возвращает нижний непустой узел паралелльного соединения
+		/// </summary>
+		public NodeDrawerBase BottomNode
 		{
 			get
 			{
@@ -146,15 +159,46 @@ namespace CircuitVisualization.ConnectionDrawer
 			get
 			{
 				int heigth = 0;
-				if(NodesCount != 0)
+				if(NotEmptyNodesCount != 0)
 				{
 					for (int i = 0; i < NodesCount; i++)
 					{
 						heigth += this[i].Height;
 					}
-					heigth += (NodesCount - 1) * ELEMENTS_DISTANCE_HEIGHT;
+					heigth += (NotEmptyNodesCount - 1) * ELEMENTS_DISTANCE_HEIGHT;
 				}
 				return heigth;
+			}
+		}
+
+		/// <summary>
+		/// Возвращает суммарное промежуточное расстояние между 
+		/// узлами верхней или нижней части паралелльного соединения
+		/// </summary>
+		private int HalfElementsDistance
+		{
+			get
+			{
+				if(NotEmptyNodesCount != 0)
+				{
+					int notEmptyNodesCount = Convert.ToInt32(Math.Ceiling(
+						NotEmptyNodesCount / 2.0));
+					if (NotEmptyNodesCount % 2 != 0)
+					{
+						if (NotEmptyNodesCount != 1)
+						{
+							return (notEmptyNodesCount - 1)
+								* ELEMENTS_DISTANCE_HEIGHT;
+						}
+					}
+					else
+					{
+						return (notEmptyNodesCount - 1)
+							* ELEMENTS_DISTANCE_HEIGHT
+							+ ELEMENTS_DISTANCE_HEIGHT / 2;
+					}
+				}
+				return 0;
 			}
 		}
 
@@ -192,24 +236,9 @@ namespace CircuitVisualization.ConnectionDrawer
 							}
 						}
 					}
-					
-					if (NotEmptyNodesCount % 2 != 0)
-					{
-						if (NotEmptyNodesCount != 1)
-						{
-							height += (notEmptyNodesCount - 1) 
-								* ELEMENTS_DISTANCE_HEIGHT;
-						}
-					}
-					else
-					{
-						height += (notEmptyNodesCount - 1) 
-							* ELEMENTS_DISTANCE_HEIGHT
-							+ ELEMENTS_DISTANCE_HEIGHT / 2;
-					}
 				}
 
-				return height;
+				return height += HalfElementsDistance;
 			}
 		}
 
@@ -251,38 +280,39 @@ namespace CircuitVisualization.ConnectionDrawer
 							}
 						}
 					}
-
-					if (NotEmptyNodesCount % 2 != 0)
-					{
-						if (NotEmptyNodesCount != 1)
-						{
-							height += (notEmptyNodesCount - 1)
-								* ELEMENTS_DISTANCE_HEIGHT;
-						}
-					}
-					else
-					{
-						height += (notEmptyNodesCount - 1)
-							* ELEMENTS_DISTANCE_HEIGHT
-							+ ELEMENTS_DISTANCE_HEIGHT / 2;
-					}
 				}
 
-				return height;
+				return height += HalfElementsDistance;
 			}
 		}
 
+		/// <summary>
+		/// Высолняет отрисовку соединения узла типа 
+		/// <see cref="ParallelConnectionDrawer"/> 
+		/// c предшествующим и последующим узлами
+		/// </summary>
+		/// <param name="bitmap">Изображение электрической цепи</param>
+		/// <param name="x">Абцисса точки начала отрисовки вертикальной 
+		/// линии паралелльного соединения</param>
+		/// <param name="y">Ордината точки начала отрисовки вертикальной 
+		/// линии параллельного соединения</param>
+		/// <param name="rootWidth">Ширина корня соединения с 
+		/// соответствующим знаком. Если корень соединяет текущий узел 
+		/// с предшествующим узлом, ширина передается с отрицательным
+		/// знаком. Если корень соединяет текущий узел с последующим узлом,
+		/// ширина передается с положительным знаком</param>
 		private void DrawConnection(Bitmap bitmap, int x, int y, int rootWidth)
 		{
 			if(ElementsCount != 0)
 			{
 				int topHeight = TopHeight - TopNode.TopHeight;
 				int bottomHeight = BottomHeight - BottomNode.BottomHeight;
-				Drawer.DrawLine(bitmap, x, y - topHeight, x, y + bottomHeight,
-					LINE_COLOR, LINE_WIDTH);
+				Drawer.DrawLine(bitmap, x, y - topHeight, x, 
+					y + bottomHeight, LINE_COLOR, LINE_WIDTH);
 				if(NotEmptyNodesCount > 1)
 				{
-					Drawer.DrawLine(bitmap, x, y, x + rootWidth, y, LINE_COLOR, LINE_WIDTH);
+					Drawer.DrawLine(bitmap, x, y, x + rootWidth, y, 
+						LINE_COLOR, LINE_WIDTH);
 				}
 			}
 		}
@@ -297,6 +327,8 @@ namespace CircuitVisualization.ConnectionDrawer
 		{
 			for (int i = 0; i < NodesCount; i++)
 			{
+				y += this[i].TopHeight;
+
 				this[i].Draw(bitmap, x, y);
 
 				if(!(this[i] is ConnectionDrawerBase connectionDrawer 
@@ -313,14 +345,10 @@ namespace CircuitVisualization.ConnectionDrawer
 							x + Width, y, LINE_COLOR, LINE_WIDTH);
 					}
 				}
-				
-				if (i != NodesCount - 1)
+
+				if (this[i].BottomHeight != 0)
 				{
-					if(this[i].BottomHeight != 0)
-					{
-						y += this[i].BottomHeight + this[i + 1].TopHeight +
-							ELEMENTS_DISTANCE_HEIGHT;
-					}
+					y += this[i].BottomHeight + ELEMENTS_DISTANCE_HEIGHT;
 				}
 			}
 		}
@@ -342,7 +370,7 @@ namespace CircuitVisualization.ConnectionDrawer
 				}
 				DrawConnection(bitmap, x, y, -ROOT_WIDTH);
 
-				DrawNodes(bitmap, x, y - TopHeight + TopNode.TopHeight);
+				DrawNodes(bitmap, x, y - TopHeight);
 
 				if (NotEmptyNodesCount > 1)
 				{

@@ -16,21 +16,26 @@ namespace CircuitVisualization.ElementDrawer
 		private const int RESISTOR_WIDTH = 40;
 
 		/// <summary>
+		/// Высота резистора в пикселях
+		/// </summary>
+		private const int RESISTOR_HEIGHT = 20;
+
+		/// <summary>
 		/// Ширина соединения резистора с предшествующим и 
 		/// последующим элементами в пикселях
 		/// </summary>
 		private const int CONNECTION_WIDTH = 40;
 
 		/// <summary>
-		/// Высота резистора в пикселях
-		/// </summary>
-		private const int RESISTOR_HEIGHT = 20;
-
-		/// <summary>
 		/// Высота отступа от резисотора сверху и снизу в пикселях
 		/// </summary>
 		private const int VERTICAL_INDENT = 10;
 
+		/// <summary>
+		/// Возвращает false, так как узел типа
+		/// <see cref="ResistorDrawer"/> - это элемент, 
+		/// имеющий ширину и высоту
+		/// </summary>
 		public override bool IsEmpty
 		{
 			get

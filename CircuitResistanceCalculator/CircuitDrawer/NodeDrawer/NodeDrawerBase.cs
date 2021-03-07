@@ -19,6 +19,10 @@ namespace CircuitVisualization.NodeDrawer
 		/// </summary>
 		public const int LINE_WIDTH = 2;
 
+		/// <summary>
+		/// Возвращает true, если узел не имеет ни одного элемента.
+		/// В противном случае возвращает false
+		/// </summary>
 		public abstract bool IsEmpty { get; }
 
 		/// <summary>

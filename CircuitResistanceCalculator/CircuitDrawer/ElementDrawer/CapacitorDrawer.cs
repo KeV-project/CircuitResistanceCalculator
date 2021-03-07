@@ -16,21 +16,26 @@ namespace CircuitVisualization.ElementDrawer
 		private const int CAPACITOR_WIDTH = 20;
 
 		/// <summary>
+		/// Высота конденсатора в пикселях
+		/// </summary>
+		private const int CAPACITOR_HEIGHT = 40;
+
+		/// <summary>
 		/// Ширина соединения конденсатора с предшествующим и 
 		/// последующим элементами в пикселях
 		/// </summary>
 		private const int CONNECTION_WIDTH = 50;
 
 		/// <summary>
-		/// Высота конденсатора в пикселях
-		/// </summary>
-		private const int CAPACITOR_HEIGHT = 40;
-
-		/// <summary>
 		/// Высота отступа от конденсатора сверху и снизу в пикселях
 		/// </summary>
 		private const int VERTICAL_INDENT = 0;
 
+		/// <summary>
+		/// Возвращает false, так как узел типа
+		/// <see cref="CapacitorDrawer"/> - это элемент, 
+		/// имеющий ширину и высоту
+		/// </summary>
 		public override bool IsEmpty
 		{
 			get

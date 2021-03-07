@@ -33,6 +33,10 @@ namespace CircuitVisualization.ConnectionDrawer
 			}
 		}
 
+		/// <summary>
+		/// Возвращает true, если последовательное соединения не содержит
+		/// ни одного элемента. В противном случае возвращает false
+		/// </summary>
 		public override bool IsEmpty
 		{
 			get

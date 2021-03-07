@@ -17,21 +17,26 @@ namespace CircuitVisualization.ElementDrawer
 		private const int INDUCTOR_WIDTH = 80;
 
 		/// <summary>
+		/// Высота индуктора в пикселях
+		/// </summary>
+		private const int INDUCTOR_HEIGHT = 10;
+
+		/// <summary>
 		/// Ширина соединения индуктора с предшествующим и 
 		/// последующим элементами в пикселях
 		/// </summary>
 		private const int CONNECTION_WIDTH = 20;
 
 		/// <summary>
-		/// Высота индуктора в пикселях
-		/// </summary>
-		private const int INDUCTOR_HEIGHT = 10;
-
-		/// <summary>
 		/// Высота отступа от индуктора сверху и снизу в пикселях
 		/// </summary>
 		private const int VERTICAL_INDENT = 15;
 
+		/// <summary>
+		/// Возвращает false, так как узел типа
+		/// <see cref="InductorDrawer"/> - это элемент, 
+		/// имеющий ширину и высоту
+		/// </summary>
 		public override bool IsEmpty
 		{
 			get

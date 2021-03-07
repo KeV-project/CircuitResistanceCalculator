@@ -98,7 +98,7 @@ namespace CircuitResistanceCalculatorUI.MainForm
 
 			if(_circuit != null && _circuit.NodesCount != 0)
 			{
-				Bitmap bitmap = CircuitDrawer.Draw(_circuit);
+				Bitmap bitmap = CircuitDrawer.Draw((SerialConnection)_circuit);
 				CircuitPictureBox.Image = bitmap;
 				CircuitPictureBox.Location = new Point(
 					(CircuitPanel.Width - bitmap.Width) / 2,
